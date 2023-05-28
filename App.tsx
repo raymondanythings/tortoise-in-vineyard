@@ -4,27 +4,16 @@
  *
  * @format
  */
-
-import React from 'react'
-import { SafeAreaView, StatusBar, Text, useColorScheme } from 'react-native'
-
-import { Colors } from 'react-native/Libraries/NewAppScreen'
-
+import React, { useCallback, useEffect } from 'react'
+import Router from './router'
+import { NavigationContainer } from '@react-navigation/native'
+import DeviceInfo from 'react-native-device-info'
+import asyncStorage from '@react-native-async-storage/async-storage'
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark'
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  }
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <Text>무엇일까요dfdfdfdfddf?</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   )
 }
 
