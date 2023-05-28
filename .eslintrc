@@ -1,0 +1,38 @@
+{ 
+  "root": true,
+  "extends": [ 
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "@react-native-community"
+  ], 
+  "parser": "@typescript-eslint/parser", 
+  "parserOptions": { 
+    "ecmaFeatures": { 
+      "jsx": true 
+    }, 
+    "ecmaVersion": 12, 
+    "sourceType": "module" 
+  }, 
+  "plugins": [ 
+    "react", 
+    "react-hooks", 
+    "@typescript-eslint", 
+    "prettier", 
+    "import" 
+  ], 
+  "rules": { 
+    "react/react-in-jsx-scope": "off",
+    "arrow-body-style": "error", 
+    "prefer-arrow-callback": "off", 
+    "no-var": "error", 
+    "no-dupe-keys": "error", 
+    "react/prop-types": "off",
+    "prettier/prettier": "error" 
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  } 
+}
