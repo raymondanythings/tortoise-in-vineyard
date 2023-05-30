@@ -11,7 +11,7 @@ const OnBoard = ({ navigation }: { navigation: any }) => {
         <View style={styles.characterContainer}>
           <Text style={styles.heading}>나무 이미지</Text>
         </View>
-        <Pressable style={styles.nextButton} onPress={() => navigation.push('onboard')}>
+        <Pressable style={styles.nextButton} onPress={() => navigation.push('beforeex')}>
           <Text style={styles.btnInnerText}>달리기 시작</Text>
         </Pressable>
       </SafeAreaView>
