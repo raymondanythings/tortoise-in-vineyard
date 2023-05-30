@@ -15,7 +15,7 @@ const BeforeEx = () => {
           가벼운 스트레칭은 필수에요!
         </Text>
         <View style={styles.characterContainer}>
-          <Text style={globalStyle.heading}>준비 영상</Text>
+          <Text style={globalStyle.heading}>준비운동 캐릭터</Text>
         </View>
         <Pressable
           style={globalStyle.nextButton}
