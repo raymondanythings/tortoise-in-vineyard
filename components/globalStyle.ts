@@ -15,6 +15,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     marginBottom: 55,
+    color: '#A1AEB7',
   },
   nextButton: {
     paddingHorizontal: 80,
