@@ -20,6 +20,7 @@ if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
   use_frameworks! :linkage => linkage.to_sym
 end
+pod 'RNWatch', :path => '../node_modules/react-native-watch-connectivity'
 
 target 'pacemaker' do
   config = use_native_modules!

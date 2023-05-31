@@ -14,8 +14,14 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-pacemaker-pacemakerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-pacemaker-pacemakerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		E349964C2A23564300660197 /* pacemakerwatchosExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E349964B2A23564300660197 /* pacemakerwatchosExtension.swift */; };
-		E349964E2A23564300660197 /* pacemakerwatchos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E349964D2A23564300660197 /* pacemakerwatchos.swift */; };
+		E3A677B42A275A0F00BD9FB7 /* pacemakerWatchosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A677B32A275A0F00BD9FB7 /* pacemakerWatchosApp.swift */; };
+		E3A677B62A275A0F00BD9FB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A677B52A275A0F00BD9FB7 /* ContentView.swift */; };
+		E3A677B82A275A1100BD9FB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A677B72A275A1100BD9FB7 /* Assets.xcassets */; };
+		E3A677BB2A275A1100BD9FB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A677BA2A275A1100BD9FB7 /* Preview Assets.xcassets */; };
+		E3A677BE2A275A1100BD9FB7 /* pacemakerWatchos Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3A677B12A275A0F00BD9FB7 /* pacemakerWatchos Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E3D151252A275EF5005F1CCB /* sessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D151242A275EF5005F1CCB /* sessionExtension.swift */; };
+		E3D151272A275EF5005F1CCB /* session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D151262A275EF5005F1CCB /* session.swift */; };
+		E3D1512B2A275EF5005F1CCB /* session.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = E3D151222A275EF5005F1CCB /* session.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +32,46 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = pacemaker;
 		};
+		E3A677BC2A275A1100BD9FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3A677B02A275A0F00BD9FB7;
+			remoteInfo = "pacemakerWatchos Watch App";
+		};
+		E3D151292A275EF5005F1CCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3D151212A275EF5005F1CCB;
+			remoteInfo = session;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E3A677C22A275A1100BD9FB7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				E3A677BE2A275A1100BD9FB7 /* pacemakerWatchos Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3D1512F2A275EF5005F1CCB /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				E3D1512B2A275EF5005F1CCB /* session.appex in Embed ExtensionKit Extensions */,
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* pacemakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pacemakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,10 +91,16 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pacemaker/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-pacemaker-pacemakerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.release.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E34996442A2355BE00660197 /* pacemaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = pacemaker.entitlements; path = pacemaker/pacemaker.entitlements; sourceTree = "<group>"; };
-		E34996492A23564300660197 /* pacemakerwatchos.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = pacemakerwatchos.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		E349964B2A23564300660197 /* pacemakerwatchosExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pacemakerwatchosExtension.swift; sourceTree = "<group>"; };
-		E349964D2A23564300660197 /* pacemakerwatchos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pacemakerwatchos.swift; sourceTree = "<group>"; };
-		E349964F2A23564300660197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3A677B12A275A0F00BD9FB7 /* pacemakerWatchos Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pacemakerWatchos Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3A677B32A275A0F00BD9FB7 /* pacemakerWatchosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pacemakerWatchosApp.swift; sourceTree = "<group>"; };
+		E3A677B52A275A0F00BD9FB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E3A677B72A275A1100BD9FB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E3A677BA2A275A1100BD9FB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E3D1511D2A275EA4005F1CCB /* pacemakerWatchos Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pacemakerWatchos Watch App.entitlements"; sourceTree = "<group>"; };
+		E3D151222A275EF5005F1CCB /* session.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = session.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3D151242A275EF5005F1CCB /* sessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionExtension.swift; sourceTree = "<group>"; };
+		E3D151262A275EF5005F1CCB /* session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = session.swift; sourceTree = "<group>"; };
+		E3D151282A275EF5005F1CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -70,7 +121,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E34996462A23564300660197 /* Frameworks */ = {
+		E3A677AE2A275A0F00BD9FB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3D1511F2A275EF5005F1CCB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -134,7 +192,8 @@
 				13B07FAE1A68108700A75B9A /* pacemaker */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* pacemakerTests */,
-				E349964A2A23564300660197 /* pacemakerwatchos */,
+				E3A677B22A275A0F00BD9FB7 /* pacemakerWatchos Watch App */,
+				E3D151232A275EF5005F1CCB /* session */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -149,7 +208,8 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* pacemaker.app */,
 				00E356EE1AD99517003FC87E /* pacemakerTests.xctest */,
-				E34996492A23564300660197 /* pacemakerwatchos.appex */,
+				E3A677B12A275A0F00BD9FB7 /* pacemakerWatchos Watch App.app */,
+				E3D151222A275EF5005F1CCB /* session.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,14 +225,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		E349964A2A23564300660197 /* pacemakerwatchos */ = {
+		E3A677B22A275A0F00BD9FB7 /* pacemakerWatchos Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				E349964B2A23564300660197 /* pacemakerwatchosExtension.swift */,
-				E349964D2A23564300660197 /* pacemakerwatchos.swift */,
-				E349964F2A23564300660197 /* Info.plist */,
+				E3D1511D2A275EA4005F1CCB /* pacemakerWatchos Watch App.entitlements */,
+				E3A677B32A275A0F00BD9FB7 /* pacemakerWatchosApp.swift */,
+				E3A677B52A275A0F00BD9FB7 /* ContentView.swift */,
+				E3A677B72A275A1100BD9FB7 /* Assets.xcassets */,
+				E3A677B92A275A1100BD9FB7 /* Preview Content */,
 			);
-			path = pacemakerwatchos;
+			path = "pacemakerWatchos Watch App";
+			sourceTree = "<group>";
+		};
+		E3A677B92A275A1100BD9FB7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E3A677BA2A275A1100BD9FB7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E3D151232A275EF5005F1CCB /* session */ = {
+			isa = PBXGroup;
+			children = (
+				E3D151242A275EF5005F1CCB /* sessionExtension.swift */,
+				E3D151262A275EF5005F1CCB /* session.swift */,
+				E3D151282A275EF5005F1CCB /* Info.plist */,
+			);
+			path = session;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,31 +291,52 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				E3A677C22A275A1100BD9FB7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E3A677BD2A275A1100BD9FB7 /* PBXTargetDependency */,
 			);
 			name = pacemaker;
 			productName = pacemaker;
 			productReference = 13B07F961A680F5B00A75B9A /* pacemaker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E34996482A23564300660197 /* pacemakerwatchos */ = {
+		E3A677B02A275A0F00BD9FB7 /* pacemakerWatchos Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E34996502A23564300660197 /* Build configuration list for PBXNativeTarget "pacemakerwatchos" */;
+			buildConfigurationList = E3A677BF2A275A1100BD9FB7 /* Build configuration list for PBXNativeTarget "pacemakerWatchos Watch App" */;
 			buildPhases = (
-				E34996452A23564300660197 /* Sources */,
-				E34996462A23564300660197 /* Frameworks */,
-				E34996472A23564300660197 /* Resources */,
+				E3A677AD2A275A0F00BD9FB7 /* Sources */,
+				E3A677AE2A275A0F00BD9FB7 /* Frameworks */,
+				E3A677AF2A275A0F00BD9FB7 /* Resources */,
+				E3D1512F2A275EF5005F1CCB /* Embed ExtensionKit Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E3D1512A2A275EF5005F1CCB /* PBXTargetDependency */,
+			);
+			name = "pacemakerWatchos Watch App";
+			productName = "pacemakerWatchos Watch App";
+			productReference = E3A677B12A275A0F00BD9FB7 /* pacemakerWatchos Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E3D151212A275EF5005F1CCB /* session */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3D1512C2A275EF5005F1CCB /* Build configuration list for PBXNativeTarget "session" */;
+			buildPhases = (
+				E3D1511E2A275EF5005F1CCB /* Sources */,
+				E3D1511F2A275EF5005F1CCB /* Frameworks */,
+				E3D151202A275EF5005F1CCB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = pacemakerwatchos;
-			productName = pacemakerwatchos;
-			productReference = E34996492A23564300660197 /* pacemakerwatchos.appex */;
+			name = session;
+			productName = session;
+			productReference = E3D151222A275EF5005F1CCB /* session.appex */;
 			productType = "com.apple.product-type.extensionkit-extension";
 		};
 /* End PBXNativeTarget section */
@@ -254,7 +355,10 @@
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
 					};
-					E34996482A23564300660197 = {
+					E3A677B02A275A0F00BD9FB7 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					E3D151212A275EF5005F1CCB = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
@@ -274,7 +378,8 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* pacemaker */,
 				00E356ED1AD99517003FC87E /* pacemakerTests */,
-				E34996482A23564300660197 /* pacemakerwatchos */,
+				E3A677B02A275A0F00BD9FB7 /* pacemakerWatchos Watch App */,
+				E3D151212A275EF5005F1CCB /* session */,
 			);
 		};
 /* End PBXProject section */
@@ -296,7 +401,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E34996472A23564300660197 /* Resources */ = {
+		E3A677AF2A275A0F00BD9FB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A677BB2A275A1100BD9FB7 /* Preview Assets.xcassets in Resources */,
+				E3A677B82A275A1100BD9FB7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3D151202A275EF5005F1CCB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -473,12 +587,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E34996452A23564300660197 /* Sources */ = {
+		E3A677AD2A275A0F00BD9FB7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E349964C2A23564300660197 /* pacemakerwatchosExtension.swift in Sources */,
-				E349964E2A23564300660197 /* pacemakerwatchos.swift in Sources */,
+				E3A677B62A275A0F00BD9FB7 /* ContentView.swift in Sources */,
+				E3A677B42A275A0F00BD9FB7 /* pacemakerWatchosApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3D1511E2A275EF5005F1CCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3D151272A275EF5005F1CCB /* session.swift in Sources */,
+				E3D151252A275EF5005F1CCB /* sessionExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +612,16 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* pacemaker */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		E3A677BD2A275A1100BD9FB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3A677B02A275A0F00BD9FB7 /* pacemakerWatchos Watch App */;
+			targetProxy = E3A677BC2A275A1100BD9FB7 /* PBXContainerItemProxy */;
+		};
+		E3D1512A2A275EF5005F1CCB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3D151212A275EF5005F1CCB /* session */;
+			targetProxy = E3D151292A275EF5005F1CCB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -548,6 +681,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-pacemaker.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = pacemaker/pacemaker.entitlements;
@@ -577,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-pacemaker.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = pacemaker/pacemaker.entitlements;
@@ -737,7 +872,95 @@
 			};
 			name = Release;
 		};
-		E34996512A23564300660197 /* Debug */ = {
+		E3A677C02A275A1100BD9FB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "pacemakerWatchos Watch App/pacemakerWatchos Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"pacemakerWatchos Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 3XU5VHUK72;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = pacemakerWatchos;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		E3A677C12A275A1100BD9FB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "pacemakerWatchos Watch App/pacemakerWatchos Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "\"pacemakerWatchos Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 3XU5VHUK72;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = pacemakerWatchos;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
+		E3D1512D2A275EF5005F1CCB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
@@ -752,8 +975,8 @@
 				DEVELOPMENT_TEAM = 3XU5VHUK72;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = pacemakerwatchos/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = pacemakerwatchos;
+				INFOPLIST_FILE = session/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = session;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -764,7 +987,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = pacemaker.pacemakerwatchos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp.session;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -777,7 +1000,7 @@
 			};
 			name = Debug;
 		};
-		E34996522A23564300660197 /* Release */ = {
+		E3D1512E2A275EF5005F1CCB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
@@ -793,8 +1016,8 @@
 				DEVELOPMENT_TEAM = 3XU5VHUK72;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = pacemakerwatchos/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = pacemakerwatchos;
+				INFOPLIST_FILE = session/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = session;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -804,7 +1027,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = pacemaker.pacemakerwatchos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp.session;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -847,11 +1070,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E34996502A23564300660197 /* Build configuration list for PBXNativeTarget "pacemakerwatchos" */ = {
+		E3A677BF2A275A1100BD9FB7 /* Build configuration list for PBXNativeTarget "pacemakerWatchos Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E34996512A23564300660197 /* Debug */,
-				E34996522A23564300660197 /* Release */,
+				E3A677C02A275A1100BD9FB7 /* Debug */,
+				E3A677C12A275A1100BD9FB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3D1512C2A275EF5005F1CCB /* Build configuration list for PBXNativeTarget "session" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3D1512D2A275EF5005F1CCB /* Debug */,
+				E3D1512E2A275EF5005F1CCB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

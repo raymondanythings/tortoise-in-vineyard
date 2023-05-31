@@ -35,6 +35,10 @@
 			</dict>
 		</dict>
 	</dict>
+
+<!-- Below is only required if requesting clinical health data -->
+	<!-- <key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Read and understand clinical health data.</string> -->
 	<key>NSHealthShareUsageDescription</key>
 	<string>건강 데이터를 쓸때 필요해요.</string>
 
