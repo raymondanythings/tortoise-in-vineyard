@@ -21,9 +21,9 @@ const WatchCheck = ({ navigation }: { navigation: any }) => {
         <NextButton
           color='#EBC043'
           text='워치 없어요'
-          onPress={() => route.dispatch(StackActions.replace('run'))} // 워치 없을 때는 km로만 측정되도록 라우터 재설정
+          onPress={() => route.dispatch(StackActions.replace('emotion'))} // 워치 없을 때는 km로만 측정되도록 라우터 재설정
         />
-        <NextButton text='착용했어요' onPress={() => navigation.push('run')} />
+        <NextButton text='착용했어요' onPress={() => navigation.push('emotion')} />
       </SafeAreaView>
     </View>
   )
