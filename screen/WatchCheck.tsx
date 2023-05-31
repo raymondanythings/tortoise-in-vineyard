@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
 
-const BeforeEx = () => {
+const WatchCheck = ({ navigation }: { navigation: any }) => {
   const route = useNavigation()
   return (
     <View style={globalStyle.container}>
@@ -23,13 +23,13 @@ const BeforeEx = () => {
           text='워치 없어요'
           onPress={() => route.dispatch(StackActions.replace('run'))} // 워치 없을 때는 km로만 측정되도록 라우터 재설정
         />
-        <NextButton text='착용했어요' onPress={() => route.dispatch(StackActions.replace('run'))} />
+        <NextButton text='착용했어요' onPress={() => navigation.push('run')} />
       </SafeAreaView>
     </View>
   )
 }
 
-export default BeforeEx
+export default WatchCheck
 
 const styles = StyleSheet.create({
   characterContainer: {

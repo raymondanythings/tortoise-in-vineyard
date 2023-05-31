@@ -4,8 +4,8 @@ import { View, StyleSheet, Text, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
-const BeforeEx = () => {
-  const route = useNavigation()
+
+const BeforeEx = ({ navigation }: { navigation: any }) => {
   return (
     <View style={globalStyle.container}>
       <SafeAreaView style={globalStyle.safeAreaContainer}>
@@ -17,10 +17,7 @@ const BeforeEx = () => {
         <View style={styles.characterContainer}>
           <Text style={globalStyle.heading}>준비운동 캐릭터</Text>
         </View>
-        <NextButton
-          text='준비운동 완료'
-          onPress={() => route.dispatch(StackActions.replace('watchcheck'))}
-        />
+        <NextButton text='준비운동 완료' onPress={() => navigation.push('watchcheck')} />
       </SafeAreaView>
     </View>
   )
