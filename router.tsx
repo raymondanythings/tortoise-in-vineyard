@@ -48,9 +48,9 @@ const MainScreen = () => {
       <MainStack.Screen name='watchcheck' component={WatchCheck} />
       <MainStack.Screen
         name='run'
-        options={{
-          gestureEnabled: false,
-        }}
+        // options={{
+        //   gestureEnabled: false,
+        // }}
         component={Run}
       />
     </MainStack.Navigator>
