@@ -11,7 +11,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   // }
   return (
     <View style={globalStyle.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
+      <SafeAreaView style={globalStyle.safeAreaContainer}>
         <Text style={globalStyle.heading}>달리는 포도</Text>
         <Text style={globalStyle.subheading}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
@@ -32,10 +32,6 @@ const Home = ({ navigation }: { navigation: any }) => {
 export default Home
 
 const styles = StyleSheet.create({
-  safeAreaContainer: {
-    alignItems: 'center',
-    paddingHorizontal: 40,
-  },
   characterContainer: {
     borderColor: '#C2D1D9',
     backgroundColor: '#C2D1D9',

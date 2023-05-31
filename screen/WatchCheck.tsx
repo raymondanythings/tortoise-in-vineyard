@@ -9,7 +9,7 @@ const BeforeEx = () => {
   const route = useNavigation()
   return (
     <View style={globalStyle.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
+      <SafeAreaView style={globalStyle.safeAreaContainer}>
         <Text style={globalStyle.heading}>워치 착용하셨나요?</Text>
         <Text style={globalStyle.subheading}>
           심박수 측정을 위해 기기를 착용해주세요 없다면, {'\n'}
@@ -32,10 +32,6 @@ const BeforeEx = () => {
 export default BeforeEx
 
 const styles = StyleSheet.create({
-  safeAreaContainer: {
-    alignItems: 'center',
-    paddingHorizontal: 40,
-  },
   characterContainer: {
     borderColor: '#C2D1D9',
     backgroundColor: '#C2D1D9',

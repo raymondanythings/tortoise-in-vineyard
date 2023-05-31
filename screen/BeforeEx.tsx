@@ -8,7 +8,7 @@ const BeforeEx = () => {
   const route = useNavigation()
   return (
     <View style={globalStyle.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
+      <SafeAreaView style={globalStyle.safeAreaContainer}>
         <Text style={globalStyle.heading}>준비운동, 잊지 않았죠?</Text>
         <Text style={globalStyle.subheading}>
           달리기 전 몸이 놀라지 않게 {'\n'}
@@ -29,10 +29,6 @@ const BeforeEx = () => {
 export default BeforeEx
 
 const styles = StyleSheet.create({
-  safeAreaContainer: {
-    alignItems: 'center',
-    paddingHorizontal: 40,
-  },
   characterContainer: {
     borderColor: '#C2D1D9',
     backgroundColor: '#C2D1D9',

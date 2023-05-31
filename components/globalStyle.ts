@@ -17,4 +17,8 @@ export default StyleSheet.create({
     marginBottom: 55,
     color: '#A1AEB7',
   },
+  safeAreaContainer: {
+    alignItems: 'center',
+    paddingHorizontal: 40,
+  },
 })
