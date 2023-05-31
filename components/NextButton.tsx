@@ -14,7 +14,7 @@ const NextButton: React.FunctionComponent<ButtonProps> = (props) => {
       style={{
         paddingHorizontal: 80,
         paddingVertical: 10,
-        backgroundColor: props.color ? '#EBC043' : '#4E4E4E',
+        backgroundColor: props.color ? props.color : '#4E4E4E',
         borderRadius: 50,
         width: 263,
         alignItems: 'center',

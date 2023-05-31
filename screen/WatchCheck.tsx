@@ -19,7 +19,7 @@ const BeforeEx = () => {
           <Text style={globalStyle.heading}>워치 이미지</Text>
         </View>
         <NextButton
-          color='noWatch'
+          color='#EBC043'
           text='워치 없어요'
           onPress={() => route.dispatch(StackActions.replace('run'))} // 워치 없을 때는 km로만 측정되도록 라우터 재설정
         />
