@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { watchEvents } from 'react-native-watch-connectivity'
-const Run = () => {
+const Run = ({ navigation }: { navigation: any }) => {
   const [messageFromWatch, setMessageFromWatch] = useState('Waiting...')
   // Listener when receive message
   const messageListener = () =>
@@ -17,7 +17,7 @@ const Run = () => {
       <Text>
         Run
         {messageFromWatch}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push('afteremotion')}>
           <Text>다음</Text>
         </TouchableOpacity>
       </Text>
