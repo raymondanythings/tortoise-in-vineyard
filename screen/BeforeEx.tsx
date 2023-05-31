@@ -3,7 +3,7 @@ import React from 'react'
 import { View, StyleSheet, Text, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
-
+import NextButton from '../components/NextButton'
 const BeforeEx = () => {
   const route = useNavigation()
   return (
@@ -17,12 +17,10 @@ const BeforeEx = () => {
         <View style={styles.characterContainer}>
           <Text style={globalStyle.heading}>준비운동 캐릭터</Text>
         </View>
-        <Pressable
-          style={globalStyle.nextButton}
-          onPress={() => route.dispatch(StackActions.replace('run'))}
-        >
-          <Text style={globalStyle.btnInnerText}>준비운동 완료</Text>
-        </Pressable>
+        <NextButton
+          text='준비운동 완료'
+          onPress={() => route.dispatch(StackActions.replace('watchcheck'))}
+        />
       </SafeAreaView>
     </View>
   )

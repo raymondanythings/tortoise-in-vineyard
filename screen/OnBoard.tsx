@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
+import NextButton from '../components/NextButton'
 
 const OnBoard = ({ navigation }: { navigation: any }) => {
   return (
@@ -12,9 +13,7 @@ const OnBoard = ({ navigation }: { navigation: any }) => {
         <View style={styles.characterContainer}>
           <Text style={globalStyle.heading}>나무 이미지</Text>
         </View>
-        <Pressable style={globalStyle.nextButton} onPress={() => navigation.push('beforeex')}>
-          <Text style={globalStyle.btnInnerText}>달리기 시작</Text>
-        </Pressable>
+        <NextButton text='달리기 시작' onPress={() => navigation.push('beforeex')} />
       </SafeAreaView>
     </View>
   )

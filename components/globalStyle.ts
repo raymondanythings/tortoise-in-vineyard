@@ -17,17 +17,4 @@ export default StyleSheet.create({
     marginBottom: 55,
     color: '#A1AEB7',
   },
-  nextButton: {
-    paddingHorizontal: 80,
-    paddingVertical: 10,
-    backgroundColor: '#4E4E4E',
-    borderRadius: 50,
-    width: 263,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    marginBottom: 9,
-    height: 54,
-  },
-  btnInnerText: { fontSize: 12, color: 'white', fontWeight: '400' },
 })

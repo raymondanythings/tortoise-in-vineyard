@@ -3,6 +3,7 @@ import React from 'react'
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
+import NextButton from '../components/NextButton'
 
 const Home = ({ navigation }: { navigation: any }) => {
   // const getId = async () => {
@@ -19,9 +20,7 @@ const Home = ({ navigation }: { navigation: any }) => {
         <View style={styles.characterContainer}>
           <Text style={globalStyle.heading}>메인 캐릭터</Text>
         </View>
-        <Pressable style={globalStyle.nextButton} onPress={() => navigation.push('onboard')}>
-          <Text style={globalStyle.btnInnerText}>서비스 이용하기</Text>
-        </Pressable>
+        <NextButton text='서비스 이용하기' onPress={() => navigation.push('onboard')} />
         <TouchableOpacity onPress={async () => await AsyncStorage.clear()}>
           <Text>스토리지 지우기</Text>
         </TouchableOpacity>
