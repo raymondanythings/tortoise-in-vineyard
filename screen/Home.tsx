@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
-import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
@@ -21,9 +21,9 @@ const Home = ({ navigation }: { navigation: any }) => {
           <Text style={globalStyle.heading}>메인 캐릭터</Text>
         </View>
         <NextButton text='서비스 이용하기' onPress={() => navigation.push('onboard')} />
-        <TouchableOpacity onPress={async () => await AsyncStorage.clear()}>
+        <Pressable onPress={async () => await AsyncStorage.clear()}>
           <Text>스토리지 지우기</Text>
-        </TouchableOpacity>
+        </Pressable>
       </SafeAreaView>
     </View>
   )
