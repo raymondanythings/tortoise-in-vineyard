@@ -12,10 +12,10 @@ import asyncStorage from '@react-native-async-storage/async-storage'
 import WebView from 'react-native-webview'
 function App(): JSX.Element {
   return (
-    <WebView source={{ uri: 'https://client-eta-rust.vercel.app/' }} />
-    // <NavigationContainer>
-    //   <Router />
-    // </NavigationContainer>
+    // <WebView source={{ uri: 'https://client-eta-rust.vercel.app/' }} />
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   )
 }
 
