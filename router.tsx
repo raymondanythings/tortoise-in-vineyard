@@ -4,8 +4,10 @@ import Register from './screen/Register'
 import Home from './screen/Home'
 import OnBoard from './screen/OnBoard'
 import BeforeEx from './screen/BeforeEx'
+import WatchCheck from './screen/WatchCheck'
 import Run from './screen/Run'
 import Check from './screen/Check'
+
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
 
@@ -43,6 +45,7 @@ const MainScreen = () => {
       />
       <MainStack.Screen name='onboard' component={OnBoard} />
       <MainStack.Screen name='beforeex' component={BeforeEx} />
+      <MainStack.Screen name='watchcheck' component={WatchCheck} />
       <MainStack.Screen
         name='run'
         options={{
