@@ -851,9 +851,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -896,9 +898,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { watchEvents } from 'react-native-watch-connectivity'
+import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { Platform } from 'react-native'
@@ -21,10 +21,17 @@ const Run = ({ navigation }: { navigation: any }) => {
   const [messageFromWatch, setMessageFromWatch] = useState('Waiting...')
   // Listener when receive message
 
-  const messageListener = () =>
+  const messageListener = async () => {
+    const paired = await getIsPaired()
+    const installed = await getIsWatchAppInstalled()
+    console.log(paired, 'paired')
+    console.log(installed, 'installed')
     watchEvents.on('message', (message) => {
+      console.log(message, ' <<<< message from watchos')
       setMessageFromWatch(message.watchMessage as any)
     })
+  }
+
   useEffect(() => {
     messageListener()
     getHealthKit()

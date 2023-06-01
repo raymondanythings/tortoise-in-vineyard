@@ -98,7 +98,11 @@ class WorkoutManager : NSObject, ObservableObject {
   
   // MARK: - Workout Metrics
   @Published var averageHeartRate : Double = 0
-  @Published var heartRate : Double = 0
+  @Published var heartRate : Double = 0 {
+    didSet {
+      SessionManager.sharedManager.sendMessage(message:["heart" : "123"])
+    }
+  }
   @Published var activeEnergy : Double = 0
   @Published var distance : Double = 0{
     didSet {
