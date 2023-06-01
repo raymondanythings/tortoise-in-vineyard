@@ -14,6 +14,7 @@
 		6C28C0139A69276032255382 /* libPods-pacemaker-pacemakerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A25664B5987E7D10EC5BBCD0 /* libPods-pacemaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA565BD0861A385FD01BB781 /* libPods-pacemaker.a */; };
+		E31B4C2E2A28FB8700A55535 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B4C2D2A28FB8700A55535 /* SessionManager.swift */; };
 		E39DDC322A28499E00F6025A /* SessionPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC312A28499E00F6025A /* SessionPagingView.swift */; };
 		E39DDC342A284A7000F6025A /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC332A284A7000F6025A /* MetricsView.swift */; };
 		E39DDC362A284E4800F6025A /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC352A284E4800F6025A /* ElapsedTimeView.swift */; };
@@ -23,11 +24,9 @@
 		E39DDC402A28730700F6025A /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC3F2A28730700F6025A /* WorkoutManager.swift */; };
 		E3CC38EE2A284798002E5BBD /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CC38ED2A284798002E5BBD /* StartView.swift */; };
 		E3D151372A27644D005F1CCB /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D151362A27644D005F1CCB /* WatchAppApp.swift */; };
-		E3D151392A27644D005F1CCB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D151382A27644D005F1CCB /* ContentView.swift */; };
 		E3D1513B2A276450005F1CCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D1513A2A276450005F1CCB /* Assets.xcassets */; };
 		E3D1513E2A276450005F1CCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */; };
 		E3D151412A276450005F1CCB /* 퐁퐁두두.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3D151342A27644D005F1CCB /* 퐁퐁두두.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E3F513682A27743300A57084 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F513672A27743300A57084 /* InterfaceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +76,7 @@
 		D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pacemaker-pacemakerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD74402AEEEAD249FC3C6BC4 /* Pods-pacemaker-pacemakerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.release.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E15D84FF05E7B0CB211AC48F /* Pods-pacemaker-pacemakerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.debug.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E31B4C2D2A28FB8700A55535 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		E34996442A2355BE00660197 /* pacemaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = pacemaker.entitlements; path = pacemaker/pacemaker.entitlements; sourceTree = "<group>"; };
 		E39DDC312A28499E00F6025A /* SessionPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPagingView.swift; sourceTree = "<group>"; };
 		E39DDC332A284A7000F6025A /* MetricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
@@ -91,10 +91,8 @@
 		E3CC38ED2A284798002E5BBD /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		E3D151342A27644D005F1CCB /* 퐁퐁두두.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "퐁퐁두두.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D151362A27644D005F1CCB /* WatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppApp.swift; sourceTree = "<group>"; };
-		E3D151382A27644D005F1CCB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E3D1513A2A276450005F1CCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E3F513672A27743300A57084 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EDDDEC25A85FF29D567B646D /* Pods-pacemaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker.release.xcconfig"; path = "Target Support Files/Pods-pacemaker/Pods-pacemaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,10 +216,8 @@
 				E39DDC422A28767100F6025A /* WatchApp-Watch-App-Info.plist */,
 				E39DDC412A28766000F6025A /* WatchApp Watch AppDebug.entitlements */,
 				E3D151362A27644D005F1CCB /* WatchAppApp.swift */,
-				E3D151382A27644D005F1CCB /* ContentView.swift */,
 				E3D1513A2A276450005F1CCB /* Assets.xcassets */,
 				E3D1513C2A276450005F1CCB /* Preview Content */,
-				E3F513672A27743300A57084 /* InterfaceController.swift */,
 				E3CC38ED2A284798002E5BBD /* StartView.swift */,
 				E39DDC312A28499E00F6025A /* SessionPagingView.swift */,
 				E39DDC332A284A7000F6025A /* MetricsView.swift */,
@@ -230,6 +226,7 @@
 				E39DDC392A2851CD00F6025A /* SummaryView.swift */,
 				E39DDC3D2A28715B00F6025A /* ActivityRingView.swift */,
 				E39DDC3F2A28730700F6025A /* WorkoutManager.swift */,
+				E31B4C2D2A28FB8700A55535 /* SessionManager.swift */,
 			);
 			path = "WatchApp Watch App";
 			sourceTree = "<group>";
@@ -548,9 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3F513682A27743300A57084 /* InterfaceController.swift in Sources */,
 				E39DDC362A284E4800F6025A /* ElapsedTimeView.swift in Sources */,
-				E3D151392A27644D005F1CCB /* ContentView.swift in Sources */,
 				E39DDC322A28499E00F6025A /* SessionPagingView.swift in Sources */,
 				E39DDC402A28730700F6025A /* WorkoutManager.swift in Sources */,
 				E39DDC382A2850AB00F6025A /* ControlsView.swift in Sources */,
@@ -558,6 +553,7 @@
 				E39DDC342A284A7000F6025A /* MetricsView.swift in Sources */,
 				E39DDC3E2A28715B00F6025A /* ActivityRingView.swift in Sources */,
 				E3CC38EE2A284798002E5BBD /* StartView.swift in Sources */,
+				E31B4C2E2A28FB8700A55535 /* SessionManager.swift in Sources */,
 				E39DDC3A2A2851CD00F6025A /* SummaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

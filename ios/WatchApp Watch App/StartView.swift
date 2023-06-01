@@ -9,7 +9,7 @@ import SwiftUI
 import HealthKit
 struct StartView: View {
   @EnvironmentObject var workoutManager : WorkoutManager
-  var workoutTypes : [HKWorkoutActivityType] = [.cycling, .running, .walking]
+  var workoutTypes : [HKWorkoutActivityType] = [.running]
     var body: some View {
       List(workoutTypes) {
         workoutType in

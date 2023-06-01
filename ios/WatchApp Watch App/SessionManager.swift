@@ -1,8 +1,16 @@
+//
+//  SessionManager.swift
+//  WatchApp Watch App
+//
+//  Created by YongHyun Yeob on 2023/06/02.
+//
+
+import Foundation
 import WatchConnectivity
 
-class WatchSessionManager: NSObject, WCSessionDelegate {
+class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
 
-    static let sharedManager = WatchSessionManager()
+    static let sharedManager = SessionManager()
     private override init() {
         super.init()
     }
@@ -43,13 +51,14 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
     func startSession() {
         session?.delegate = self
         session?.activate()
+      
     }
 }
 
 // MARK: Application Context
 // use when your app needs only the latest information
 // if the data was not sent, it will be replaced
-extension WatchSessionManager {
+extension SessionManager {
 
     // Sender
     func updateApplicationContext(applicationContext: [String : AnyObject]) throws {
@@ -75,7 +84,7 @@ extension WatchSessionManager {
 // MARK: User Info
 // use when your app needs all the data
 // FIFO queue
-extension WatchSessionManager {
+extension SessionManager {
 
     // Sender
     func transferUserInfo(userInfo: [String : AnyObject]) -> WCSessionUserInfoTransfer? {
@@ -98,7 +107,7 @@ extension WatchSessionManager {
 }
 
 // MARK: Transfer File
-extension WatchSessionManager {
+extension SessionManager {
 
     // Sender
     func transferFile(file: NSURL, metadata: [String : AnyObject]) -> WCSessionFileTransfer? {
@@ -120,7 +129,7 @@ extension WatchSessionManager {
 
 
 // MARK: Interactive Messaging
-extension WatchSessionManager {
+extension SessionManager {
 
     // Live messaging! App has to be reachable
     private var validReachableSession: WCSession? {
