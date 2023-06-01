@@ -184,3 +184,7 @@ extension WorkoutManager : HKLiveWorkoutBuilderDelegate {
     
   }
 }
+
+extension Double {
+  var km : Double { return self * 1_000.0}
+}

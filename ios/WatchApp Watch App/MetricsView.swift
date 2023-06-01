@@ -15,7 +15,9 @@ struct MetricsView: View {
         VStack(alignment: .leading) {
           Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
           ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime ?? 0, showSubseconds: context.cadence == .live).foregroundColor(Color.yellow)
-          Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
+//          Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
+//          Text(workoutManager.distance.formatted(.number.precision(.fractionLength(0))) + "M")
+          Text(workoutManager.distance.km.formatted(.number.precision(.fractionLength(0))) + "M")
           // Text(Measurement(value: workoutManager.activeEnergy,unit: UnitEnergy.kilocalories).formatted(.measurement(width: .abbreviated,usage: .workout,numberFormatStyle: .number.precision(.fractionLength(0)))))
         }
       }
