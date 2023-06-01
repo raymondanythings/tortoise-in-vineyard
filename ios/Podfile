@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, min_ios_version_supported
+platform :ios, '13.0'
 prepare_react_native_project!
 
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
@@ -21,6 +21,13 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 pod 'RNWatch', :path => '../node_modules/react-native-watch-connectivity'
+pod 'react-native-geolocation-service', :path => '../node_modules/react-native-geolocation-service'
+# React Native Maps dependencies
+# The following line is only needed if building on an Apple silicon Mac without rosetta.
+pod 'Google-Maps-iOS-Utils', :git => 'https://github.com/Simon-TechForm/google-maps-ios-utils.git', :branch => 'feat/support-apple-silicon'
+
+rn_maps_path = '../node_modules/react-native-maps'
+pod 'react-native-google-maps', :path => rn_maps_path
 
 target 'pacemaker' do
   config = use_native_modules!
