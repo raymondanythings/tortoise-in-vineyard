@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		28E7ADA72A28A8A00001B551 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E7ADA62A28A8A00001B551 /* File.swift */; };
 		6C28C0139A69276032255382 /* libPods-pacemaker-pacemakerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A25664B5987E7D10EC5BBCD0 /* libPods-pacemaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA565BD0861A385FD01BB781 /* libPods-pacemaker.a */; };
@@ -72,6 +73,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = pacemaker/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = pacemaker/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = pacemaker/main.m; sourceTree = "<group>"; };
+		28E7ADA52A28A8A00001B551 /* pacemaker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pacemaker-Bridging-Header.h"; sourceTree = "<group>"; };
+		28E7ADA62A28A8A00001B551 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pacemaker/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA565BD0861A385FD01BB781 /* libPods-pacemaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pacemaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pacemaker-pacemakerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +157,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				28E7ADA62A28A8A00001B551 /* File.swift */,
+				28E7ADA52A28A8A00001B551 /* pacemaker-Bridging-Header.h */,
 			);
 			name = pacemaker;
 			sourceTree = "<group>";
@@ -321,7 +326,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1430;
 					};
 					E3D151332A27644D005F1CCB = {
 						CreatedOnToolsVersion = 14.3;
@@ -540,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				28E7ADA72A28A8A00001B551 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,6 +588,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E15D84FF05E7B0CB211AC48F /* Pods-pacemaker-pacemakerTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -609,6 +616,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DD74402AEEEAD249FC3C6BC4 /* Pods-pacemaker-pacemakerTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = pacemakerTests/Info.plist;
@@ -653,6 +661,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker;
 				PRODUCT_NAME = pacemaker;
+				SWIFT_OBJC_BRIDGING_HEADER = "pacemaker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -682,6 +691,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker;
 				PRODUCT_NAME = pacemaker;
+				SWIFT_OBJC_BRIDGING_HEADER = "pacemaker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
