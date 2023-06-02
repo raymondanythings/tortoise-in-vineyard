@@ -12,10 +12,11 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		28E7ADA72A28A8A00001B551 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E7ADA62A28A8A00001B551 /* File.swift */; };
+		49ED0B254B824EE29E22E99A /* RF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21539F274E6B414B9E88080C /* RF.ttf */; };
 		6C28C0139A69276032255382 /* libPods-pacemaker-pacemakerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A25664B5987E7D10EC5BBCD0 /* libPods-pacemaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA565BD0861A385FD01BB781 /* libPods-pacemaker.a */; };
-		E30E0F8C2A2A4B1700F3DAAB /* font in Resources */ = {isa = PBXBuildFile; fileRef = E30E0F8B2A2A4B1700F3DAAB /* font */; };
+		E30296392A2A5E1300FCF316 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E30296382A2A5E1300FCF316 /* fonts */; };
 		E31B4C2E2A28FB8700A55535 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B4C2D2A28FB8700A55535 /* SessionManager.swift */; };
 		E39DDC322A28499E00F6025A /* SessionPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC312A28499E00F6025A /* SessionPagingView.swift */; };
 		E39DDC342A284A7000F6025A /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC332A284A7000F6025A /* MetricsView.swift */; };
@@ -28,7 +29,7 @@
 		E3D151372A27644D005F1CCB /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D151362A27644D005F1CCB /* WatchAppApp.swift */; };
 		E3D1513B2A276450005F1CCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D1513A2A276450005F1CCB /* Assets.xcassets */; };
 		E3D1513E2A276450005F1CCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */; };
-		E3D151412A276450005F1CCB /* 퐁퐁두두.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3D151342A27644D005F1CCB /* 퐁퐁두두.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E3D151412A276450005F1CCB /* 달리는거북이.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3D151342A27644D005F1CCB /* 달리는거북이.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +56,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				E3D151412A276450005F1CCB /* 퐁퐁두두.app in Embed Watch Content */,
+				E3D151412A276450005F1CCB /* 달리는거북이.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +67,7 @@
 		00E356EE1AD99517003FC87E /* pacemakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pacemakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* pacemakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pacemakerTests.m; sourceTree = "<group>"; };
+		0CAAD92659EC4D6A8D9986E3 /* RF삐뚤빼뚤체.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RF삐뚤빼뚤체.ttf"; path = "../fonts/RF삐뚤빼뚤체.ttf"; sourceTree = "<group>"; };
 		0CBEE0BC7B919EA21EB81260 /* Pods-pacemaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker.debug.xcconfig"; path = "Target Support Files/Pods-pacemaker/Pods-pacemaker.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* pacemaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pacemaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = pacemaker/AppDelegate.h; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = pacemaker/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = pacemaker/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = pacemaker/main.m; sourceTree = "<group>"; };
+		21539F274E6B414B9E88080C /* RF.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = RF.ttf; path = ../fonts/RF.ttf; sourceTree = "<group>"; };
 		28E7ADA52A28A8A00001B551 /* pacemaker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pacemaker-Bridging-Header.h"; sourceTree = "<group>"; };
 		28E7ADA62A28A8A00001B551 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pacemaker/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,8 +83,8 @@
 		D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pacemaker-pacemakerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD74402AEEEAD249FC3C6BC4 /* Pods-pacemaker-pacemakerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.release.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E15D84FF05E7B0CB211AC48F /* Pods-pacemaker-pacemakerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.debug.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E30296382A2A5E1300FCF316 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		E30E0F8A2A2A42BD00F3DAAB /* WatchApp Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchApp Watch App.entitlements"; sourceTree = "<group>"; };
-		E30E0F8B2A2A4B1700F3DAAB /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = font; sourceTree = "<group>"; };
 		E31B4C2D2A28FB8700A55535 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		E34996442A2355BE00660197 /* pacemaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = pacemaker.entitlements; path = pacemaker/pacemaker.entitlements; sourceTree = "<group>"; };
 		E39DDC312A28499E00F6025A /* SessionPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPagingView.swift; sourceTree = "<group>"; };
@@ -95,7 +98,7 @@
 		E39DDC422A28767100F6025A /* WatchApp-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchApp-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E39DDC432A28769D00F6025A /* pacemakerDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = pacemakerDebug.entitlements; path = pacemaker/pacemakerDebug.entitlements; sourceTree = "<group>"; };
 		E3CC38ED2A284798002E5BBD /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
-		E3D151342A27644D005F1CCB /* 퐁퐁두두.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "퐁퐁두두.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3D151342A27644D005F1CCB /* 달리는거북이.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "달리는거북이.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D151362A27644D005F1CCB /* WatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppApp.swift; sourceTree = "<group>"; };
 		E3D1513A2A276450005F1CCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -184,7 +187,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				E30E0F8B2A2A4B1700F3DAAB /* font */,
+				E30296382A2A5E1300FCF316 /* fonts */,
 				13B07FAE1A68108700A75B9A /* pacemaker */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* pacemakerTests */,
@@ -192,6 +195,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				FEE66572213A4663B7EC0E7A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -203,7 +207,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* pacemaker.app */,
 				00E356EE1AD99517003FC87E /* pacemakerTests.xctest */,
-				E3D151342A27644D005F1CCB /* 퐁퐁두두.app */,
+				E3D151342A27644D005F1CCB /* 달리는거북이.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,6 +251,15 @@
 				E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FEE66572213A4663B7EC0E7A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0CAAD92659EC4D6A8D9986E3 /* RF삐뚤빼뚤체.ttf */,
+				21539F274E6B414B9E88080C /* RF.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,7 +324,7 @@
 			);
 			name = "WatchApp Watch App";
 			productName = "WatchApp Watch App";
-			productReference = E3D151342A27644D005F1CCB /* 퐁퐁두두.app */;
+			productReference = E3D151342A27644D005F1CCB /* 달리는거북이.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -367,9 +380,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E30E0F8C2A2A4B1700F3DAAB /* font in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				49ED0B254B824EE29E22E99A /* RF.ttf in Resources */,
+				E30296392A2A5E1300FCF316 /* fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +855,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -857,6 +872,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "달리는거북이";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -871,7 +887,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp;
-				PRODUCT_NAME = "퐁퐁두두";
+				PRODUCT_NAME = "달리는거북이";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -888,6 +904,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -905,6 +922,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "달리는거북이";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -918,7 +936,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp;
-				PRODUCT_NAME = "퐁퐁두두";
+				PRODUCT_NAME = "달리는거북이";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

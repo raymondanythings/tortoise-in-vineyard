@@ -7,15 +7,17 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-    fontSize: 28,
-    fontWeight: '700',
+    fontSize: 54,
+    lineHeight: 49,
     marginBottom: 8,
   },
   subheading: {
     fontSize: 14,
     fontWeight: '400',
+    lineHeight: 24,
     marginBottom: 55,
     color: '#A1AEB7',
+    fontFamily: 'Pretendard-Regular',
   },
   safeAreaContainer: {
     alignItems: 'center',

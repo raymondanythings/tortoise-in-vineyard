@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E3D151332A27644D005F1CCB"
-               BuildableName = "&#x1111;&#x1169;&#x11bc;&#x1111;&#x1169;&#x11bc;&#x1103;&#x116e;&#x1103;&#x116e;.app"
+               BuildableName = "&#x1103;&#x1161;&#x11af;&#x1105;&#x1175;&#x1102;&#x1173;&#x11ab;&#x1100;&#x1165;&#x1107;&#x116e;&#x11a8;&#x110b;&#x1175;.app"
                BlueprintName = "WatchApp Watch App"
                ReferencedContainer = "container:pacemaker.xcodeproj">
             </BuildableReference>
@@ -58,7 +58,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E3D151332A27644D005F1CCB"
-            BuildableName = "&#x1111;&#x1169;&#x11bc;&#x1111;&#x1169;&#x11bc;&#x1103;&#x116e;&#x1103;&#x116e;.app"
+            BuildableName = "&#x1103;&#x1161;&#x11af;&#x1105;&#x1175;&#x1102;&#x1173;&#x11ab;&#x1100;&#x1165;&#x1107;&#x116e;&#x11a8;&#x110b;&#x1175;.app"
             BlueprintName = "WatchApp Watch App"
             ReferencedContainer = "container:pacemaker.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E3D151332A27644D005F1CCB"
-            BuildableName = "&#x1111;&#x1169;&#x11bc;&#x1111;&#x1169;&#x11bc;&#x1103;&#x116e;&#x1103;&#x116e;.app"
+            BuildableName = "&#x1103;&#x1161;&#x11af;&#x1105;&#x1175;&#x1102;&#x1173;&#x11ab;&#x1100;&#x1165;&#x1107;&#x116e;&#x11a8;&#x110b;&#x1175;.app"
             BlueprintName = "WatchApp Watch App"
             ReferencedContainer = "container:pacemaker.xcodeproj">
          </BuildableReference>

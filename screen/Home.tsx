@@ -10,10 +10,13 @@ const Home = ({ navigation }: { navigation: any }) => {
   return (
     <View style={globalStyle.container}>
       <SafeAreaView style={globalStyle.safeAreaContainer}>
-        <Text style={globalStyle.heading}>달리는 포도</Text>
-        <Text style={globalStyle.subheading}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
+        <Text style={globalStyle.heading}>달리는 거북이</Text>
+        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
+          {`
+남들과 비교하지 않고, 나만의 기준으로 운동해요.
+나만의 적정 심박수를 찾아서
+AI가 페이스메이킹을 해줄 거예요.
+          `}
         </Text>
         <View style={styles.characterContainer}>
           <Text style={globalStyle.heading}>메인 캐릭터</Text>

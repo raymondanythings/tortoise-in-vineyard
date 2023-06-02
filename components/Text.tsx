@@ -4,7 +4,7 @@ import globalStyle from './globalStyle'
 
 const Text = ({ children, ...rest }: TextProps) => {
   return (
-    <T {...rest} style={[rest.style, globalStyle.text]}>
+    <T {...rest} style={[globalStyle.text, rest.style]}>
       {children}
     </T>
   )
