@@ -182,6 +182,20 @@ const Run = ({ navigation }: { navigation: any }) => {
             <View style={styles.marker}></View>
           </View>
         </Marker.Animated> */}
+        {/* 테두리 선 */}
+        <Polyline
+          coordinates={locations}
+          strokeColors={
+            locations.length >= 2
+              ? [
+                  '#6C32EC',
+                  ...generateColor('#6C32EC', ' #E3AF29', locations.length - 2),
+                  ' #E3AF29',
+                ]
+              : []
+          }
+          strokeWidth={12}
+        />
         <Polyline
           coordinates={locations}
           strokeColors={
