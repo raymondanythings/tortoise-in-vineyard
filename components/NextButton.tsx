@@ -13,15 +13,11 @@ const NextButton: React.FunctionComponent<ButtonProps> = (props) => {
     <Pressable
       onPress={props.onPress}
       style={{
-        paddingHorizontal: 80,
-        paddingVertical: 10,
         backgroundColor: props.color ? props.color : '#4E4E4E',
         borderRadius: 50,
         width: 263,
         alignItems: 'center',
         justifyContent: 'center',
-        // marginTop: 20,
-        marginBottom: 9,
         height: 54,
       }}
     >

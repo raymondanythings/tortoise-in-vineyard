@@ -14,16 +14,15 @@ export default StyleSheet.create({
   subheading: {
     fontSize: 14,
     fontWeight: '400',
-    lineHeight: 24,
-    marginBottom: 55,
     color: '#A1AEB7',
     fontFamily: 'Pretendard-Regular',
+    lineHeight: 24,
   },
   safeAreaContainer: {
     alignItems: 'center',
     paddingHorizontal: 40,
   },
-  // text: {
-  //   fontFamily: 'RF',
-  // },
+  text: {
+    fontFamily: 'RF',
+  },
 })
