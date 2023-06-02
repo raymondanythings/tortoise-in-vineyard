@@ -9,6 +9,7 @@ import Geolocation from 'react-native-geolocation-service'
 import NextButton from '../components/NextButton'
 import globalStyle from '../components/globalStyle'
 import Text from '../components/Text'
+import CUSTOM_MAP from '../constants/customMap'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -145,13 +146,14 @@ const Run = ({ navigation }: { navigation: any }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <MapView
         style={{ flex: 1 }}
-        // provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={CUSTOM_MAP}
         initialRegion={
           locations.length > 0
             ? {
                 latitude: locations[0].latitude, // 맨 처음 위치
                 longitude: locations[0].longitude, // 맨 처음 위치
-                latitudeDelta: 0.005,
+                latitudeDelta: 0.0005,
                 longitudeDelta: 0.0021,
               }
             : undefined
@@ -255,6 +257,7 @@ const Run = ({ navigation }: { navigation: any }) => {
 }
 
 export default Run
+
 const styles = StyleSheet.create({
   radius: {
     height: 50,
