@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
@@ -56,6 +56,7 @@ const Run = ({ navigation }: { navigation: any }) => {
       (position) => {
         const { latitude, longitude } = position.coords
         // console.log('pp', position)
+        setLocation({ latitude, longitude }) // 사용자의 현재 위치로 location state를 업데이트
         setLocations([...locations, { latitude, longitude }])
       },
       (error) => {
@@ -98,8 +99,8 @@ const Run = ({ navigation }: { navigation: any }) => {
             ? {
                 latitude: locations[0].latitude, // 맨 처음 위치
                 longitude: locations[0].longitude, // 맨 처음 위치
-                latitudeDelta: 0.0009,
-                longitudeDelta: 0.009,
+                latitudeDelta: 0.005,
+                longitudeDelta: 0.0021,
               }
             : undefined
         }
@@ -137,7 +138,11 @@ const Run = ({ navigation }: { navigation: any }) => {
           }}
           title='this is a marker'
           description='this is a marker example'
-        />
+        >
+          <View style={styles.radius}>
+            <View style={styles.marker}></View>
+          </View>
+        </Marker>
         <Polyline
           coordinates={locations}
           strokeColor='#000' // fallback for when `strokeColors` is not supported by the map-provider
@@ -180,3 +185,24 @@ const Run = ({ navigation }: { navigation: any }) => {
 }
 
 export default Run
+const styles = StyleSheet.create({
+  radius: {
+    height: 50,
+    width: 50,
+    borderRadius: 50 / 2,
+    overflow: 'hidden',
+    borderWidth: 1,
+    backgroundColor: 'rgba(255, 226, 49, 0.4)',
+    borderColor: 'rgba(255, 226, 49,0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  marker: {
+    height: 20,
+    width: 20,
+    borderWidth: 3,
+    borderColor: 'white',
+    borderRadius: 20 / 2,
+    overflow: 'hidden',
+  },
+})
