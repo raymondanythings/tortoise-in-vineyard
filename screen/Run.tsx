@@ -3,10 +3,9 @@ import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
-import MapView, { Camera, MapMarker, Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
+import MapView, { LatLng, MapMarker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import NextButton from '../components/NextButton'
 import globalStyle, { Font } from '../components/globalStyle'
 import Text from '../components/Text'
 import CUSTOM_MAP from '../constants/customMap'
@@ -39,6 +38,11 @@ interface IGeolocation {
 const Run = ({ navigation }: { navigation: any }) => {
   const [tracking, setTracking] = useState(false)
   const [heartRate, setHeartRate] = useState(0)
+  const [locations, setLocations] = useState<Array<ILocation>>([])
+  const [location, setLocation] = useState<IGeolocation>({
+    latitude: 37.78825,
+    longitude: -122.4324,
+  })
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
 
@@ -70,75 +74,63 @@ const Run = ({ navigation }: { navigation: any }) => {
   const userMarker = useRef<MapMarker>()
 
   const watchId = useRef<number>()
-  const [locations, setLocations] = useState<Array<ILocation>>([])
-  const [location, setLocation] = useState<IGeolocation>({
-    latitude: 37.78825,
-    longitude: -122.4324,
-  })
+
+  const clearWatch = () => {
+    if (watchId.current) {
+      Geolocation.clearWatch(watchId.current)
+    }
+  }
+
+  const moveCamera = (latLng?: LatLng) => {
+    if (mapViewRef.current) {
+      mapViewRef.current.animateCamera(
+        {
+          center: {
+            latitude: latLng?.latitude ?? location.latitude,
+            longitude: latLng?.longitude ?? location.longitude,
+          },
+          heading: 0,
+          ...(tracking ? { pitch: 0, zoom: 19 } : { zoom: 18, pitch: 10 }),
+        },
+        { duration: 1000 },
+      )
+    }
+  }
 
   useEffect(() => {
     if (geolocationPermission === 'granted') {
-      if (!tracking) {
-        Geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords
-            setLocation((prev) => ({ latitude, longitude }))
+      watchId.current = Geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords
+          setLocation((prev) => ({ latitude, longitude }))
+          if (tracking) {
             setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
-            if (mapViewRef.current) {
-              const camera: Camera = {
-                center: { latitude, longitude },
-                zoom: 18,
-                heading: 0,
-                pitch: 10,
-              }
-              mapViewRef.current.animateCamera(camera, { duration: 1000 })
-            }
+          }
+          moveCamera({ latitude, longitude })
+        },
+        (error) => {
+          console.log(error)
+        },
+        {
+          enableHighAccuracy: true,
+          distanceFilter: 10,
+          accuracy: {
+            ios: 'bestForNavigation',
           },
-          (error) => {
-            console.log(error)
-          },
-          {
-            enableHighAccuracy: true,
-          },
-        )
-      } else {
-        watchId.current = Geolocation.watchPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords
-            setLocation((prev) => ({ latitude, longitude }))
-            setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
-            if (mapViewRef.current) {
-              const camera: Camera = {
-                center: { latitude, longitude },
-                zoom: 19,
-                heading: 0,
-                pitch: 10,
-              }
-              mapViewRef.current.animateCamera(camera, { duration: 1000 })
-            }
-          },
-          (error) => {
-            console.log(error)
-          },
-          {
-            enableHighAccuracy: true,
-            distanceFilter: 10,
-            interval: 1,
-            fastestInterval: 1,
-            accuracy: {
-              ios: 'bestForNavigation',
-            },
-          },
-        )
-      }
+        },
+      )
     }
 
     return () => {
-      if (watchId.current) {
-        Geolocation.clearWatch(watchId.current)
-      }
+      clearWatch()
     }
   }, [tracking, geolocationPermission])
+
+  useEffect(() => {
+    navigation.addListener('blur', () => {
+      clearWatch()
+    })
+  }, [])
 
   // 로케이션을 받아올 수 없을 때 뜨는 화면
   if (!locations) {
@@ -259,7 +251,14 @@ const Run = ({ navigation }: { navigation: any }) => {
         }}
       >
         <Pressable
-          onPress={() => setTracking((prev) => !prev)}
+          onPress={() =>
+            setTracking((prev) => {
+              if (!prev) {
+                clearWatch()
+              }
+              return !prev
+            })
+          }
           style={{
             backgroundColor: colors.PURPLE,
             width: 90,
