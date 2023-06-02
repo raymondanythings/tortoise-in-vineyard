@@ -9,13 +9,18 @@ import Foundation
 import WatchConnectivity
 
 class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
+  
+  
 
     static let sharedManager = SessionManager()
-    private override init() {
-        super.init()
-    }
-
+//    var session : WCSession
     private let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
+    private override init() {
+      super.init()
+      startSession()
+  }
+
+    
 
     @available(iOS 9.3, *)
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -44,20 +49,20 @@ class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
         #elseif os(watchOS)
             return session
         #endif
-        
+
         return nil
     }
 
     func startSession() {
         session?.delegate = self
         session?.activate()
-      
+
     }
 }
-
-// MARK: Application Context
-// use when your app needs only the latest information
-// if the data was not sent, it will be replaced
+//
+//// MARK: Application Context
+//// use when your app needs only the latest information
+//// if the data was not sent, it will be replaced
 extension SessionManager {
 
     // Sender
@@ -140,10 +145,12 @@ extension SessionManager {
     }
 
     // Sender
-    func sendMessage(message: [String : AnyObject],
+    func sendMessage(message: [String : Any],
                      replyHandler: (([String : Any]) -> Void)? = nil,
                      errorHandler: ((Error) -> Void)? = nil)
     {
+        print(validReachableSession)
+        print("send Message")
         validReachableSession?.sendMessage(message, replyHandler: replyHandler, errorHandler: errorHandler)
     }
 

@@ -9,8 +9,8 @@ import SwiftUI
 
 @main
 struct WatchApp_Watch_AppApp: App {
-    @StateObject var workoutManager = WorkoutManager()
     @StateObject var sessionManager = SessionManager.sharedManager
+    @StateObject var workoutManager = WorkoutManager()
     @SceneBuilder var body: some Scene {
       WindowGroup {
         NavigationView {
@@ -18,9 +18,6 @@ struct WatchApp_Watch_AppApp: App {
         }
         .sheet(isPresented: $workoutManager.showingSummaryView) {
           SummaryView()
-        }
-        .onAppear{
-          sessionManager.startSession()
         }
         .environmentObject(workoutManager)
         .environmentObject(sessionManager)
