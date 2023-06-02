@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
-import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline, MapViewProps } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import NextButton from '../components/NextButton'
@@ -43,6 +43,8 @@ const Run = ({ navigation }: { navigation: any }) => {
   }, [])
 
   // 구글맵 코드
+  const mapViewRef = useRef<MapView | null>(null) // MapView 컴포넌트를 제어하기 위한 ref
+
   const [locations, setLocations] = useState<Array<ILocation>>([])
   const [location, setLocation] = useState<IGeolocation>({
     latitude: 37.78825,
@@ -50,35 +52,44 @@ const Run = ({ navigation }: { navigation: any }) => {
   })
   let _watchId: number
 
-  // 트래킹을 위한 watchPosition 메소드로 변경
   useEffect(() => {
-    _watchId = Geolocation.watchPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords
-        // console.log('pp', position)
-        setLocation({ latitude, longitude }) // 사용자의 현재 위치로 location state를 업데이트
-        setLocations([...locations, { latitude, longitude }])
-      },
-      (error) => {
-        console.log(error)
-      },
-      {
-        enableHighAccuracy: true,
-        distanceFilter: 10, // 10m 마다 위치 추적
-        accuracy: {
-          ios: 'bestForNavigation', // ios 전용 세부 정확도(최상)
-        },
-      },
-    )
-  }, [locations]) // 위치 변화할때 마다
+    requestPermission().then((result) => {
+      if (result === 'granted') {
+        _watchId = Geolocation.watchPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords
+            setLocation({ latitude, longitude })
+            setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
+            if (mapViewRef.current) {
+              mapViewRef.current.animateToRegion({
+                latitude,
+                longitude,
+                latitudeDelta: 0.005,
+                longitudeDelta: 0.0021,
+              })
+            }
+          },
+          (error) => {
+            console.log(error)
+          },
+          {
+            enableHighAccuracy: true,
+            distanceFilter: 10,
+            accuracy: {
+              ios: 'bestForNavigation',
+            },
+          },
+        )
+      }
+    })
 
-  useEffect(() => {
+    // 클린업 함수
     return () => {
       if (_watchId !== null) {
         Geolocation.clearWatch(_watchId)
       }
     }
-  }, [])
+  }, []) // 'locations' 의존성 제거
 
   // 로케이션을 받아올 수 없을 때 뜨는 화면
   if (!locations) {
