@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
@@ -31,6 +31,9 @@ interface IGeolocation {
 }
 
 const Run = ({ navigation }: { navigation: any }) => {
+  const [tracking, setTracking] = useState(false)
+  const [buttonText, setButtonText] = useState('START')
+
   const [messageFromWatch, setMessageFromWatch] = useState('Waiting...')
   // Listener when receive message
 
@@ -50,7 +53,7 @@ const Run = ({ navigation }: { navigation: any }) => {
     getHealthKit()
   }, [])
 
-  // 구글맵 코드
+  // 지도 관련 코드
   const mapViewRef = useRef<MapView | null>(null) // MapView 컴포넌트를 제어하기 위한 ref
 
   const [locations, setLocations] = useState<Array<ILocation>>([])
@@ -58,38 +61,44 @@ const Run = ({ navigation }: { navigation: any }) => {
     latitude: 37.78825,
     longitude: -122.4324,
   })
-  let _watchId: number
 
   useEffect(() => {
-    requestPermission().then((result) => {
-      if (result === 'granted') {
-        _watchId = Geolocation.watchPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords
-            setLocation({ latitude, longitude })
-            setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
-            if (mapViewRef.current) {
-              mapViewRef.current.animateToRegion({
-                latitude,
-                longitude,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.0021,
-              })
-            }
-          },
-          (error) => {
-            console.log(error)
-          },
-          {
-            enableHighAccuracy: true,
-            distanceFilter: 10,
-            accuracy: {
-              ios: 'bestForNavigation',
+    let _watchId: number | null = null
+
+    if (tracking) {
+      requestPermission().then((result) => {
+        if (result === 'granted') {
+          _watchId = Geolocation.watchPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords
+              setLocation({ latitude, longitude })
+              setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
+              if (mapViewRef.current) {
+                mapViewRef.current.animateToRegion(
+                  {
+                    latitude,
+                    longitude,
+                    latitudeDelta: 0.0005,
+                    longitudeDelta: 0.00021,
+                  },
+                  1000,
+                )
+              }
             },
-          },
-        )
-      }
-    })
+            (error) => {
+              console.log(error)
+            },
+            {
+              enableHighAccuracy: true,
+              distanceFilter: 10,
+              accuracy: {
+                ios: 'bestForNavigation',
+              },
+            },
+          )
+        }
+      })
+    }
 
     // 클린업 함수
     return () => {
@@ -97,7 +106,30 @@ const Run = ({ navigation }: { navigation: any }) => {
         Geolocation.clearWatch(_watchId)
       }
     }
-  }, []) // 'locations' 의존성 제거
+  }, [tracking])
+
+  // start 누르기 전 초기 사용자 위치를 위한 함수
+  useEffect(() => {
+    if (!tracking) {
+      requestPermission().then((result) => {
+        if (result === 'granted') {
+          Geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords
+              setLocation({ latitude, longitude })
+              setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
+            },
+            (error) => {
+              console.log(error)
+            },
+            {
+              enableHighAccuracy: true,
+            },
+          )
+        }
+      })
+    }
+  }, [])
 
   // 로케이션을 받아올 수 없을 때 뜨는 화면
   if (!locations) {
@@ -186,8 +218,26 @@ const Run = ({ navigation }: { navigation: any }) => {
             alignItems: 'center',
           }}
         >
-          <Text style={globalStyle.heading}>1.1km</Text>
-          <Text style={globalStyle.subheading}>1.1km</Text>
+          <Pressable
+            style={{
+              position: 'absolute',
+              top: 0,
+              backgroundColor: 'greenyellow',
+              borderRadius: 30,
+              width: 60,
+              height: 60,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={() => {
+              setTracking(!tracking)
+              setButtonText(buttonText === 'START' ? 'PAUSE' : 'START')
+            }}
+          >
+            <Text>{buttonText}</Text>
+          </Pressable>
+          {/* <Text style={globalStyle.heading}>1.1km</Text>
+          <Text style={globalStyle.subheading}>1.1km</Text> */}
         </View>
       </MapView>
       <View
