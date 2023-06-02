@@ -6,8 +6,6 @@ import { NavigationContainer } from '@react-navigation/native'
 // import WebView from 'react-native-webview'
 function App(): JSX.Element {
   return (
-    // <WebView source={{ uri: 'https://client-eta-rust.vercel.app/' }} />
-    // <Text>???</Text>
     <NavigationContainer>
       <Router />
     </NavigationContainer>

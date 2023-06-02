@@ -1,9 +1,10 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, StyleSheet, Text, Pressable } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
+import Text from '../components/Text'
 
 const WatchCheck = ({ navigation }: { navigation: any }) => {
   const route = useNavigation()

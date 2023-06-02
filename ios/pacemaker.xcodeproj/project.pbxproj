@@ -15,6 +15,7 @@
 		6C28C0139A69276032255382 /* libPods-pacemaker-pacemakerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A25664B5987E7D10EC5BBCD0 /* libPods-pacemaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA565BD0861A385FD01BB781 /* libPods-pacemaker.a */; };
+		E30E0F8C2A2A4B1700F3DAAB /* font in Resources */ = {isa = PBXBuildFile; fileRef = E30E0F8B2A2A4B1700F3DAAB /* font */; };
 		E31B4C2E2A28FB8700A55535 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31B4C2D2A28FB8700A55535 /* SessionManager.swift */; };
 		E39DDC322A28499E00F6025A /* SessionPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC312A28499E00F6025A /* SessionPagingView.swift */; };
 		E39DDC342A284A7000F6025A /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39DDC332A284A7000F6025A /* MetricsView.swift */; };
@@ -80,6 +81,7 @@
 		DD74402AEEEAD249FC3C6BC4 /* Pods-pacemaker-pacemakerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.release.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E15D84FF05E7B0CB211AC48F /* Pods-pacemaker-pacemakerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.debug.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E30E0F8A2A2A42BD00F3DAAB /* WatchApp Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchApp Watch App.entitlements"; sourceTree = "<group>"; };
+		E30E0F8B2A2A4B1700F3DAAB /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = font; sourceTree = "<group>"; };
 		E31B4C2D2A28FB8700A55535 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		E34996442A2355BE00660197 /* pacemaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = pacemaker.entitlements; path = pacemaker/pacemaker.entitlements; sourceTree = "<group>"; };
 		E39DDC312A28499E00F6025A /* SessionPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPagingView.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				E30E0F8B2A2A4B1700F3DAAB /* font */,
 				13B07FAE1A68108700A75B9A /* pacemaker */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* pacemakerTests */,
@@ -364,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E30E0F8C2A2A4B1700F3DAAB /* font in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

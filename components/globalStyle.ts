@@ -21,4 +21,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 40,
   },
+  text: {
+    fontFamily: 'RF',
+  },
 })

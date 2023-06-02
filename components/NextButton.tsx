@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, Pressable, GestureResponderEvent } from 'react-native'
+import { Pressable, GestureResponderEvent } from 'react-native'
+import Text from './Text'
 
 interface ButtonProps {
   onPress: (event: GestureResponderEvent) => void

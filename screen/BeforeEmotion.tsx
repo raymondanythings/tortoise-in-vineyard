@@ -1,9 +1,10 @@
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
 import EmotionButtons from '../components/EmotionButtons'
+import Text from '../components/Text'
 
 const Emotion = ({ navigation }: { navigation: any }) => {
   return (

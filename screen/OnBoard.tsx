@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View, StyleSheet, Pressable } from 'react-native'
+import { View, StyleSheet, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
+import Text from '../components/Text'
 
 const OnBoard = ({ navigation }: { navigation: any }) => {
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
@@ -8,6 +8,7 @@ import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import NextButton from '../components/NextButton'
 import globalStyle from '../components/globalStyle'
+import Text from '../components/Text'
 
 // 위치 권한 요청
 async function requestPermission() {

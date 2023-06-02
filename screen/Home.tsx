@@ -1,14 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
 import NextButton from '../components/NextButton'
+import Text from '../components/Text'
 
 const Home = ({ navigation }: { navigation: any }) => {
-  // const getId = async () => {
-  //   await AsyncStorage.getItem('')
-  // }
   return (
     <View style={globalStyle.container}>
       <SafeAreaView style={globalStyle.safeAreaContainer}>

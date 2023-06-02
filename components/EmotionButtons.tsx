@@ -1,5 +1,6 @@
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, View } from 'react-native'
+import Text from './Text'
 
 const EmotionButtons = () => {
   // 각 버튼의 텍스트와 눌렀을 때의 동작을 정의
