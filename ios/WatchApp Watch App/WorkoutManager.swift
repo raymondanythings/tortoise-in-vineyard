@@ -100,13 +100,13 @@ class WorkoutManager : NSObject, ObservableObject {
   @Published var averageHeartRate : Double = 0
   @Published var heartRate : Double = 0 {
     didSet {
-      SessionManager.sharedManager.sendMessage(message:["heart" : "123"])
+      SessionManager.sharedManager.sendMessage(message:["heartRate" : heartRate])
     }
   }
   @Published var activeEnergy : Double = 0
   @Published var distance : Double = 0{
     didSet {
-      print(distance , "<<<< distancec")
+      SessionManager.sharedManager.sendMessage(message:["distance" : distance])
     }
   }
   @Published var workout : HKWorkout?

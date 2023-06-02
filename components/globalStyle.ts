@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native'
 
+export const Font = {
+  Pretendard: 'Pretendard-Regular',
+  RF: 'RF',
+}
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -9,13 +13,12 @@ export default StyleSheet.create({
   heading: {
     fontSize: 54,
     lineHeight: 49,
-    marginBottom: 8,
   },
   subheading: {
     fontSize: 14,
     fontWeight: '400',
     color: '#A1AEB7',
-    fontFamily: 'Pretendard-Regular',
+    fontFamily: Font.Pretendard,
     lineHeight: 24,
   },
   safeAreaContainer: {
@@ -23,6 +26,6 @@ export default StyleSheet.create({
     paddingHorizontal: 40,
   },
   text: {
-    fontFamily: 'RF',
+    fontFamily: Font.RF,
   },
 })

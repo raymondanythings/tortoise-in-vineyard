@@ -3,15 +3,16 @@ import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
 import { getHealthKit } from '../utils/Healthkit'
-import MapView, { MapMarker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
+import MapView, { Camera, MapMarker, Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import NextButton from '../components/NextButton'
-import globalStyle from '../components/globalStyle'
+import globalStyle, { Font } from '../components/globalStyle'
 import Text from '../components/Text'
 import CUSTOM_MAP from '../constants/customMap'
 import Icon from '../constants/Icon'
 import colors from '../constants/colors'
+import { generateColor } from '../utils/linearGradient'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -36,20 +37,20 @@ interface IGeolocation {
 
 const Run = ({ navigation }: { navigation: any }) => {
   const [tracking, setTracking] = useState(false)
-  const [buttonText, setButtonText] = useState('START')
-
-  const [messageFromWatch, setMessageFromWatch] = useState('Waiting...')
+  const [heartRate, setHeartRate] = useState(0)
   // Listener when receive message
 
   const messageListener = async () => {
     const paired = await getIsPaired()
     const installed = await getIsWatchAppInstalled()
-    console.log(paired, 'paired')
-    console.log(installed, 'installed')
-    watchEvents.on('message', (message) => {
-      console.log(message, ' <<<< message from watchos')
-      setMessageFromWatch(message.watchMessage as any)
-    })
+    paired &&
+      installed &&
+      watchEvents.on<{ heartRate?: number; distance?: number }>('message', (message) => {
+        const { heartRate: heart, distance } = message
+        if (heart) {
+          setHeartRate(() => heart)
+        }
+      })
   }
 
   useEffect(() => {
@@ -58,9 +59,10 @@ const Run = ({ navigation }: { navigation: any }) => {
   }, [])
 
   // 지도 관련 코드
-  const mapViewRef = useRef<MapView | null>(null) // MapView 컴포넌트를 제어하기 위한 ref
-
+  const mapViewRef = useRef<MapView>(null) // MapView 컴포넌트를 제어하기 위한 ref
   const userMarker = useRef<MapMarker>()
+
+  const watchId = useRef<number>()
   const [locations, setLocations] = useState<Array<ILocation>>([])
   const [location, setLocation] = useState<IGeolocation>({
     latitude: 37.78825,
@@ -68,33 +70,45 @@ const Run = ({ navigation }: { navigation: any }) => {
   })
 
   useEffect(() => {
-    let _watchId: number | null = null
-
-    if (tracking) {
-      requestPermission().then((result) => {
-        if (result === 'granted') {
-          _watchId = Geolocation.watchPosition(
+    requestPermission().then((result) => {
+      if (result === 'granted') {
+        if (!tracking) {
+          Geolocation.getCurrentPosition(
             (position) => {
               const { latitude, longitude } = position.coords
-              userMarker.current?.animateMarkerToCoordinate(
-                {
-                  latitude,
-                  longitude,
-                },
-                300,
-              )
-              setLocation({ latitude, longitude })
+              setLocation((prev) => ({ latitude, longitude }))
+              setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
+            },
+            (error) => {
+              console.log(error)
+            },
+            {
+              enableHighAccuracy: true,
+            },
+          )
+        } else {
+          watchId.current = Geolocation.watchPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords
+              setLocation((prev) => ({ latitude, longitude }))
               setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
               if (mapViewRef.current) {
-                mapViewRef.current.animateToRegion(
-                  {
-                    latitude,
-                    longitude,
-                    latitudeDelta: 0.0005,
-                    longitudeDelta: 0.00021,
-                  },
-                  1000,
-                )
+                // mapViewRef.current.animateToRegion(
+                //   {
+                //     latitude,
+                //     longitude,
+                //     latitudeDelta: 0,
+                //     longitudeDelta: 0,
+                //   },
+                //   1000,
+                // )
+                const camera: Camera = {
+                  center: { latitude, longitude },
+                  zoom: 18,
+                  heading: 0,
+                  pitch: 10,
+                }
+                mapViewRef.current.animateCamera(camera, { duration: 1000 })
               }
             },
             (error) => {
@@ -103,45 +117,22 @@ const Run = ({ navigation }: { navigation: any }) => {
             {
               enableHighAccuracy: true,
               distanceFilter: 10,
+              interval: 1,
+              fastestInterval: 1,
               accuracy: {
                 ios: 'bestForNavigation',
               },
             },
           )
         }
-      })
-    }
-
-    // 클린업 함수
+      }
+    })
     return () => {
-      if (_watchId !== null) {
-        Geolocation.clearWatch(_watchId)
+      if (watchId.current) {
+        Geolocation.clearWatch(watchId.current)
       }
     }
   }, [tracking])
-
-  // start 누르기 전 초기 사용자 위치를 위한 함수
-  useEffect(() => {
-    if (!tracking) {
-      requestPermission().then((result) => {
-        if (result === 'granted') {
-          Geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords
-              setLocation({ latitude, longitude })
-              setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
-            },
-            (error) => {
-              console.log(error)
-            },
-            {
-              enableHighAccuracy: true,
-            },
-          )
-        }
-      })
-    }
-  }, [])
 
   // 로케이션을 받아올 수 없을 때 뜨는 화면
   if (!locations) {
@@ -153,16 +144,12 @@ const Run = ({ navigation }: { navigation: any }) => {
   }
   // 로케이션 허용 후 뜨는 화면
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
     <View style={{ flex: 1 }}>
       <MapView
+        ref={mapViewRef}
         style={{
           flex: 1,
-          // position: 'absolute',
-          // top: 0,
-          // left: 0,
-          // height: Dimensions.get('window').height,
-          // width: Dimensions.get('window').width,
+          position: 'relative',
         }}
         provider={PROVIDER_GOOGLE}
         customMapStyle={CUSTOM_MAP}
@@ -176,90 +163,68 @@ const Run = ({ navigation }: { navigation: any }) => {
               }
             : undefined
         }
-        showsUserLocation
-        followsUserLocation
-        userLocationCalloutEnabled
+        // showsUserLocation
+        // followsUserLocation
+        // userLocationCalloutEnabled
         loadingEnabled
         zoomEnabled={false}
         pitchEnabled={false}
         rotateEnabled={false}
         scrollEnabled={false}
         minZoomLevel={18}
-        // onRegionChange={(region) => {
-        //   setLocation({
-        //     latitude: region.latitude,
-        //     longitude: region.longitude,
-        //   })
-        // }}
-        // onRegionChangeComplete={(region) => {
-        //   setLocation({
-        //     latitude: region.latitude,
-        //     longitude: region.longitude,
-        //   })
-        // }}
       >
-        {/* start 마커 위치 */}
-        {/*
-        <Marker
-          coordinate={{
-            latitude: locations[0].latitude,
-            longitude: locations[0].longitude,
-          }}
-        /> */}
-        {/* <Marker.Animated
+        <Marker.Animated
           ref={userMarker}
           coordinate={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: location.latitude - 0.00007,
+            longitude: location.longitude + 0.0000001,
           }}
         >
           <View style={styles.radius}>
             <View style={styles.marker}></View>
           </View>
-        </Marker.Animated> */}
+        </Marker.Animated>
         <Polyline
           coordinates={locations}
-          strokeColor='#000' // fallback for when `strokeColors` is not supported by the map-provider
-          strokeColors={[
-            '#7F0000',
-            '#00000000', // no color, creates a "long" gradient between the previous and next coordinate
-            '#B24112',
-            '#E5845C',
-            '#238C23',
-            '#7F0000',
-          ]}
+          strokeColors={
+            locations.length >= 2
+              ? ['#8F4BFF', ...generateColor('#8F4BFF', '#FF9E31', locations.length - 2), '#FF9E31']
+              : []
+          }
           strokeWidth={6}
         />
-        {/* <View
+        <View
           style={{
             position: 'absolute',
-            top: 0,
-            width: '100%',
-            height: '20%',
-            backgroundColor: 'white',
-            justifyContent: 'center',
+            top: 60,
+            height: 120,
+            borderRadius: 20,
+            backgroundColor: '#fff',
+            overflow: 'hidden',
+            width: Dimensions.get('window').width - 60,
+            marginHorizontal: 30,
+            flexDirection: 'row',
             alignItems: 'center',
+            shadowColor: '#333333',
+            shadowRadius: 30,
+            shadowOpacity: 1,
+            shadowOffset: {
+              height: -10,
+              width: 400,
+            },
           }}
         >
-          <Pressable
-            style={{
-              position: 'absolute',
-              top: 0,
-              backgroundColor: 'greenyellow',
-              borderRadius: 30,
-              width: 60,
-              height: 60,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            onPress={() => {
-              setTracking(!tracking)
-              setButtonText(buttonText === 'START' ? 'PAUSE' : 'START')
-            }}
-          >
-            <Text>{buttonText}</Text>
-          </Pressable>
-        </View> */}
+          <View style={{ flex: 1 }}></View>
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
+                {heartRate}
+              </Text>
+              <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
+            </View>
+            <Text>1.1 km</Text>
+          </View>
+        </View>
       </MapView>
       <View
         style={{
@@ -282,7 +247,8 @@ const Run = ({ navigation }: { navigation: any }) => {
           },
         }}
       >
-        <View
+        <Pressable
+          onPress={() => setTracking((prev) => !prev)}
           style={{
             backgroundColor: colors.PURPLE,
             width: 90,
@@ -298,8 +264,8 @@ const Run = ({ navigation }: { navigation: any }) => {
             bottom: 0,
           }}
         >
-          <Image source={Icon.PAUSE} style={{ width: 21, height: 25 }} />
-        </View>
+          <Image source={tracking ? Icon.PAUSE : Icon.START} style={{ width: 21, height: 25 }} />
+        </Pressable>
         <Pressable
           style={{
             borderRadius: 10,
