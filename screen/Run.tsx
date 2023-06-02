@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
@@ -13,6 +13,7 @@ import CUSTOM_MAP from '../constants/customMap'
 import Icon from '../constants/Icon'
 import colors from '../constants/colors'
 import { generateColor } from '../utils/linearGradient'
+import { AuthorizationResult } from 'react-native-geolocation-service'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -38,6 +39,7 @@ interface IGeolocation {
 const Run = ({ navigation }: { navigation: any }) => {
   const [tracking, setTracking] = useState(false)
   const [heartRate, setHeartRate] = useState(0)
+  const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
 
   const messageListener = async () => {
@@ -52,10 +54,15 @@ const Run = ({ navigation }: { navigation: any }) => {
         }
       })
   }
+  const geolocationRequest = useCallback(async () => {
+    const result = await requestPermission()
+    setGeolocationPermission(result)
+  }, [])
 
   useEffect(() => {
     messageListener()
     getHealthKit()
+    geolocationRequest()
   }, [])
 
   // 지도 관련 코드
@@ -70,69 +77,68 @@ const Run = ({ navigation }: { navigation: any }) => {
   })
 
   useEffect(() => {
-    requestPermission().then((result) => {
-      if (result === 'granted') {
-        if (!tracking) {
-          Geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords
-              setLocation((prev) => ({ latitude, longitude }))
-              setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
-            },
-            (error) => {
-              console.log(error)
-            },
-            {
-              enableHighAccuracy: true,
-            },
-          )
-        } else {
-          watchId.current = Geolocation.watchPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords
-              setLocation((prev) => ({ latitude, longitude }))
-              setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
-              if (mapViewRef.current) {
-                // mapViewRef.current.animateToRegion(
-                //   {
-                //     latitude,
-                //     longitude,
-                //     latitudeDelta: 0,
-                //     longitudeDelta: 0,
-                //   },
-                //   1000,
-                // )
-                const camera: Camera = {
-                  center: { latitude, longitude },
-                  zoom: 18,
-                  heading: 0,
-                  pitch: 10,
-                }
-                mapViewRef.current.animateCamera(camera, { duration: 1000 })
+    if (geolocationPermission === 'granted') {
+      if (!tracking) {
+        Geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords
+            setLocation((prev) => ({ latitude, longitude }))
+            setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
+            if (mapViewRef.current) {
+              const camera: Camera = {
+                center: { latitude, longitude },
+                zoom: 18,
+                heading: 0,
+                pitch: 10,
               }
+              mapViewRef.current.animateCamera(camera, { duration: 1000 })
+            }
+          },
+          (error) => {
+            console.log(error)
+          },
+          {
+            enableHighAccuracy: true,
+          },
+        )
+      } else {
+        watchId.current = Geolocation.watchPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords
+            setLocation((prev) => ({ latitude, longitude }))
+            setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
+            if (mapViewRef.current) {
+              const camera: Camera = {
+                center: { latitude, longitude },
+                zoom: 19,
+                heading: 0,
+                pitch: 10,
+              }
+              mapViewRef.current.animateCamera(camera, { duration: 1000 })
+            }
+          },
+          (error) => {
+            console.log(error)
+          },
+          {
+            enableHighAccuracy: true,
+            distanceFilter: 10,
+            interval: 1,
+            fastestInterval: 1,
+            accuracy: {
+              ios: 'bestForNavigation',
             },
-            (error) => {
-              console.log(error)
-            },
-            {
-              enableHighAccuracy: true,
-              distanceFilter: 10,
-              interval: 1,
-              fastestInterval: 1,
-              accuracy: {
-                ios: 'bestForNavigation',
-              },
-            },
-          )
-        }
+          },
+        )
       }
-    })
+    }
+
     return () => {
       if (watchId.current) {
         Geolocation.clearWatch(watchId.current)
       }
     }
-  }, [tracking])
+  }, [tracking, geolocationPermission])
 
   // 로케이션을 받아올 수 없을 때 뜨는 화면
   if (!locations) {
@@ -163,9 +169,9 @@ const Run = ({ navigation }: { navigation: any }) => {
               }
             : undefined
         }
-        // showsUserLocation
-        // followsUserLocation
-        // userLocationCalloutEnabled
+        showsUserLocation
+        followsUserLocation
+        userLocationCalloutEnabled
         loadingEnabled
         zoomEnabled={false}
         pitchEnabled={false}
@@ -173,7 +179,7 @@ const Run = ({ navigation }: { navigation: any }) => {
         scrollEnabled={false}
         minZoomLevel={18}
       >
-        <Marker.Animated
+        {/* <Marker.Animated
           ref={userMarker}
           coordinate={{
             latitude: location.latitude - 0.00007,
@@ -183,7 +189,7 @@ const Run = ({ navigation }: { navigation: any }) => {
           <View style={styles.radius}>
             <View style={styles.marker}></View>
           </View>
-        </Marker.Animated>
+        </Marker.Animated> */}
         <Polyline
           coordinates={locations}
           strokeColors={
@@ -191,7 +197,11 @@ const Run = ({ navigation }: { navigation: any }) => {
               ? ['#8F4BFF', ...generateColor('#8F4BFF', '#FF9E31', locations.length - 2), '#FF9E31']
               : []
           }
-          strokeWidth={6}
+          strokeWidth={10}
+          style={{
+            borderColor: 'red',
+          }}
+          lineJoin='round'
         />
         <View
           style={{
@@ -203,6 +213,7 @@ const Run = ({ navigation }: { navigation: any }) => {
             overflow: 'hidden',
             width: Dimensions.get('window').width - 60,
             marginHorizontal: 30,
+            display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
             shadowColor: '#333333',
