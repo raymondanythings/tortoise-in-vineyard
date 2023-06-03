@@ -24,31 +24,7 @@ const OnBoard = () => {
       <View style={globalStyle.center}>
         <Image source={Img.GRAPE} />
       </View>
-      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
-        <Pressable style={{ paddingVertical: 8 }}>
-          <Text
-            style={[
-              globalStyle.fontMedium,
-              globalStyle.Pretendard,
-              {
-                textDecorationLine: 'underline',
-                fontWeight: '300',
-                color: '#A0A0A0',
-              },
-            ]}
-          >
-            서비스 약관 읽어보기
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            AsyncStorage.clear()
-            // setToken('')
-          }}
-        >
-          <Text>초기화</Text>
-        </Pressable>
-      </View>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}></View>
     </SafeAreaView>
   )
 }
