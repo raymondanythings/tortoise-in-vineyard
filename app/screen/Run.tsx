@@ -13,6 +13,8 @@ import colors from '../constants/colors'
 import { generateColor } from '../../utils/linearGradient'
 import { AuthorizationResult } from 'react-native-geolocation-service'
 import useWatch from '../hook/useWatch'
+import Heart from '../components/Lotties/Heart'
+import PinkDots from '../components/Lotties/PinkDots'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -176,7 +178,7 @@ const Run = ({ navigation }: { navigation: any }) => {
               ? ['#6C32EC', ...generateColor('#6C32EC', '#E3AF29', locations.length - 2), '#E3AF29']
               : []
           }
-          strokeWidth={12}
+          strokeWidth={14}
         />
         <Polyline
           coordinates={locations}
@@ -191,31 +193,38 @@ const Run = ({ navigation }: { navigation: any }) => {
           }}
           lineJoin='round'
         />
-        <View
-          style={{
-            position: 'absolute',
-            top: 60,
-            height: 120,
-            borderRadius: 20,
-            backgroundColor: '#fff',
-            overflow: 'hidden',
-            width: Dimensions.get('window').width - 60,
-            marginHorizontal: 30,
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            shadowColor: '#333333',
-            shadowRadius: 30,
-            shadowOpacity: 1,
-            shadowOffset: {
-              height: -10,
-              width: 400,
+      </MapView>
+      {/* bpm 컨테이너 */}
+      <View
+        style={{
+          position: 'absolute',
+          top: 60,
+          height: 120,
+          borderRadius: 20,
+          backgroundColor: '#fff',
+          width: Dimensions.get('window').width - 60,
+          marginHorizontal: 30,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          ...Platform.select({
+            ios: {
+              shadowColor: 'rgba(0, 0, 0, 0.08)',
+              shadowOpacity: 4,
+              shadowRadius: 20,
+              shadowOffset: {
+                height: 10,
+                width: 0,
+              },
             },
-          }}
-        >
-          <View style={{ flex: 1 }}></View>
+          }),
+        }}
+      >
+        {tracking ? <Heart /> : <PinkDots />}
+        {tracking ? (
           <View style={{ flex: 1 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              {/* 심박수 */}
               <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
                 {heartRate}
               </Text>
@@ -223,8 +232,21 @@ const Run = ({ navigation }: { navigation: any }) => {
             </View>
             <Text>1.1 km</Text>
           </View>
-        </View>
-      </MapView>
+        ) : (
+          <View style={{ flex: 1, right: 40 }}>
+            <Text
+              style={{
+                fontFamily: Font.Pretendard,
+                fontSize: 30,
+                fontWeight: '600',
+                lineHeight: 50,
+              }}
+            >
+              휴식 중
+            </Text>
+          </View>
+        )}
+      </View>
       <View
         style={{
           position: 'absolute',
@@ -239,9 +261,9 @@ const Run = ({ navigation }: { navigation: any }) => {
           borderTopRightRadius: 20,
           shadowColor: '#333333',
           shadowRadius: 3,
-          shadowOpacity: 0.1,
+          shadowOpacity: 30,
           shadowOffset: {
-            height: 0,
+            height: 4,
             width: 0,
           },
         }}
