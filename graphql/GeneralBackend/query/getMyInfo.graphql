@@ -1,0 +1,15 @@
+query GetMyInfo {
+  me {
+    id
+    email
+    hasDevice
+    birthYear
+    minHeartRate
+    createdAt
+    updatedAt
+    accounts
+    grapes
+    totalRun
+    canRunTody
+  }
+}
