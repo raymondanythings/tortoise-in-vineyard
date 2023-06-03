@@ -201,19 +201,22 @@ const Run = ({ navigation }: { navigation: any }) => {
           height: 120,
           borderRadius: 20,
           backgroundColor: '#fff',
-          overflow: 'hidden',
           width: Dimensions.get('window').width - 60,
           marginHorizontal: 30,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          shadowColor: '#333333',
-          shadowRadius: 30,
-          shadowOpacity: 1,
-          shadowOffset: {
-            height: -10,
-            width: 400,
-          },
+          ...Platform.select({
+            ios: {
+              shadowColor: 'rgba(0, 0, 0, 0.08)',
+              shadowOpacity: 4,
+              shadowRadius: 20,
+              shadowOffset: {
+                height: 10,
+                width: 0,
+              },
+            },
+          }),
         }}
       >
         <Heart />
@@ -242,9 +245,9 @@ const Run = ({ navigation }: { navigation: any }) => {
           borderTopRightRadius: 20,
           shadowColor: '#333333',
           shadowRadius: 3,
-          shadowOpacity: 0.1,
+          shadowOpacity: 30,
           shadowOffset: {
-            height: 0,
+            height: 4,
             width: 0,
           },
         }}
