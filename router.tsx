@@ -9,6 +9,7 @@ import BeforeEmotion from './screen/BeforeEmotion'
 import Run from './screen/Run'
 import AfterEmotion from './screen/AfterEmotion'
 import Check from './screen/Check'
+import Apollo from './screen/Apollo'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -45,6 +46,7 @@ const MainScreen = () => {
         name='home'
         component={Home}
       />
+      <MainStack.Screen name='apollo' component={Apollo} />
       <MainStack.Screen name='onboard' component={OnBoard} />
       <MainStack.Screen name='beforeex' component={BeforeEx} />
       <MainStack.Screen name='watchcheck' component={WatchCheck} />
