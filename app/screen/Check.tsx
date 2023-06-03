@@ -4,13 +4,7 @@ import Text from '../components/Text'
 
 const Check = ({ navigation }: { navigation: any }) => {
   const checkUser = useCallback(async () => {
-    const id = await AsyncStorage.getItem('pacemaker-id')
-    console.log(id)
-    if (id) {
-      navigation.navigate('mainScreen', { screen: 'home' })
-    } else {
-      navigation.navigate('mainScreen', { screen: 'register' })
-    }
+    navigation.navigate('mainScreen', { screen: 'home' })
   }, [])
 
   useEffect(() => {

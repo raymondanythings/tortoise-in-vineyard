@@ -3,7 +3,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import "RCTAppleHealthKit.h"
 #import <GoogleMaps/GoogleMaps.h>
-
+#import <RNKakaoLogins.h>
 
 @implementation AppDelegate
 
@@ -24,7 +24,6 @@
 
   /* Add Background initializer for HealthKit  */
   [[RCTAppleHealthKit new] initializeBackgroundObservers:bridge];
-
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

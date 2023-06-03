@@ -24,8 +24,34 @@ export default StyleSheet.create({
   safeAreaContainer: {
     alignItems: 'center',
     paddingHorizontal: 40,
+    flex: 1,
+    backgroundColor: '#fff',
   },
   text: {
     fontFamily: Font.RF,
+    
+  },
+  fullWidth: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  header: {
+    flex: 5,
+
+    paddingTop: 40,
+  },
+  center: {
+    flex: 13,
+  },
+  footer: {
+    flex: 4,
+    rowGap: 8,
+  },
+  fontMedium: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  Pretendard: {
+    fontFamily: Font.Pretendard,
   },
 })

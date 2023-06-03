@@ -1,17 +1,21 @@
 import React, { useCallback, useEffect } from 'react'
 import Router from './router'
 import { NavigationContainer } from '@react-navigation/native'
-// import DeviceInfo from 'react-native-device-info'
-// import asyncStorage from '@react-native-async-storage/async-storage'
-// import WebView from 'react-native-webview'
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
-import { BASE_URL } from './constants/constants'
+import { BASE_URL } from './app/constants/constants'
+
+const client = new ApolloClient({
+  uri: BASE_URL,
+  cache: new InMemoryCache(),
+})
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Router />
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
+    </ApolloProvider>
   )
 }
 

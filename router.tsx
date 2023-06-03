@@ -1,15 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
-import Register from './screen/Register'
-import Home from './screen/Home'
-import OnBoard from './screen/OnBoard'
-import BeforeEx from './screen/BeforeEx'
-import WatchCheck from './screen/WatchCheck'
-import BeforeEmotion from './screen/BeforeEmotion'
-import Run from './screen/Run'
-import AfterEmotion from './screen/AfterEmotion'
-import Check from './screen/Check'
-import Apollo from './screen/Apollo'
+import Home from './app/screen/Home'
+import OnBoard from './app/screen/OnBoard'
+import BeforeEx from './app/screen/BeforeEx'
+import WatchCheck from './app/screen/WatchCheck'
+import BeforeEmotion from './app/screen/BeforeEmotion'
+import Run from './app/screen/Run'
+import AfterEmotion from './app/screen/AfterEmotion'
+import Check from './app/screen/Check'
+import Birthday from './app/screen/Birthday'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -32,12 +31,11 @@ const Router = () => {
 const MainScreen = () => {
   return (
     <MainStack.Navigator
-      initialRouteName='register'
+      initialRouteName='Home'
       screenOptions={{
         headerShown: false,
       }}
     >
-      <MainStack.Screen name='register' component={Register} />
       <MainStack.Screen
         options={{
           gestureEnabled: false,
@@ -46,6 +44,7 @@ const MainScreen = () => {
         name='home'
         component={Home}
       />
+      <MainStack.Screen name='birthday' component={Birthday} />
       <MainStack.Screen name='onboard' component={OnBoard} />
       <MainStack.Screen name='beforeex' component={BeforeEx} />
       <MainStack.Screen name='watchcheck' component={WatchCheck} />

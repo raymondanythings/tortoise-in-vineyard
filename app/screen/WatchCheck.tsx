@@ -3,7 +3,7 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../components/globalStyle'
-import NextButton from '../components/NextButton'
+import NextButton from '../components/Button'
 import Text from '../components/Text'
 
 const WatchCheck = ({ navigation }: { navigation: any }) => {
