@@ -22,7 +22,6 @@ AI가 페이스메이킹을 해줄 거예요.
           <Text style={globalStyle.heading}>메인 캐릭터</Text>
         </View>
         <NextButton text='서비스 이용하기' onPress={() => navigation.push('onboard')} />
-        <NextButton text='아폴로' onPress={() => navigation.push('apollo')} />
         <Pressable onPress={async () => await AsyncStorage.clear()}>
           <Text>스토리지 지우기</Text>
         </Pressable>

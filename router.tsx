@@ -46,7 +46,6 @@ const MainScreen = () => {
         name='home'
         component={Home}
       />
-      <MainStack.Screen name='apollo' component={Apollo} />
       <MainStack.Screen name='onboard' component={OnBoard} />
       <MainStack.Screen name='beforeex' component={BeforeEx} />
       <MainStack.Screen name='watchcheck' component={WatchCheck} />

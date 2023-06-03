@@ -5,10 +5,10 @@ import { NavigationContainer } from '@react-navigation/native'
 // import asyncStorage from '@react-native-async-storage/async-storage'
 // import WebView from 'react-native-webview'
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
-import uri from './constants/uri'
+import { BASE_URL } from './constants/constants'
 
 const client = new ApolloClient({
-  uri: uri.BASE_URL,
+  uri: BASE_URL,
   cache: new InMemoryCache(),
 })
 
