@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import LottieView from 'lottie-react-native'
-import heartAnimation from '../assets/lotties/heart.json'
+import heartAnimation from '../../assets/lotties/heart.json'
 
 const Heart = () => {
   return (

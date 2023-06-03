@@ -65,7 +65,7 @@ AI가 페이스메이킹을 해줄 거예요.`}
               backgroundColor: '#222222',
               columnGap: 8,
             }}
-            onPress={() => navigation.dispatch(StackActions.push('onboard'))}
+            onPress={() => navigation.dispatch(StackActions.push('run'))}
           >
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
               시작하기

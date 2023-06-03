@@ -12,7 +12,8 @@ import Icon from '../constants/Icon'
 import colors from '../constants/colors'
 import { generateColor } from '../../utils/linearGradient'
 import { AuthorizationResult } from 'react-native-geolocation-service'
-import Heart from '../components/Heart'
+import Heart from '../components/Lotties/Heart'
+import PinkDots from '../components/Lotties/PinkDots'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -219,17 +220,32 @@ const Run = ({ navigation }: { navigation: any }) => {
           }),
         }}
       >
-        <Heart />
-        <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {/* 심박수 */}
-            <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
-              {heartRate}
-            </Text>
-            <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
+        {tracking ? <Heart /> : <PinkDots />}
+        {tracking ? (
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              {/* 심박수 */}
+              <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
+                {heartRate}
+              </Text>
+              <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
+            </View>
+            <Text>1.1 km</Text>
           </View>
-          <Text>1.1 km</Text>
-        </View>
+        ) : (
+          <View style={{ flex: 1, right: 40 }}>
+            <Text
+              style={{
+                fontFamily: Font.Pretendard,
+                fontSize: 30,
+                fontWeight: '600',
+                lineHeight: 50,
+              }}
+            >
+              휴식 중
+            </Text>
+          </View>
+        )}
       </View>
       <View
         style={{
@@ -319,5 +335,4 @@ const styles = StyleSheet.create({
     borderRadius: 20 / 2,
     overflow: 'hidden',
   },
-  bpmContainer: {},
 })
