@@ -178,7 +178,7 @@ const Run = ({ navigation }: { navigation: any }) => {
               ? ['#6C32EC', ...generateColor('#6C32EC', '#E3AF29', locations.length - 2), '#E3AF29']
               : []
           }
-          strokeWidth={12}
+          strokeWidth={14}
         />
         <Polyline
           coordinates={locations}
