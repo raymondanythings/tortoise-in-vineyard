@@ -14,6 +14,10 @@ export default StyleSheet.create({
     fontSize: 54,
     lineHeight: 49,
   },
+  gaeguTitle: {
+    fontSize: 28,
+    lineHeight: 44,
+  },
   subheading: {
     fontSize: 14,
     fontWeight: '400',
@@ -29,7 +33,6 @@ export default StyleSheet.create({
   },
   text: {
     fontFamily: Font.RF,
-    
   },
   fullWidth: {
     width: '100%',

@@ -3,7 +3,7 @@ import { Pressable, GestureResponderEvent, View, PressableProps, ViewStyle } fro
 import Text from './Text'
 
 interface ButtonProps extends PressableProps {
-  onPress: (event: GestureResponderEvent) => void
+  onPress?: (event: GestureResponderEvent) => void
   color?: string
   style?: ViewStyle
 }

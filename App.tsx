@@ -3,6 +3,7 @@ import Router from './router'
 import { NavigationContainer } from '@react-navigation/native'
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
 import { BASE_URL } from './app/constants/constants'
+import { RecoilRoot } from 'recoil'
 
 const client = new ApolloClient({
   uri: BASE_URL,
@@ -12,9 +13,11 @@ const client = new ApolloClient({
 function App(): JSX.Element {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Router />
-      </NavigationContainer>
+      <RecoilRoot>
+        <NavigationContainer>
+          <Router />
+        </NavigationContainer>
+      </RecoilRoot>
     </ApolloProvider>
   )
 }
