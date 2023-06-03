@@ -7,33 +7,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
 import { BASE_URL } from './constants/constants'
 
-const client = new ApolloClient({
-  uri: BASE_URL,
-  cache: new InMemoryCache(),
-})
-
-client
-  .query({
-    query: gql`
-      query GetLocations {
-        locations {
-          id
-          name
-          description
-          photo
-        }
-      }
-    `,
-  })
-  .then((result) => console.log(result))
-
 function App(): JSX.Element {
   return (
-    <ApolloProvider client={client}>
-      <NavigationContainer>
-        <Router />
-      </NavigationContainer>
-    </ApolloProvider>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   )
 }
 

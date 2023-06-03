@@ -10,4 +10,4 @@ export const RESPONSE = {
   wrongJwt: 'Error decoding signature',
 } as const
 
-export const BASE_URL = 'https://flyby-router-demo.herokuapp.com/'
+export const BASE_URL = 'https://sesacthon-server.lucas-gong.dev/graphql'
