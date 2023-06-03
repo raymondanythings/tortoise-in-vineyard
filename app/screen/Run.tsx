@@ -13,6 +13,7 @@ import Icon from '../constants/Icon'
 import colors from '../constants/colors'
 import { generateColor } from '../../utils/linearGradient'
 import { AuthorizationResult } from 'react-native-geolocation-service'
+import Heart from '../components/Heart'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -227,9 +228,10 @@ const Run = ({ navigation }: { navigation: any }) => {
             },
           }}
         >
-          <View style={{ flex: 1 }}></View>
+          <Heart />
           <View style={{ flex: 1 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              {/* 심박수 */}
               <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
                 {heartRate}
               </Text>
