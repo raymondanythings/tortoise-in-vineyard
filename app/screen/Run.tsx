@@ -12,6 +12,7 @@ import Icon from '../constants/Icon'
 import colors from '../constants/colors'
 import { generateColor } from '../../utils/linearGradient'
 import { AuthorizationResult } from 'react-native-geolocation-service'
+import useWatch from '../hook/useWatch'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -45,11 +46,10 @@ const Run = ({ navigation }: { navigation: any }) => {
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
 
+  const { isConnected } = useWatch()
+
   const messageListener = async () => {
-    const paired = await getIsPaired()
-    const installed = await getIsWatchAppInstalled()
-    paired &&
-      installed &&
+    isConnected &&
       watchEvents.on<{ heartRate?: number; distance?: number }>('message', (message) => {
         const { heartRate: heart, distance } = message
         if (heart) {

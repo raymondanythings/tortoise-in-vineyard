@@ -1,24 +1,18 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import Router from './router'
 import { NavigationContainer } from '@react-navigation/native'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
-import { BASE_URL } from './app/constants/constants'
 import { RecoilRoot } from 'recoil'
-
-const client = new ApolloClient({
-  uri: BASE_URL,
-  cache: new InMemoryCache(),
-})
+import ApolloWrapper from './app/layout/ApolloWrapper'
 
 function App(): JSX.Element {
   return (
-    <ApolloProvider client={client}>
-      <RecoilRoot>
+    <RecoilRoot>
+      <ApolloWrapper>
         <NavigationContainer>
           <Router />
         </NavigationContainer>
-      </RecoilRoot>
-    </ApolloProvider>
+      </ApolloWrapper>
+    </RecoilRoot>
   )
 }
 

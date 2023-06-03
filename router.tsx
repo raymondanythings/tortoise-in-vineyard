@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Home from './app/screen/Home'
 import OnBoard from './app/screen/OnBoard'
 import BeforeEx from './app/screen/BeforeEx'

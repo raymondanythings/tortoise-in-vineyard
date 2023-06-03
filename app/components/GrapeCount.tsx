@@ -21,11 +21,12 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
       }}
     >
       {Array.from({ length: count }).map((_, index) => (
-        <Image key={index} source={Icon.GRAPECIRCLE} />
+        <Image key={'fill' + index} source={Icon.GRAPECIRCLE} />
       ))}
       {Array.from({ length: TOTAL_COUNT - count }, (v, i) => i + TOTAL_COUNT - count + 1).map(
         (c) => (
           <View
+            key={c}
             style={{
               width: 30,
               height: 30,

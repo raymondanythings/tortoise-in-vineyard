@@ -1,41 +1,45 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback } from 'react'
-import { Image, Pressable, StyleSheet, View } from 'react-native'
+import { Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
 import Text from '../components/Text'
 import { getProfile as getKakaoProfile, login } from '@react-native-seoul/kakao-login'
 import Icon from '../constants/Icon'
-import { AccountProvider, useGetMeLazyQuery, useLoginMutation } from '../../graphql/generated'
+import { AccountProvider, useLoginMutation } from '../../graphql/generated'
 import { AUTH_HEADER } from '../constants/constants'
 import Img from '../constants/Img'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
+import useGetUser from '../hook/useGetUser'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
-  const [loginMutaion, { error }] = useLoginMutation()
-  const [getMe, { data }] = useGetMeLazyQuery()
-  const navigation = useNavigation()
 
+  useGetUser('cache-and-network')
+  const [loginMutaion, { error }] = useLoginMutation({
+    async onCompleted(data) {
+      if (data?.signIn.accessToken) {
+        const {
+          signIn: { accessToken },
+        } = data
+        await AsyncStorage.setItem(AUTH_HEADER, accessToken)
+        setToken(accessToken)
+        navigation.dispatch(StackActions.push('birthday'))
+      }
+    },
+  })
+  const navigation = useNavigation()
   const kakaoLogin = useCallback(async () => {
     try {
       const token = await login()
       if (token) {
         const { email } = await getKakaoProfile()
-        const { data } = await loginMutaion({
+        loginMutaion({
           variables: { email, provider: AccountProvider.Kakao },
         })
-        if (data?.signIn.accessToken) {
-          const {
-            signIn: { accessToken },
-          } = data
-          await AsyncStorage.setItem(AUTH_HEADER, accessToken)
-          setToken(accessToken)
-          navigation.dispatch(StackActions.push('birthday'))
-        }
       }
     } catch (err) {
       console.log(err)

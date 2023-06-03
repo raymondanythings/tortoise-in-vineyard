@@ -1,6 +1,7 @@
 import React from 'react'
 import { Pressable, GestureResponderEvent, View, PressableProps, ViewStyle } from 'react-native'
 import Text from './Text'
+import colors from '../constants/colors'
 
 interface ButtonProps extends PressableProps {
   onPress?: (event: GestureResponderEvent) => void
@@ -9,18 +10,19 @@ interface ButtonProps extends PressableProps {
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({ color, onPress, children, ...rest }) => {
-  const { style } = rest
+  const { style, disabled } = rest
+  const backgroundColor = disabled ? colors.TEXT_MAIN : '#222222'
   return (
     <View style={{ width: '100%' }}>
       <Pressable
         onPress={(event) => onPress && onPress(event)}
         {...rest}
         style={{
-          backgroundColor: color ? color : '#4E4E4E',
           borderRadius: 10,
           display: 'flex',
           width: '100%',
           height: 54,
+          backgroundColor,
           ...(style ?? {}),
         }}
       >
