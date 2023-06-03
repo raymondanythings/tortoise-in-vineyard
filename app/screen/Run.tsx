@@ -192,41 +192,42 @@ const Run = ({ navigation }: { navigation: any }) => {
           }}
           lineJoin='round'
         />
-        <View
-          style={{
-            position: 'absolute',
-            top: 60,
-            height: 120,
-            borderRadius: 20,
-            backgroundColor: '#fff',
-            overflow: 'hidden',
-            width: Dimensions.get('window').width - 60,
-            marginHorizontal: 30,
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            shadowColor: '#333333',
-            shadowRadius: 30,
-            shadowOpacity: 1,
-            shadowOffset: {
-              height: -10,
-              width: 400,
-            },
-          }}
-        >
-          <Heart />
-          <View style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              {/* 심박수 */}
-              <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
-                {heartRate}
-              </Text>
-              <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
-            </View>
-            <Text>1.1 km</Text>
-          </View>
-        </View>
       </MapView>
+      {/* bpm 컨테이너 */}
+      <View
+        style={{
+          position: 'absolute',
+          top: 60,
+          height: 120,
+          borderRadius: 20,
+          backgroundColor: '#fff',
+          overflow: 'hidden',
+          width: Dimensions.get('window').width - 60,
+          marginHorizontal: 30,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          shadowColor: '#333333',
+          shadowRadius: 30,
+          shadowOpacity: 1,
+          shadowOffset: {
+            height: -10,
+            width: 400,
+          },
+        }}
+      >
+        <Heart />
+        <View style={{ flex: 1 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            {/* 심박수 */}
+            <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
+              {heartRate}
+            </Text>
+            <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
+          </View>
+          <Text>1.1 km</Text>
+        </View>
+      </View>
       <View
         style={{
           position: 'absolute',
@@ -315,4 +316,5 @@ const styles = StyleSheet.create({
     borderRadius: 20 / 2,
     overflow: 'hidden',
   },
+  bpmContainer: {},
 })
