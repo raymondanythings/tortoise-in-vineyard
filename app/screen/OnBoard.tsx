@@ -8,13 +8,15 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import GrapeCount from '../components/GrapeCount'
 import Button from '../components/Button'
 import useGetUser from '../hook/useGetUser'
+import GrapeBedge from '../components/GrapeBedge'
 
 const OnBoard = () => {
   const navigation = useNavigation()
   const { user } = useGetUser('cache-only')
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
-      <View style={[globalStyle.header, {}]}>
+      <View style={[globalStyle.header]}>
+        <GrapeBedge type='single' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>포도알을 모아보세요</Text>
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           {user?.canRunToday ? '포도알 6개를 모으면, 한 송이가 완성돼요!' : '내일도 만나요!'}
