@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native'
+import { hasNotch } from 'react-native-device-info'
 
 export const Font = {
   Pretendard: 'Pretendard-Regular',
   RF: 'RF',
+  GAEGU_M: 'JGaegujaengyi-Medium',
+  GAEGU_L: 'JGaegujaengyi-Light',
+  GAEGU_B: 'JGaegujaengyi-Bold',
 }
 export default StyleSheet.create({
   container: {
@@ -11,12 +15,18 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-    fontSize: 54,
-    lineHeight: 49,
+    fontSize: 44,
+    lineHeight: 55,
+    letterSpacing: 3,
+    fontFamily: Font.GAEGU_B,
+    marginBottom: 4,
   },
   gaeguTitle: {
     fontSize: 28,
-    lineHeight: 44,
+    lineHeight: 55,
+  },
+  gaeguSub: {
+    fontSize: 16,
   },
   subheading: {
     fontSize: 14,
@@ -32,22 +42,23 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
   },
   text: {
-    fontFamily: Font.RF,
+    fontFamily: Font.GAEGU_M,
   },
   fullWidth: {
     width: '100%',
     alignItems: 'center',
   },
   header: {
+    position: 'relative',
     flex: 5,
-
-    paddingTop: 40,
+    marginTop: 40,
+    alignItems: 'center',
   },
   center: {
     flex: 13,
   },
   footer: {
-    flex: 4,
+    flex: hasNotch() ? 3.5 : 4,
     rowGap: 8,
   },
   fontMedium: {

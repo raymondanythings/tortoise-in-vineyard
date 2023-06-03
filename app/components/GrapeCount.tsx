@@ -37,7 +37,7 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
               justifyContent: 'center',
             }}
           >
-            <Text style={{ fontSize: 18, lineHeight: 24, color: colors.TEXT_MAIN }}>{c}</Text>
+            <Text style={{ fontSize: 18, lineHeight: 24, color: colors.TEXT_MAIN_1 }}>{c}</Text>
           </View>
         ),
       )}
@@ -49,7 +49,7 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
           fontFamily: Font.RF,
           fontSize: 18,
           lineHeight: 24,
-          color: colors.TEXT_MAIN,
+          color: colors.TEXT_MAIN_1,
           letterSpacing: -2,
         }}
       >

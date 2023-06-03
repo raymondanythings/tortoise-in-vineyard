@@ -69,6 +69,9 @@
 		<string>RF.ttf</string>
 		<string>fonts/RF.ttf</string>
 		<string>fonts/Pretendard-Regular.ttf</string>
+		<string>fonts/JGaegujaengyi-Bold.otf</string>
+		<string>fonts/JGaegujaengyi-Light.otf</string>
+		<string>fonts/JGaegujaengyi-Medium.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

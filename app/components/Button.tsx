@@ -11,7 +11,7 @@ interface ButtonProps extends PressableProps {
 
 const Button: React.FunctionComponent<ButtonProps> = ({ color, onPress, children, ...rest }) => {
   const { style, disabled } = rest
-  const backgroundColor = disabled ? colors.TEXT_MAIN : '#222222'
+  const backgroundColor = disabled ? colors.TEXT_MAIN_1 : '#222222'
   return (
     <View style={{ width: '100%' }}>
       <Pressable

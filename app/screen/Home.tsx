@@ -17,6 +17,7 @@ import useGetUser from '../hook/useGetUser'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
+  const navigation = useNavigation()
 
   useGetUser('cache-and-network')
   const [loginMutaion, { error }] = useLoginMutation({
@@ -31,7 +32,6 @@ const Home = () => {
       }
     },
   })
-  const navigation = useNavigation()
   const kakaoLogin = useCallback(async () => {
     try {
       const token = await login()
@@ -49,7 +49,7 @@ const Home = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.fullWidth, globalStyle.header]}>
-        <Text style={globalStyle.heading}>달리는 거북이</Text>
+        <Text style={[globalStyle.heading]}>포도밭 부기</Text>
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           {`남들과 비교하지 않고, 나만의 기준으로 운동해요.
 나만의 적정 심박수를 찾아서
