@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import globalStyle from '../components/globalStyle'
+import globalStyle from '../common/globalStyle'
 import NextButton from '../components/Button'
 import EmotionButtons from '../components/EmotionButtons'
 import Text from '../components/Text'

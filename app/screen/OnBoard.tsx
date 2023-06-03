@@ -1,22 +1,55 @@
 import React from 'react'
-import { View, StyleSheet, Pressable } from 'react-native'
+import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import globalStyle from '../components/globalStyle'
+import globalStyle from '../common/globalStyle'
 import NextButton from '../components/Button'
 import Text from '../components/Text'
+import Img from '../constants/Img'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
+import Icon from '../constants/Icon'
+import GrapeCount from '../components/GrapeCount'
 
-const OnBoard = ({ navigation }: { navigation: any }) => {
+const OnBoard = () => {
+  const navigation = useNavigation()
   return (
-    <View style={globalStyle.container}>
-      <SafeAreaView style={globalStyle.safeAreaContainer}>
-        <Text style={globalStyle.heading}>아직은 포도알이 없어요</Text>
-        <Text style={globalStyle.subheading}>포도알 6개를 모으면, 한 송이가 완성돼요!</Text>
-        <View style={styles.characterContainer}>
-          <Text style={globalStyle.heading}>나무 이미지</Text>
-        </View>
-        <NextButton text='달리기 시작' onPress={() => navigation.push('watchcheck')} />
-      </SafeAreaView>
-    </View>
+    <SafeAreaView style={globalStyle.safeAreaContainer}>
+      <View style={[globalStyle.header, {}]}>
+        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>포도알을 모아보세요</Text>
+        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
+          포도알 6개를 모으면, 한 송이가 완성돼요!
+        </Text>
+        <GrapeCount count={3} />
+      </View>
+      <View style={globalStyle.center}>
+        <Image source={Img.GRAPE} />
+      </View>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
+        <Pressable style={{ paddingVertical: 8 }}>
+          <Text
+            style={[
+              globalStyle.fontMedium,
+              globalStyle.Pretendard,
+              {
+                textDecorationLine: 'underline',
+                fontWeight: '300',
+                color: '#A0A0A0',
+              },
+            ]}
+          >
+            서비스 약관 읽어보기
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            AsyncStorage.clear()
+            // setToken('')
+          }}
+        >
+          <Text>초기화</Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
   )
 }
 

@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
-import { getHealthKit } from '../../utils/Healthkit'
-import MapView, { LatLng, MapMarker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
+import MapView, { LatLng, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import globalStyle, { Font } from '../components/globalStyle'
+import globalStyle, { Font } from '../common/globalStyle'
 import Text from '../components/Text'
 import CUSTOM_MAP from '../constants/customMap'
 import Icon from '../constants/Icon'
@@ -63,15 +62,8 @@ const Run = ({ navigation }: { navigation: any }) => {
     setGeolocationPermission(result)
   }, [])
 
-  useEffect(() => {
-    messageListener()
-    getHealthKit()
-    geolocationRequest()
-  }, [])
-
   // 지도 관련 코드
   const mapViewRef = useRef<MapView>(null) // MapView 컴포넌트를 제어하기 위한 ref
-  const userMarker = useRef<MapMarker>()
 
   const watchId = useRef<number>()
 
@@ -126,20 +118,14 @@ const Run = ({ navigation }: { navigation: any }) => {
     }
   }, [tracking, geolocationPermission])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    messageListener()
+    geolocationRequest()
     navigation.addListener('blur', () => {
       clearWatch()
     })
   }, [])
 
-  // 로케이션을 받아올 수 없을 때 뜨는 화면
-  if (!locations) {
-    return (
-      <SafeAreaView>
-        <Text>위치를 불러오는 중입니다...</Text>
-      </SafeAreaView>
-    )
-  }
   // 로케이션 허용 후 뜨는 화면
   return (
     <View style={{ flex: 1 }}>

@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { ForwardedRef, MutableRefObject, forwardRef } from 'react'
 import { Text as T, TextProps } from 'react-native'
-import globalStyle from './globalStyle'
+import globalStyle from '../common/globalStyle'
 
-const Text = ({ children, ...rest }: TextProps) => {
+const Text = forwardRef<T, TextProps>(({ children, ...rest }, ref) => {
   return (
-    <T {...rest} style={[globalStyle.text, rest.style]}>
+    <T {...rest} ref={ref} style={[globalStyle.text, rest.style]}>
       {children}
     </T>
   )
-}
+})
 
 export default Text
