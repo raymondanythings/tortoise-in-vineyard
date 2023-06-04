@@ -149,7 +149,6 @@ extension SessionManager {
                      replyHandler: (([String : Any]) -> Void)? = nil,
                      errorHandler: ((Error) -> Void)? = nil)
     {
-        print(validReachableSession)
         print("send Message")
         validReachableSession?.sendMessage(message, replyHandler: replyHandler, errorHandler: errorHandler)
     }

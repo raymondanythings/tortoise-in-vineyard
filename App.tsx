@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { RecoilRoot } from 'recoil'
 import ApolloWrapper from './app/layout/ApolloWrapper'
 import { NativeEventEmitter, NativeModules } from 'react-native'
+import healthKit from './utils/Healthkit'
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -13,6 +14,7 @@ function App(): JSX.Element {
         console.log('--> observer triggered')
       },
     )
+    healthKit.requestPermission()
   }, [])
   return (
     <RecoilRoot>

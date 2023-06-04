@@ -1,15 +1,18 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
-import NextButton from '../components/Button'
 import Text from '../components/Text'
 import Img from '../constants/Img'
 import Button from '../components/Button'
 import useWatch from '../hook/useWatch'
+import useGetUser from '../hook/useGetUser'
 
-const WatchCheck = ({ navigation }: { navigation: any }) => {
+const WatchCheck = () => {
+  const { user } = useGetUser('cache-only')
+  const navigation = useNavigation()
+
   const { isConnected } = useWatch()
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
@@ -34,7 +37,13 @@ const WatchCheck = ({ navigation }: { navigation: any }) => {
             columnGap: 8,
           }}
           disabled={!isConnected}
-          onPress={() => navigation.dispatch(StackActions.push('watchcheck'))}
+          onPress={() => {
+            if (user?.minHeartRate) {
+              navigation.dispatch(StackActions.push('beforeemotion'))
+            } else {
+              navigation.dispatch(StackActions.push('minheartratecheck'))
+            }
+          }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             착용 완료
@@ -60,15 +69,3 @@ const WatchCheck = ({ navigation }: { navigation: any }) => {
 }
 
 export default WatchCheck
-
-const styles = StyleSheet.create({
-  characterContainer: {
-    borderColor: '#C2D1D9',
-    backgroundColor: '#C2D1D9',
-    width: 263,
-    height: 300,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 35,
-  },
-})

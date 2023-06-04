@@ -5,11 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
 import Text from '../components/Text'
-import { getProfile as getKakaoProfile, login } from '@react-native-seoul/kakao-login'
+import {
+  getProfile as getKakaoProfile,
+  loginWithKakaoAccount,
+} from '@react-native-seoul/kakao-login'
 import Icon from '../constants/Icon'
 import { AccountProvider, useGetMeLazyQuery, useLoginMutation } from '../../graphql/generated'
 import { AUTH_HEADER } from '../constants/constants'
-import Img from '../constants/Img'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
@@ -52,7 +54,8 @@ const Home = () => {
   })
   const kakaoLogin = useCallback(async () => {
     try {
-      const token = await login()
+      const token = await loginWithKakaoAccount()
+      // const token = await login()
       if (token) {
         const { email } = await getKakaoProfile()
         loginMutaion({
@@ -60,14 +63,14 @@ const Home = () => {
         })
       }
     } catch (err) {
-      console.log(err)
+      console.error(err, '????')
     }
   }, [])
-
   const canNavigateHandler = () => {
     isNavigate.current = true
   }
 
+  console.log(Text)
   useEffect(() => {
     navigation.addListener('blur', canNavigateHandler)
     return () => {

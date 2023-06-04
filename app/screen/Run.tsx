@@ -21,7 +21,7 @@ import { AuthorizationResult } from 'react-native-geolocation-service'
 import useWatch from '../hook/useWatch'
 import Heart from '../components/Lotties/Heart'
 import PinkDots from '../components/Lotties/PinkDots'
-
+import SwipeButton from 'rn-swipe-button'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -300,7 +300,20 @@ const Run = ({ navigation }: { navigation: any }) => {
         >
           <Image source={tracking ? Icon.PAUSE : Icon.START} style={{ width: 21, height: 25 }} />
         </Pressable>
-        <Pressable
+        <SwipeButton
+          disableResetOnTap
+          // forceReset={ reset => {
+          //   forceResetLastButton = reset
+          // }}
+          railBackgroundColor='#9fc7e8'
+          railStyles={{
+            backgroundColor: '#44000088',
+            borderColor: '#880000FF',
+          }}
+          thumbIconBackgroundColor='#FFFFFF'
+          title='Slide to unlock'
+        />
+        {/* <Pressable
           style={{
             borderRadius: 10,
             backgroundColor: '#222',
@@ -312,7 +325,7 @@ const Run = ({ navigation }: { navigation: any }) => {
           onPress={() => navigation.push('afteremotion')}
         >
           <Text style={[globalStyle.subheading, { color: 'white' }]}>달리기 완료</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
     </View>
     // </SafeAreaView>
