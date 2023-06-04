@@ -57,8 +57,8 @@ const MainScreen = () => {
         // }}
         component={Run}
       />
-      <MainStack.Screen name='complete' component={Complete} />
       <MainStack.Screen name='afteremotion' component={AfterEmotion} />
+      <MainStack.Screen name='complete' component={Complete} />
     </MainStack.Navigator>
   )
 }
