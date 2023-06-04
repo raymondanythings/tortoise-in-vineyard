@@ -2,7 +2,13 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
-import MapView, { LatLng, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
+import MapView, {
+  LatLng,
+  Marker,
+  MarkerAnimated,
+  PROVIDER_GOOGLE,
+  Polyline,
+} from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import globalStyle, { Font } from '../common/globalStyle'
@@ -159,8 +165,8 @@ const Run = ({ navigation }: { navigation: any }) => {
         scrollEnabled={false}
         minZoomLevel={18}
       >
-        {/* <Marker.Animated
-          ref={userMarker}
+        <MarkerAnimated
+          // ref={userMarker}
           coordinate={{
             latitude: location.latitude - 0.00007,
             longitude: location.longitude + 0.0000001,
@@ -169,7 +175,7 @@ const Run = ({ navigation }: { navigation: any }) => {
           <View style={styles.radius}>
             <View style={styles.marker}></View>
           </View>
-        </Marker.Animated> */}
+        </MarkerAnimated>
         {/* 테두리 선 */}
         <Polyline
           coordinates={locations}

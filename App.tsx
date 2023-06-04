@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Router from './router'
 import { NavigationContainer } from '@react-navigation/native'
 import { RecoilRoot } from 'recoil'
 import ApolloWrapper from './app/layout/ApolloWrapper'
+import { NativeEventEmitter, NativeModules } from 'react-native'
 
 function App(): JSX.Element {
+  useEffect(() => {
+    new NativeEventEmitter(NativeModules.AppleHealthKit).addListener(
+      'healthKit:Workout:new',
+      async () => {
+        console.log('--> observer triggered')
+      },
+    )
+  }, [])
   return (
     <RecoilRoot>
       <ApolloWrapper>

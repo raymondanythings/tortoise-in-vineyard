@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
@@ -13,15 +13,18 @@ import Bedge from '../components/Bedge'
 const OnBoard = () => {
   const navigation = useNavigation()
   const { user } = useGetUser('cache-only')
+  const grapeCircleCount = useMemo(() => user?.totalRun ?? 0 % 6, [user?.totalRun])
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header]}>
         <Bedge label='포도알' />
-        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>포도알을 모아보세요</Text>
+        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
+          {grapeCircleCount ? '포도알을 모아보세요' : '아직 포도알이 없어요'}
+        </Text>
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           {user?.canRunToday ? '포도알 6개를 모으면, 한 송이가 완성돼요!' : '내일도 만나요!'}
         </Text>
-        <GrapeCount count={3} />
+        <GrapeCount count={grapeCircleCount} />
       </View>
       <View style={globalStyle.center}>
         <Image source={Img.GRAPE} />

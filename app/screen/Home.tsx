@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
@@ -7,18 +7,36 @@ import Button from '../components/Button'
 import Text from '../components/Text'
 import { getProfile as getKakaoProfile, login } from '@react-native-seoul/kakao-login'
 import Icon from '../constants/Icon'
-import { AccountProvider, useLoginMutation } from '../../graphql/generated'
+import { AccountProvider, useGetMeLazyQuery, useLoginMutation } from '../../graphql/generated'
 import { AUTH_HEADER } from '../constants/constants'
 import Img from '../constants/Img'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
-import useGetUser from '../hook/useGetUser'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
   const navigation = useNavigation()
-  const { user } = useGetUser('cache-and-network')
+  const isNavigate = useRef(true)
+  const [getMe, { data: userData }] = useGetMeLazyQuery({
+    fetchPolicy: 'network-only',
+    onCompleted({ me }) {
+      validateUserAndPush()
+    },
+  })
+
+  const validateUserAndPush = () => {
+    if (isNavigate.current) {
+      if (userData?.me) {
+        isNavigate.current = false
+        return navigation.dispatch(
+          StackActions.push(userData?.me.birthYear ? 'onboard' : 'birthday'),
+        )
+      } else {
+        getMe()
+      }
+    }
+  }
   const [loginMutaion, { error }] = useLoginMutation({
     async onCompleted(data) {
       if (data?.signIn.accessToken) {
@@ -27,7 +45,7 @@ const Home = () => {
         } = data
         await AsyncStorage.setItem(AUTH_HEADER, accessToken)
         setToken(accessToken)
-        navigation.dispatch(StackActions.push('birthday'))
+        validateUserAndPush()
       }
     },
   })
@@ -42,6 +60,17 @@ const Home = () => {
       }
     } catch (err) {
       console.log(err)
+    }
+  }, [])
+
+  const canNavigateHandler = () => {
+    isNavigate.current = true
+  }
+
+  useEffect(() => {
+    navigation.addListener('blur', canNavigateHandler)
+    return () => {
+      navigation.removeListener('blur', canNavigateHandler)
     }
   }, [])
 
@@ -68,12 +97,7 @@ AI가 페이스메이킹을 해줄 거예요.`}
               backgroundColor: '#222222',
               columnGap: 8,
             }}
-            onPress={() => {
-              if (user?.birthYear) {
-                return navigation.dispatch(StackActions.push('onboard'))
-              }
-              navigation.dispatch(StackActions.push('birthday'))
-            }}
+            onPress={validateUserAndPush}
           >
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
               시작하기

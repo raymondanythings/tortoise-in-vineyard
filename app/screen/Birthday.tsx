@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, View } from 'react-native'
 import Text from '../components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -15,7 +15,7 @@ const END_YEAR = new Date().getFullYear()
 const Birthday = () => {
   const navigation = useNavigation()
   const [birthday, setBirthday] = useState(END_YEAR)
-  const { updateQuery } = useGetUser('cache-only')
+  const { updateQuery, user } = useGetUser('network-only')
   const [update] = useUpdateBirthMutation({
     onCompleted(data) {
       updateQuery((prev, option) => ({
@@ -28,6 +28,11 @@ const Birthday = () => {
       navigation.dispatch(StackActions.push('watchcheck'))
     },
   })
+  useEffect(() => {
+    if (user?.birthYear) {
+      navigation.dispatch(StackActions.push('onboard'))
+    }
+  }, [user?.birthYear])
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>
