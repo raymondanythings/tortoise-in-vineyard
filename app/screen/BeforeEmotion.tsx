@@ -13,6 +13,7 @@ import { emotionState } from '../store/emotionState'
 
 const BeforeEmotion = ({ navigation }: { navigation: any }) => {
   const emotion = useRecoilValue(emotionState)
+  const isEmotionSelected = emotion.emotion !== '' // 감정 선택이 됐을 때 조건식
 
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: emotion.bgcolor }]}>
@@ -34,9 +35,10 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#222222',
             columnGap: 8,
+            backgroundColor: isEmotionSelected ? '#222222' : '#A0A0A0',
           }}
+          disabled={!isEmotionSelected}
           onPress={() => navigation.dispatch(StackActions.push('run'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
