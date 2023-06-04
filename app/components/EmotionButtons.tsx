@@ -3,26 +3,41 @@ import { Pressable, StyleSheet, View, Image } from 'react-native'
 import Text from './Text'
 import Img from '../constants/Img'
 import Icon from '../constants/Icon'
+import { useRecoilState } from 'recoil'
+import { emotionState } from '../store/emotionState'
 
 const EmotionButtons = () => {
+  const [emotion, setEmotion] = useRecoilState(emotionState)
+
   // 각 버튼의 텍스트와 눌렀을 때의 동작을 정의
   const emotions = [
-    { text: '기쁜', onPress: () => console.log('기쁜 눌림') },
-    { text: '뿌듯한', onPress: () => console.log('뿌듯한 눌림') },
-    { text: '행복한', onPress: () => console.log('행복한 눌림') },
-    { text: '신나는', onPress: () => console.log('신나는 눌림') },
-    { text: '짜증나는', onPress: () => console.log('짜증나는 눌림') },
-    { text: '불안한', onPress: () => console.log('불안한 눌림') },
-    { text: '무기력한', onPress: () => console.log('무기력한 눌림') },
-    { text: '우울한', onPress: () => console.log('우울한 눌림') },
-    { text: '화나는', onPress: () => console.log('화나는 눌림') },
+    { text: '기쁜', bgcolor: '#FFFBE0' },
+    { text: '뿌듯한', bgcolor: '#FFF5EA' },
+    { text: '행복한', bgcolor: '#FDF6F5' },
+    { text: '신나는', bgcolor: '#F6F3F9' },
+    { text: '짜증나는', bgcolor: '#F5F7F8' },
+    { text: '불안한', bgcolor: ' #FAF1EC' },
+    { text: '무기력한', bgcolor: '#F3F8F5' },
+    { text: '우울한', bgcolor: '#EFF8FA' },
+    { text: '화나는', bgcolor: '#FFEAE3' },
   ]
+
+  // 버튼을 누르면 해당되는 배경색으로, 동일한 버튼을 다시 누르면 배경색이 흰색으로
+  const handlePress = (emotionText: string, bgcolor: string) => {
+    if (emotion.emotion === emotionText) {
+      setEmotion({ bgcolor: '#FFFFFF', emotion: '' })
+      console.log('똑같은 거 누름')
+    } else {
+      setEmotion({ bgcolor, emotion: emotionText })
+      console.log(`감정: ${emotionText}, ${bgcolor}`)
+    }
+  }
+
   return (
     <View style={styles.emotionContainer}>
       {emotions.map((emotion, index) => (
-        <View>
+        <View key={index}>
           <Pressable
-            key={index}
             style={[
               styles.emotionButton,
               (index === 1 || 4 || 7) && { marginBottom: 8.5 },
@@ -36,7 +51,7 @@ const EmotionButtons = () => {
               index === 7 && { backgroundColor: '#92CEDE', marginTop: 15.5 },
               index === 8 && { backgroundColor: '#FD7247', marginTop: 15.5 },
             ]}
-            onPress={emotion.onPress}
+            onPress={() => handlePress(emotion.text, emotion.bgcolor)}
           >
             {index === 0 && <Image source={Icon.EMOTION.PLEASED} />}
             {index === 1 && <Image source={Icon.EMOTION.PROUD} />}
