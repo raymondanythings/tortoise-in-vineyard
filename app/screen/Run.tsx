@@ -306,7 +306,7 @@ const Run = () => {
         </Pressable>
         <Swiper
           onToggle={() => {
-            navigation.dispatch(StackActions.push('complete'))
+            navigation.dispatch(StackActions.push('afteremotion'))
           }}
         />
       </View>
