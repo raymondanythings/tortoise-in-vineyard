@@ -3,6 +3,7 @@ export default {
   START: require('../assets/start.png'),
   KAKAO: require('../assets/kakao.png'),
   GRAPECIRCLE: require('../assets/grape_circle.png'),
+  GRAPEFORCONFETTI: require('../assets/grape_confetti.png'),
   LOGO: require('../assets/logo.gif'),
   EMOTION: {
     ANGRY: require('../assets/emotion/ANGRY.png'),

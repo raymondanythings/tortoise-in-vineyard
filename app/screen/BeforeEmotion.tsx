@@ -42,7 +42,7 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
             backgroundColor: emotion.value ? '#222222' : '#A0A0A0',
           }}
           disabled={!emotion.value}
-          onPress={() => navigation.dispatch(StackActions.push('run'))}
+          onPress={() => navigation.dispatch(StackActions.push('complete'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             감정 기록 완료
