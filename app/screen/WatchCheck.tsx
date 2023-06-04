@@ -48,7 +48,7 @@ const WatchCheck = ({ navigation }: { navigation: any }) => {
             columnGap: 8,
           }}
           disabled={isConnected}
-          onPress={() => navigation.dispatch(StackActions.push('run'))}
+          onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             거리로 측정할게요
