@@ -5,10 +5,10 @@ import Text from './Text'
 import globalStyle from '../common/globalStyle'
 
 interface GrapeBedgeProps {
-  type?: 'whole' | 'single'
+  label: string
 }
 
-const GrapeBedge = ({ type = 'whole' }: GrapeBedgeProps) => {
+const Bedge = ({ label }: GrapeBedgeProps) => {
   return (
     <View
       style={{
@@ -22,11 +22,9 @@ const GrapeBedge = ({ type = 'whole' }: GrapeBedgeProps) => {
         alignItems: 'center',
       }}
     >
-      <Text style={[{ color: '#fff' }, globalStyle.gaeguSub]}>
-        {type === 'single' ? '포도알' : '포도송이'}
-      </Text>
+      <Text style={[{ color: '#fff' }, globalStyle.gaeguSub]}>{label}</Text>
     </View>
   )
 }
 
-export default GrapeBedge
+export default Bedge

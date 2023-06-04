@@ -1,4 +1,4 @@
-import React, { ForwardedRef, MutableRefObject, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import { Text as T, TextProps } from 'react-native'
 import globalStyle from '../common/globalStyle'
 

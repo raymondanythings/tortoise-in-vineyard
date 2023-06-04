@@ -670,6 +670,8 @@
 				DEVELOPMENT_TEAM = 3XU5VHUK72;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = pacemaker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "포도밭부기";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -701,6 +703,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3XU5VHUK72;
 				INFOPLIST_FILE = pacemaker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "포도밭부기";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -878,7 +882,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "달리는거북이";
+				INFOPLIST_KEY_CFBundleDisplayName = "포도밭부기";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -928,7 +932,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "달리는거북이";
+				INFOPLIST_KEY_CFBundleDisplayName = "포도밭부기";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
