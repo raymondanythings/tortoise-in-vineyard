@@ -207,6 +207,13 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInOutput', accessToken: string } };
 
+export type UpdateBirthMutationVariables = Exact<{
+  birthYear: Scalars['Float']['input'];
+}>;
+
+
+export type UpdateBirthMutation = { __typename?: 'Mutation', updateBirthYear: { __typename?: 'User', birthYear?: number | null } };
+
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -247,6 +254,39 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const UpdateBirthDocument = gql`
+    mutation updateBirth($birthYear: Float!) {
+  updateBirthYear(birthYear: $birthYear) {
+    birthYear
+  }
+}
+    `;
+export type UpdateBirthMutationFn = Apollo.MutationFunction<UpdateBirthMutation, UpdateBirthMutationVariables>;
+
+/**
+ * __useUpdateBirthMutation__
+ *
+ * To run a mutation, you first call `useUpdateBirthMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBirthMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBirthMutation, { data, loading, error }] = useUpdateBirthMutation({
+ *   variables: {
+ *      birthYear: // value for 'birthYear'
+ *   },
+ * });
+ */
+export function useUpdateBirthMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBirthMutation, UpdateBirthMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBirthMutation, UpdateBirthMutationVariables>(UpdateBirthDocument, options);
+      }
+export type UpdateBirthMutationHookResult = ReturnType<typeof useUpdateBirthMutation>;
+export type UpdateBirthMutationResult = Apollo.MutationResult<UpdateBirthMutation>;
+export type UpdateBirthMutationOptions = Apollo.BaseMutationOptions<UpdateBirthMutation, UpdateBirthMutationVariables>;
 export const GetMeDocument = gql`
     query getMe {
   me {

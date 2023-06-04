@@ -18,7 +18,7 @@ import useGetUser from '../hook/useGetUser'
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
   const navigation = useNavigation()
-  useGetUser('cache-and-network')
+  const { user } = useGetUser('cache-and-network')
   const [loginMutaion, { error }] = useLoginMutation({
     async onCompleted(data) {
       if (data?.signIn.accessToken) {
@@ -68,7 +68,12 @@ AI가 페이스메이킹을 해줄 거예요.`}
               backgroundColor: '#222222',
               columnGap: 8,
             }}
-            onPress={() => navigation.dispatch(StackActions.push('onboard'))}
+            onPress={() => {
+              if (user?.birthYear) {
+                return navigation.dispatch(StackActions.push('onboard'))
+              }
+              navigation.dispatch(StackActions.push('birthday'))
+            }}
           >
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
               시작하기

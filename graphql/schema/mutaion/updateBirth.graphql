@@ -1,0 +1,5 @@
+mutation updateBirth($birthYear: Float!) {
+  updateBirthYear(birthYear: $birthYear) {
+    birthYear
+  }
+}

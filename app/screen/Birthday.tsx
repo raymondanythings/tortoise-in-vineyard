@@ -2,15 +2,32 @@ import React, { useState } from 'react'
 import { Image, View } from 'react-native'
 import Text from '../components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import globalStyle from '../common/globalStyle'
+import globalStyle, { Font } from '../common/globalStyle'
 import Img from '../constants/Img'
 import Button from '../components/Button'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { Picker } from '@react-native-picker/picker'
+import { useUpdateBirthMutation } from '../../graphql/generated'
+import useGetUser from '../hook/useGetUser'
 
+const START_YEAR = 1900
+const END_YEAR = new Date().getFullYear()
 const Birthday = () => {
   const navigation = useNavigation()
-  const [birthday, setBirthday] = useState()
+  const [birthday, setBirthday] = useState(END_YEAR)
+  const { updateQuery } = useGetUser('cache-only')
+  const [update] = useUpdateBirthMutation({
+    onCompleted(data) {
+      updateQuery((prev, option) => ({
+        ...prev,
+        me: {
+          ...prev.me,
+          birthYear: data.updateBirthYear.birthYear,
+        },
+      }))
+      navigation.dispatch(StackActions.push('watchcheck'))
+    },
+  })
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>
@@ -21,23 +38,38 @@ const Birthday = () => {
           나에게 알맞은 심박수 계산을 위해 필요해요.
         </Text>
       </View>
-      <View style={globalStyle.center}>
-        {/* <Image source={Img.WATCH} /> */}
-        <Picker
-          selectedValue={birthday}
-          onValueChange={(item) => {
-            setBirthday((prev) => item)
-          }}
-        >
-          <Picker.Item label='1' value={1} />
-          <Picker.Item label='2' value={2} />
-          <Picker.Item label='3' value={3} />
-          <Picker.Item label='4' value={4} />
-          <Picker.Item label='5' value={5} />
-          <Picker.Item label='6' value={6} />
-          <Picker.Item label='7' value={7} />
-        </Picker>
+      <View style={[globalStyle.center, { width: '100%' }]}>
+        <View style={{ position: 'relative', justifyContent: 'center' }}>
+          <Picker
+            selectedValue={birthday}
+            selectionColor={'transparent'}
+            mode='dropdown'
+            prompt='????'
+            onValueChange={(item) => {
+              setBirthday(item)
+            }}
+          >
+            {Array.from(
+              { length: END_YEAR - START_YEAR + 1 },
+              (_, index) => START_YEAR + index,
+            ).map((item) => (
+              <Picker.Item key={item} label={item + ''} value={item} />
+            ))}
+          </Picker>
+          <Text
+            style={{
+              position: 'absolute',
+              right: '18%',
+              fontFamily: Font.Pretendard,
+              fontSize: 20,
+              fontWeight: '500',
+            }}
+          >
+            년생
+          </Text>
+        </View>
       </View>
+
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
           style={{
@@ -46,7 +78,13 @@ const Birthday = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          onPress={() => navigation.dispatch(StackActions.push('watchcheck'))}
+          onPress={() =>
+            update({
+              variables: {
+                birthYear: birthday,
+              },
+            })
+          }
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             착용 완료
