@@ -1,20 +1,56 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { StackActions } from '@react-navigation/native'
 import globalStyle from '../common/globalStyle'
-import NextButton from '../components/Button'
-import EmotionButtons from '../components/EmotionButtons'
+import Button from '../components/Button'
+import Bedge from '../components/Bedge'
 import Text from '../components/Text'
+import EmotionButtons from '../components/EmotionButtons'
 
 const AfterEmotion = ({ navigation }: { navigation: any }) => {
+  const [emotion, setEmotion] = useState(null)
+
+  const handleEmotionSelection = (selected: any) => {
+    if (selected.value === '') {
+      setEmotion(null)
+    } else {
+      setEmotion(selected)
+    }
+  }
+
   return (
-    <View style={globalStyle.container}>
-      <SafeAreaView style={globalStyle.safeAreaContainer}>
-        <Text style={globalStyle.heading}>뛰고 나니 어떤가요?</Text>
-        <Text style={globalStyle.subheading}>달리기 후, 지금의 기분을 알려주세요</Text>
-        <NextButton text='오늘의 기분을 저장할게요' onPress={() => navigation.push('run')} />
-      </SafeAreaView>
-    </View>
+    <SafeAreaView style={[globalStyle.safeAreaContainer]}>
+      <View style={[globalStyle.header]}>
+        <Bedge label='감정 기록' />
+        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>현재 감정은 어떤가요?</Text>
+        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
+          달리기 후, 느낀 감정에 가까운 단어를 선택해주세요
+        </Text>
+      </View>
+      <View style={[globalStyle.center, { flexDirection: 'row' }]}>
+        <EmotionButtons onIconPress={handleEmotionSelection} />
+      </View>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
+        <Button
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            columnGap: 8,
+            backgroundColor: emotion ? '#222222' : '#A0A0A0',
+          }}
+          disabled={!emotion}
+          onPress={() => {
+            navigation.dispatch(StackActions.push('complete'))
+          }}
+        >
+          <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
+            감정 기록 완료
+          </Text>
+        </Button>
+      </View>
+    </SafeAreaView>
   )
 }
 
