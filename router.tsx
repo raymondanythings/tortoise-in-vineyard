@@ -8,6 +8,7 @@ import Run from './app/screen/Run'
 import AfterEmotion from './app/screen/AfterEmotion'
 import Check from './app/screen/Check'
 import Birthday from './app/screen/Birthday'
+import Complete from './app/screen/Complete'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -54,6 +55,7 @@ const MainScreen = () => {
         // }}
         component={Run}
       />
+      <MainStack.Screen name='complete' component={Complete} />
       <MainStack.Screen name='afteremotion' component={AfterEmotion} />
     </MainStack.Navigator>
   )
