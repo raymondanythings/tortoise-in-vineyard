@@ -12,11 +12,12 @@ import bigEmotion from '../constants/bigEmotion'
 const Complete = () => {
   const navigation = useNavigation()
   // 3초 뒤에 다른 페이지로 이동
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigation.dispatch(StackActions.push('home'))
-  //   }, 3000)
-  // }, [])
+  // 다음 페이지가 현재 없어서 home으로 가게 해둠
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.dispatch(StackActions.push('home'))
+    }, 3000)
+  }, [])
 
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>
