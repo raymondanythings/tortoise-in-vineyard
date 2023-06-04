@@ -1,6 +1,8 @@
 import React from 'react'
-import { Pressable, StyleSheet, View } from 'react-native'
+import { Pressable, StyleSheet, View, Image } from 'react-native'
 import Text from './Text'
+import Img from '../constants/Img'
+import Icon from '../constants/Icon'
 
 const EmotionButtons = () => {
   // 각 버튼의 텍스트와 눌렀을 때의 동작을 정의
@@ -18,16 +20,42 @@ const EmotionButtons = () => {
   return (
     <View style={styles.emotionContainer}>
       {emotions.map((emotion, index) => (
-        <Pressable
-          key={index}
-          style={[
-            styles.emotionButton,
-            (index === 1 || 4 || 7) && { marginHorizontal: 10, marginBottom: 15 },
-          ]}
-          onPress={emotion.onPress}
-        >
-          <Text>{emotion.text}</Text>
-        </Pressable>
+        <View>
+          <Pressable
+            key={index}
+            style={[
+              styles.emotionButton,
+              (index === 1 || 4 || 7) && { marginBottom: 8.5 },
+              index === 0 && { backgroundColor: '#FFE231' },
+              index === 1 && { backgroundColor: '#FCBC72' },
+              index === 2 && { backgroundColor: '#F3C4BE' },
+              index === 3 && { backgroundColor: '#C2B1D5', marginTop: 15.5 },
+              index === 4 && { backgroundColor: '#BCCACD', marginTop: 15.5 },
+              index === 5 && { backgroundColor: '#DDA17D', marginTop: 15.5 },
+              index === 6 && { backgroundColor: '#AFD1B9', marginTop: 15.5 },
+              index === 7 && { backgroundColor: '#92CEDE', marginTop: 15.5 },
+              index === 8 && { backgroundColor: '#FD7247', marginTop: 15.5 },
+            ]}
+            onPress={emotion.onPress}
+          >
+            {index === 0 && <Image source={Icon.EMOTION.PLEASED} />}
+            {index === 1 && <Image source={Icon.EMOTION.PROUD} />}
+            {index === 2 && <Image source={Icon.EMOTION.HAPPY} />}
+            {index === 3 && <Image source={Icon.EMOTION.EXITED} />}
+            {index === 4 && <Image source={Icon.EMOTION.IRRITATED} />}
+            {index === 5 && <Image source={Icon.EMOTION.UNSTABLE} />}
+            {index === 6 && <Image source={Icon.EMOTION.LETHARGIC} />}
+            {index === 7 && <Image source={Icon.EMOTION.GLOOMY} />}
+            {index === 8 && <Image source={Icon.EMOTION.ANGRY} />}
+          </Pressable>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
+            <Text>{emotion.text}</Text>
+          </View>
+        </View>
       ))}
     </View>
   )
@@ -37,13 +65,11 @@ export default EmotionButtons
 
 const styles = StyleSheet.create({
   emotionContainer: {
-    borderColor: '#C2D1D9',
-    backgroundColor: '#ccd495b9',
-    width: 305,
-    height: 291,
-    justifyContent: 'center',
+    // backgroundColor: '#ccd495b9',
+    // width: 279,
+    // height: 359.5,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 35,
     flexDirection: 'row', // 요소들을 가로 방향으로 배치
     flexWrap: 'wrap', // 요소들이 넘칠 경우 자동으로 다음 줄로 이동
   },

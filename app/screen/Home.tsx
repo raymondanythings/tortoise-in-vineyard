@@ -13,6 +13,7 @@ import Img from '../constants/Img'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
+import Logo from '../components/Logo'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -77,16 +78,17 @@ const Home = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.fullWidth, globalStyle.header]}>
-        <Text style={[globalStyle.heading]}>포도밭 부기</Text>
+        <Logo />
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           {`남들과 비교하지 않고, 나만의 기준으로 운동해요.
 나만의 적정 심박수를 찾아서
 AI가 페이스메이킹을 해줄 거예요.`}
         </Text>
       </View>
-      <View style={globalStyle.center}>
-        <Image source={Img.GRAPE} />
+      <View style={{ backgroundColor: '#C1D68A', width: 300, height: 300, marginVertical: 20 }}>
+        <Text>메인 꼬북자리</Text>
       </View>
+      {/* <Image source={Img.GRAPE} /> */}
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         {token ? (
           <Button
