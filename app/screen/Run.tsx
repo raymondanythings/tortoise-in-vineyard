@@ -21,7 +21,9 @@ import { AuthorizationResult } from 'react-native-geolocation-service'
 import useWatch from '../hook/useWatch'
 import Heart from '../components/Lotties/Heart'
 import PinkDots from '../components/Lotties/PinkDots'
-import SwipeButton from 'rn-swipe-button'
+
+import Swiper from '../components/Swiper'
+import { StackActions, useNavigation } from '@react-navigation/native'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -43,7 +45,7 @@ interface IGeolocation {
   longitude: number
 }
 
-const Run = ({ navigation }: { navigation: any }) => {
+const Run = () => {
   const [tracking, setTracking] = useState(false)
   const [heartRate, setHeartRate] = useState(0)
   const [locations, setLocations] = useState<Array<ILocation>>([])
@@ -53,6 +55,8 @@ const Run = ({ navigation }: { navigation: any }) => {
   })
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
+
+  const navigation = useNavigation()
 
   const { isConnected } = useWatch()
 
@@ -155,7 +159,7 @@ const Run = ({ navigation }: { navigation: any }) => {
               }
             : undefined
         }
-        showsUserLocation
+        // showsUserLocation
         followsUserLocation
         userLocationCalloutEnabled
         loadingEnabled
@@ -300,41 +304,11 @@ const Run = ({ navigation }: { navigation: any }) => {
         >
           <Image source={tracking ? Icon.PAUSE : Icon.START} style={{ width: 21, height: 25 }} />
         </Pressable>
-        <SwipeButton
-          disableResetOnTap
-          // forceReset={ reset => {
-          //   forceResetLastButton = reset
-          // }}
-          containerStyles={{
-            borderRadius: 10,
+        <Swiper
+          onToggle={() => {
+            navigation.dispatch(StackActions.push('complete'))
           }}
-          railBackgroundColor='#9fc7e8'
-          railStyles={{
-            backgroundColor: '#44000088',
-            borderColor: '#880000FF',
-            borderRadius: 10,
-          }}
-          thumbIconBackgroundColor='#FFFFFF'
-          // thumbIconComponent={
-          //   <View>
-          //     <Text>??</Text>
-          //   </View>
-          // }
-          title='Slide to unlock'
         />
-        {/* <Pressable
-          style={{
-            borderRadius: 10,
-            backgroundColor: '#222',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 54,
-          }}
-          onPress={() => navigation.push('afteremotion')}
-        >
-          <Text style={[globalStyle.subheading, { color: 'white' }]}>달리기 완료</Text>
-        </Pressable> */}
       </View>
     </View>
     // </SafeAreaView>

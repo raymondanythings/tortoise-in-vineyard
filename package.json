@@ -27,6 +27,7 @@
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.10.1",
     "react-native-health": "^1.14.0",
+    "react-native-linear-gradient": "^2.6.2",
     "react-native-maps": "^1.7.1",
     "react-native-reanimated": "^3.1.0",
     "react-native-safe-area-context": "^4.5.3",
