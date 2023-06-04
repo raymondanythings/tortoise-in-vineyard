@@ -8,10 +8,14 @@ import EmotionButtons from '../components/EmotionButtons'
 import Text from '../components/Text'
 import Button from '../components/Button'
 import Bedge from '../components/Bedge'
+import { useRecoilValue } from 'recoil'
+import { emotionState } from '../store/emotionState'
 
-const Emotion = ({ navigation }: { navigation: any }) => {
+const BeforeEmotion = ({ navigation }: { navigation: any }) => {
+  const emotion = useRecoilValue(emotionState)
+
   return (
-    <SafeAreaView style={globalStyle.safeAreaContainer}>
+    <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: emotion.bgcolor }]}>
       <View style={[globalStyle.header]}>
         <Bedge label='감정 기록' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
@@ -44,4 +48,4 @@ const Emotion = ({ navigation }: { navigation: any }) => {
   )
 }
 
-export default Emotion
+export default BeforeEmotion
