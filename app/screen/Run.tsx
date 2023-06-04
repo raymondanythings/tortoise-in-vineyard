@@ -315,11 +315,11 @@ const Run = ({ navigation }: { navigation: any }) => {
             borderRadius: 10,
           }}
           thumbIconBackgroundColor='#FFFFFF'
-          thumbIconComponent={
-            <View>
-              <Text>??</Text>
-            </View>
-          }
+          // thumbIconComponent={
+          //   <View>
+          //     <Text>??</Text>
+          //   </View>
+          // }
           title='Slide to unlock'
         />
         {/* <Pressable
