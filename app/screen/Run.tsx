@@ -305,12 +305,21 @@ const Run = ({ navigation }: { navigation: any }) => {
           // forceReset={ reset => {
           //   forceResetLastButton = reset
           // }}
+          containerStyles={{
+            borderRadius: 10,
+          }}
           railBackgroundColor='#9fc7e8'
           railStyles={{
             backgroundColor: '#44000088',
             borderColor: '#880000FF',
+            borderRadius: 10,
           }}
           thumbIconBackgroundColor='#FFFFFF'
+          thumbIconComponent={
+            <View>
+              <Text>??</Text>
+            </View>
+          }
           title='Slide to unlock'
         />
         {/* <Pressable

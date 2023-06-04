@@ -1,93 +1,93 @@
-import React from 'react'
-import { Pressable, StyleSheet, View, Image } from 'react-native'
+import React, { useState } from 'react'
+import { Pressable, StyleSheet, View, Image, FlatList, PressableProps } from 'react-native'
 import Text from './Text'
-import Img from '../constants/Img'
 import Icon from '../constants/Icon'
-import { useRecoilState } from 'recoil'
-import { emotionState } from '../store/emotionState'
+import globalStyle from '../common/globalStyle'
 
-const EmotionButtons = () => {
-  const [emotion, setEmotion] = useRecoilState(emotionState)
+export interface Emotion {
+  value: keyof typeof Icon.EMOTION | ''
+  text: string
+  bgColor: string
+  color: string
+}
 
-  // 각 버튼의 텍스트와 눌렀을 때의 동작을 정의
-  const emotions = [
-    { text: '기쁜', bgcolor: '#FFFBE0' },
-    { text: '뿌듯한', bgcolor: '#FFF5EA' },
-    { text: '행복한', bgcolor: '#FDF6F5' },
-    { text: '신나는', bgcolor: '#F6F3F9' },
-    { text: '짜증나는', bgcolor: '#F5F7F8' },
-    { text: '불안한', bgcolor: ' #FAF1EC' },
-    { text: '무기력한', bgcolor: '#F3F8F5' },
-    { text: '우울한', bgcolor: '#EFF8FA' },
-    { text: '화나는', bgcolor: '#FFEAE3' },
-  ]
+const emotions: Emotion[] = [
+  { value: 'PLEASED', text: '기쁜', bgColor: '#FFFBE0', color: '#FFE231' },
+  { value: 'PROUD', text: '뿌듯한', bgColor: '#FFF5EA', color: '#FCBC72' },
+  { value: 'HAPPY', text: '행복한', bgColor: '#FDF6F5', color: '#F3C4BE' },
+  { value: 'EXITED', text: '신나는', bgColor: '#F6F3F9', color: '#C2B1D5' },
+  { value: 'IRRITATED', text: '짜증나는', bgColor: '#F5F7F8', color: '#BCCACD' },
+  { value: 'UNSTABLE', text: '불안한', bgColor: ' #FAF1EC', color: '#DDA17D' },
+  { value: 'LETHARGIC', text: '무기력한', bgColor: '#F3F8F5', color: '#AFD1B9' },
+  { value: 'GLOOMY', text: '우울한', bgColor: '#EFF8FA', color: '#92CEDE' },
+  { value: 'ANGRY', text: '화나는', bgColor: '#FFEAE3', color: '#FD7247' },
+]
 
-  // 버튼을 누르면 해당되는 배경색으로, 동일한 버튼을 다시 누르면 배경색이 흰색으로
-  const handlePress = (emotionText: string, bgcolor: string) => {
-    if (emotion.emotion === emotionText) {
-      setEmotion({ bgcolor: '#FFFFFF', emotion: '' })
-      console.log('똑같은 거 누름')
-    } else {
-      setEmotion({ bgcolor, emotion: emotionText })
-      console.log(`감정: ${emotionText}, ${bgcolor}`)
-    }
-  }
+interface EmotionButtons {
+  value?: Emotion['value']
+  onIconPress?: (selected: Emotion) => void
+}
+
+const EmotionButtons = ({ onIconPress, value }: EmotionButtons) => {
+  const [selected, setSelected] = useState<string | undefined>(value)
 
   return (
-    <View style={styles.emotionContainer}>
-      {emotions.map((emotion, index) => (
-        <View key={index}>
+    <FlatList
+      data={emotions}
+      numColumns={3}
+      style={{
+        flexGrow: 1,
+      }}
+      columnWrapperStyle={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+      keyExtractor={(item) => item.value}
+      ItemSeparatorComponent={(props) => {
+        return <View style={{ padding: 10 }} />
+      }}
+      renderItem={({ item, index, separators }) => {
+        return (
           <Pressable
-            style={[
-              styles.emotionButton,
-              (index === 1 || 4 || 7) && { marginBottom: 8.5 },
-              index === 0 && { backgroundColor: '#FFE231' },
-              index === 1 && { backgroundColor: '#FCBC72' },
-              index === 2 && { backgroundColor: '#F3C4BE' },
-              index === 3 && { backgroundColor: '#C2B1D5', marginTop: 15.5 },
-              index === 4 && { backgroundColor: '#BCCACD', marginTop: 15.5 },
-              index === 5 && { backgroundColor: '#DDA17D', marginTop: 15.5 },
-              index === 6 && { backgroundColor: '#AFD1B9', marginTop: 15.5 },
-              index === 7 && { backgroundColor: '#92CEDE', marginTop: 15.5 },
-              index === 8 && { backgroundColor: '#FD7247', marginTop: 15.5 },
-            ]}
-            onPress={() => handlePress(emotion.text, emotion.bgcolor)}
-          >
-            {index === 0 && <Image source={Icon.EMOTION.PLEASED} />}
-            {index === 1 && <Image source={Icon.EMOTION.PROUD} />}
-            {index === 2 && <Image source={Icon.EMOTION.HAPPY} />}
-            {index === 3 && <Image source={Icon.EMOTION.EXITED} />}
-            {index === 4 && <Image source={Icon.EMOTION.IRRITATED} />}
-            {index === 5 && <Image source={Icon.EMOTION.UNSTABLE} />}
-            {index === 6 && <Image source={Icon.EMOTION.LETHARGIC} />}
-            {index === 7 && <Image source={Icon.EMOTION.GLOOMY} />}
-            {index === 8 && <Image source={Icon.EMOTION.ANGRY} />}
-          </Pressable>
-          <View
             style={{
               alignItems: 'center',
+              rowGap: 8.6,
+            }}
+            onPress={() => {
+              if (selected && selected === item.value) {
+                setSelected('')
+                onIconPress && onIconPress({ bgColor: '', color: '', text: '', value: '' })
+              } else {
+                setSelected(item.value)
+                onIconPress && onIconPress(item)
+              }
             }}
           >
-            <Text>{emotion.text}</Text>
-          </View>
-        </View>
-      ))}
-    </View>
+            <View
+              style={[
+                styles.emotionButton,
+                {
+                  backgroundColor: selected
+                    ? selected === item.value
+                      ? item.color
+                      : '#E2E2E2'
+                    : item.color,
+                },
+              ]}
+            >
+              <Image source={Icon.EMOTION[item.value]} />
+            </View>
+            <Text style={globalStyle.gaeguEmotion}>{item.text}</Text>
+          </Pressable>
+        )
+      }}
+    />
   )
 }
 
 export default EmotionButtons
 
 const styles = StyleSheet.create({
-  emotionContainer: {
-    // backgroundColor: '#ccd495b9',
-    // width: 279,
-    // height: 359.5,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row', // 요소들을 가로 방향으로 배치
-    flexWrap: 'wrap', // 요소들이 넘칠 경우 자동으로 다음 줄로 이동
-  },
   emotionButton: {
     width: 81,
     height: 81,

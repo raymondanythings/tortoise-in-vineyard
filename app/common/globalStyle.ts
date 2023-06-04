@@ -28,6 +28,10 @@ export default StyleSheet.create({
   gaeguSub: {
     fontSize: 16,
   },
+  gaeguEmotion: {
+    fontSize: 16,
+  },
+
   subheading: {
     fontSize: 14,
     fontWeight: '400',

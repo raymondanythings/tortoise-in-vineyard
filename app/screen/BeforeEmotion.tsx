@@ -1,22 +1,25 @@
 import React from 'react'
 import { View } from 'react-native'
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { StackActions } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
-import NextButton from '../components/Button'
 import EmotionButtons from '../components/EmotionButtons'
 import Text from '../components/Text'
 import Button from '../components/Button'
 import Bedge from '../components/Bedge'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { emotionState } from '../store/emotionState'
 
 const BeforeEmotion = ({ navigation }: { navigation: any }) => {
-  const emotion = useRecoilValue(emotionState)
-  const isEmotionSelected = emotion.emotion !== '' // 감정 선택이 됐을 때 조건식
+  const [emotion, setEmotion] = useRecoilState(emotionState)
 
   return (
-    <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: emotion.bgcolor }]}>
+    <SafeAreaView
+      style={[
+        globalStyle.safeAreaContainer,
+        { backgroundColor: emotion.bgColor ? emotion.bgColor : '#ffffff' },
+      ]}
+    >
       <View style={[globalStyle.header]}>
         <Bedge label='감정 기록' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
@@ -26,8 +29,8 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
           달리기 전, 느낀 감정에 가까운 단어를 선택해주세요
         </Text>
       </View>
-      <View style={globalStyle.center}>
-        <EmotionButtons />
+      <View style={[globalStyle.center, { flexDirection: 'row' }]}>
+        <EmotionButtons onIconPress={(selected) => setEmotion(selected)} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
@@ -36,9 +39,9 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
             alignItems: 'center',
             justifyContent: 'center',
             columnGap: 8,
-            backgroundColor: isEmotionSelected ? '#222222' : '#A0A0A0',
+            backgroundColor: emotion.value ? '#222222' : '#A0A0A0',
           }}
-          disabled={!isEmotionSelected}
+          disabled={!emotion.value}
           onPress={() => navigation.dispatch(StackActions.push('run'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
