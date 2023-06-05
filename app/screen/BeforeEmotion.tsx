@@ -12,37 +12,39 @@ import { emotionState } from '../store/emotionState'
 import { useStartRunMutation } from '../../graphql/generated'
 import { useRecoilValue } from 'recoil'
 import { Emotion, RunType } from '../../graphql/generated'
+import useGetUser from '../hook/useGetUser'
 
 const BeforeEmotion = ({ navigation }: { navigation: any }) => {
   const [emotion, setEmotion] = useRecoilState(emotionState)
 
-  const [startRun] = useStartRunMutation()
-
+  // const [startRun] = useStartRunMutation()
+  const [startRun] = useStartRunMutation({
+    onCompleted(data) {
+      if (data.startRun) {
+        // 뮤테이션 성공시 run 화면으로 이동
+        navigation.dispatch(StackActions.push('run'))
+      } else {
+        console.log('뮤테이션 실패!!!')
+      }
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
   // useStartRunMutation 훅을 사용해서 뮤테이션을 실행하는 핸들러....
-  const handleButtonClick = async () => {
-    console.log('?', Emotion[emotion.value as keyof typeof Emotion])
-    console.log(emotion)
-
+  const handleButtonClick = () => {
     if (emotion.value !== '') {
+      console.log(emotion)
       const emotionBefore = Emotion[emotion.value as keyof typeof Emotion]
-      // 버튼을 클릭하면 startRun 뮤테이션을 실행하도록..
-      // 테스트를 위해 RunType을 HEART_RATE로 하드코딩함..
-      const { data, errors } = await startRun({
+
+      startRun({
         variables: {
           input: {
-            type: RunType.HeartRate,
+            type: RunType.Distance,
             emotionBefore,
           },
         },
       })
-
-      if (data) {
-        // 뮤테이션 성공시 run 화면으로 이동
-        navigation.dispatch(StackActions.push('run'))
-      } else if (errors) {
-        // 뮤테이션 실패시 에러 처리
-        console.log(errors)
-      }
     }
   }
 
