@@ -207,6 +207,13 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInOutput', accessToken: string } };
 
+export type StartRunMutationVariables = Exact<{
+  input: StartRunInput;
+}>;
+
+
+export type StartRunMutation = { __typename?: 'Mutation', startRun: { __typename?: 'Run', id: string, type: RunType, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, lowerBoundHeartRate?: number | null, upperBoundHeartRate?: number | null, createdAt: any, updatedAt: any } };
+
 export type UpdateBirthMutationVariables = Exact<{
   birthYear: Scalars['Float']['input'];
 }>;
@@ -254,6 +261,47 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const StartRunDocument = gql`
+    mutation startRun($input: StartRunInput!) {
+  startRun(input: $input) {
+    id
+    type
+    emotionBefore
+    emotionAfter
+    runMeters
+    lowerBoundHeartRate
+    upperBoundHeartRate
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type StartRunMutationFn = Apollo.MutationFunction<StartRunMutation, StartRunMutationVariables>;
+
+/**
+ * __useStartRunMutation__
+ *
+ * To run a mutation, you first call `useStartRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useStartRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [startRunMutation, { data, loading, error }] = useStartRunMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useStartRunMutation(baseOptions?: Apollo.MutationHookOptions<StartRunMutation, StartRunMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<StartRunMutation, StartRunMutationVariables>(StartRunDocument, options);
+      }
+export type StartRunMutationHookResult = ReturnType<typeof useStartRunMutation>;
+export type StartRunMutationResult = Apollo.MutationResult<StartRunMutation>;
+export type StartRunMutationOptions = Apollo.BaseMutationOptions<StartRunMutation, StartRunMutationVariables>;
 export const UpdateBirthDocument = gql`
     mutation updateBirth($birthYear: Float!) {
   updateBirthYear(birthYear: $birthYear) {

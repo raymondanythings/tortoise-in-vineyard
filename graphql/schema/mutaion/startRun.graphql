@@ -1,0 +1,13 @@
+mutation startRun($input: StartRunInput!) {
+  startRun(input: $input) {
+    id
+    type
+    emotionBefore
+    emotionAfter
+    runMeters
+    lowerBoundHeartRate
+    upperBoundHeartRate
+    createdAt
+    updatedAt
+  }
+}
