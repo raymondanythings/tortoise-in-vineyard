@@ -38,7 +38,7 @@ const OnBoard = () => {
             columnGap: 8,
           }}
           disabled={!user?.canRunToday}
-          onPress={() => navigation.dispatch(StackActions.push('watchcheck'))}
+          onPress={() => navigation.dispatch(StackActions.push('complete'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             {user?.canRunToday ? '달리기 시작' : '포도알 준비중'}

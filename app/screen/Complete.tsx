@@ -6,12 +6,14 @@ import globalStyle from '../common/globalStyle'
 import Confetti from '../components/Lotties/Confetti'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import Icon from '../constants/Icon'
-import EMOTION from '../constants/bigEmotion'
 import bigEmotion from '../constants/bigEmotion'
+
+const DELAY_NAVIGATION = 3000
 
 const Complete = () => {
   const navigation = useNavigation()
   const [animation, setAnimation] = useState(new Animated.Value(0))
+
   useEffect(() => {
     Animated.spring(animation, {
       toValue: 1,
@@ -31,7 +33,7 @@ const Complete = () => {
   useEffect(() => {
     setTimeout(() => {
       navigation.dispatch(StackActions.push('home'))
-    }, 3000)
+    }, DELAY_NAVIGATION)
   }, [])
 
   return (
@@ -47,20 +49,32 @@ const Complete = () => {
         <Animated.View
           style={{
             position: 'absolute',
-            backgroundColor: 'yellow',
             justifyContent: 'center',
             alignItems: 'center',
+            flex: 1,
             transform: [{ translateY: bounceAnimation }],
           }}
         >
-          <Image
-            style={{ position: 'absolute', width: 214, height: 214 }}
-            source={Icon.GRAPEFORCONFETTI}
-          />
-          <Image
-            source={bigEmotion.PROUD}
-            style={{ position: 'absolute', width: 214, height: 214 }}
-          />
+          <View style={{ width: '100%', aspectRatio: 1.3 }}>
+            <Image
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain',
+              }}
+              source={Icon.GRAPEFORCONFETTI}
+            />
+            <Image
+              source={bigEmotion.PROUD}
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain',
+              }}
+            />
+          </View>
         </Animated.View>
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}></View>
