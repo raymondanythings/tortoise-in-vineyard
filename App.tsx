@@ -7,15 +7,6 @@ import { NativeEventEmitter, NativeModules } from 'react-native'
 import healthKit from './utils/Healthkit'
 
 function App(): JSX.Element {
-  useEffect(() => {
-    new NativeEventEmitter(NativeModules.AppleHealthKit).addListener(
-      'healthKit:Workout:new',
-      async () => {
-        console.log('--> observer triggered')
-      },
-    )
-    healthKit.requestPermission()
-  }, [])
   return (
     <RecoilRoot>
       <ApolloWrapper>

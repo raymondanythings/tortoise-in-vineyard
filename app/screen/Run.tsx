@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
+import { watchEvents } from 'react-native-watch-connectivity'
 import MapView, {
   LatLng,
   Marker,
@@ -11,7 +10,7 @@ import MapView, {
 } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import globalStyle, { Font } from '../common/globalStyle'
+import { Font } from '../common/globalStyle'
 import Text from '../components/Text'
 import CUSTOM_MAP from '../constants/customMap'
 import Icon from '../constants/Icon'
@@ -24,6 +23,8 @@ import PinkDots from '../components/Lotties/PinkDots'
 
 import Swiper from '../components/Swiper'
 import { StackActions, useNavigation } from '@react-navigation/native'
+import { calculateDistance } from '../../utils/distance'
+import healthKit from '../../utils/Healthkit'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -35,7 +36,7 @@ async function requestPermission() {
   }
 }
 // 위도, 경도를 위한 인터페이스
-interface ILocation {
+export interface ILocation {
   latitude: number
   longitude: number
 }
@@ -56,19 +57,11 @@ const Run = () => {
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
 
+  const distance = useMemo(() => calculateDistance(locations), [locations.length])
   const navigation = useNavigation()
 
   const { isConnected } = useWatch()
 
-  const messageListener = async () => {
-    isConnected &&
-      watchEvents.on<{ heartRate?: number; distance?: number }>('message', (message) => {
-        const { heartRate: heart, distance } = message
-        if (heart) {
-          setHeartRate(() => heart)
-        }
-      })
-  }
   const geolocationRequest = useCallback(async () => {
     const result = await requestPermission()
     setGeolocationPermission(result)
@@ -131,11 +124,18 @@ const Run = () => {
   }, [tracking, geolocationPermission])
 
   useLayoutEffect(() => {
-    messageListener()
+    const id = setInterval(() => {
+      healthKit.connectHeartRate()
+    }, 1000)
     geolocationRequest()
     navigation.addListener('blur', () => {
+      clearInterval(id)
       clearWatch()
     })
+    return () => {
+      clearInterval(id)
+      clearWatch()
+    }
   }, [])
 
   // 로케이션 허용 후 뜨는 화면
@@ -240,7 +240,9 @@ const Run = () => {
               </Text>
               <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
             </View>
-            <Text>1.1 km</Text>
+            <Text>
+              {distance > 1000 ? distance.toFixed(2) + ' km' : (distance * 1000).toFixed() + ' m'}
+            </Text>
           </View>
         ) : (
           <View style={{ flex: 1, right: 40 }}>
