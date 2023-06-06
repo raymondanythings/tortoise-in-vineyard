@@ -40,33 +40,36 @@ const Attention = () => {
         </Text>
       </View>
       <View style={[globalStyle.center]}>
-        <View
-          style={{
-            // flexDirection: 'row',
-            position: 'relative',
-            alignItems: 'center',
-            justifyContent: 'center',
-            // width: '100%',
-          }}
-        >
-          <View style={{ position: 'absolute' }}>
-            <Image source={Img.SENDBOX_BLACK} style={{ height: 90 }} />
+        {user?.minHeartRate && (
+          <View
+            style={{
+              // flexDirection: 'row',
+              position: 'relative',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'yellow',
+              // width: '100%',
+            }}
+          >
+            <View style={{ position: 'absolute' }}>
+              <Image source={Img.SENDBOX_BLACK} style={{ height: 90 }} />
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text
+                style={[
+                  globalStyle.gaeguEmotion,
+                  globalStyle.Pretendard,
+                  { color: '#A1AEB7', marginRight: 20 },
+                ]}
+              >
+                평균 심박수
+              </Text>
+              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>
+                {user?.minHeartRate} BPM
+              </Text>
+            </View>
           </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text
-              style={[
-                globalStyle.gaeguEmotion,
-                globalStyle.Pretendard,
-                { color: '#A1AEB7', marginRight: 20 },
-              ]}
-            >
-              평균 심박수
-            </Text>
-            <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>
-              {user?.minHeartRate} BPM
-            </Text>
-          </View>
-        </View>
+        )}
         <View
           style={{
             flex: 2,
