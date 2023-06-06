@@ -6,7 +6,6 @@ import globalStyle from '../common/globalStyle'
 import EmotionButtons from '../components/EmotionButtons'
 import Text from '../components/Text'
 import Button from '../components/Button'
-import Bedge from '../components/Bedge'
 import { useRecoilState } from 'recoil'
 import { emotionState } from '../store/emotionState'
 import { useStartRunMutation } from '../../graphql/generated'
@@ -59,7 +58,6 @@ const BeforeEmotion = () => {
       ]}
     >
       <View style={[globalStyle.header]}>
-        <Bedge label='감정 기록' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
           오늘의 감정은 어떤가요?
         </Text>

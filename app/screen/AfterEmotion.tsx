@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { StackActions } from '@react-navigation/native'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
-import Bedge from '../components/Bedge'
 import Text from '../components/Text'
 import EmotionButtons from '../components/EmotionButtons'
 import { Emotion } from '../constants/bigEmotion'
@@ -28,7 +27,6 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
       ]}
     >
       <View style={[globalStyle.header]}>
-        <Bedge label='감정 기록' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>현재 감정은 어떤가요?</Text>
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           달리기 후, 느낀 감정에 가까운 단어를 선택해주세요

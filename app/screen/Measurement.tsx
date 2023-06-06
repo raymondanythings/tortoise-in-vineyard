@@ -7,7 +7,7 @@ import Success from '../components/Lotties/Success'
 import Button from '../components/Button'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import useGetUser from '../hook/useGetUser'
-import Img from '../constants/Img'
+import Icon from '../constants/Icon'
 
 const Measurement = () => {
   const { user } = useGetUser('cache-only')
@@ -23,27 +23,24 @@ const Measurement = () => {
         </Text>
       </View>
       <View style={globalStyle.center}>
-        <Success />
+        <View style={{ width: '60%', height: '60%', marginBottom: '10%' }}>
+          <Success />
+        </View>
         <View
           style={[
             {
               alignItems: 'center',
               height: '30%',
+              position: 'relative',
             },
           ]}
         >
-          <View
-            style={{
-              flexDirection: 'row',
-              position: 'relative',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-              width: '100%',
-            }}
-          >
-            <View style={{ position: 'absolute', width: '100%' }}>
-              <Image source={Img.SENDBOX_BLACK} style={{ width: '100%' }} />
-            </View>
+          <Image
+            source={Icon.BOX}
+            style={{ position: 'absolute', width: '100%', height: '100%', top: '-30%' }}
+            resizeMode='contain'
+          />
+          <View style={{ flexDirection: 'row', zIndex: 1 }}>
             <Text
               style={[
                 globalStyle.gaeguEmotion,
@@ -57,7 +54,7 @@ const Measurement = () => {
               {user?.minHeartRate} BPM
             </Text>
           </View>
-          {/* <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', zIndex: 1 }}>
             <Text
               style={[
                 globalStyle.gaeguEmotion,
@@ -79,6 +76,7 @@ const Measurement = () => {
             alignItems: 'center',
             justifyContent: 'center',
             columnGap: 8,
+            backgroundColor: '#A0A0A0',
           }}
           onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
         >

@@ -24,6 +24,7 @@ export default StyleSheet.create({
   gaeguTitle: {
     fontSize: 28,
     lineHeight: 44,
+    fontWeight: 'bold',
   },
   gaeguSub: {
     fontSize: 16,
