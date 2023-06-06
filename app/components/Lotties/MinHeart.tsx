@@ -24,6 +24,7 @@ const MinHeart = () => {
           minHeartRate,
         },
       }))
+      sendMessage({ action: 'stopWorkout' }, (payload) => console.log(payload?.isSuccess, '<<<'))
     },
   })
   const watchState = useRecoilValue(watchAtom)
@@ -59,7 +60,7 @@ const MinHeart = () => {
 
   const getHeart = () => {
     try {
-      sendMessage({ action: 'startWorkout' }, (payload) => console.log(payload?.success, '<<<'))
+      sendMessage({ action: 'startWorkout' }, (payload) => console.log(payload?.isSuccess, '<<<'))
     } catch (err) {
       console.log(err, 'err')
     }
