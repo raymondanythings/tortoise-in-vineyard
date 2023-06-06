@@ -8,7 +8,6 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import GrapeCount from '../components/GrapeCount'
 import Button from '../components/Button'
 import useGetUser from '../hook/useGetUser'
-import Bedge from '../components/Bedge'
 
 const OnBoard = () => {
   const navigation = useNavigation()
@@ -17,7 +16,6 @@ const OnBoard = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header]}>
-        <Bedge label='포도알' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
           {grapeCircleCount ? '포도알을 모아보세요' : '아직 포도알이 없어요'}
         </Text>
