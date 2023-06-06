@@ -9,12 +9,15 @@ import { useRecoilValue } from 'recoil'
 import { watchAtom } from '../../store/watchAtom'
 import { useUpdateMinHeartRateMutation } from '../../../graphql/generated'
 import useGetUser from '../../hook/useGetUser'
-import { useNavigation } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
+import Text from '../Text'
+import globalStyle, { Font } from '../../common/globalStyle'
 const STD_THRESHOLD = 5
 const MinHeart = () => {
   const [heartRateData, setHeartRateData] = useState<number[]>([])
   const { updateQuery } = useGetUser('cache-only')
   const navigation = useNavigation()
+  const { isReachability } = useWatch()
   const [updateMinHeart] = useUpdateMinHeartRateMutation({
     onCompleted({ updateMinHeartRate: { minHeartRate } }) {
       updateQuery((prev) => ({
@@ -24,7 +27,9 @@ const MinHeart = () => {
           minHeartRate,
         },
       }))
-      sendMessage({ action: 'stopWorkout' }, (payload) => console.log(payload?.isSuccess, '<<<'))
+      sendMessage({ action: 'stopWorkout' }, (payload) => {
+        navigation.dispatch(StackActions.replace('measurement'))
+      })
     },
   })
   const watchState = useRecoilValue(watchAtom)
@@ -34,7 +39,7 @@ const MinHeart = () => {
     const variance =
       heartRateData.reduce((acc, cur) => acc + Math.pow(cur - mean, 2), 0) / heartRateData.length
     const std = Math.sqrt(variance)
-
+    console.log(variance)
     return std < STD_THRESHOLD
   }, [heartRateData.length])
 
@@ -66,8 +71,10 @@ const MinHeart = () => {
     }
   }
   useEffect(() => {
-    getHeart()
-  }, [])
+    if (isReachability) {
+      getHeart()
+    }
+  }, [isReachability])
 
   useEffect(() => {
     setHeartRateData((prev) => [...prev, watchState.heartRate])
@@ -81,6 +88,27 @@ const MinHeart = () => {
       }}
     >
       <Image source={Img.WATCH_HEART} />
+      <View
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          top: '-18%',
+        }}
+      >
+        <Text
+          style={[
+            globalStyle.pretendardSub,
+            {
+              color: '#fff',
+            },
+          ]}
+        >
+          심박수
+        </Text>
+      </View>
       <AnimatedLottieView
         style={{
           width: '100%',

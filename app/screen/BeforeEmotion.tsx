@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { StackActions } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import EmotionButtons from '../components/EmotionButtons'
@@ -10,11 +10,10 @@ import Bedge from '../components/Bedge'
 import { useRecoilState } from 'recoil'
 import { emotionState } from '../store/emotionState'
 import { useStartRunMutation } from '../../graphql/generated'
-import { useRecoilValue } from 'recoil'
-import { Emotion, RunType } from '../../graphql/generated'
-import useGetUser from '../hook/useGetUser'
+import { RunType } from '../../graphql/generated'
 
-const BeforeEmotion = ({ navigation }: { navigation: any }) => {
+const BeforeEmotion = () => {
+  const navigation = useNavigation()
   const [emotion, setEmotion] = useRecoilState(emotionState)
 
   // const [startRun] = useStartRunMutation()
@@ -22,7 +21,14 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
     onCompleted(data) {
       if (data.startRun) {
         // 뮤테이션 성공시 run 화면으로 이동
-        navigation.dispatch(StackActions.push('run'))
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'attention',
+            },
+          ],
+        })
       } else {
         console.log('뮤테이션 실패!!!')
       }

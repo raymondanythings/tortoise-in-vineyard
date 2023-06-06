@@ -9,8 +9,9 @@ import Foundation
 import WatchConnectivity
 
 class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
-  
-  
+    @Published var shouldStartRunning = false
+    @Published var shouldStopRunning = false
+
     let workoutManager = WorkoutManager()
     static let sharedManager = SessionManager()
 //    var session : WCSession
@@ -166,22 +167,30 @@ extension SessionManager {
         DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
           // 메시지에서 "action"에 해당하는 value를 얻음
+          var isSuccess = false
           if let action = message["action"] as? String {
-              var isSuccess = false
               switch action {
               case "startWorkout":
                   isSuccess = self.workoutManager.startWorkout()
+              case "startRunning":
+                self.shouldStartRunning = true
+                isSuccess = true
               case "stopWorkout":
                   isSuccess = self.workoutManager.stopWorkout()
+                  self.shouldStopRunning = true
+              case "pause":
+                  isSuccess = self.workoutManager.pause()
+                
+              case "resume":
+                  isSuccess = self.workoutManager.resume()
               // 추가적인 액션들
               default:
                   print("Unknown action received: \(action)")
               }
-              replyHandler(["isSuccess" : isSuccess])
           } else {
               print("No action found in the message")
           }
-         
+          replyHandler(["isSuccess" : isSuccess])
         }
     }
 

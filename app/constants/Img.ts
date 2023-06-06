@@ -6,4 +6,5 @@ export default {
   HEART: require('../assets/heart.png'),
   WATCH_PREV: require('../assets/watch_prev.png'),
   WATCH_HEART: require('../assets/apple_watch_heart.png'),
+  SENDBOX_BLACK: require('../assets/sendbox_black.png'),
 }

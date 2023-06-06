@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ControlsView: View {
   @EnvironmentObject var workoutManager : WorkoutManager
+  @EnvironmentObject var sessionManager: SessionManager
     var body: some View {
       HStack {
         VStack {
@@ -19,6 +20,11 @@ struct ControlsView: View {
           
           }.tint(Color.red).font(.title2)
           Text("End")
+        }.onChange(of: sessionManager.shouldStopRunning){
+          shouldStopRunning in
+          if shouldStopRunning {
+            workoutManager.endWorkout()
+          }
         }
         VStack {
           Button {

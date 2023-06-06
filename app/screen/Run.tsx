@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
-import { watchEvents } from 'react-native-watch-connectivity'
+import { sendMessage, watchEvents } from 'react-native-watch-connectivity'
 import MapView, {
   LatLng,
   Marker,
@@ -29,6 +29,8 @@ import FastImage from 'react-native-fast-image'
 import Img from '../constants/Img'
 import { useRecoilValue } from 'recoil'
 import { emotionState } from '../store/emotionState'
+import { watchAtom } from '../store/watchAtom'
+import { watchOsActionsType } from '../constants/constants'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -53,8 +55,8 @@ interface IGeolocation {
 const GRADIENT_LIMIT = 12
 
 const Run = () => {
-  const [tracking, setTracking] = useState(false)
-  const [heartRate, setHeartRate] = useState(0)
+  const watchState = useRecoilValue(watchAtom)
+  const [tracking, setTracking] = useState(true)
   const [locations, setLocations] = useState<Array<ILocation>>([])
   const [location, setLocation] = useState<IGeolocation>({
     latitude: 37.78825,
@@ -132,16 +134,11 @@ const Run = () => {
   }, [tracking, geolocationPermission])
 
   useLayoutEffect(() => {
-    const id = setInterval(() => {
-      healthKit.connectHeartRate()
-    }, 1000)
     geolocationRequest()
     navigation.addListener('blur', () => {
-      clearInterval(id)
       clearWatch()
     })
     return () => {
-      clearInterval(id)
       clearWatch()
     }
   }, [])
@@ -262,7 +259,7 @@ const Run = () => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {/* 심박수 */}
               <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
-                {heartRate}
+                {Number(watchState.heartRate || 0)}
               </Text>
               <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
             </View>
@@ -311,6 +308,12 @@ const Run = () => {
             setTracking((prev) => {
               if (!prev) {
                 clearWatch()
+                sendMessage(
+                  { action: (prev ? 'pause' : 'resume') as watchOsActionsType },
+                  (payload) => {
+                    console.log(payload, '<<<')
+                  },
+                )
               }
               return !prev
             })

@@ -7,6 +7,7 @@ import Success from '../components/Lotties/Success'
 import Button from '../components/Button'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import useGetUser from '../hook/useGetUser'
+import Img from '../constants/Img'
 
 const Measurement = () => {
   const { user } = useGetUser('cache-only')
@@ -31,7 +32,18 @@ const Measurement = () => {
             },
           ]}
         >
-          <View style={{ flexDirection: 'row' }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              position: 'relative',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              width: '100%',
+            }}
+          >
+            <View style={{ position: 'absolute', width: '100%' }}>
+              <Image source={Img.SENDBOX_BLACK} style={{ width: '100%' }} />
+            </View>
             <Text
               style={[
                 globalStyle.gaeguEmotion,
@@ -41,9 +53,11 @@ const Measurement = () => {
             >
               평균 심박수
             </Text>
-            <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>111 BPM</Text>
+            <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>
+              {user?.minHeartRate} BPM
+            </Text>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          {/* <View style={{ flexDirection: 'row' }}>
             <Text
               style={[
                 globalStyle.gaeguEmotion,
@@ -55,7 +69,7 @@ const Measurement = () => {
               목표 심박수
             </Text>
             <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>111 BPM</Text>
-          </View>
+          </View> */}
         </View>
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
@@ -65,9 +79,8 @@ const Measurement = () => {
             alignItems: 'center',
             justifyContent: 'center',
             columnGap: 8,
-            backgroundColor: '#A0A0A0', // 임시
           }}
-          onPress={() => navigation.dispatch(StackActions.push('measurement'))}
+          onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             확인했어요
@@ -80,7 +93,7 @@ const Measurement = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          onPress={() => navigation.dispatch(StackActions.push('minheartratecheck'))}
+          onPress={() => navigation.dispatch(StackActions.pop())}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             다시 측정할게요

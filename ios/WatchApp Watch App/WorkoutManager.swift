@@ -11,7 +11,7 @@ import HealthKit
 class WorkoutManager : NSObject, ObservableObject {
   var selectedWorkout : HKWorkoutActivityType? {
     didSet {
-      guard let selectedWorkout = selectedWorkout else {return}
+      guard selectedWorkout != nil else {return}
       startWorkout()
     }
   }
@@ -83,19 +83,29 @@ class WorkoutManager : NSObject, ObservableObject {
   // state control
   @Published var running = false
   
-  func pause() {
-    session?.pause()
+  func pause() -> Bool {
+    if let session = session {
+      session.pause()
+      return true
+    }
+    
+    
+    return false
   }
   
-  func resume() {
-    session?.resume()
+  func resume() -> Bool {
+    if let session = session {
+      session.resume()
+      return true
+    }
+    return false
   }
   
-  func togglePause(){
+  func togglePause() -> Bool {
     if running == true {
-      pause()
+      return pause()
     } else {
-      resume()
+      return resume()
     }
   }
   

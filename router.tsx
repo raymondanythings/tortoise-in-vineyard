@@ -11,6 +11,7 @@ import Birthday from './app/screen/Birthday'
 import Complete from './app/screen/Complete'
 import MinHeartRateCheck from './app/screen/MinHeartRateCheck'
 import Measurement from './app/screen/Measurement'
+import Attention from './app/screen/Attention'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -52,6 +53,7 @@ const MainScreen = () => {
       <MainStack.Screen name='minheartratecheck' component={MinHeartRateCheck} />
       <MainStack.Screen name='measurement' component={Measurement} />
       <MainStack.Screen name='beforeemotion' component={BeforeEmotion} />
+      <MainStack.Screen name='attention' component={Attention} />
       <MainStack.Screen
         name='run'
         // options={{

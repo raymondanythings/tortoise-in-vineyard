@@ -23,24 +23,22 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
       {Array.from({ length: count }).map((_, index) => (
         <Image key={'fill' + index} source={Icon.GRAPECIRCLE} />
       ))}
-      {Array.from({ length: TOTAL_COUNT - count }, (v, i) => i + TOTAL_COUNT - count + 1).map(
-        (c) => (
-          <View
-            key={c}
-            style={{
-              width: 30,
-              height: 30,
-              backgroundColor: 'rgba(160, 160, 160,0.15)',
-              borderRadius: 9999,
-              overflow: 'hidden',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Text style={{ fontSize: 18, lineHeight: 24, color: colors.TEXT_MAIN_1 }}>{c}</Text>
-          </View>
-        ),
-      )}
+      {Array.from({ length: TOTAL_COUNT - count }, (v, i) => i + count + 1).map((c) => (
+        <View
+          key={c}
+          style={{
+            width: 30,
+            height: 30,
+            backgroundColor: 'rgba(160, 160, 160,0.15)',
+            borderRadius: 9999,
+            overflow: 'hidden',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Text style={{ fontSize: 18, lineHeight: 24, color: colors.TEXT_MAIN_1 }}>{c}</Text>
+        </View>
+      ))}
 
       <Text
         style={{

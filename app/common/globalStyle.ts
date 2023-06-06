@@ -23,7 +23,7 @@ export default StyleSheet.create({
   },
   gaeguTitle: {
     fontSize: 28,
-    lineHeight: 55,
+    lineHeight: 44,
   },
   gaeguSub: {
     fontSize: 16,
@@ -38,6 +38,11 @@ export default StyleSheet.create({
     color: '#A1AEB7',
     fontFamily: Font.Pretendard,
     lineHeight: 24,
+  },
+  pretendardSub: {
+    fontSize: 14,
+    lineHeight: 24,
+    fontFamily: Font.Pretendard,
   },
   safeAreaContainer: {
     alignItems: 'center',

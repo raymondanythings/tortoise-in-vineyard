@@ -18,8 +18,19 @@ struct StartView: View {
       }.listStyle(.carousel).navigationBarTitle("Workouts").onAppear {
         workoutManager.requestAuthorization()
         sessionManager.startSession()
+      }.onChange(of: sessionManager.shouldStartRunning){
+        shouldStartRunning in
+        if shouldStartRunning {
+          workoutManager.selectedWorkout = .running
+        }
+      }
+      .onAppear(){
+        sessionManager.shouldStopRunning = false
+        sessionManager.shouldStopRunning = false
       }
     }
+  
+  
 }
 
 struct StartView_Previews: PreviewProvider {
