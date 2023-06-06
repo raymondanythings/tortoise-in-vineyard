@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { View, Image, Animated } from 'react-native'
 import Text from '../components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -15,7 +15,7 @@ const Complete = ({ route }) => {
   const { emotion } = route.params || {}
   console.log(emotion, '<<')
 
-  const [animation, setAnimation] = useState(new Animated.Value(0))
+  const animation = useRef(new Animated.Value(0)).current
 
   useEffect(() => {
     Animated.spring(animation, {

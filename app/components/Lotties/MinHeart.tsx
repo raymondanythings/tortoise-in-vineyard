@@ -4,20 +4,29 @@ import Img from '../../constants/Img'
 import AnimatedLottieView from 'lottie-react-native'
 import heartcheck from '../../assets/lotties/min_heartrate.json'
 import useWatch from '../../hook/useWatch'
-import { sendMessage, useReachability, watchEvents } from 'react-native-watch-connectivity'
+import { sendMessage } from 'react-native-watch-connectivity'
+import { useRecoilValue } from 'recoil'
+import { watchAtom } from '../../store/watchAtom'
+import { useUpdateMinHeartRateMutation } from '../../../graphql/generated'
+import useGetUser from '../../hook/useGetUser'
+import { useNavigation } from '@react-navigation/native'
 const STD_THRESHOLD = 5
 const MinHeart = () => {
-  const { isConnected } = useWatch()
   const [heartRateData, setHeartRateData] = useState<number[]>([])
-  const messageListener = () => {
-    isConnected &&
-      watchEvents.on<{ heartRate?: number }>('message', (message) => {
-        const { heartRate } = message || {}
-        if (heartRate) {
-          setHeartRateData((prev) => [...prev, heartRate])
-        }
-      })
-  }
+  const { updateQuery } = useGetUser('cache-only')
+  const navigation = useNavigation()
+  const [updateMinHeart] = useUpdateMinHeartRateMutation({
+    onCompleted({ updateMinHeartRate: { minHeartRate } }) {
+      updateQuery((prev) => ({
+        ...prev,
+        me: {
+          ...prev.me,
+          minHeartRate,
+        },
+      }))
+    },
+  })
+  const watchState = useRecoilValue(watchAtom)
 
   const isHeartRateConverged = useCallback(() => {
     const mean = heartRateData.reduce((acc, cur) => acc + cur, 0) / heartRateData.length
@@ -26,7 +35,7 @@ const MinHeart = () => {
     const std = Math.sqrt(variance)
 
     return std < STD_THRESHOLD
-  }, [heartRateData])
+  }, [heartRateData.length])
 
   const determineStableHeartRate = () => {
     if (heartRateData.length < 10) return
@@ -38,29 +47,32 @@ const MinHeart = () => {
 
       const stableHeartRate =
         lastTenSecondsHeartRate.reduce((acc, cur) => acc + cur, 0) / lastTenSecondsHeartRate.length
-
       onStable(stableHeartRate)
     }
   }
 
   const onStable = (stableHeartRate: number) => {
-    console.log(stableHeartRate, '<<stableHeartRate')
+    updateMinHeart({
+      variables: { minHeartRate: stableHeartRate },
+    })
   }
 
   const getHeart = () => {
     try {
-      sendMessage({ test: '123123123123' }, (payload) => console.log(payload?.success, '<<<'))
+      sendMessage({ action: 'startWorkout' }, (payload) => console.log(payload?.success, '<<<'))
     } catch (err) {
       console.log(err, 'err')
     }
   }
   useEffect(() => {
-    messageListener()
     getHeart()
   }, [])
+
   useEffect(() => {
+    setHeartRateData((prev) => [...prev, watchState.heartRate])
+    console.log(watchState.heartRate, '<<??')
     determineStableHeartRate()
-  }, [heartRateData])
+  }, [watchState])
   return (
     <View
       style={{

@@ -6,7 +6,8 @@ import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
 import Bedge from '../components/Bedge'
 import Text from '../components/Text'
-import EmotionButtons, { Emotion, emotions } from '../components/EmotionButtons'
+import EmotionButtons from '../components/EmotionButtons'
+import { Emotion } from '../constants/bigEmotion'
 
 const AfterEmotion = ({ navigation }: { navigation: any }) => {
   const [emotion, setEmotion] = useState<Emotion | null>(null)

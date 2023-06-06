@@ -13,7 +13,7 @@ const WatchCheck = () => {
   const { user } = useGetUser('cache-only')
   const navigation = useNavigation()
 
-  const { isConnected } = useWatch()
+  const { isConnected, isReachability } = useWatch()
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>
@@ -36,7 +36,7 @@ const WatchCheck = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={!isConnected}
+          disabled={!isConnected || !isReachability}
           onPress={() => {
             if (user?.minHeartRate) {
               navigation.dispatch(StackActions.push('beforeemotion'))
@@ -56,7 +56,7 @@ const WatchCheck = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={isConnected}
+          disabled={isConnected && isReachability}
           onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>

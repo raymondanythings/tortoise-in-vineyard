@@ -28,32 +28,40 @@ class WorkoutManager : NSObject, ObservableObject {
   let healthstore = HKHealthStore()
   var session : HKWorkoutSession?
   var builder : HKLiveWorkoutBuilder?
-  
-  func startWorkout()  {
+  func stopWorkout() -> Bool {
+    if let session = session {
+        session.end()
+        return true
+    } else {
+        return false
+    }
+  }
+  func startWorkout() ->  Bool  {
     let configuration = HKWorkoutConfiguration()
     configuration.activityType = .running
     configuration.locationType = .outdoor
-    print("?????????")
     do {
       session = try HKWorkoutSession(healthStore: healthstore, configuration: configuration)
       builder = session?.associatedWorkoutBuilder()
     } catch {
-      return
+      return false
     }
-    print("222222222")
     builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthstore, workoutConfiguration: configuration)
     
     
     session?.delegate = self
     builder?.delegate = self
     
-    
+    var isSuccess = true
     let startDate = Date()
     session?.startActivity(with: startDate)
     builder?.beginCollection(withStart: startDate){
       (success,error) in
-      print(success)
+      if (error != nil) {
+        isSuccess = false
+      }
     }
+    return isSuccess
   }
   
   func requestAuthorization(){

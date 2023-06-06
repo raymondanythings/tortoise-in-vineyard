@@ -1,0 +1,5 @@
+mutation updateMinHeartRate($minHeartRate: Float!) {
+  updateMinHeartRate(minHeartRate: $minHeartRate) {
+    ...userData
+  }
+}

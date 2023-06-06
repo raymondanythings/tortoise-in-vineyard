@@ -27,6 +27,8 @@ import { calculateDistance } from '../../utils/distance'
 import healthKit from '../../utils/Healthkit'
 import FastImage from 'react-native-fast-image'
 import Img from '../constants/Img'
+import { useRecoilValue } from 'recoil'
+import { emotionState } from '../store/emotionState'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -48,6 +50,8 @@ interface IGeolocation {
   longitude: number
 }
 
+const GRADIENT_LIMIT = 12
+
 const Run = () => {
   const [tracking, setTracking] = useState(false)
   const [heartRate, setHeartRate] = useState(0)
@@ -56,6 +60,8 @@ const Run = () => {
     latitude: 37.78825,
     longitude: -122.4324,
   })
+
+  const selectedEmotion = useRecoilValue(emotionState)
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
 
@@ -140,6 +146,10 @@ const Run = () => {
     }
   }, [])
 
+  // locations.length 6 이하 -> locations.length
+  // locations.length 6 이상 -> locations.length - 6 만큼 emotion color
+  // selectedEmotion
+
   // 로케이션 허용 후 뜨는 화면
   return (
     <View style={{ flex: 1 }}>
@@ -187,7 +197,14 @@ const Run = () => {
           coordinates={locations}
           strokeColors={
             locations.length >= 2
-              ? ['#FFE231', ...generateColor('#FFE231', '#6C32EC', locations.length - 2), '#6C32EC']
+              ? locations.length <= GRADIENT_LIMIT
+                ? [...generateColor(selectedEmotion.color, '#6B2FF4', locations.length)]
+                : [
+                    ...Array.from({ length: locations.length - GRADIENT_LIMIT }).map(
+                      (_) => '#6B2FF4',
+                    ),
+                    ...generateColor(selectedEmotion.color, '#6B2FF4', GRADIENT_LIMIT),
+                  ]
               : []
           }
           strokeWidth={26}
@@ -196,7 +213,14 @@ const Run = () => {
           coordinates={locations}
           strokeColors={
             locations.length >= 2
-              ? ['#FFE231', ...generateColor('#FFE231', '#6C32EC', locations.length - 2), '#6C32EC']
+              ? locations.length <= GRADIENT_LIMIT
+                ? [...generateColor(selectedEmotion.color, '#914CF7', locations.length)]
+                : [
+                    ...Array.from({ length: locations.length - GRADIENT_LIMIT }).map(
+                      (_) => '#914CF7',
+                    ),
+                    ...generateColor(selectedEmotion.color, '#914CF7', GRADIENT_LIMIT),
+                  ]
               : []
           }
           strokeWidth={20}

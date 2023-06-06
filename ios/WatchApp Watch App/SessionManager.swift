@@ -165,14 +165,23 @@ extension SessionManager {
         // handle receiving message
         DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
-          print(message)
-          do {
-            self.workoutManager.startWorkout()
-            replyHandler(["success" : true])
-          }catch {
-            replyHandler(["success" : false])
+          // 메시지에서 "action"에 해당하는 value를 얻음
+          if let action = message["action"] as? String {
+              var isSuccess = false
+              switch action {
+              case "startWorkout":
+                  isSuccess = self.workoutManager.startWorkout()
+              case "stopWorkout":
+                  isSuccess = self.workoutManager.stopWorkout()
+              // 추가적인 액션들
+              default:
+                  print("Unknown action received: \(action)")
+              }
+              replyHandler(["isSuccess" : isSuccess])
+          } else {
+              print("No action found in the message")
           }
-          
+         
         }
     }
 

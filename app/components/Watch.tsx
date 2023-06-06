@@ -24,7 +24,7 @@ const Watch = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     messageListener()
-  }, [isConnected])
+  }, [isConnected, isReachability])
   return <>{children}</>
 }
 

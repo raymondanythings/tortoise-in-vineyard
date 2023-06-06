@@ -1,13 +1,5 @@
 query getMe {
   me {
-    id
-    email
-    hasDevice
-    birthYear
-    minHeartRate
-    createdAt
-    updatedAt
-    totalRun
-    canRunToday
+    ...userData
   }
 }

@@ -1,0 +1,3 @@
+subscription runPaceMaker($runId: String!) {
+  runPaceMaker(runId: $runId)
+}
