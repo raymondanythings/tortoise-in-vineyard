@@ -72,4 +72,7 @@ export default StyleSheet.create({
   Pretendard: {
     fontFamily: Font.Pretendard,
   },
+  grapeColorFont: {
+    color: '#8C46FF',
+  },
 })
