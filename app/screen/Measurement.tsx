@@ -65,6 +65,7 @@ const Measurement = () => {
             alignItems: 'center',
             justifyContent: 'center',
             columnGap: 8,
+            backgroundColor: '#A0A0A0', // 임시
           }}
           onPress={() => navigation.dispatch(StackActions.push('measurement'))}
         >
