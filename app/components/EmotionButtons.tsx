@@ -3,24 +3,25 @@ import { Pressable, StyleSheet, View, Image, FlatList, PressableProps } from 're
 import Text from './Text'
 import Icon from '../constants/Icon'
 import globalStyle from '../common/globalStyle'
+import { Emotion as E } from '../../graphql/generated'
 
 export interface Emotion {
-  value: keyof typeof Icon.EMOTION | ''
+  value: E | ''
   text: string
   bgColor: string
   color: string
 }
 
 const emotions: Emotion[] = [
-  { value: 'PLEASED', text: '기쁜', bgColor: '#FFFBE0', color: '#FFE231' },
-  { value: 'PROUD', text: '뿌듯한', bgColor: '#FFF5EA', color: '#FCBC72' },
-  { value: 'HAPPY', text: '행복한', bgColor: '#FDF6F5', color: '#F3C4BE' },
-  { value: 'EXITED', text: '신나는', bgColor: '#F6F3F9', color: '#C2B1D5' },
-  { value: 'IRRITATED', text: '짜증나는', bgColor: '#F5F7F8', color: '#BCCACD' },
-  { value: 'UNSTABLE', text: '불안한', bgColor: ' #FAF1EC', color: '#DDA17D' },
-  { value: 'LETHARGIC', text: '무기력한', bgColor: '#F3F8F5', color: '#AFD1B9' },
-  { value: 'GLOOMY', text: '우울한', bgColor: '#EFF8FA', color: '#92CEDE' },
-  { value: 'ANGRY', text: '화나는', bgColor: '#FFEAE3', color: '#FD7247' },
+  { value: E.Pleased, text: '기쁜', bgColor: '#FFFBE0', color: '#FFE231' },
+  { value: E.Proud, text: '뿌듯한', bgColor: '#FFF5EA', color: '#FCBC72' },
+  { value: E.Happy, text: '행복한', bgColor: '#FDF6F5', color: '#F3C4BE' },
+  { value: E.Excited, text: '신나는', bgColor: '#F6F3F9', color: '#C2B1D5' },
+  { value: E.Irritated, text: '짜증나는', bgColor: '#F5F7F8', color: '#BCCACD' },
+  { value: E.Unstable, text: '불안한', bgColor: ' #FAF1EC', color: '#DDA17D' },
+  { value: E.Lethargic, text: '무기력한', bgColor: '#F3F8F5', color: '#AFD1B9' },
+  { value: E.Gloomy, text: '우울한', bgColor: '#EFF8FA', color: '#92CEDE' },
+  { value: E.Angry, text: '화나는', bgColor: '#FFEAE3', color: '#FD7247' },
 ]
 
 interface EmotionButtons {

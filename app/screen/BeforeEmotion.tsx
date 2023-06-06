@@ -34,14 +34,11 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
   // useStartRunMutation 훅을 사용해서 뮤테이션을 실행하는 핸들러....
   const handleButtonClick = () => {
     if (emotion.value !== '') {
-      console.log(emotion)
-      const emotionBefore = Emotion[emotion.value as keyof typeof Emotion]
-
       startRun({
         variables: {
           input: {
             type: RunType.Distance,
-            emotionBefore,
+            emotionBefore: emotion.value,
           },
         },
       })

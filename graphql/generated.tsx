@@ -1,37 +1,41 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-const defaultOptions = {} as const;
+import { gql } from '@apollo/client'
+import * as Apollo from '@apollo/client'
+export type Maybe<T> = T | null
+export type InputMaybe<T> = Maybe<T>
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
+  [_ in K]?: never
+}
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never }
+const defaultOptions = {} as const
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
-};
+  ID: { input: string | number; output: string }
+  String: { input: string; output: string }
+  Boolean: { input: boolean; output: boolean }
+  Int: { input: number; output: number }
+  Float: { input: number; output: number }
+  DateTime: { input: any; output: any }
+}
 
 export type Account = {
-  __typename?: 'Account';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['String']['output'];
-  password?: Maybe<Scalars['String']['output']>;
-  provider: AccountProvider;
-  updatedAt: Scalars['DateTime']['output'];
-  user: User;
-  userId: Scalars['String']['output'];
-};
+  __typename?: 'Account'
+  createdAt: Scalars['DateTime']['output']
+  id: Scalars['String']['output']
+  password?: Maybe<Scalars['String']['output']>
+  provider: AccountProvider
+  updatedAt: Scalars['DateTime']['output']
+  user: User
+  userId: Scalars['String']['output']
+}
 
 export enum AccountProvider {
   Apple = 'APPLE',
-  Kakao = 'KAKAO'
+  Kakao = 'KAKAO',
 }
 
 export enum Emotion {
@@ -43,198 +47,218 @@ export enum Emotion {
   Lethargic = 'LETHARGIC',
   Pleased = 'PLEASED',
   Proud = 'PROUD',
-  Unstable = 'UNSTABLE'
+  Unstable = 'UNSTABLE',
 }
 
 export type EndRunInput = {
-  emotionAfter: Emotion;
-  runId: Scalars['String']['input'];
-  runMeters?: InputMaybe<Scalars['Float']['input']>;
-};
+  emotionAfter: Emotion
+  runId: Scalars['String']['input']
+  runMeters?: InputMaybe<Scalars['Float']['input']>
+}
 
 export type EndRunOutput = {
-  __typename?: 'EndRunOutput';
-  numLeft: Scalars['Float']['output'];
-  totalRun: Scalars['Float']['output'];
-};
+  __typename?: 'EndRunOutput'
+  numLeft: Scalars['Float']['output']
+  totalRun: Scalars['Float']['output']
+}
 
 export type GetEncourageInput = {
-  currentHeartRate?: InputMaybe<Scalars['Float']['input']>;
-  runId: Scalars['String']['input'];
-};
+  currentHeartRate?: InputMaybe<Scalars['Float']['input']>
+  runId: Scalars['String']['input']
+}
 
 export type Grape = {
-  __typename?: 'Grape';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['String']['output'];
-  runs: Array<Run>;
-  updatedAt: Scalars['DateTime']['output'];
-  user: User;
-  userId: Scalars['String']['output'];
-};
+  __typename?: 'Grape'
+  createdAt: Scalars['DateTime']['output']
+  id: Scalars['String']['output']
+  runs: Array<Run>
+  updatedAt: Scalars['DateTime']['output']
+  user: User
+  userId: Scalars['String']['output']
+}
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: 'Mutation'
   /** [Protected] 러닝 종료 API */
-  endRun: EndRunOutput;
-  getEncourage: Scalars['Boolean']['output'];
+  endRun: EndRunOutput
+  getEncourage: Scalars['Boolean']['output']
   /** 로그인 API */
-  signIn: SignInOutput;
+  signIn: SignInOutput
   /** [Protected] 러닝 시작 API */
-  startRun: Run;
+  startRun: Run
   /** [Protected] 나이 설정 API */
-  updateBirthYear: User;
+  updateBirthYear: User
   /** [Protected] 안정심박수 설정 API */
-  updateMinHeartRate: User;
-};
-
+  updateMinHeartRate: User
+}
 
 export type MutationEndRunArgs = {
-  input: EndRunInput;
-};
-
+  input: EndRunInput
+}
 
 export type MutationGetEncourageArgs = {
-  input: GetEncourageInput;
-};
-
+  input: GetEncourageInput
+}
 
 export type MutationSignInArgs = {
-  input: SignInInput;
-};
-
+  input: SignInInput
+}
 
 export type MutationStartRunArgs = {
-  input: StartRunInput;
-};
-
+  input: StartRunInput
+}
 
 export type MutationUpdateBirthYearArgs = {
-  birthYear: Scalars['Float']['input'];
-};
-
+  birthYear: Scalars['Float']['input']
+}
 
 export type MutationUpdateMinHeartRateArgs = {
-  minHeartRate: Scalars['Float']['input'];
-};
+  minHeartRate: Scalars['Float']['input']
+}
 
 export type Query = {
-  __typename?: 'Query';
-  grape: Grape;
-  grapes: Array<Grape>;
+  __typename?: 'Query'
+  grape: Grape
+  grapes: Array<Grape>
   /** [Protected] 내 정보 조회 API */
-  me: User;
-  run: Run;
-};
-
+  me: User
+  run: Run
+}
 
 export type QueryGrapeArgs = {
-  id: Scalars['String']['input'];
-};
-
+  id: Scalars['String']['input']
+}
 
 export type QueryRunArgs = {
-  id: Scalars['String']['input'];
-};
+  id: Scalars['String']['input']
+}
 
 export type Run = {
-  __typename?: 'Run';
-  createdAt: Scalars['DateTime']['output'];
-  emotionAfter?: Maybe<Emotion>;
-  emotionBefore: Emotion;
-  grape: Grape;
-  grapeId: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  lowerBoundHeartRate?: Maybe<Scalars['Float']['output']>;
-  runMeters?: Maybe<Scalars['Float']['output']>;
-  type: RunType;
-  updatedAt: Scalars['DateTime']['output'];
-  upperBoundHeartRate?: Maybe<Scalars['Float']['output']>;
-};
+  __typename?: 'Run'
+  createdAt: Scalars['DateTime']['output']
+  emotionAfter?: Maybe<Emotion>
+  emotionBefore: Emotion
+  grape: Grape
+  grapeId: Scalars['String']['output']
+  id: Scalars['String']['output']
+  lowerBoundHeartRate?: Maybe<Scalars['Float']['output']>
+  runMeters?: Maybe<Scalars['Float']['output']>
+  type: RunType
+  updatedAt: Scalars['DateTime']['output']
+  upperBoundHeartRate?: Maybe<Scalars['Float']['output']>
+}
 
 export enum RunType {
   Distance = 'DISTANCE',
-  HeartRate = 'HEART_RATE'
+  HeartRate = 'HEART_RATE',
 }
 
 export type SignInInput = {
-  email: Scalars['String']['input'];
-  provider: AccountProvider;
-};
+  email: Scalars['String']['input']
+  provider: AccountProvider
+}
 
 export type SignInOutput = {
-  __typename?: 'SignInOutput';
-  accessToken: Scalars['String']['output'];
-};
+  __typename?: 'SignInOutput'
+  accessToken: Scalars['String']['output']
+}
 
 export type StartRunInput = {
-  emotionBefore: Emotion;
-  type: RunType;
-};
+  emotionBefore: Emotion
+  type: RunType
+}
 
 export type Subscription = {
-  __typename?: 'Subscription';
-  runPaceMaker: Scalars['String']['output'];
-};
-
+  __typename?: 'Subscription'
+  runPaceMaker: Scalars['String']['output']
+}
 
 export type SubscriptionRunPaceMakerArgs = {
-  runId: Scalars['String']['input'];
-};
+  runId: Scalars['String']['input']
+}
 
 export type User = {
-  __typename?: 'User';
-  accounts: Array<Account>;
-  birthYear?: Maybe<Scalars['Float']['output']>;
+  __typename?: 'User'
+  accounts: Array<Account>
+  birthYear?: Maybe<Scalars['Float']['output']>
   /** 오늘 달릴 수 있는지 여부 */
-  canRunToday: Scalars['Boolean']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  email: Scalars['String']['output'];
-  grapes: Array<Grape>;
-  hasDevice: Scalars['Boolean']['output'];
-  id: Scalars['String']['output'];
-  minHeartRate?: Maybe<Scalars['Float']['output']>;
+  canRunToday: Scalars['Boolean']['output']
+  createdAt: Scalars['DateTime']['output']
+  email: Scalars['String']['output']
+  grapes: Array<Grape>
+  hasDevice: Scalars['Boolean']['output']
+  id: Scalars['String']['output']
+  minHeartRate?: Maybe<Scalars['Float']['output']>
   /** 총 달린 횟수 (총 포도알 개수) */
-  totalRun: Scalars['Float']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-};
+  totalRun: Scalars['Float']['output']
+  updatedAt: Scalars['DateTime']['output']
+}
 
 export type LoginMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  provider: AccountProvider;
-}>;
+  email: Scalars['String']['input']
+  provider: AccountProvider
+}>
 
-
-export type LoginMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInOutput', accessToken: string } };
+export type LoginMutation = {
+  __typename?: 'Mutation'
+  signIn: { __typename?: 'SignInOutput'; accessToken: string }
+}
 
 export type StartRunMutationVariables = Exact<{
-  input: StartRunInput;
-}>;
+  input: StartRunInput
+}>
 
-
-export type StartRunMutation = { __typename?: 'Mutation', startRun: { __typename?: 'Run', id: string, type: RunType, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, lowerBoundHeartRate?: number | null, upperBoundHeartRate?: number | null, createdAt: any, updatedAt: any } };
-
-export type UpdateBirthMutationVariables = Exact<{
-  birthYear: Scalars['Float']['input'];
-}>;
-
-
-export type UpdateBirthMutation = { __typename?: 'Mutation', updateBirthYear: { __typename?: 'User', birthYear?: number | null } };
-
-export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetMeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean } };
-
-
-export const LoginDocument = gql`
-    mutation Login($email: String!, $provider: AccountProvider!) {
-  signIn(input: {email: $email, provider: $provider}) {
-    accessToken
+export type StartRunMutation = {
+  __typename?: 'Mutation'
+  startRun: {
+    __typename?: 'Run'
+    id: string
+    type: RunType
+    emotionBefore: Emotion
+    emotionAfter?: Emotion | null
+    runMeters?: number | null
+    lowerBoundHeartRate?: number | null
+    upperBoundHeartRate?: number | null
+    createdAt: any
+    updatedAt: any
   }
 }
-    `;
-export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+export type UpdateBirthMutationVariables = Exact<{
+  birthYear: Scalars['Float']['input']
+}>
+
+export type UpdateBirthMutation = {
+  __typename?: 'Mutation'
+  updateBirthYear: { __typename?: 'User'; birthYear?: number | null }
+}
+
+export type GetMeQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetMeQuery = {
+  __typename?: 'Query'
+  me: {
+    __typename?: 'User'
+    id: string
+    email: string
+    hasDevice: boolean
+    birthYear?: number | null
+    minHeartRate?: number | null
+    createdAt: any
+    updatedAt: any
+    totalRun: number
+    canRunToday: boolean
+  }
+}
+
+export const LoginDocument = gql`
+  mutation Login($email: String!, $provider: AccountProvider!) {
+    signIn(input: { email: $email, provider: $provider }) {
+      accessToken
+    }
+  }
+`
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>
 
 /**
  * __useLoginMutation__
@@ -254,29 +278,34 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-      }
-export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
-export const StartRunDocument = gql`
-    mutation startRun($input: StartRunInput!) {
-  startRun(input: $input) {
-    id
-    type
-    emotionBefore
-    emotionAfter
-    runMeters
-    lowerBoundHeartRate
-    upperBoundHeartRate
-    createdAt
-    updatedAt
-  }
+export function useLoginMutation(
+  baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options)
 }
-    `;
-export type StartRunMutationFn = Apollo.MutationFunction<StartRunMutation, StartRunMutationVariables>;
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>
+export const StartRunDocument = gql`
+  mutation startRun($input: StartRunInput!) {
+    startRun(input: $input) {
+      id
+      type
+      emotionBefore
+      emotionAfter
+      runMeters
+      lowerBoundHeartRate
+      upperBoundHeartRate
+      createdAt
+      updatedAt
+    }
+  }
+`
+export type StartRunMutationFn = Apollo.MutationFunction<
+  StartRunMutation,
+  StartRunMutationVariables
+>
 
 /**
  * __useStartRunMutation__
@@ -295,21 +324,29 @@ export type StartRunMutationFn = Apollo.MutationFunction<StartRunMutation, Start
  *   },
  * });
  */
-export function useStartRunMutation(baseOptions?: Apollo.MutationHookOptions<StartRunMutation, StartRunMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<StartRunMutation, StartRunMutationVariables>(StartRunDocument, options);
-      }
-export type StartRunMutationHookResult = ReturnType<typeof useStartRunMutation>;
-export type StartRunMutationResult = Apollo.MutationResult<StartRunMutation>;
-export type StartRunMutationOptions = Apollo.BaseMutationOptions<StartRunMutation, StartRunMutationVariables>;
-export const UpdateBirthDocument = gql`
-    mutation updateBirth($birthYear: Float!) {
-  updateBirthYear(birthYear: $birthYear) {
-    birthYear
-  }
+export function useStartRunMutation(
+  baseOptions?: Apollo.MutationHookOptions<StartRunMutation, StartRunMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<StartRunMutation, StartRunMutationVariables>(StartRunDocument, options)
 }
-    `;
-export type UpdateBirthMutationFn = Apollo.MutationFunction<UpdateBirthMutation, UpdateBirthMutationVariables>;
+export type StartRunMutationHookResult = ReturnType<typeof useStartRunMutation>
+export type StartRunMutationResult = Apollo.MutationResult<StartRunMutation>
+export type StartRunMutationOptions = Apollo.BaseMutationOptions<
+  StartRunMutation,
+  StartRunMutationVariables
+>
+export const UpdateBirthDocument = gql`
+  mutation updateBirth($birthYear: Float!) {
+    updateBirthYear(birthYear: $birthYear) {
+      birthYear
+    }
+  }
+`
+export type UpdateBirthMutationFn = Apollo.MutationFunction<
+  UpdateBirthMutation,
+  UpdateBirthMutationVariables
+>
 
 /**
  * __useUpdateBirthMutation__
@@ -328,28 +365,36 @@ export type UpdateBirthMutationFn = Apollo.MutationFunction<UpdateBirthMutation,
  *   },
  * });
  */
-export function useUpdateBirthMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBirthMutation, UpdateBirthMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateBirthMutation, UpdateBirthMutationVariables>(UpdateBirthDocument, options);
-      }
-export type UpdateBirthMutationHookResult = ReturnType<typeof useUpdateBirthMutation>;
-export type UpdateBirthMutationResult = Apollo.MutationResult<UpdateBirthMutation>;
-export type UpdateBirthMutationOptions = Apollo.BaseMutationOptions<UpdateBirthMutation, UpdateBirthMutationVariables>;
-export const GetMeDocument = gql`
-    query getMe {
-  me {
-    id
-    email
-    hasDevice
-    birthYear
-    minHeartRate
-    createdAt
-    updatedAt
-    totalRun
-    canRunToday
-  }
+export function useUpdateBirthMutation(
+  baseOptions?: Apollo.MutationHookOptions<UpdateBirthMutation, UpdateBirthMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpdateBirthMutation, UpdateBirthMutationVariables>(
+    UpdateBirthDocument,
+    options,
+  )
 }
-    `;
+export type UpdateBirthMutationHookResult = ReturnType<typeof useUpdateBirthMutation>
+export type UpdateBirthMutationResult = Apollo.MutationResult<UpdateBirthMutation>
+export type UpdateBirthMutationOptions = Apollo.BaseMutationOptions<
+  UpdateBirthMutation,
+  UpdateBirthMutationVariables
+>
+export const GetMeDocument = gql`
+  query getMe {
+    me {
+      id
+      email
+      hasDevice
+      birthYear
+      minHeartRate
+      createdAt
+      updatedAt
+      totalRun
+      canRunToday
+    }
+  }
+`
 
 /**
  * __useGetMeQuery__
@@ -366,14 +411,18 @@ export const GetMeDocument = gql`
  *   },
  * });
  */
-export function useGetMeQuery(baseOptions?: Apollo.QueryHookOptions<GetMeQuery, GetMeQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetMeQuery, GetMeQueryVariables>(GetMeDocument, options);
-      }
-export function useGetMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMeQuery, GetMeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetMeQuery, GetMeQueryVariables>(GetMeDocument, options);
-        }
-export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
-export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
-export type GetMeQueryResult = Apollo.QueryResult<GetMeQuery, GetMeQueryVariables>;
+export function useGetMeQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetMeQuery, GetMeQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetMeQuery, GetMeQueryVariables>(GetMeDocument, options)
+}
+export function useGetMeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetMeQuery, GetMeQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetMeQuery, GetMeQueryVariables>(GetMeDocument, options)
+}
+export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>
+export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>
+export type GetMeQueryResult = Apollo.QueryResult<GetMeQuery, GetMeQueryVariables>

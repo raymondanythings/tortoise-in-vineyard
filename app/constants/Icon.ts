@@ -7,7 +7,7 @@ export default {
   LOGO: require('../assets/logo.gif'),
   EMOTION: {
     ANGRY: require('../assets/emotion/ANGRY.png'),
-    EXITED: require('../assets/emotion/EXITED.png'),
+    EXCITED: require('../assets/emotion/EXCITED.png'),
     GLOOMY: require('../assets/emotion/GLOOMY.png'),
     HAPPY: require('../assets/emotion/HAPPY.png'),
     IRRITATED: require('../assets/emotion/IRRITATED.png'),

@@ -59,24 +59,29 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
     opacity: interpolate(sharedValue.value, InterpolateXInput, [0, 1]),
   }))
 
-  const containerOpacity = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(sharedValue.value, InterpolateXInput, [
-      'rgba(34, 34, 34,1)',
-      'rgba(34, 34, 34,0)',
-    ]),
+  const blackWidth = useAnimatedStyle(() => ({
+    width: interpolate(sharedValue.value, InterpolateXInput, [layoutWidth.value - 40, 0]),
   }))
-  console.log(canFinish, '???')
+
   return (
     <Animated.View
-      style={[
-        styles.containerStyle,
-        layoutWidth.value ? { width: layoutWidth.value } : {},
-        containerOpacity,
-      ]}
+      style={[styles.containerStyle, layoutWidth.value ? { width: layoutWidth.value } : {}]}
       onLayout={(event) => {
         layoutWidth.value = event.nativeEvent.layout.width
       }}
     >
+      <Animated.View
+        style={[
+          // layoutWidth.value ? { width: layoutWidth.value } : {},
+          blackWidth,
+          {
+            height: BUTTON_HEIGHT,
+            backgroundColor: 'rgba(34,34,34,1)',
+            borderRadius: 10,
+            position: 'absolute',
+          },
+        ]}
+      ></Animated.View>
       <AnimatedLinearGradient
         colors={['#222222', '#8C46FF']}
         start={{ x: 0.0, y: 0.5 }}
@@ -114,11 +119,9 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
 
 const styles = StyleSheet.create({
   containerStyle: {
-    backgroundColor: 'rgba(34, 34, 34,1)',
     height: BUTTON_HEIGHT,
-    width: '100%',
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
     position: 'relative',
   },
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     // zIndex: 4,
-    // backgroundColor: 'red',
+    backgroundColor: 'red',
   },
 })
 
