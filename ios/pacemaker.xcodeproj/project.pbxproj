@@ -29,7 +29,7 @@
 		E3D151372A27644D005F1CCB /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D151362A27644D005F1CCB /* WatchAppApp.swift */; };
 		E3D1513B2A276450005F1CCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D1513A2A276450005F1CCB /* Assets.xcassets */; };
 		E3D1513E2A276450005F1CCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */; };
-		E3D151412A276450005F1CCB /* 달리는거북이.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3D151342A27644D005F1CCB /* 달리는거북이.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E3D151412A276450005F1CCB /* 포도밭거북이.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3D151342A27644D005F1CCB /* 포도밭거북이.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E3D244F02A2BACE5003AB4F9 /* SwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D244EF2A2BACE5003AB4F9 /* SwiftBridge.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +57,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				E3D151412A276450005F1CCB /* 달리는거북이.app in Embed Watch Content */,
+				E3D151412A276450005F1CCB /* 포도밭거북이.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +99,7 @@
 		E39DDC422A28767100F6025A /* WatchApp-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchApp-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E39DDC432A28769D00F6025A /* pacemakerDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = pacemakerDebug.entitlements; path = pacemaker/pacemakerDebug.entitlements; sourceTree = "<group>"; };
 		E3CC38ED2A284798002E5BBD /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
-		E3D151342A27644D005F1CCB /* 달리는거북이.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "달리는거북이.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3D151342A27644D005F1CCB /* 포도밭거북이.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "포도밭거북이.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D151362A27644D005F1CCB /* WatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppApp.swift; sourceTree = "<group>"; };
 		E3D1513A2A276450005F1CCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3D1513D2A276450005F1CCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* pacemaker.app */,
 				00E356EE1AD99517003FC87E /* pacemakerTests.xctest */,
-				E3D151342A27644D005F1CCB /* 달리는거북이.app */,
+				E3D151342A27644D005F1CCB /* 포도밭거북이.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 			);
 			name = "WatchApp Watch App";
 			productName = "WatchApp Watch App";
-			productReference = E3D151342A27644D005F1CCB /* 달리는거북이.app */;
+			productReference = E3D151342A27644D005F1CCB /* 포도밭거북이.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -897,7 +897,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp;
-				PRODUCT_NAME = "달리는거북이";
+				PRODUCT_NAME = "포도밭거북이";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -946,7 +946,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seriousfont.pacemaker.watchkitapp;
-				PRODUCT_NAME = "달리는거북이";
+				PRODUCT_NAME = "포도밭거북이";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -1,6 +1,6 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, Dimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Text from '../components/Text'
@@ -13,7 +13,7 @@ const WatchCheck = () => {
   const { user } = useGetUser('cache-only')
   const navigation = useNavigation()
 
-  const { isConnected } = useWatch()
+  const { isConnected, isReachability } = useWatch()
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>
@@ -26,7 +26,7 @@ const WatchCheck = () => {
         </Text>
       </View>
       <View style={globalStyle.center}>
-        <Image source={Img.WATCH} />
+        <Image source={Img.WATCH_PREV} style={{ width: Dimensions.get('window').width }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
@@ -36,7 +36,7 @@ const WatchCheck = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={!isConnected}
+          disabled={!isConnected || !isReachability}
           onPress={() => {
             if (user?.minHeartRate) {
               navigation.dispatch(StackActions.push('beforeemotion'))
@@ -56,7 +56,7 @@ const WatchCheck = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={isConnected}
+          disabled={isConnected && isReachability}
           onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>

@@ -12,7 +12,7 @@ class WorkoutManager : NSObject, ObservableObject {
   var selectedWorkout : HKWorkoutActivityType? {
     didSet {
       guard let selectedWorkout = selectedWorkout else {return}
-      startWorkout(workoutType: selectedWorkout)
+      startWorkout()
     }
   }
   
@@ -28,17 +28,23 @@ class WorkoutManager : NSObject, ObservableObject {
   let healthstore = HKHealthStore()
   var session : HKWorkoutSession?
   var builder : HKLiveWorkoutBuilder?
-  
-  func startWorkout(workoutType : HKWorkoutActivityType){
+  func stopWorkout() -> Bool {
+    if let session = session {
+        session.end()
+        return true
+    } else {
+        return false
+    }
+  }
+  func startWorkout() ->  Bool  {
     let configuration = HKWorkoutConfiguration()
-    configuration.activityType = workoutType
+    configuration.activityType = .running
     configuration.locationType = .outdoor
-    
     do {
       session = try HKWorkoutSession(healthStore: healthstore, configuration: configuration)
       builder = session?.associatedWorkoutBuilder()
     } catch {
-      return
+      return false
     }
     builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthstore, workoutConfiguration: configuration)
     
@@ -46,13 +52,16 @@ class WorkoutManager : NSObject, ObservableObject {
     session?.delegate = self
     builder?.delegate = self
     
-    
+    var isSuccess = true
     let startDate = Date()
     session?.startActivity(with: startDate)
     builder?.beginCollection(withStart: startDate){
-      (success,errror) in
-    // TODO: workout 시작 모바일 전송로직 추가
+      (success,error) in
+      if (error != nil) {
+        isSuccess = false
+      }
     }
+    return isSuccess
   }
   
   func requestAuthorization(){
@@ -63,7 +72,6 @@ class WorkoutManager : NSObject, ObservableObject {
       HKQuantityType.quantityType(forIdentifier: .heartRate)!,
       HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
       HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-      HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
       HKObjectType.activitySummaryType()
     ]
     

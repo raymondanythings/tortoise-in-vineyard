@@ -1,6 +1,10 @@
-import AppleHealthKit, { HealthValue, HealthKitPermissions } from 'react-native-health'
-import { watchEvents } from 'react-native-watch-connectivity'
+import AppleHealthKit, {
+  HealthKitPermissions,
+  HealthObserver,
+  HealthUnit,
+} from 'react-native-health'
 import { NativeAppEventEmitter, NativeEventEmitter, NativeModules } from 'react-native'
+
 const permissions = {
   permissions: {
     read: [
@@ -10,17 +14,25 @@ const permissions = {
     ],
   },
 } as HealthKitPermissions
-const healthKit = {
-  heartRate: 0,
-  requestPermission: () => {
-    AppleHealthKit.initHealthKit(permissions, (error: string, result) => {
-      console.log(result, '<<result')
-    })
-    AppleHealthKit.getAnchoredWorkouts
-  },
+class healthKit {
+  private heartRate = 0
 
+  requestPermission() {
+    return AppleHealthKit.initHealthKit(permissions, (error: string, result) => {
+      return !!result
+    })
+  }
   connectHeartRate() {
-    AppleHealthKit.setObserver({ type: 'HeartRate' })
+    AppleHealthKit.getHeartRateSamples(
+      {
+        ascending: false,
+        startDate: new Date(new Date().getTime() - 10000).toISOString(),
+        endDate: new Date().toISOString(),
+      },
+      (err, result) => {
+        // console.log(result, '<<getHeartRateSamples')
+      },
+    )
     NativeAppEventEmitter.addListener('healthKit:HeartRate:sample', (data) => {
       console.log('NativeAppEventEmitter', data)
     })
@@ -29,9 +41,18 @@ const healthKit = {
       async (event) => {
         console.log(event, '--> observer triggered')
         this.heartRate = event
+        console.log(this.heartRate), ' <<this.heartRate'
       },
     )
-  },
+  }
+
+  getHeartRate() {
+    return this.heartRate
+  }
+
+  reset() {
+    this.heartRate = 0
+  }
 }
 
-export default healthKit
+export default new healthKit()

@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { getIsPaired, getIsWatchAppInstalled, watchEvents } from 'react-native-watch-connectivity'
+import { watchEvents } from 'react-native-watch-connectivity'
 import MapView, {
   LatLng,
   Marker,
@@ -11,7 +10,7 @@ import MapView, {
 } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import globalStyle, { Font } from '../common/globalStyle'
+import { Font } from '../common/globalStyle'
 import Text from '../components/Text'
 import CUSTOM_MAP from '../constants/customMap'
 import Icon from '../constants/Icon'
@@ -24,6 +23,12 @@ import PinkDots from '../components/Lotties/PinkDots'
 
 import Swiper from '../components/Swiper'
 import { StackActions, useNavigation } from '@react-navigation/native'
+import { calculateDistance } from '../../utils/distance'
+import healthKit from '../../utils/Healthkit'
+import FastImage from 'react-native-fast-image'
+import Img from '../constants/Img'
+import { useRecoilValue } from 'recoil'
+import { emotionState } from '../store/emotionState'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -35,7 +40,7 @@ async function requestPermission() {
   }
 }
 // 위도, 경도를 위한 인터페이스
-interface ILocation {
+export interface ILocation {
   latitude: number
   longitude: number
 }
@@ -45,6 +50,8 @@ interface IGeolocation {
   longitude: number
 }
 
+const GRADIENT_LIMIT = 12
+
 const Run = () => {
   const [tracking, setTracking] = useState(false)
   const [heartRate, setHeartRate] = useState(0)
@@ -53,22 +60,16 @@ const Run = () => {
     latitude: 37.78825,
     longitude: -122.4324,
   })
+
+  const selectedEmotion = useRecoilValue(emotionState)
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   // Listener when receive message
 
+  const distance = useMemo(() => calculateDistance(locations), [locations.length])
   const navigation = useNavigation()
 
   const { isConnected } = useWatch()
 
-  const messageListener = async () => {
-    isConnected &&
-      watchEvents.on<{ heartRate?: number; distance?: number }>('message', (message) => {
-        const { heartRate: heart, distance } = message
-        if (heart) {
-          setHeartRate(() => heart)
-        }
-      })
-  }
   const geolocationRequest = useCallback(async () => {
     const result = await requestPermission()
     setGeolocationPermission(result)
@@ -94,7 +95,7 @@ const Run = () => {
             longitude: latLng?.longitude ?? location.longitude,
           },
           heading: 0,
-          ...(tracking ? { pitch: 0, zoom: 19 } : { zoom: 18, pitch: 10 }),
+          ...(tracking ? { pitch: 0, zoom: 1 } : { zoom: 2, pitch: 10 }),
         },
         { duration: 1000 },
       )
@@ -131,12 +132,23 @@ const Run = () => {
   }, [tracking, geolocationPermission])
 
   useLayoutEffect(() => {
-    messageListener()
+    const id = setInterval(() => {
+      healthKit.connectHeartRate()
+    }, 1000)
     geolocationRequest()
     navigation.addListener('blur', () => {
+      clearInterval(id)
       clearWatch()
     })
+    return () => {
+      clearInterval(id)
+      clearWatch()
+    }
   }, [])
+
+  // locations.length 6 이하 -> locations.length
+  // locations.length 6 이상 -> locations.length - 6 만큼 emotion color
+  // selectedEmotion
 
   // 로케이션 허용 후 뜨는 화면
   return (
@@ -177,7 +189,7 @@ const Run = () => {
           }}
         >
           <View style={styles.radius}>
-            <View style={styles.marker}></View>
+            <FastImage source={Img.LOGO_MOVING} style={styles.marker} />
           </View>
         </MarkerAnimated>
         {/* 테두리 선 */}
@@ -185,19 +197,33 @@ const Run = () => {
           coordinates={locations}
           strokeColors={
             locations.length >= 2
-              ? ['#6C32EC', ...generateColor('#6C32EC', '#E3AF29', locations.length - 2), '#E3AF29']
+              ? locations.length <= GRADIENT_LIMIT
+                ? [...generateColor(selectedEmotion.color, '#6B2FF4', locations.length)]
+                : [
+                    ...Array.from({ length: locations.length - GRADIENT_LIMIT }).map(
+                      (_) => '#6B2FF4',
+                    ),
+                    ...generateColor(selectedEmotion.color, '#6B2FF4', GRADIENT_LIMIT),
+                  ]
               : []
           }
-          strokeWidth={14}
+          strokeWidth={26}
         />
         <Polyline
           coordinates={locations}
           strokeColors={
             locations.length >= 2
-              ? ['#8F4BFF', ...generateColor('#8F4BFF', '#FF9E31', locations.length - 2), '#FF9E31']
+              ? locations.length <= GRADIENT_LIMIT
+                ? [...generateColor(selectedEmotion.color, '#914CF7', locations.length)]
+                : [
+                    ...Array.from({ length: locations.length - GRADIENT_LIMIT }).map(
+                      (_) => '#914CF7',
+                    ),
+                    ...generateColor(selectedEmotion.color, '#914CF7', GRADIENT_LIMIT),
+                  ]
               : []
           }
-          strokeWidth={10}
+          strokeWidth={20}
           style={{
             borderColor: 'red',
           }}
@@ -240,7 +266,9 @@ const Run = () => {
               </Text>
               <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
             </View>
-            <Text>1.1 km</Text>
+            <Text style={{ fontFamily: Font.Pretendard }}>
+              {distance > 1 ? distance.toFixed(2) + ' km' : (distance * 1000).toFixed() + ' m'}
+            </Text>
           </View>
         ) : (
           <View style={{ flex: 1, right: 40 }}>
@@ -306,7 +334,9 @@ const Run = () => {
         </Pressable>
         <Swiper
           onToggle={() => {
-            navigation.dispatch(StackActions.push('afteremotion'))
+            setTimeout(() => {
+              navigation.dispatch(StackActions.push('afteremotion'))
+            }, 1500)
           }}
         />
       </View>
@@ -319,22 +349,17 @@ export default Run
 
 const styles = StyleSheet.create({
   radius: {
-    height: 50,
-    width: 50,
-    borderRadius: 50 / 2,
-    overflow: 'hidden',
-    borderWidth: 1,
-    backgroundColor: 'rgba(255, 226, 49, 0.4)',
-    borderColor: 'rgba(255, 226, 49,0.8)',
+    height: 60,
+    width: 60,
+    borderRadius: 60 / 2,
+    backgroundColor: 'rgba(255, 226, 49, 1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   marker: {
-    height: 20,
-    width: 20,
-    borderWidth: 3,
-    borderColor: 'white',
-    borderRadius: 20 / 2,
-    overflow: 'hidden',
+    height: 40,
+    width: 40,
+    // borderColor: 'white',
+    // overflow: 'hidden',
   },
 })

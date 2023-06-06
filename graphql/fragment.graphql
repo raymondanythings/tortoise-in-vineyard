@@ -1,0 +1,11 @@
+fragment userData on User {
+  id
+  email
+  hasDevice
+  birthYear
+  minHeartRate
+  createdAt
+  updatedAt
+  totalRun
+  canRunToday
+}

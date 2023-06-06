@@ -9,9 +9,41 @@ import Button from '../components/Button'
 import Bedge from '../components/Bedge'
 import { useRecoilState } from 'recoil'
 import { emotionState } from '../store/emotionState'
+import { useStartRunMutation } from '../../graphql/generated'
+import { useRecoilValue } from 'recoil'
+import { Emotion, RunType } from '../../graphql/generated'
+import useGetUser from '../hook/useGetUser'
 
 const BeforeEmotion = ({ navigation }: { navigation: any }) => {
   const [emotion, setEmotion] = useRecoilState(emotionState)
+
+  // const [startRun] = useStartRunMutation()
+  const [startRun] = useStartRunMutation({
+    onCompleted(data) {
+      if (data.startRun) {
+        // 뮤테이션 성공시 run 화면으로 이동
+        navigation.dispatch(StackActions.push('run'))
+      } else {
+        console.log('뮤테이션 실패!!!')
+      }
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+  // useStartRunMutation 훅을 사용해서 뮤테이션을 실행하는 핸들러....
+  const handleButtonClick = () => {
+    if (emotion.value !== '') {
+      startRun({
+        variables: {
+          input: {
+            type: RunType.Distance,
+            emotionBefore: emotion.value,
+          },
+        },
+      })
+    }
+  }
 
   return (
     <SafeAreaView
@@ -42,7 +74,7 @@ const BeforeEmotion = ({ navigation }: { navigation: any }) => {
             backgroundColor: emotion.value ? '#222222' : '#A0A0A0',
           }}
           disabled={!emotion.value}
-          onPress={() => navigation.dispatch(StackActions.push('run'))}
+          onPress={handleButtonClick}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             감정 기록 완료

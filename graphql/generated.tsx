@@ -199,6 +199,8 @@ export type User = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
+export type UserDataFragment = { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean };
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String']['input'];
   provider: AccountProvider;
@@ -206,6 +208,20 @@ export type LoginMutationVariables = Exact<{
 
 
 export type LoginMutation = { __typename?: 'Mutation', signIn: { __typename?: 'SignInOutput', accessToken: string } };
+
+export type UpdateMinHeartRateMutationVariables = Exact<{
+  minHeartRate: Scalars['Float']['input'];
+}>;
+
+
+export type UpdateMinHeartRateMutation = { __typename?: 'Mutation', updateMinHeartRate: { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean } };
+
+export type StartRunMutationVariables = Exact<{
+  input: StartRunInput;
+}>;
+
+
+export type StartRunMutation = { __typename?: 'Mutation', startRun: { __typename?: 'Run', id: string, type: RunType, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, lowerBoundHeartRate?: number | null, upperBoundHeartRate?: number | null, createdAt: any, updatedAt: any } };
 
 export type UpdateBirthMutationVariables = Exact<{
   birthYear: Scalars['Float']['input'];
@@ -219,7 +235,26 @@ export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetMeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean } };
 
+export type RunPaceMakerSubscriptionVariables = Exact<{
+  runId: Scalars['String']['input'];
+}>;
 
+
+export type RunPaceMakerSubscription = { __typename?: 'Subscription', runPaceMaker: string };
+
+export const UserDataFragmentDoc = gql`
+    fragment userData on User {
+  id
+  email
+  hasDevice
+  birthYear
+  minHeartRate
+  createdAt
+  updatedAt
+  totalRun
+  canRunToday
+}
+    `;
 export const LoginDocument = gql`
     mutation Login($email: String!, $provider: AccountProvider!) {
   signIn(input: {email: $email, provider: $provider}) {
@@ -254,6 +289,80 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const UpdateMinHeartRateDocument = gql`
+    mutation updateMinHeartRate($minHeartRate: Float!) {
+  updateMinHeartRate(minHeartRate: $minHeartRate) {
+    ...userData
+  }
+}
+    ${UserDataFragmentDoc}`;
+export type UpdateMinHeartRateMutationFn = Apollo.MutationFunction<UpdateMinHeartRateMutation, UpdateMinHeartRateMutationVariables>;
+
+/**
+ * __useUpdateMinHeartRateMutation__
+ *
+ * To run a mutation, you first call `useUpdateMinHeartRateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMinHeartRateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMinHeartRateMutation, { data, loading, error }] = useUpdateMinHeartRateMutation({
+ *   variables: {
+ *      minHeartRate: // value for 'minHeartRate'
+ *   },
+ * });
+ */
+export function useUpdateMinHeartRateMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMinHeartRateMutation, UpdateMinHeartRateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMinHeartRateMutation, UpdateMinHeartRateMutationVariables>(UpdateMinHeartRateDocument, options);
+      }
+export type UpdateMinHeartRateMutationHookResult = ReturnType<typeof useUpdateMinHeartRateMutation>;
+export type UpdateMinHeartRateMutationResult = Apollo.MutationResult<UpdateMinHeartRateMutation>;
+export type UpdateMinHeartRateMutationOptions = Apollo.BaseMutationOptions<UpdateMinHeartRateMutation, UpdateMinHeartRateMutationVariables>;
+export const StartRunDocument = gql`
+    mutation startRun($input: StartRunInput!) {
+  startRun(input: $input) {
+    id
+    type
+    emotionBefore
+    emotionAfter
+    runMeters
+    lowerBoundHeartRate
+    upperBoundHeartRate
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type StartRunMutationFn = Apollo.MutationFunction<StartRunMutation, StartRunMutationVariables>;
+
+/**
+ * __useStartRunMutation__
+ *
+ * To run a mutation, you first call `useStartRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useStartRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [startRunMutation, { data, loading, error }] = useStartRunMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useStartRunMutation(baseOptions?: Apollo.MutationHookOptions<StartRunMutation, StartRunMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<StartRunMutation, StartRunMutationVariables>(StartRunDocument, options);
+      }
+export type StartRunMutationHookResult = ReturnType<typeof useStartRunMutation>;
+export type StartRunMutationResult = Apollo.MutationResult<StartRunMutation>;
+export type StartRunMutationOptions = Apollo.BaseMutationOptions<StartRunMutation, StartRunMutationVariables>;
 export const UpdateBirthDocument = gql`
     mutation updateBirth($birthYear: Float!) {
   updateBirthYear(birthYear: $birthYear) {
@@ -290,18 +399,10 @@ export type UpdateBirthMutationOptions = Apollo.BaseMutationOptions<UpdateBirthM
 export const GetMeDocument = gql`
     query getMe {
   me {
-    id
-    email
-    hasDevice
-    birthYear
-    minHeartRate
-    createdAt
-    updatedAt
-    totalRun
-    canRunToday
+    ...userData
   }
 }
-    `;
+    ${UserDataFragmentDoc}`;
 
 /**
  * __useGetMeQuery__
@@ -329,3 +430,31 @@ export function useGetMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetM
 export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
 export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
 export type GetMeQueryResult = Apollo.QueryResult<GetMeQuery, GetMeQueryVariables>;
+export const RunPaceMakerDocument = gql`
+    subscription runPaceMaker($runId: String!) {
+  runPaceMaker(runId: $runId)
+}
+    `;
+
+/**
+ * __useRunPaceMakerSubscription__
+ *
+ * To run a query within a React component, call `useRunPaceMakerSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useRunPaceMakerSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRunPaceMakerSubscription({
+ *   variables: {
+ *      runId: // value for 'runId'
+ *   },
+ * });
+ */
+export function useRunPaceMakerSubscription(baseOptions: Apollo.SubscriptionHookOptions<RunPaceMakerSubscription, RunPaceMakerSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<RunPaceMakerSubscription, RunPaceMakerSubscriptionVariables>(RunPaceMakerDocument, options);
+      }
+export type RunPaceMakerSubscriptionHookResult = ReturnType<typeof useRunPaceMakerSubscription>;
+export type RunPaceMakerSubscriptionResult = Apollo.SubscriptionResult<RunPaceMakerSubscription>;

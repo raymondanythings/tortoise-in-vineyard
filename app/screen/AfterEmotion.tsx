@@ -7,9 +7,10 @@ import Button from '../components/Button'
 import Bedge from '../components/Bedge'
 import Text from '../components/Text'
 import EmotionButtons from '../components/EmotionButtons'
+import { Emotion } from '../constants/bigEmotion'
 
 const AfterEmotion = ({ navigation }: { navigation: any }) => {
-  const [emotion, setEmotion] = useState(null)
+  const [emotion, setEmotion] = useState<Emotion | null>(null)
 
   const handleEmotionSelection = (selected: any) => {
     if (selected.value === '') {
@@ -20,7 +21,12 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <SafeAreaView style={[globalStyle.safeAreaContainer]}>
+    <SafeAreaView
+      style={[
+        globalStyle.safeAreaContainer,
+        { backgroundColor: emotion?.bgColor ? emotion.bgColor : 'white' },
+      ]}
+    >
       <View style={[globalStyle.header]}>
         <Bedge label='감정 기록' />
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>현재 감정은 어떤가요?</Text>
@@ -42,7 +48,11 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
           }}
           disabled={!emotion}
           onPress={() => {
-            navigation.dispatch(StackActions.push('complete'))
+            navigation.dispatch(
+              StackActions.push('complete', {
+                emotion,
+              }),
+            )
           }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
