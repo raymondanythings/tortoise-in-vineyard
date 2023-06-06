@@ -12,7 +12,7 @@ class WorkoutManager : NSObject, ObservableObject {
   var selectedWorkout : HKWorkoutActivityType? {
     didSet {
       guard let selectedWorkout = selectedWorkout else {return}
-      startWorkout(workoutType: selectedWorkout)
+      startWorkout()
     }
   }
   
@@ -29,17 +29,18 @@ class WorkoutManager : NSObject, ObservableObject {
   var session : HKWorkoutSession?
   var builder : HKLiveWorkoutBuilder?
   
-  func startWorkout(workoutType : HKWorkoutActivityType){
+  func startWorkout()  {
     let configuration = HKWorkoutConfiguration()
-    configuration.activityType = workoutType
+    configuration.activityType = .running
     configuration.locationType = .outdoor
-    
+    print("?????????")
     do {
       session = try HKWorkoutSession(healthStore: healthstore, configuration: configuration)
       builder = session?.associatedWorkoutBuilder()
     } catch {
       return
     }
+    print("222222222")
     builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthstore, workoutConfiguration: configuration)
     
     
@@ -50,8 +51,8 @@ class WorkoutManager : NSObject, ObservableObject {
     let startDate = Date()
     session?.startActivity(with: startDate)
     builder?.beginCollection(withStart: startDate){
-      (success,errror) in
-    // TODO: workout 시작 모바일 전송로직 추가
+      (success,error) in
+      print(success)
     }
   }
   
@@ -63,7 +64,6 @@ class WorkoutManager : NSObject, ObservableObject {
       HKQuantityType.quantityType(forIdentifier: .heartRate)!,
       HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
       HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-      HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
       HKObjectType.activitySummaryType()
     ]
     

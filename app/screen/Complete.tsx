@@ -10,8 +10,11 @@ import bigEmotion from '../constants/bigEmotion'
 
 const DELAY_NAVIGATION = 3000
 
-const Complete = () => {
+const Complete = ({ route }) => {
   const navigation = useNavigation()
+  const { emotion } = route.params || {}
+  console.log(emotion, '<<')
+
   const [animation, setAnimation] = useState(new Animated.Value(0))
 
   useEffect(() => {
@@ -31,9 +34,9 @@ const Complete = () => {
   // 3초 뒤에 다른 페이지로 이동
   // 다음 페이지가 현재 없어서 home으로 가게 해둠
   useEffect(() => {
-    setTimeout(() => {
-      navigation.dispatch(StackActions.push('home'))
-    }, DELAY_NAVIGATION)
+    // setTimeout(() => {
+    //   navigation.dispatch(StackActions.push('home'))
+    // }, DELAY_NAVIGATION)
   }, [])
 
   return (
@@ -66,7 +69,7 @@ const Complete = () => {
               source={Icon.GRAPEFORCONFETTI}
             />
             <Image
-              source={bigEmotion.PROUD}
+              source={bigEmotion[emotion.value]}
               style={{
                 position: 'absolute',
                 width: '100%',

@@ -21,7 +21,7 @@ struct SummaryView: View {
     if workoutManager.workout == nil {
       ProgressView("Saving workout").navigationBarHidden(true)
     } else {
-      ScrollView(.vertical){
+      ScrollView(.vertical){ 
         VStack(alignment: .leading){
           SummaryMetricView(title : "Total Distance", value : Measurement(value: workoutManager.workout?.totalDistance?.doubleValue(for: .meter()) ?? 0, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated,usage:.road))).accentColor(Color.green)
           SummaryMetricView(title: "Total Time", value: durationFormatter.string(from: workoutManager.workout?.duration ?? 0.0) ?? "").accentColor(Color.yellow)

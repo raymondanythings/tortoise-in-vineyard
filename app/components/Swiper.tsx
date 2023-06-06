@@ -27,6 +27,9 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
   const handleComplete = (isToggled: boolean) => {
     if (isToggled !== toggled) {
       setToggled(isToggled)
+      if (isToggled) {
+        console.log(handleComplete, '<<<<<')
+      }
       onToggle && onToggle(isToggled)
     }
   }
@@ -84,8 +87,6 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
       ></Animated.View>
       <AnimatedLinearGradient
         colors={['#222222', '#8C46FF']}
-        start={{ x: 0.0, y: 0.5 }}
-        end={{ x: 1, y: 0.5 }}
         style={[styles.background, colorWave]}
       />
 

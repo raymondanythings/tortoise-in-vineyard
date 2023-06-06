@@ -30,7 +30,7 @@ class healthKit {
         endDate: new Date().toISOString(),
       },
       (err, result) => {
-        console.log(result, '<<getHeartRateSamples')
+        // console.log(result, '<<getHeartRateSamples')
       },
     )
     NativeAppEventEmitter.addListener('healthKit:HeartRate:sample', (data) => {

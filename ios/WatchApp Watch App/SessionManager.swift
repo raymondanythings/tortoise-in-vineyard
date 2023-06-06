@@ -11,7 +11,7 @@ import WatchConnectivity
 class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
   
   
-
+    let workoutManager = WorkoutManager()
     static let sharedManager = SessionManager()
 //    var session : WCSession
     private let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
@@ -165,6 +165,14 @@ extension SessionManager {
         // handle receiving message
         DispatchQueue.main.async {
             // make sure to put on the main queue to update UI!
+          print(message)
+          do {
+            self.workoutManager.startWorkout()
+            replyHandler(["success" : true])
+          }catch {
+            replyHandler(["success" : false])
+          }
+          
         }
     }
 

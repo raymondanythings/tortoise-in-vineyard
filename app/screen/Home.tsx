@@ -16,6 +16,7 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
+import Img from '../constants/Img'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -80,7 +81,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
-      <View style={[globalStyle.fullWidth, globalStyle.header]}>
+      <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
         <Logo />
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           {`남들과 비교하지 않고, 나만의 기준으로 운동해요.
@@ -88,11 +89,13 @@ const Home = () => {
 AI가 페이스메이킹을 해줄 거예요.`}
         </Text>
       </View>
-      <View style={{ backgroundColor: '#C1D68A', width: 300, height: 300, marginVertical: 20 }}>
-        <Text>메인 꼬북자리</Text>
+      <View
+        style={[{ marginVertical: 20, justifyContent: 'center', marginLeft: '10%' }, { flex: 6 }]}
+      >
+        <Image source={Img.LOGO_MOVING} />
       </View>
       {/* <Image source={Img.GRAPE} /> */}
-      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
+      <View style={[globalStyle.fullWidth, { flex: 2.5 }]}>
         {token ? (
           <Button
             style={{
@@ -139,14 +142,14 @@ AI가 페이스메이킹을 해줄 거예요.`}
             서비스 약관 읽어보기
           </Text>
         </Pressable>
-        <Pressable
+        {/* <Pressable
           onPress={() => {
             AsyncStorage.clear()
             setToken('')
           }}
         >
           <Text>초기화</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
     </SafeAreaView>
   )

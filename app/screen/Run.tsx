@@ -25,6 +25,8 @@ import Swiper from '../components/Swiper'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { calculateDistance } from '../../utils/distance'
 import healthKit from '../../utils/Healthkit'
+import FastImage from 'react-native-fast-image'
+import Img from '../constants/Img'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -87,7 +89,7 @@ const Run = () => {
             longitude: latLng?.longitude ?? location.longitude,
           },
           heading: 0,
-          ...(tracking ? { pitch: 0, zoom: 19 } : { zoom: 18, pitch: 10 }),
+          ...(tracking ? { pitch: 0, zoom: 1 } : { zoom: 2, pitch: 10 }),
         },
         { duration: 1000 },
       )
@@ -177,7 +179,7 @@ const Run = () => {
           }}
         >
           <View style={styles.radius}>
-            <View style={styles.marker}></View>
+            <FastImage source={Img.LOGO_MOVING} style={styles.marker} />
           </View>
         </MarkerAnimated>
         {/* 테두리 선 */}
@@ -185,19 +187,19 @@ const Run = () => {
           coordinates={locations}
           strokeColors={
             locations.length >= 2
-              ? ['#6C32EC', ...generateColor('#6C32EC', '#E3AF29', locations.length - 2), '#E3AF29']
+              ? ['#FFE231', ...generateColor('#FFE231', '#6C32EC', locations.length - 2), '#6C32EC']
               : []
           }
-          strokeWidth={14}
+          strokeWidth={26}
         />
         <Polyline
           coordinates={locations}
           strokeColors={
             locations.length >= 2
-              ? ['#8F4BFF', ...generateColor('#8F4BFF', '#FF9E31', locations.length - 2), '#FF9E31']
+              ? ['#FFE231', ...generateColor('#FFE231', '#6C32EC', locations.length - 2), '#6C32EC']
               : []
           }
-          strokeWidth={10}
+          strokeWidth={20}
           style={{
             borderColor: 'red',
           }}
@@ -240,8 +242,8 @@ const Run = () => {
               </Text>
               <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
             </View>
-            <Text>
-              {distance > 1000 ? distance.toFixed(2) + ' km' : (distance * 1000).toFixed() + ' m'}
+            <Text style={{ fontFamily: Font.Pretendard }}>
+              {distance > 1 ? distance.toFixed(2) + ' km' : (distance * 1000).toFixed() + ' m'}
             </Text>
           </View>
         ) : (
@@ -308,7 +310,9 @@ const Run = () => {
         </Pressable>
         <Swiper
           onToggle={() => {
-            navigation.dispatch(StackActions.push('afteremotion'))
+            setTimeout(() => {
+              navigation.dispatch(StackActions.push('afteremotion'))
+            }, 1500)
           }}
         />
       </View>
@@ -321,22 +325,17 @@ export default Run
 
 const styles = StyleSheet.create({
   radius: {
-    height: 50,
-    width: 50,
-    borderRadius: 50 / 2,
-    overflow: 'hidden',
-    borderWidth: 1,
-    backgroundColor: 'rgba(255, 226, 49, 0.4)',
-    borderColor: 'rgba(255, 226, 49,0.8)',
+    height: 60,
+    width: 60,
+    borderRadius: 60 / 2,
+    backgroundColor: 'rgba(255, 226, 49, 1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   marker: {
-    height: 20,
-    width: 20,
-    borderWidth: 3,
-    borderColor: 'white',
-    borderRadius: 20 / 2,
-    overflow: 'hidden',
+    height: 40,
+    width: 40,
+    // borderColor: 'white',
+    // overflow: 'hidden',
   },
 })

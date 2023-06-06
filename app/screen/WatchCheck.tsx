@@ -1,6 +1,6 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, Dimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Text from '../components/Text'
@@ -26,7 +26,7 @@ const WatchCheck = () => {
         </Text>
       </View>
       <View style={globalStyle.center}>
-        <Image source={Img.WATCH} />
+        <Image source={Img.WATCH_PREV} style={{ width: Dimensions.get('window').width }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
