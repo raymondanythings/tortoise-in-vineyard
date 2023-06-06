@@ -5,6 +5,7 @@ export default {
   GRAPECIRCLE: require('../assets/grape_circle.png'),
   GRAPEFORCONFETTI: require('../assets/grape_confetti.png'),
   LOGO: require('../assets/logo.gif'),
+  BOX: require('../assets/boxBlack.png'),
   EMOTION: {
     ANGRY: require('../assets/emotion/ANGRY.png'),
     EXCITED: require('../assets/emotion/EXCITED.png'),
