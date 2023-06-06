@@ -1,6 +1,6 @@
 export default {
   ANGRY: require('../assets/bigEmotion/angry.png'),
-  EXITED: require('../assets/bigEmotion/exited.png'),
+  EXCITED: require('../assets/bigEmotion/excited.png'),
   GLOOMY: require('../assets/bigEmotion/gloomy.png'),
   HAPPY: require('../assets/bigEmotion/happy.png'),
   IRRITATED: require('../assets/bigEmotion/irritated.png'),
