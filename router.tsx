@@ -11,6 +11,7 @@ import Birthday from './app/screen/Birthday'
 import Complete from './app/screen/Complete'
 import MinHeartRateCheck from './app/screen/MinHeartRateCheck'
 import Measurement from './app/screen/Measurement'
+import Grapes from './app/screen/Grapes'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -61,6 +62,7 @@ const MainScreen = () => {
       />
       <MainStack.Screen name='afteremotion' component={AfterEmotion} />
       <MainStack.Screen name='complete' component={Complete} />
+      <MainStack.Screen name='grapes' component={Grapes} />
     </MainStack.Navigator>
   )
 }

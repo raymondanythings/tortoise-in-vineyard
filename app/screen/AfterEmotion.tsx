@@ -28,7 +28,7 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
       ]}
     >
       <View style={[globalStyle.header]}>
-        <Bedge label='감정 기록' />
+        {/* <Bedge label='감정 기록' /> */}
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>현재 감정은 어떤가요?</Text>
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
           달리기 후, 느낀 감정에 가까운 단어를 선택해주세요
