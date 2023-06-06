@@ -66,7 +66,7 @@ const Measurement = () => {
               목표 심박수
             </Text>
             <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>111 BPM</Text>
-          </View> */}
+          </View>
         </View>
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
