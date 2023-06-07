@@ -169,6 +169,8 @@ extension SessionManager {
           // 메시지에서 "action"에 해당하는 value를 얻음
           var isSuccess = false
           if let action = message["action"] as? String {
+              print("received Action")
+              print(action)
               switch action {
               case "startWorkout":
                   isSuccess = self.workoutManager.startWorkout()

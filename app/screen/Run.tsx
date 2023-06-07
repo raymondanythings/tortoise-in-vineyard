@@ -72,6 +72,7 @@ const Run = () => {
     latitude: 37.78825,
     longitude: -122.4324,
   })
+  const changeCount = useRef<number>(0)
   const [runState, setRunState] = useRecoilState(runAtom)
   const [latestHeartRateOnPush, setLatestHeartRateOnPush] = useState(0)
   const selectedEmotion = useRecoilValue(emotionState)
@@ -170,50 +171,31 @@ const Run = () => {
     }
   }, [])
 
-  // const playCurrentPaceMaker = useCallback(async () => {
-  //   if (paceMakerMessage) {
-  //     await TrackPlayer.reset()
-  //     await TrackPlayer.add([
-  //       {
-  //         url: paceMakerMessage,
-  //       },
-  //     ])
-  //     await TrackPlayer.play()
-  //   }
-  // }, [paceMakerMessage])
-
-  // useEffect(() => {
-  //   playCurrentPaceMaker()
-  // }, [playCurrentPaceMaker])
+  const getHeartRate = () => watchState.heartRate
   const postEncourage = () => {
-    return setInterval(() => {
-      console.log(watchState.heartRate, '<<<<watchState.heartRate')
-      if (watchState.heartRate && runState.type === RunType.HeartRate) {
-        if (watchState.heartRate !== latestHeartRateOnPush) {
-          updateEncourage({
-            variables: {
-              input: {
-                runId: runState.id,
-                currentHeartRate: watchState.heartRate,
-              },
+    const currentHeartRate = getHeartRate()
+    
+      if (currentHeartRate !== latestHeartRateOnPush) {
+        updateEncourage({
+          variables: {
+            input: {
+              runId: runState.id,
+              currentHeartRate:(watchState.heartRate && currentHeartRate !== latestHeartRateOnPush) ? watchState.heartRate : 0,
             },
-          })
-        }
+          },
+        })
       }
-    }, 30000)
+    
   }
+
   useEffect(() => {
-    intervalId.current = postEncourage()
-    return () => {
-      clearInterval(intervalId.current)
+    changeCount.current++
+    if (changeCount.current >= 10) {
+      changeCount.current = 0
+      postEncourage()
     }
-  }, [isReachability])
+  }, [isReachability, watchState.heartRate])
 
-  // locations.length 6 이하 -> locations.length
-  // locations.length 6 이상 -> locations.length - 6 만큼 emotion color
-  // selectedEmotion
-
-  // 로케이션 허용 후 뜨는 화면
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -414,7 +396,7 @@ const Run = () => {
   )
 }
 
-export default memo(Run)
+export default Run
 
 const styles = StyleSheet.create({
   radius: {

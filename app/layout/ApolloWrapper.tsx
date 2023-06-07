@@ -13,6 +13,9 @@ const ApolloWrapper = ({ children }: PropsWithChildren) => {
   const wsLink = new GraphQLWsLink(
     createClient({
       url: 'wss://sesacthon-server.lucas-gong.dev/graphql',
+      shouldRetry() {
+        return true
+      },
     }),
   )
   const httpLink = new HttpLink({

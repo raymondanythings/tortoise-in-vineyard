@@ -3,7 +3,7 @@ import Run from './Run'
 import usePaceMakerMessage from '../hook/usePaceMakerMessage'
 import TrackPlayer from 'react-native-track-player'
 const SubscriptionWrapper = () => {
-  const { paceMakerMessage } = usePaceMakerMessage()
+  const paceMakerMessage = usePaceMakerMessage()
   console.log(paceMakerMessage, '<<')
   const playCurrentPaceMaker = useCallback(async () => {
     if (paceMakerMessage) {

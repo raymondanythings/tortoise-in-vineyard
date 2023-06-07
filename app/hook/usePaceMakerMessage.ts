@@ -15,22 +15,17 @@ const usePaceMakerMessage = (
   > = {},
 ) => {
   const runState = useRecoilValue(runAtom)
-  console.log(runState.id, '<<runState.id')
-  const {
-    data: { runPaceMaker: paceMakerMessage } = {},
-    error,
-    loading,
-  } = Apollo.useSubscription(RunPaceMakerDocument, {
+
+  const { data, error, loading } = Apollo.useSubscription(RunPaceMakerDocument, {
     variables: {
       runId: runState.id,
     },
   })
-
-  console.log(paceMakerMessage, '<<<paceMakerMessage')
+  console.log(runState.id, '<<runState.id')
+  console.log(data, '<<<paceMakerMessage')
   console.log(error, '<<<error')
 
-  const returnValue = useMemo(() => ({ paceMakerMessage }), [paceMakerMessage])
-  return returnValue
+  return data
 }
 
 export default usePaceMakerMessage

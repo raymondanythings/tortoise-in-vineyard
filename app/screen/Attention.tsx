@@ -14,14 +14,9 @@ const Attention = () => {
   const navigation = useNavigation()
   const startRunning = () => {
     if (isReachability) {
-      sendMessage({ action: 'startRunning' }, (payload) => {
-        if (payload.isSuccess) {
-          navigation.dispatch(StackActions.replace('run'))
-        }
-      })
-    } else {
-      navigation.dispatch(StackActions.replace('run'))
+      sendMessage({ action: 'startRunning' }, (payload) => {})
     }
+    navigation.dispatch(StackActions.replace('run'))
   }
   const { user } = useGetUser('cache-only')
   return (
