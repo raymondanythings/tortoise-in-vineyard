@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View } from 'react-native'
+import { Image, Pressable, View } from 'react-native'
 import Text from '../components/Text'
 import { sendMessage } from 'react-native-watch-connectivity'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -20,8 +20,8 @@ const Attention = () => {
         }
       })
     } else {
+      navigation.dispatch(StackActions.replace('run'))
     }
-    navigation.dispatch(StackActions.replace('run'))
   }
   const { user } = useGetUser('cache-only')
   return (
@@ -70,7 +70,7 @@ const Attention = () => {
             </View>
           </View>
         )}
-        <View
+        <Pressable
           style={{
             flex: 2,
             marginTop: '20%',
@@ -78,14 +78,13 @@ const Attention = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
+          onPress={() => {
+            startRunning()
+          }}
         >
-          <StartButton
-            onPress={() => {
-              startRunning()
-            }}
-          />
+          <StartButton />
           <Text style={{ position: 'absolute', color: '#fff', fontSize: 60 }}>START</Text>
-        </View>
+        </Pressable>
       </View>
       <View style={globalStyle.footer}>{/* <StartButton /> */}</View>
     </SafeAreaView>

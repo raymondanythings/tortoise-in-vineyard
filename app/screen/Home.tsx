@@ -17,6 +17,7 @@ import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
 import Img from '../constants/Img'
+import TrackPlayer from 'react-native-track-player'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -30,6 +31,7 @@ const Home = () => {
   })
 
   const validateUserAndPush = () => {
+    console.log('??')
     if (isNavigate.current) {
       if (userData?.me) {
         isNavigate.current = false
@@ -71,8 +73,8 @@ const Home = () => {
     isNavigate.current = true
   }
 
-  console.log(Text)
   useEffect(() => {
+    TrackPlayer.setupPlayer()
     navigation.addListener('blur', canNavigateHandler)
     return () => {
       navigation.removeListener('blur', canNavigateHandler)
@@ -143,9 +145,16 @@ AI가 페이스메이킹을 해줄 거예요.`}
           </Text>
         </Pressable>
         {/* <Pressable
-          onPress={() => {
-            AsyncStorage.clear()
-            setToken('')
+          onPress={async () => {
+            await TrackPlayer.reset()
+            await TrackPlayer.add([
+              {
+                url: 'https://download.samplelib.com/mp3/sample-3s.mp3',
+              },
+            ])
+            await TrackPlayer.play()
+            // AsyncStorage.clear()
+            // setToken('')
           }}
         >
           <Text>초기화</Text>

@@ -1,4 +1,12 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
 import { sendMessage } from 'react-native-watch-connectivity'
 import MapView, {
@@ -25,19 +33,13 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import { calculateDistance } from '../../utils/distance'
 import FastImage from 'react-native-fast-image'
 import Img from '../constants/Img'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { emotionState } from '../store/emotionState'
 import { watchAtom } from '../store/watchAtom'
 import { watchOsActionsType } from '../constants/constants'
-import { useSubscription } from '@apollo/client'
-import {
-  RunType,
-  useGetEncourageMutation,
-  useRunPaceMakerSubscription,
-} from '../../graphql/generated'
+import { RunType, useGetEncourageMutation } from '../../graphql/generated'
 import { runAtom } from '../store/run'
-import usePaceMakerMessage from '../hook/usePaceMakerMessage'
-import TrackPlayer from 'react-native-track-player'
+
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -63,7 +65,7 @@ const GRADIENT_LIMIT = 12
 
 const Run = () => {
   const watchState = useRecoilValue(watchAtom)
-
+  const { isReachability } = useWatch()
   const [tracking, setTracking] = useState(true)
   const [locations, setLocations] = useState<Array<ILocation>>([])
   const [location, setLocation] = useState<IGeolocation>({
@@ -75,11 +77,18 @@ const Run = () => {
   const selectedEmotion = useRecoilValue(emotionState)
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
   const [updateEncourage] = useGetEncourageMutation({
-    onCompleted() {
-      setLatestHeartRateOnPush(watchState.heartRate)
+    onCompleted(data) {
+      if (data.getEncourage) {
+        console.log(data, '<< update done')
+        setLatestHeartRateOnPush(watchState.heartRate)
+      }
+    },
+    onError(error, clientOptions) {
+      console.log(error, '<<error')
     },
   })
-  const { paceMakerMessage } = usePaceMakerMessage()
+
+  const intervalId = useRef<number>(0)
   const distance = useMemo(() => {
     const calcDistance = calculateDistance(locations)
     setRunState((prev) => ({
@@ -161,38 +170,44 @@ const Run = () => {
     }
   }, [])
 
-  const playCurrentPaceMaker = useCallback(async () => {
-    if (paceMakerMessage) {
-      await TrackPlayer.reset()
-      await TrackPlayer.add([
-        {
-          url: paceMakerMessage,
-        },
-      ])
-      await TrackPlayer.play()
-    }
-  }, [paceMakerMessage])
+  // const playCurrentPaceMaker = useCallback(async () => {
+  //   if (paceMakerMessage) {
+  //     await TrackPlayer.reset()
+  //     await TrackPlayer.add([
+  //       {
+  //         url: paceMakerMessage,
+  //       },
+  //     ])
+  //     await TrackPlayer.play()
+  //   }
+  // }, [paceMakerMessage])
 
-  useEffect(() => {
-    playCurrentPaceMaker()
-  }, [playCurrentPaceMaker])
-  useEffect(() => {
-    if (watchState.heartRate && runState.type === RunType.HeartRate) {
-      if (
-        latestHeartRateOnPush - 20 >= watchState.heartRate ||
-        latestHeartRateOnPush + 20 <= watchState.heartRate
-      ) {
-        updateEncourage({
-          variables: {
-            input: {
-              runId: runState.id,
-              currentHeartRate: watchState.heartRate,
+  // useEffect(() => {
+  //   playCurrentPaceMaker()
+  // }, [playCurrentPaceMaker])
+  const postEncourage = () => {
+    return setInterval(() => {
+      console.log(watchState.heartRate, '<<<<watchState.heartRate')
+      if (watchState.heartRate && runState.type === RunType.HeartRate) {
+        if (watchState.heartRate !== latestHeartRateOnPush) {
+          updateEncourage({
+            variables: {
+              input: {
+                runId: runState.id,
+                currentHeartRate: watchState.heartRate,
+              },
             },
-          },
-        })
+          })
+        }
       }
+    }, 30000)
+  }
+  useEffect(() => {
+    intervalId.current = postEncourage()
+    return () => {
+      clearInterval(intervalId.current)
     }
-  }, [watchState.heartRate])
+  }, [isReachability])
 
   // locations.length 6 이하 -> locations.length
   // locations.length 6 이상 -> locations.length - 6 만큼 emotion color
@@ -310,7 +325,7 @@ const Run = () => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {/* 심박수 */}
               <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
-                {Number(watchState.heartRate || 0)}
+                {Math.round(watchState.heartRate || 0)}
               </Text>
               <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
             </View>
@@ -399,7 +414,7 @@ const Run = () => {
   )
 }
 
-export default Run
+export default memo(Run)
 
 const styles = StyleSheet.create({
   radius: {

@@ -39,7 +39,6 @@ const MinHeart = () => {
     const variance =
       heartRateData.reduce((acc, cur) => acc + Math.pow(cur - mean, 2), 0) / heartRateData.length
     const std = Math.sqrt(variance)
-    console.log(variance)
     return std < STD_THRESHOLD
   }, [heartRateData.length])
 
@@ -78,7 +77,6 @@ const MinHeart = () => {
 
   useEffect(() => {
     setHeartRateData((prev) => [...prev, watchState.heartRate])
-    console.log(watchState.heartRate, '<<??')
     determineStableHeartRate()
   }, [watchState])
   return (

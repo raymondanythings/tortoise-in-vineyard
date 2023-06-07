@@ -22,6 +22,7 @@ const BeforeEmotion = () => {
         const {
           startRun: { id, type },
         } = data
+        console.log(data)
         setRunState((prev) => ({
           ...prev,
           id,
@@ -45,6 +46,7 @@ const BeforeEmotion = () => {
       console.log(error)
     },
   })
+
   // useStartRunMutation 훅을 사용해서 뮤테이션을 실행하는 핸들러....
   const handleButtonClick = () => {
     if (emotion.value !== '') {

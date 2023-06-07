@@ -12,6 +12,7 @@ import Complete from './app/screen/Complete'
 import MinHeartRateCheck from './app/screen/MinHeartRateCheck'
 import Measurement from './app/screen/Measurement'
 import Attention from './app/screen/Attention'
+import SubscriptionWrapper from './app/screen/SubscriptionWrapper'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -54,13 +55,7 @@ const MainScreen = () => {
       <MainStack.Screen name='measurement' component={Measurement} />
       <MainStack.Screen name='beforeemotion' component={BeforeEmotion} />
       <MainStack.Screen name='attention' component={Attention} />
-      <MainStack.Screen
-        name='run'
-        // options={{
-        //   gestureEnabled: false,
-        // }}
-        component={Run}
-      />
+      <MainStack.Screen name='run' component={SubscriptionWrapper} />
       <MainStack.Screen name='afteremotion' component={AfterEmotion} />
       <MainStack.Screen name='complete' component={Complete} />
     </MainStack.Navigator>

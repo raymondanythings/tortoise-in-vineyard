@@ -9,6 +9,7 @@ import { createClient } from 'graphql-ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 const ApolloWrapper = ({ children }: PropsWithChildren) => {
   const token = useRecoilValue(authState)
+  console.log(token)
   const wsLink = new GraphQLWsLink(
     createClient({
       url: 'wss://sesacthon-server.lucas-gong.dev/graphql',

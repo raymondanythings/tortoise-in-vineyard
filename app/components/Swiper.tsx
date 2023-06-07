@@ -28,7 +28,7 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
     if (isToggled !== toggled) {
       setToggled(isToggled)
       if (isToggled) {
-        console.log(handleComplete, '<<<<<')
+        console.log(isToggled, '<<<<< isToggled')
       }
       onToggle && onToggle(isToggled)
     }

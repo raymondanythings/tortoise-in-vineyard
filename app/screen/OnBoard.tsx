@@ -8,11 +8,13 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import GrapeCount from '../components/GrapeCount'
 import Button from '../components/Button'
 import useGetUser from '../hook/useGetUser'
+import usePaceMakerMessage from '../hook/usePaceMakerMessage'
 
 const OnBoard = () => {
   const navigation = useNavigation()
   const { user } = useGetUser('cache-only')
   const grapeCircleCount = useMemo(() => user?.totalRun ?? 0 % 6, [user?.totalRun])
+
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header]}>
@@ -35,7 +37,7 @@ const OnBoard = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={!user?.canRunToday}
+          // disabled={!user?.canRunToday}
           onPress={() => navigation.dispatch(StackActions.push('watchcheck'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>

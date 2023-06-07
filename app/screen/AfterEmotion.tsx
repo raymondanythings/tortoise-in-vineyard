@@ -67,7 +67,7 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
               endRunMutation({
                 variables: {
                   input: {
-                    runMeters: runState.distance,
+                    runMeters: Math.round(runState.distance * 1000),
                     emotionAfter: emotion.value,
                     runId: runState.id,
                   },
