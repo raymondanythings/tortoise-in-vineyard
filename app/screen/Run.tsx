@@ -180,7 +180,7 @@ const Run = () => {
     if (watchState.heartRate && runState.type === RunType.HeartRate) {
       if (
         latestHeartRateOnPush - 20 >= watchState.heartRate ||
-        latestHeartRateOnPush + 20 <= watchState.HeartRate
+        latestHeartRateOnPush + 20 <= watchState.heartRate
       ) {
         updateEncourage({
           variables: {
