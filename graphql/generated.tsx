@@ -201,6 +201,13 @@ export type User = {
 
 export type UserDataFragment = { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean };
 
+export type GetEncourageMutationVariables = Exact<{
+  input: GetEncourageInput;
+}>;
+
+
+export type GetEncourageMutation = { __typename?: 'Mutation', getEncourage: boolean };
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String']['input'];
   provider: AccountProvider;
@@ -222,6 +229,13 @@ export type StartRunMutationVariables = Exact<{
 
 
 export type StartRunMutation = { __typename?: 'Mutation', startRun: { __typename?: 'Run', id: string, type: RunType, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, lowerBoundHeartRate?: number | null, upperBoundHeartRate?: number | null, createdAt: any, updatedAt: any } };
+
+export type EndRunMutationVariables = Exact<{
+  input: EndRunInput;
+}>;
+
+
+export type EndRunMutation = { __typename?: 'Mutation', endRun: { __typename?: 'EndRunOutput', totalRun: number, numLeft: number } };
 
 export type UpdateBirthMutationVariables = Exact<{
   birthYear: Scalars['Float']['input'];
@@ -255,6 +269,37 @@ export const UserDataFragmentDoc = gql`
   canRunToday
 }
     `;
+export const GetEncourageDocument = gql`
+    mutation getEncourage($input: GetEncourageInput!) {
+  getEncourage(input: $input)
+}
+    `;
+export type GetEncourageMutationFn = Apollo.MutationFunction<GetEncourageMutation, GetEncourageMutationVariables>;
+
+/**
+ * __useGetEncourageMutation__
+ *
+ * To run a mutation, you first call `useGetEncourageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGetEncourageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [getEncourageMutation, { data, loading, error }] = useGetEncourageMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetEncourageMutation(baseOptions?: Apollo.MutationHookOptions<GetEncourageMutation, GetEncourageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GetEncourageMutation, GetEncourageMutationVariables>(GetEncourageDocument, options);
+      }
+export type GetEncourageMutationHookResult = ReturnType<typeof useGetEncourageMutation>;
+export type GetEncourageMutationResult = Apollo.MutationResult<GetEncourageMutation>;
+export type GetEncourageMutationOptions = Apollo.BaseMutationOptions<GetEncourageMutation, GetEncourageMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $provider: AccountProvider!) {
   signIn(input: {email: $email, provider: $provider}) {
@@ -363,6 +408,40 @@ export function useStartRunMutation(baseOptions?: Apollo.MutationHookOptions<Sta
 export type StartRunMutationHookResult = ReturnType<typeof useStartRunMutation>;
 export type StartRunMutationResult = Apollo.MutationResult<StartRunMutation>;
 export type StartRunMutationOptions = Apollo.BaseMutationOptions<StartRunMutation, StartRunMutationVariables>;
+export const EndRunDocument = gql`
+    mutation endRun($input: EndRunInput!) {
+  endRun(input: $input) {
+    totalRun
+    numLeft
+  }
+}
+    `;
+export type EndRunMutationFn = Apollo.MutationFunction<EndRunMutation, EndRunMutationVariables>;
+
+/**
+ * __useEndRunMutation__
+ *
+ * To run a mutation, you first call `useEndRunMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEndRunMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [endRunMutation, { data, loading, error }] = useEndRunMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEndRunMutation(baseOptions?: Apollo.MutationHookOptions<EndRunMutation, EndRunMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EndRunMutation, EndRunMutationVariables>(EndRunDocument, options);
+      }
+export type EndRunMutationHookResult = ReturnType<typeof useEndRunMutation>;
+export type EndRunMutationResult = Apollo.MutationResult<EndRunMutation>;
+export type EndRunMutationOptions = Apollo.BaseMutationOptions<EndRunMutation, EndRunMutationVariables>;
 export const UpdateBirthDocument = gql`
     mutation updateBirth($birthYear: Float!) {
   updateBirthYear(birthYear: $birthYear) {

@@ -1,0 +1,3 @@
+mutation getEncourage($input: GetEncourageInput!) {
+  getEncourage(input: $input)
+}

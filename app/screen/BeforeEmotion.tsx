@@ -9,16 +9,25 @@ import Button from '../components/Button'
 import { useRecoilState } from 'recoil'
 import { emotionState } from '../store/emotionState'
 import { useStartRunMutation } from '../../graphql/generated'
-import { RunType } from '../../graphql/generated'
+import { runAtom } from '../store/run'
 
 const BeforeEmotion = () => {
   const navigation = useNavigation()
   const [emotion, setEmotion] = useRecoilState(emotionState)
-
+  const [runState, setRunState] = useRecoilState(runAtom)
   // const [startRun] = useStartRunMutation()
   const [startRun] = useStartRunMutation({
     onCompleted(data) {
       if (data.startRun) {
+        const {
+          startRun: { id, type },
+        } = data
+        setRunState((prev) => ({
+          ...prev,
+          id,
+          type,
+          isRunning: true,
+        }))
         // 뮤테이션 성공시 run 화면으로 이동
         navigation.reset({
           index: 0,
@@ -42,7 +51,7 @@ const BeforeEmotion = () => {
       startRun({
         variables: {
           input: {
-            type: RunType.Distance,
+            type: runState.type,
             emotionBefore: emotion.value,
           },
         },

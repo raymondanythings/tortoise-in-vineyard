@@ -8,11 +8,14 @@ import Img from '../constants/Img'
 import Button from '../components/Button'
 import useWatch from '../hook/useWatch'
 import useGetUser from '../hook/useGetUser'
+import { useSetRecoilState } from 'recoil'
+import { runAtom } from '../store/run'
+import { RunType } from '../../graphql/generated'
 
 const WatchCheck = () => {
   const { user } = useGetUser('cache-only')
   const navigation = useNavigation()
-
+  const setRunState = useSetRecoilState(runAtom)
   const { isConnected, isReachability } = useWatch()
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
@@ -39,6 +42,10 @@ const WatchCheck = () => {
           disabled={!isConnected || !isReachability}
           onPress={() => {
             if (user?.minHeartRate) {
+              setRunState((prev) => ({
+                ...prev,
+                type: RunType.HeartRate,
+              }))
               navigation.dispatch(StackActions.push('beforeemotion'))
             } else {
               navigation.dispatch(StackActions.push('minheartratecheck'))
@@ -57,7 +64,13 @@ const WatchCheck = () => {
             columnGap: 8,
           }}
           disabled={isConnected && isReachability}
-          onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
+          onPress={() => {
+            setRunState((prev) => ({
+              ...prev,
+              type: RunType.Distance,
+            }))
+            navigation.dispatch(StackActions.push('beforeemotion'))
+          }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             거리로 측정할게요

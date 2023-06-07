@@ -25,12 +25,19 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import { calculateDistance } from '../../utils/distance'
 import FastImage from 'react-native-fast-image'
 import Img from '../constants/Img'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { emotionState } from '../store/emotionState'
 import { watchAtom } from '../store/watchAtom'
 import { watchOsActionsType } from '../constants/constants'
 import { useSubscription } from '@apollo/client'
-import { useRunPaceMakerSubscription } from '../../graphql/generated'
+import {
+  RunType,
+  useGetEncourageMutation,
+  useRunPaceMakerSubscription,
+} from '../../graphql/generated'
+import { runAtom } from '../store/run'
+import usePaceMakerMessage from '../hook/usePaceMakerMessage'
+import TrackPlayer from 'react-native-track-player'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -63,15 +70,20 @@ const Run = () => {
     latitude: 37.78825,
     longitude: -122.4324,
   })
-
+  const [runState, setRunState] = useRecoilState(runAtom)
   const selectedEmotion = useRecoilValue(emotionState)
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
-  // Listener when receive message
-
-  const distance = useMemo(() => calculateDistance(locations), [locations.length])
+  const [updateEncourage] = useGetEncourageMutation()
+  const { paceMakerMessage } = usePaceMakerMessage()
+  const distance = useMemo(() => {
+    const calcDistance = calculateDistance(locations)
+    setRunState((prev) => ({
+      ...prev,
+      distance: calcDistance,
+    }))
+    return calcDistance
+  }, [locations.length])
   const navigation = useNavigation()
-
-  const { isConnected } = useWatch()
 
   const geolocationRequest = useCallback(async () => {
     const result = await requestPermission()
@@ -143,6 +155,34 @@ const Run = () => {
       clearWatch()
     }
   }, [])
+
+  const playCurrentPaceMaker = useCallback(async () => {
+    if (paceMakerMessage) {
+      await TrackPlayer.reset()
+      await TrackPlayer.add([
+        {
+          url: paceMakerMessage,
+        },
+      ])
+      await TrackPlayer.play()
+    }
+  }, [paceMakerMessage])
+
+  useEffect(() => {
+    playCurrentPaceMaker()
+  }, [playCurrentPaceMaker])
+  useEffect(() => {
+    if (watchState.heartRate && runState.type === RunType.HeartRate) {
+      updateEncourage({
+        variables: {
+          input: {
+            runId: runState.id,
+            currentHeartRate: watchState.heartRate,
+          },
+        },
+      })
+    }
+  }, [watchState.heartRate])
 
   // locations.length 6 이하 -> locations.length
   // locations.length 6 이상 -> locations.length - 6 만큼 emotion color
@@ -350,3 +390,20 @@ const Run = () => {
 }
 
 export default Run
+
+const styles = StyleSheet.create({
+  radius: {
+    height: 60,
+    width: 60,
+    borderRadius: 60 / 2,
+    backgroundColor: 'rgba(255, 226, 49, 1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  marker: {
+    height: 40,
+    width: 40,
+    // borderColor: 'white',
+    // overflow: 'hidden',
+  },
+})

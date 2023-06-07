@@ -11,3 +11,10 @@ mutation startRun($input: StartRunInput!) {
     updatedAt
   }
 }
+
+mutation endRun($input: EndRunInput!) {
+  endRun(input: $input) {
+    totalRun
+    numLeft
+  }
+}

@@ -7,10 +7,14 @@ import Button from '../components/Button'
 import Text from '../components/Text'
 import EmotionButtons from '../components/EmotionButtons'
 import { Emotion } from '../constants/bigEmotion'
+import { useEndRunMutation } from '../../graphql/generated'
+import { useRecoilValue } from 'recoil'
+import { runAtom } from '../store/run'
 
 const AfterEmotion = ({ navigation }: { navigation: any }) => {
   const [emotion, setEmotion] = useState<Emotion | null>(null)
-
+  const [endRunMutation] = useEndRunMutation()
+  const runState = useRecoilValue(runAtom)
   const handleEmotionSelection = (selected: any) => {
     if (selected.value === '') {
       setEmotion(null)
@@ -44,13 +48,24 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
             columnGap: 8,
             backgroundColor: emotion ? '#222222' : '#A0A0A0',
           }}
-          disabled={!emotion}
+          disabled={!emotion?.value}
           onPress={() => {
-            navigation.dispatch(
-              StackActions.push('complete', {
-                emotion,
-              }),
-            )
+            if (emotion?.value) {
+              endRunMutation({
+                variables: {
+                  input: {
+                    runMeters: runState.distance,
+                    emotionAfter: emotion.value,
+                    runId: runState.id,
+                  },
+                },
+              })
+              navigation.dispatch(
+                StackActions.push('complete', {
+                  emotion,
+                }),
+              )
+            }
           }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
