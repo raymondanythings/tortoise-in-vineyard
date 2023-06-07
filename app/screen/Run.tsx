@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
-import { sendMessage, watchEvents } from 'react-native-watch-connectivity'
+import { sendMessage } from 'react-native-watch-connectivity'
 import MapView, {
   LatLng,
   Marker,
@@ -20,17 +20,17 @@ import { AuthorizationResult } from 'react-native-geolocation-service'
 import useWatch from '../hook/useWatch'
 import Heart from '../components/Lotties/Heart'
 import PinkDots from '../components/Lotties/PinkDots'
-
 import Swiper from '../components/Swiper'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { calculateDistance } from '../../utils/distance'
-import healthKit from '../../utils/Healthkit'
 import FastImage from 'react-native-fast-image'
 import Img from '../constants/Img'
 import { useRecoilValue } from 'recoil'
 import { emotionState } from '../store/emotionState'
 import { watchAtom } from '../store/watchAtom'
 import { watchOsActionsType } from '../constants/constants'
+import { useSubscription } from '@apollo/client'
+import { useRunPaceMakerSubscription } from '../../graphql/generated'
 // 위치 권한 요청
 async function requestPermission() {
   try {
@@ -56,6 +56,7 @@ const GRADIENT_LIMIT = 12
 
 const Run = () => {
   const watchState = useRecoilValue(watchAtom)
+
   const [tracking, setTracking] = useState(true)
   const [locations, setLocations] = useState<Array<ILocation>>([])
   const [location, setLocation] = useState<IGeolocation>({
@@ -349,20 +350,3 @@ const Run = () => {
 }
 
 export default Run
-
-const styles = StyleSheet.create({
-  radius: {
-    height: 60,
-    width: 60,
-    borderRadius: 60 / 2,
-    backgroundColor: 'rgba(255, 226, 49, 1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  marker: {
-    height: 40,
-    width: 40,
-    // borderColor: 'white',
-    // overflow: 'hidden',
-  },
-})
