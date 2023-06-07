@@ -9,7 +9,7 @@ const StartButton = (props: PressableProps) => {
       <LottieView
         style={{ width: '100%', height: '100%' }}
         source={Startbutton}
-        speed={0.4}
+        speed={1}
         autoPlay
       />
     </Pressable>
