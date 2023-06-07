@@ -36,6 +36,15 @@ struct ControlsView: View {
           Text(workoutManager.running ? "Pause" : "Resume")
         }
         
+      }.onChange(of: sessionManager.isPaused){
+        shouldStartRunning in
+        workoutManager.togglePause()
+      }.onChange(of : sessionManager.isDone) {
+        isDone in
+        if isDone {
+          workoutManager.endWorkout()
+        }
+            
       }
     }
 }

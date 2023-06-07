@@ -10,6 +10,7 @@ interface GrapeCountProps {
 }
 const TOTAL_COUNT = 6
 const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
+  const c = count % TOTAL_COUNT
   return (
     <View
       style={{
@@ -20,10 +21,10 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
         alignItems: 'center',
       }}
     >
-      {Array.from({ length: count }).map((_, index) => (
+      {Array.from({ length: c }).map((_, index) => (
         <Image key={'fill' + index} source={Icon.GRAPECIRCLE} />
       ))}
-      {Array.from({ length: TOTAL_COUNT - count }, (v, i) => i + count + 1).map((c) => (
+      {Array.from({ length: TOTAL_COUNT - c }, (v, i) => i + c + 1).map((c) => (
         <View
           key={c}
           style={{
@@ -51,7 +52,7 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
           letterSpacing: -2,
         }}
       >
-        {count} / 6
+        {c % 6} / 6
       </Text>
     </View>
   )

@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import { Pressable, StyleSheet, Text } from 'react-native'
+import { Image, Pressable, StyleSheet, Text } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import LinearGradient from 'react-native-linear-gradient'
 import Animated, {
@@ -13,6 +13,7 @@ import Animated, {
   interpolateColor,
 } from 'react-native-reanimated'
 import { Font } from '../common/globalStyle'
+import Icon from '../constants/Icon'
 
 const BUTTON_HEIGHT = 54
 
@@ -59,7 +60,7 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
 
   const colorWave = useAnimatedStyle(() => ({
     width: 80 + sharedValue.value,
-    opacity: interpolate(sharedValue.value, InterpolateXInput, [0, 1]),
+    // opacity: interpolate(sharedValue.value, InterpolateXInput, [0, 1]),
   }))
 
   const blackWidth = useAnimatedStyle(() => ({
@@ -91,10 +92,12 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
       />
 
       <PanGestureHandler onGestureEvent={animatedGestureHandler}>
-        <Animated.View style={[styles.swipeableCircle, animatedStylesSwipe]}></Animated.View>
+        <Animated.View style={[styles.swipeableCircle, animatedStylesSwipe]}>
+          <Image source={Icon.CHEVRON} />
+        </Animated.View>
       </PanGestureHandler>
 
-      <Text style={[styles.swipeText]}>달리기 완료</Text>
+      <Text style={[styles.swipeText]}>밀어서 종료하기</Text>
       {canFinish ? null : (
         <Pressable
           onPress={() => {
@@ -132,6 +135,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#8C46FF',
     borderRadius: 10,
     position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 3,
     left: 0,
   },

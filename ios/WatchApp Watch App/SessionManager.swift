@@ -11,6 +11,9 @@ import WatchConnectivity
 class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
     @Published var shouldStartRunning = false
     @Published var shouldStopRunning = false
+    @Published var isPaused = false
+    @Published var isDone = false
+  
 
     let workoutManager = WorkoutManager()
     static let sharedManager = SessionManager()
@@ -59,6 +62,13 @@ class SessionManager: NSObject, WCSessionDelegate ,ObservableObject{
         session?.activate()
 
     }
+  
+  func resetSession(){
+    shouldStartRunning = false
+    shouldStopRunning = false
+    isPaused = false
+    isDone = false
+  }
 }
 //
 //// MARK: Application Context
@@ -182,9 +192,10 @@ extension SessionManager {
                   self.shouldStopRunning = true
               case "pause":
                   isSuccess = self.workoutManager.pause()
-                
+                  self.isPaused = !self.isPaused
               case "resume":
                   isSuccess = self.workoutManager.resume()
+                  self.isDone = true
               // 추가적인 액션들
               default:
                   print("Unknown action received: \(action)")

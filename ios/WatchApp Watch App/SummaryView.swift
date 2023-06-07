@@ -9,6 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct SummaryView: View {
+  @EnvironmentObject var sessionManager : SessionManager
   @EnvironmentObject var workoutManager : WorkoutManager
   @Environment(\.dismiss) var dismiss
   @State private var durationFormatter : DateComponentsFormatter = {
@@ -31,6 +32,7 @@ struct SummaryView: View {
 //          ActivityRingsView(healthStore:workoutManager.healthstore).frame(width: 50,height: 50)
           Button("Done"){
             dismiss()
+            sessionManager.resetSession()
           }
         }.scenePadding()
       }

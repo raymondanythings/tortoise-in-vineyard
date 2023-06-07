@@ -15,15 +15,14 @@ const usePaceMakerMessage = (
   > = {},
 ) => {
   const runState = useRecoilValue(runAtom)
-
+  // console.log(runState.id, '<<runState.id')
   const { data, error, loading } = Apollo.useSubscription(RunPaceMakerDocument, {
     variables: {
       runId: runState.id,
     },
+    shouldResubscribe: true,
+    fetchPolicy: 'network-only',
   })
-  console.log(runState.id, '<<runState.id')
-  console.log(data, '<<<paceMakerMessage')
-  console.log(error, '<<<error')
 
   return data
 }

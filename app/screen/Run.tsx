@@ -89,7 +89,6 @@ const Run = () => {
     },
   })
 
-  const intervalId = useRef<number>(0)
   const distance = useMemo(() => {
     const calcDistance = calculateDistance(locations)
     setRunState((prev) => ({
@@ -163,39 +162,62 @@ const Run = () => {
 
   useLayoutEffect(() => {
     geolocationRequest()
+  }, [])
+
+  useEffect(() => {
+    let id: NodeJS.Timer = 0
+    if (runState.type === RunType.Distance) {
+      id = setInterval(() => {
+        postEncourage()
+      }, 60000)
+    }
     navigation.addListener('blur', () => {
       clearWatch()
+      clearInterval(id)
     })
     return () => {
       clearWatch()
+      clearInterval(id)
     }
   }, [])
 
-  const getHeartRate = () => watchState.heartRate
   const postEncourage = () => {
-    const currentHeartRate = getHeartRate()
-    
-      if (currentHeartRate !== latestHeartRateOnPush) {
-        updateEncourage({
-          variables: {
-            input: {
-              runId: runState.id,
-              currentHeartRate:(watchState.heartRate && currentHeartRate !== latestHeartRateOnPush) ? watchState.heartRate : 0,
-            },
-          },
-        })
-      }
-    
+    updateEncourage({
+      variables: {
+        input: {
+          runId: runState.id,
+          currentHeartRate: watchState.heartRate ? watchState.heartRate : undefined,
+        },
+      },
+    })
   }
 
   useEffect(() => {
-    changeCount.current++
-    if (changeCount.current >= 10) {
-      changeCount.current = 0
-      postEncourage()
+    let id:NodeJS.Timer
+    if (tracking) {
+      if (runState.type === RunType.HeartRate) {
+        id = setInterval(() => {
+          changeCount.current++
+          if (changeCount.current >= 60) {
+            clearInterval(id)
+          }
+        }, 1000)
+      }
     }
-  }, [isReachability, watchState.heartRate])
-
+    return () => {
+      clearInterval(id)
+    }
+  }, [isReachability, tracking])
+  useEffect(() => {
+    if (tracking) {
+      if (changeCount.current >= 60) {
+        postEncourage()
+        changeCount.current = 0
+      }
+    } else {
+      changeCount.current = 0
+    }
+  }, [changeCount.current, tracking])
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -352,20 +374,20 @@ const Run = () => {
         }}
       >
         <Pressable
-          onPress={() =>
+          onPress={() => {
             setTracking((prev) => {
               if (!prev) {
                 clearWatch()
-                sendMessage(
-                  { action: (prev ? 'pause' : 'resume') as watchOsActionsType },
-                  (payload) => {
-                    console.log(payload, '<<<')
-                  },
-                )
               }
               return !prev
             })
-          }
+            sendMessage(
+              { action: 'pause' as watchOsActionsType },
+              // (payload) => {
+              //   console.log(payload, '<<<')
+              // },
+            )
+          }}
           style={{
             backgroundColor: colors.PURPLE,
             width: 90,
@@ -386,6 +408,7 @@ const Run = () => {
         <Swiper
           onToggle={() => {
             setTimeout(() => {
+              sendMessage({ action: 'resume' as watchOsActionsType })
               navigation.dispatch(StackActions.push('afteremotion'))
             }, 1500)
           }}

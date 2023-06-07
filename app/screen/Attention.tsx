@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Image, Pressable, View } from 'react-native'
 import Text from '../components/Text'
 import { sendMessage } from 'react-native-watch-connectivity'
@@ -19,6 +19,13 @@ const Attention = () => {
     navigation.dispatch(StackActions.replace('run'))
   }
   const { user } = useGetUser('cache-only')
+  const targetHeartRate = useMemo(() => {
+    const thisYear = new Date().getFullYear()
+    const userYear = user?.birthYear || thisYear
+    const age = thisYear - userYear
+    const maxSubAge = 208 - 0.8 * age
+    return `${(maxSubAge * 0.4).toFixed()} ~ ${(maxSubAge * 0.6).toFixed()}`
+  }, [user?.birthYear])
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>
       <View
@@ -42,30 +49,44 @@ const Attention = () => {
               position: 'relative',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'yellow',
+              // backgroundColor: 'yellow',
               // width: '100%',
             }}
           >
             <View style={{ position: 'absolute' }}>
               <Image source={Img.SENDBOX_BLACK} style={{ height: 90 }} />
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row' }}>
               <Text
                 style={[
                   globalStyle.gaeguEmotion,
                   globalStyle.Pretendard,
-                  { color: '#A1AEB7', marginRight: 20 },
+                  { color: '#A1AEB7', marginRight: 30, textAlign: 'right', flex: 1 },
                 ]}
               >
                 평균 심박수
               </Text>
-              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>
+              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard, { flex: 1 }]}>
                 {user?.minHeartRate} BPM
+              </Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginTop: 4 }}>
+              <Text
+                style={[
+                  globalStyle.gaeguEmotion,
+                  globalStyle.Pretendard,
+                  { color: '#8C46FF', marginRight: 30, textAlign: 'right', flex: 1 },
+                ]}
+              >
+                목표 심박수
+              </Text>
+              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard, { flex: 1 }]}>
+                {targetHeartRate} BPM
               </Text>
             </View>
           </View>
         )}
-        <Pressable
+        <View
           style={{
             flex: 2,
             marginTop: '20%',
@@ -73,13 +94,14 @@ const Attention = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onPress={() => {
-            startRunning()
-          }}
         >
-          <StartButton />
+          <StartButton
+            onPress={() => {
+              startRunning()
+            }}
+          />
           <Text style={{ position: 'absolute', color: '#fff', fontSize: 60 }}>START</Text>
-        </Pressable>
+        </View>
       </View>
       <View style={globalStyle.footer}>{/* <StartButton /> */}</View>
     </SafeAreaView>

@@ -3,21 +3,29 @@ import React, { PropsWithChildren, useMemo } from 'react'
 import { useRecoilValue } from 'recoil'
 import { authState } from '../store/auth'
 import { setContext } from '@apollo/client/link/context'
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { AUTH_HEADER, BASE_URL } from '../constants/constants'
-import { createClient } from 'graphql-ws'
 import { getMainDefinition } from '@apollo/client/utilities'
+import { onError } from '@apollo/client/link/error'
+import { WebSocketLink } from '@apollo/client/link/ws'
+import { SubscriptionClient } from 'subscriptions-transport-ws'
+
 const ApolloWrapper = ({ children }: PropsWithChildren) => {
   const token = useRecoilValue(authState)
   console.log(token)
-  const wsLink = new GraphQLWsLink(
-    createClient({
-      url: 'wss://sesacthon-server.lucas-gong.dev/graphql',
-      shouldRetry() {
-        return true
-      },
+  const wsLink = new WebSocketLink(
+    new SubscriptionClient('wss://sesacthon-server.lucas-gong.dev/graphql', {
+      reconnect: true,
     }),
   )
+
+  // Log any GraphQL errors or network error that occurred
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
+      )
+    if (networkError) console.log(`[Network error]: ${networkError}`)
+  })
   const httpLink = new HttpLink({
     uri: BASE_URL,
   })
@@ -40,7 +48,7 @@ const ApolloWrapper = ({ children }: PropsWithChildren) => {
     })
 
     return new ApolloClient({
-      link: from([authLink, splitLink]),
+      link: from([errorLink, authLink, splitLink]),
       cache: new InMemoryCache(),
     })
   }, [token])
