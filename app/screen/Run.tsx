@@ -71,9 +71,14 @@ const Run = () => {
     longitude: -122.4324,
   })
   const [runState, setRunState] = useRecoilState(runAtom)
+  const [latestHeartRateOnPush, setLatestHeartRateOnPush] = useState(0)
   const selectedEmotion = useRecoilValue(emotionState)
   const [geolocationPermission, setGeolocationPermission] = useState<AuthorizationResult>()
-  const [updateEncourage] = useGetEncourageMutation()
+  const [updateEncourage] = useGetEncourageMutation({
+    onCompleted() {
+      setLatestHeartRateOnPush(watchState.heartRate)
+    },
+  })
   const { paceMakerMessage } = usePaceMakerMessage()
   const distance = useMemo(() => {
     const calcDistance = calculateDistance(locations)
@@ -173,14 +178,19 @@ const Run = () => {
   }, [playCurrentPaceMaker])
   useEffect(() => {
     if (watchState.heartRate && runState.type === RunType.HeartRate) {
-      updateEncourage({
-        variables: {
-          input: {
-            runId: runState.id,
-            currentHeartRate: watchState.heartRate,
+      if (
+        latestHeartRateOnPush - 20 >= watchState.heartRate ||
+        latestHeartRateOnPush + 20 <= watchState.HeartRate
+      ) {
+        updateEncourage({
+          variables: {
+            input: {
+              runId: runState.id,
+              currentHeartRate: watchState.heartRate,
+            },
           },
-        },
-      })
+        })
+      }
     }
   }, [watchState.heartRate])
 

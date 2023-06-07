@@ -45,8 +45,8 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Release"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -58,11 +58,15 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E3D151332A27644D005F1CCB"
-            BuildableName = "&#x1111;&#x1169;&#x1103;&#x1169;&#x1107;&#x1161;&#x11c0;&#x1100;&#x1165;&#x1107;&#x116e;&#x11a8;&#x110b;&#x1175;.app"
+            BuildableName = "paceMakerWatchApp.app"
             BlueprintName = "WatchApp Watch App"
             ReferencedContainer = "container:pacemaker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <LocationScenarioReference
+         identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
+         referenceType = "1">
+      </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E3D151332A27644D005F1CCB"
-            BuildableName = "&#x1111;&#x1169;&#x1103;&#x1169;&#x1107;&#x1161;&#x11c0;&#x1100;&#x1165;&#x1107;&#x116e;&#x11a8;&#x110b;&#x1175;.app"
+            BuildableName = "paceMakerWatchApp.app"
             BlueprintName = "WatchApp Watch App"
             ReferencedContainer = "container:pacemaker.xcodeproj">
          </BuildableReference>

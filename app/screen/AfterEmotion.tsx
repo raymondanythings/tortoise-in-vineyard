@@ -13,7 +13,20 @@ import { runAtom } from '../store/run'
 
 const AfterEmotion = ({ navigation }: { navigation: any }) => {
   const [emotion, setEmotion] = useState<Emotion | null>(null)
-  const [endRunMutation] = useEndRunMutation()
+  const [endRunMutation] = useEndRunMutation({
+    onCompleted(data) {
+      const {
+        endRun: { numLeft, totalRun },
+      } = data
+      if (numLeft || totalRun) {
+        navigation.dispatch(
+          StackActions.push('complete', {
+            emotion,
+          }),
+        )
+      }
+    },
+  })
   const runState = useRecoilValue(runAtom)
   const handleEmotionSelection = (selected: any) => {
     if (selected.value === '') {
@@ -60,11 +73,6 @@ const AfterEmotion = ({ navigation }: { navigation: any }) => {
                   },
                 },
               })
-              navigation.dispatch(
-                StackActions.push('complete', {
-                  emotion,
-                }),
-              )
             }
           }}
         >

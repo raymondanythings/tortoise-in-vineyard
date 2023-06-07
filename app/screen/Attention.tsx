@@ -20,8 +20,8 @@ const Attention = () => {
         }
       })
     } else {
-      navigation.dispatch(StackActions.replace('run'))
     }
+    navigation.dispatch(StackActions.replace('run'))
   }
   const { user } = useGetUser('cache-only')
   return (
