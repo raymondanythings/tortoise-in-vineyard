@@ -12,7 +12,7 @@ import { useSetRecoilState } from 'recoil'
 import { runAtom } from '../store/run'
 import { RunType } from '../../graphql/generated'
 
-const WatchCheck = () => {
+const WatchAppCheck = () => {
   const { user } = useGetUser('cache-only')
   const navigation = useNavigation()
   const setRunState = useSetRecoilState(runAtom)
@@ -21,15 +21,11 @@ const WatchCheck = () => {
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
-          애플워치 착용하셨나요?
-        </Text>
-        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
-          {`심박수 측정을 위해 기기를 착용해주세요.
-없다면, 거리로 측정해드릴게요!`}
+          애플워치에서 어플을 켜주세요
         </Text>
       </View>
       <View style={globalStyle.center}>
-        <Image source={Img.WATCH_PREV} style={{ width: Dimensions.get('window').width }} />
+        {/* <Image source={Img.WATCH_APP} style={{ width: Dimensions.get('window').width }} /> */}
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
@@ -41,11 +37,19 @@ const WatchCheck = () => {
           }}
           disabled={!isConnected || !isReachability}
           onPress={() => {
-            navigation.dispatch(StackActions.push('watchappcheck'))
+            if (user?.minHeartRate) {
+              setRunState((prev) => ({
+                ...prev,
+                type: RunType.HeartRate,
+              }))
+              navigation.dispatch(StackActions.push('beforeemotion'))
+            } else {
+              navigation.dispatch(StackActions.push('minheartratecheck'))
+            }
           }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            착용 완료
+            애플워치
           </Text>
         </Button>
         <Button
@@ -73,4 +77,4 @@ const WatchCheck = () => {
   )
 }
 
-export default WatchCheck
+export default WatchAppCheck
