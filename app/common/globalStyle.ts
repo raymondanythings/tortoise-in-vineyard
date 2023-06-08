@@ -81,4 +81,11 @@ export default StyleSheet.create({
   grapeColorFont: {
     color: '#8C46FF',
   },
+  letter: {
+    fontSize: 22,
+    lineHeight: 28,
+    letterSpacing: 3,
+    fontFamily: Font.GAEGU_B,
+    marginBottom: 33,
+  },
 })

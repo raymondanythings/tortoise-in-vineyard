@@ -8,4 +8,6 @@ export default {
   WATCH_APP: require('../assets/watch_app.png'),
   WATCH_HEART: require('../assets/apple_watch_heart.png'),
   SENDBOX_BLACK: require('../assets/sendbox_black.png'),
+  FOLD: require('../assets/fold.png'),
+  UNFOLD: require('../assets/unfold.png'),
 }
