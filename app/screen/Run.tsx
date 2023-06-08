@@ -169,7 +169,7 @@ const Run = () => {
 
   useEffect(() => {
     let id: NodeJS.Timer = 0
-    if (runState.type === RunType.Distance) {
+    if (runState.type === RunType.Distance && tracking) {
       id = setInterval(() => {
         postEncourage()
       }, 60000)
@@ -182,7 +182,7 @@ const Run = () => {
       clearWatch()
       clearInterval(id)
     }
-  }, [])
+  }, [tracking])
 
   const postEncourage = () => {
     updateEncourage({
