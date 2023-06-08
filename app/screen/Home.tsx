@@ -36,7 +36,7 @@ const Home = () => {
       if (userData?.me) {
         isNavigate.current = false
         return navigation.dispatch(
-          StackActions.push(userData?.me.birthYear ? 'onboard' : 'birthday'),
+          StackActions.push(userData?.me.birthYear ? 'watchcheck' : 'birthday'),
         )
       } else {
         getMe()
@@ -104,7 +104,7 @@ AI가 페이스메이킹을 해줄 거예요.`}
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: '#222222',
+              backgroundColor: '#8C46FF',
               columnGap: 8,
             }}
             onPress={validateUserAndPush}
@@ -129,7 +129,7 @@ AI가 페이스메이킹을 해줄 거예요.`}
           </Button>
         )}
 
-        <Pressable style={{ paddingVertical: 8 }}>
+        {/* <Pressable style={{ paddingVertical: 8 }}>
           <Text
             style={[
               globalStyle.fontMedium,
@@ -143,7 +143,7 @@ AI가 페이스메이킹을 해줄 거예요.`}
           >
             서비스 약관 읽어보기
           </Text>
-        </Pressable>
+        </Pressable> */}
         {/* <Pressable
           onPress={async () => {
             await TrackPlayer.reset()
