@@ -8,7 +8,7 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import Icon from '../constants/Icon'
 import bigEmotion from '../constants/bigEmotion'
 
-const DELAY_NAVIGATION = 3000
+const DELAY_NAVIGATION = 2200
 
 const Complete = ({ route }) => {
   const navigation = useNavigation()
@@ -34,9 +34,9 @@ const Complete = ({ route }) => {
   // 3초 뒤에 다른 페이지로 이동
   // 다음 페이지가 현재 없어서 home으로 가게 해둠
   useEffect(() => {
-    // setTimeout(() => {
-    //   navigation.dispatch(StackActions.push('home'))
-    // }, DELAY_NAVIGATION)
+    setTimeout(() => {
+      navigation.dispatch(StackActions.push('grapes'))
+    }, DELAY_NAVIGATION)
   }, [])
 
   return (
