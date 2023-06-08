@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import LottieView from 'lottie-react-native'
 import pinkDots from '../../assets/lotties/pinkDots.json'
 
-const PurpleDots = () => {
+const PinkDots = () => {
   return (
     <View style={{ flex: 1, height: '100%', alignItems: 'center', justifyContent: 'center' }}>
       <LottieView
@@ -16,4 +16,4 @@ const PurpleDots = () => {
   )
 }
 
-export default PurpleDots
+export default PinkDots

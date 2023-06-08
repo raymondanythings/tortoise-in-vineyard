@@ -39,6 +39,8 @@ import { watchAtom } from '../store/watchAtom'
 import { watchOsActionsType } from '../constants/constants'
 import { RunType, useGetEncourageMutation } from '../../graphql/generated'
 import { runAtom } from '../store/run'
+import PurpleDots from '../components/Lotties/PurpleDots'
+import PurplePin from '../components/Lotties/PurplePin'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -141,6 +143,7 @@ const Run = () => {
             setLocations((prevLocations) => [...prevLocations, { latitude, longitude }])
           }
           moveCamera({ latitude, longitude })
+          // console.log(runState, 'dfsjfdlk')
         },
         (error) => {
           console.log(error)
@@ -193,7 +196,7 @@ const Run = () => {
   }
 
   useEffect(() => {
-    let id:NodeJS.Timer
+    let id: NodeJS.Timer
     if (tracking) {
       if (runState.type === RunType.HeartRate) {
         id = setInterval(() => {
@@ -323,20 +326,54 @@ const Run = () => {
           }),
         }}
       >
-        {tracking ? <Heart /> : <PinkDots />}
         {tracking ? (
-          <View style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              {/* 심박수 */}
-              <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
-                {Math.round(watchState.heartRate || 0)}
+          runState.type === RunType.Distance ? (
+            <PurplePin />
+          ) : (
+            <Heart />
+          )
+        ) : runState.type === RunType.Distance ? (
+          <PurpleDots />
+        ) : (
+          <PinkDots />
+        )}
+        {tracking ? (
+          runState.type === RunType.Distance ? (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'baseline',
+              }}
+            >
+              <Text style={{ fontFamily: Font.Pretendard, color: 'black', fontSize: 46 }}>
+                {distance > 1 ? distance.toFixed(2) : (distance * 1000).toFixed()}
               </Text>
-              <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
+              <Text style={{ fontFamily: Font.Pretendard, color: 'black', fontSize: 18 }}>
+                {distance > 1 ? ' KM' : ' m'}
+              </Text>
             </View>
-            <Text style={{ fontFamily: Font.Pretendard }}>
-              {distance > 1 ? distance.toFixed(2) + ' km' : (distance * 1000).toFixed() + ' m'}
-            </Text>
-          </View>
+          ) : (
+            <View style={{ flex: 1 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                {/* 심박수 */}
+                <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
+                  {Math.round(watchState.heartRate || 0)}
+                </Text>
+                <Text style={{ fontSize: 30, fontFamily: Font.Pretendard }}> BPM</Text>
+              </View>
+              <Text
+                style={{
+                  fontFamily: Font.Pretendard,
+                  color: '#A0A0A0',
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                }}
+              >
+                {distance > 1 ? distance.toFixed(2) + ' KM' : (distance * 1000).toFixed() + ' m'}
+              </Text>
+            </View>
+          )
         ) : (
           <View style={{ flex: 1, right: 40 }}>
             <Text
