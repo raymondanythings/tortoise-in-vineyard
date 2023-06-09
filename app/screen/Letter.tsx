@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Animated, Dimensions, Pressable, View } from 'react-native'
+import { Animated, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import globalStyle from '../common/globalStyle'
 import Img from '../constants/Img'
 import Text from '../components/Text'
 import Button from '../components/Button'
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth, screenHeight } from '../constants/screen'
 
 const Letter = () => {
   const animation = useRef(new Animated.Value(1)).current
@@ -50,8 +48,6 @@ const Letter = () => {
               opacity: animation,
               position: 'absolute',
               bottom: '-90%',
-              // zIndex: 1,
-              // top: screenHeight * 0.3,
             },
             globalStyle.letter,
             globalStyle.grapeColorFont,
@@ -74,7 +70,6 @@ const Letter = () => {
                 resizeMode: 'contain',
                 opacity: animation,
                 position: 'absolute',
-                // backgroundColor: 'green',
               }}
             />
             <Animated.Image
@@ -83,7 +78,6 @@ const Letter = () => {
                 width: screenWidth * 1,
                 height: screenHeight * 0.7,
                 resizeMode: 'contain',
-                // backgroundColor: 'blue',
                 position: 'absolute',
                 top: '-30%',
                 opacity: animation.interpolate({

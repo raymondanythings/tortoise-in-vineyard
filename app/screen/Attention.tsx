@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { Image, Dimensions, StyleSheet, View } from 'react-native'
+import React from 'react'
+import { Image, StyleSheet, View } from 'react-native'
 import Text from '../components/Text'
 import { sendMessage } from 'react-native-watch-connectivity'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -9,9 +9,7 @@ import Img from '../constants/Img'
 import useWatch from '../hook/useWatch'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import Icon from '../constants/Icon'
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth, screenHeight } from '../constants/screen'
 
 const Attention = () => {
   const { isReachability } = useWatch()

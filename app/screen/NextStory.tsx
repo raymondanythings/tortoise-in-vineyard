@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Image, Dimensions, Pressable, View } from 'react-native'
+import React from 'react'
+import { Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import globalStyle from '../common/globalStyle'
 import Img from '../constants/Img'
 import Text from '../components/Text'
 import Button from '../components/Button'
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth, screenHeight } from '../constants/screen'
 
 const NextStory = () => {
   const navigation = useNavigation()

@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { View, StyleSheet, Pressable, Dimensions, Image } from 'react-native'
+import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { sendMessage } from 'react-native-watch-connectivity'
 import MapView, {
   LatLng,
@@ -41,6 +41,7 @@ import { RunType, useGetEncourageMutation } from '../../graphql/generated'
 import { runAtom } from '../store/run'
 import PurpleDots from '../components/Lotties/PurpleDots'
 import PurplePin from '../components/Lotties/PurplePin'
+import { screenWidth, screenHeight } from '../constants/screen'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -316,7 +317,7 @@ const Run = () => {
           height: 120,
           borderRadius: 20,
           backgroundColor: '#fff',
-          width: Dimensions.get('window').width - 60,
+          width: screenWidth - 60,
           marginHorizontal: 30,
           display: 'flex',
           flexDirection: 'row',

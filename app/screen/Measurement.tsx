@@ -1,6 +1,6 @@
 import React from 'react'
 import globalStyle from '../common/globalStyle'
-import { View, Image, Dimensions } from 'react-native'
+import { View, Image } from 'react-native'
 import Text from '../components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Success from '../components/Lotties/Success'
@@ -9,9 +9,7 @@ import { StackActions, useNavigation } from '@react-navigation/native'
 import useGetUser from '../hook/useGetUser'
 import Icon from '../constants/Icon'
 import useGetHeartRateRange from '../hook/useGetHeartRateRange'
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth, screenHeight } from '../constants/screen'
 
 const Measurement = () => {
   const { user } = useGetUser('cache-only')

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback, useEffect, useRef } from 'react'
-import { Dimensions, Image, Pressable, View } from 'react-native'
+import { Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
@@ -17,6 +17,7 @@ import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
 import Img from '../constants/Img'
+import { screenHeight } from '../constants/screen'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -151,7 +152,7 @@ const Home = () => {
         style={{
           position: 'absolute',
 
-          bottom: -Dimensions.get('window').height * 0.25,
+          bottom: -screenHeight * 0.25,
           zIndex: -1,
         }}
       />

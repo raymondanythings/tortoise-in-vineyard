@@ -1,6 +1,6 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Image, Dimensions } from 'react-native'
+import { View, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Text from '../components/Text'
@@ -11,6 +11,7 @@ import useGetUser from '../hook/useGetUser'
 import { useSetRecoilState } from 'recoil'
 import { runAtom } from '../store/run'
 import { RunType } from '../../graphql/generated'
+import { screenWidth, screenHeight } from '../constants/screen'
 
 const WatchCheck = ({ route }) => {
   const { user } = useGetUser('cache-only')
@@ -29,7 +30,7 @@ const WatchCheck = ({ route }) => {
         </Text>
       </View>
       <View style={globalStyle.center}>
-        <Image source={Img.WATCH_PREV} style={{ width: Dimensions.get('window').width }} />
+        <Image source={Img.WATCH_PREV} style={{ width: screenWidth }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button

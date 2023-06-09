@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { View, Image, Dimensions, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet } from 'react-native'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
@@ -7,11 +7,9 @@ import Text from '../components/Text'
 import Button from '../components/Button'
 import GrapeCount from '../components/GrapeCount'
 import useGetUser from '../hook/useGetUser'
-import { useRecoilValue } from 'recoil'
-import { runAtom } from '../store/run'
 import Img from '../constants/Img'
-import { useGetGrapeLazyQuery, useRunQuery } from '../../graphql/generated'
 import GrapeTree from '../components/GrapeTree'
+import { screenWidth, screenHeight } from '../constants/screen'
 
 const GrapeTreeHome = () => {
   const navigation = useNavigation()
@@ -67,23 +65,23 @@ export default GrapeTreeHome
 const styles = StyleSheet.create({
   tree: {
     position: 'absolute',
-    width: Dimensions.get('window').width * 0.9,
-    height: Dimensions.get('window').height * 0.5,
-    top: -Dimensions.get('window').height * 0.04,
-    left: -Dimensions.get('window').width * 0.45,
+    width: screenWidth * 0.9,
+    height: screenHeight * 0.5,
+    top: -screenHeight * 0.04,
+    left: -screenWidth * 0.45,
     zIndex: 1,
   },
   intersect: {
     position: 'absolute',
-    bottom: -Dimensions.get('window').height * 0.45,
-    left: -Dimensions.get('window').width * 0.7,
+    bottom: -screenHeight * 0.45,
+    left: -screenWidth * 0.7,
   },
   turtle: {
     position: 'absolute',
-    width: Dimensions.get('window').width * 0.26,
-    height: Dimensions.get('window').height * 0.4,
-    bottom: -Dimensions.get('window').height * 0.1,
-    right: Dimensions.get('window').width * 0.1,
+    width: screenWidth * 0.26,
+    height: screenHeight * 0.4,
+    bottom: -screenHeight * 0.1,
+    right: screenWidth * 0.1,
     resizeMode: 'contain',
   },
   button: {

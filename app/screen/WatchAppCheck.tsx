@@ -1,6 +1,6 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
 import React, { useEffect } from 'react'
-import { View, Image, Dimensions } from 'react-native'
+import { View, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Text from '../components/Text'
