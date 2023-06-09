@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Image, Pressable, View } from 'react-native'
+import { Image, Dimensions, Pressable, View } from 'react-native'
 import Text from '../components/Text'
 import { sendMessage } from 'react-native-watch-connectivity'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -11,6 +11,10 @@ import useWatch from '../hook/useWatch'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { useGetHeartRateRageQuery } from '../../graphql/generated'
 import useGetHeartRateRange from '../hook/useGetHeartRateRange'
+
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
+
 const Attention = () => {
   const { isReachability } = useWatch()
   const navigation = useNavigation()
@@ -35,77 +39,49 @@ const Attention = () => {
       <View
         style={{
           position: 'relative',
-          flex: 4,
+          flex: 2,
           alignItems: 'center',
           marginTop: 40,
         }}
       >
-        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
-          {`나에게 맞는 속도로
-함께 가보자고!`}
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 28,
+            fontWeight: 'bold',
+            lineHeight: 36,
+            position: 'absolute',
+          }}
+        >
+          {`나만의 속도로
+달리기 가보자고!`}
         </Text>
-      </View>
-      <View style={[globalStyle.center]}>
-        {user?.minHeartRate && (
-          <View
-            style={{
-              // flexDirection: 'row',
-              position: 'relative',
-              alignItems: 'center',
-              justifyContent: 'center',
-              // backgroundColor: 'yellow',
-              // width: '100%',
-              maxHeight: 90,
-            }}
-          >
-            <View style={{ position: 'absolute' }}>
-              <Image source={Img.SENDBOX_BLACK} style={{ height: 90 }} />
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: 260,
-              }}
-            >
-              <Text
-                style={[
-                  globalStyle.gaeguEmotion,
-                  globalStyle.Pretendard,
-                  { color: '#A1AEB7', textAlign: 'center', flex: 1 },
-                ]}
-              >
-                평균 심박수
-              </Text>
-              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard, { flex: 1 }]}>
-                {user?.minHeartRate} BPM
-              </Text>
-            </View>
-            <View style={{ flexDirection: 'row', marginTop: 4, width: 260 }}>
-              {heartRateRange ? (
-                <>
-                  <Text
-                    style={[
-                      globalStyle.gaeguEmotion,
-                      globalStyle.Pretendard,
-                      { color: '#8C46FF', textAlign: 'center', flex: 1 },
-                    ]}
-                  >
-                    목표 심박수
-                  </Text>
-                  <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard, { flex: 1 }]}>
-                    {heartRateRange} BPM
-                  </Text>
-                </>
-              ) : null}
-            </View>
-          </View>
-        )}
         <View
           style={{
-            flex: 2,
-            marginTop: '20%',
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Image source={Img.SENDBOX_BLACK} resizeMode='contain' />
+        </View>
+      </View>
+      <View style={[globalStyle.center, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Image
+          source={Img.ATTENTIONTURTLE}
+          style={{ width: screenWidth * 0.7, height: screenHeight * 0.22 }}
+        />
+      </View>
+      <View style={globalStyle.footer}>
+        <View
+          style={{
+            // backgroundColor: 'green',
+            // marginTop: '80%',
+            width: screenWidth * 0.44,
+            height: screenHeight * 0.2,
+            bottom: screenHeight * 0.1,
             position: 'relative',
             justifyContent: 'center',
             alignItems: 'center',
@@ -116,10 +92,9 @@ const Attention = () => {
               startRunning()
             }}
           />
-          <Text style={{ position: 'absolute', color: '#fff', fontSize: 60 }}>START</Text>
+          <Text style={{ position: 'absolute', color: '#fff', fontSize: 28 }}>START</Text>
         </View>
       </View>
-      <View style={globalStyle.footer}>{/* <StartButton /> */}</View>
     </SafeAreaView>
   )
 }

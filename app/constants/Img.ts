@@ -14,4 +14,6 @@ export default {
   INTERSECT: require('../assets/Intersect.png'),
   TREE: require('../assets/tree.png'),
   GRAPEBOX: require('../assets/grapeBox.png'),
+  PAUSETURTLE: require('../assets/pauseTurtle.png'),
+  ATTENTIONTURTLE: require('../assets/attentionTurtle.png'),
 }

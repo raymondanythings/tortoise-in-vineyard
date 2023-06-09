@@ -259,11 +259,15 @@ const Run = () => {
           }}
         >
           <View style={{ position: 'relative', top: 40 }}>
-            <FastImage
-              source={Img.LOGO_MOVING}
-              style={styles.marker}
-              resizeMode={FastImage.resizeMode.contain}
-            />
+            {tracking ? (
+              <FastImage
+                source={Img.LOGO_MOVING}
+                style={styles.marker}
+                resizeMode={FastImage.resizeMode.contain}
+              />
+            ) : (
+              <Image source={Img.PAUSETURTLE} style={styles.marker} />
+            )}
           </View>
         </MarkerAnimated>
         {/* 테두리 선 */}
@@ -470,5 +474,6 @@ const styles = StyleSheet.create({
   marker: {
     height: 70,
     width: 100,
+    resizeMode: 'contain',
   },
 })
