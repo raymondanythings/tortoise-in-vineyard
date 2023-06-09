@@ -1,25 +1,40 @@
 import React, { useMemo } from 'react'
-import { View, Image, ImageStyle } from 'react-native'
+import { View } from 'react-native'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Text from '../components/Text'
 import Button from '../components/Button'
-import Img from '../constants/Img'
-import Icon from '../constants/Icon'
-import bigEmotion from '../constants/bigEmotion'
-import useGetUser from '../hook/useGetUser'
-import { Emotion } from '../../graphql/generated'
 import GrapeCount from '../components/GrapeCount'
 import GrapeBoard from '../components/GrapeBoard'
-
-const TOTAL_COUNT = 6
+import useGetUser from '../hook/useGetUser'
+import { useRecoilValue } from 'recoil'
+import { runAtom } from '../store/run'
+import { useGetGrapeLazyQuery, useRunQuery } from '../../graphql/generated'
 
 const Grapes = (route: any) => {
   const navigation = useNavigation()
-  const { user } = useGetUser('cache-only')
-  const totalRun = user?.totalRun
-  const renderGrape = totalRun ? (totalRun % 6 === 0 ? 6 : totalRun % 6) : 0
+  const { user } = useGetUser('network-only')
+  const runState = useRecoilValue(runAtom)
+  const [getGrape, { data }] = useGetGrapeLazyQuery({
+    fetchPolicy: 'network-only',
+  })
+  useRunQuery({
+    variables: {
+      id: runState.id,
+    },
+    onCompleted(data) {
+      if (data?.run?.grapeId) {
+        getGrape({
+          variables: {
+            id: data.run.grapeId,
+          },
+        })
+      }
+    },
+  })
+
+  const totalRun = useMemo(() => user?.totalRun || 0, [user?.totalRun])
 
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>
@@ -30,7 +45,7 @@ const Grapes = (route: any) => {
         </Text>
       </View>
       <View style={globalStyle.center}>
-        <GrapeBoard renderGrape={renderGrape} />
+        {data?.grape?.runs ? <GrapeBoard runs={data?.grape?.runs} /> : null}
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button

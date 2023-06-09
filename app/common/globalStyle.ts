@@ -60,12 +60,12 @@ export default StyleSheet.create({
   },
   header: {
     position: 'relative',
-    flex: 5,
+    flex: hasNotch() ? 5 : 3,
     marginTop: 40,
     alignItems: 'center',
   },
   center: {
-    flex: 13,
+    flex: hasNotch() ? 13 : 11,
   },
   footer: {
     flex: hasNotch() ? 3.5 : 4,

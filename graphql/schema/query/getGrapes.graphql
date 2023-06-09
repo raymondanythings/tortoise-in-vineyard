@@ -1,9 +1,8 @@
-query grapes($id: String!) {
+query getGrape($id: String!) {
   grape(id: $id) {
-    id
+    ...grape
     runs {
-      id
-      emotionAfter
+      ...run
     }
   }
 }

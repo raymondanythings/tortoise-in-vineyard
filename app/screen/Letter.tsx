@@ -35,7 +35,7 @@ const Letter = () => {
   }, [isFolded])
 
   return (
-    <SafeAreaView style={globalStyle.safeAreaContainer}>
+    <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FEF9AE' }]}>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
         <Animated.Text
           style={[

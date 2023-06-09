@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { StackActions } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
 import Text from '../components/Text'
@@ -10,20 +10,36 @@ import { Emotion } from '../constants/bigEmotion'
 import { useEndRunMutation } from '../../graphql/generated'
 import { useRecoilValue } from 'recoil'
 import { runAtom } from '../store/run'
+import useGetUser from '../hook/useGetUser'
 
-const AfterEmotion = ({ navigation }: { navigation: any }) => {
+const AfterEmotion = () => {
+  const navigation = useNavigation()
   const [emotion, setEmotion] = useState<Emotion | null>(null)
+  const { updateQuery } = useGetUser('cache-only')
   const [endRunMutation] = useEndRunMutation({
     onCompleted(data) {
+      updateQuery((prev) => ({
+        ...prev,
+        me: {
+          ...prev.me,
+          totalRun: prev.me.totalRun + 1,
+        },
+      }))
       const {
         endRun: { numLeft, totalRun },
       } = data
       if (numLeft || totalRun) {
-        navigation.dispatch(
-          StackActions.push('complete', {
-            emotion,
-          }),
-        )
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'complete',
+              params: {
+                emotion,
+              },
+            },
+          ],
+        })
       }
     },
   })

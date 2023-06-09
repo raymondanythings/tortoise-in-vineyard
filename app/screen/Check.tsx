@@ -4,7 +4,7 @@ import Text from '../components/Text'
 import { AUTH_HEADER } from '../constants/constants'
 import { useSetRecoilState } from 'recoil'
 import { authState } from '../store/auth'
-
+import TrackPlayer from 'react-native-track-player'
 const Check = ({ navigation }: { navigation: any }) => {
   const setAuth = useSetRecoilState(authState)
   const checkUser = useCallback(async () => {
@@ -17,10 +17,11 @@ const Check = ({ navigation }: { navigation: any }) => {
     if (token) {
       setAuth(token)
     }
-    navigation.navigate('mainScreen', { screen: 'home' })
+    navigation.navigate('mainScreen', { screen: 'grapes' })
   }, [])
 
   useEffect(() => {
+    TrackPlayer.setupPlayer()
     checkUser()
   }, [])
   return <Text>Loading..</Text>

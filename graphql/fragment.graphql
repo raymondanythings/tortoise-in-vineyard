@@ -9,3 +9,15 @@ fragment userData on User {
   totalRun
   canRunToday
 }
+
+fragment grape on Grape {
+  id
+  createdAt
+}
+fragment run on Run {
+  id
+  emotionBefore
+  emotionAfter
+  runMeters
+  grapeId
+}

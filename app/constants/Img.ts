@@ -11,4 +11,5 @@ export default {
   FOLD: require('../assets/fold.png'),
   UNFOLD: require('../assets/unfold.png'),
   NEXTSTORY: require('../assets/nextStory.png'),
+  INTERSECT: require('../assets/Intersect.png'),
 }

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback, useEffect, useRef } from 'react'
-import { Image, Pressable, View } from 'react-native'
+import { Dimensions, Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
@@ -17,7 +17,6 @@ import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
 import Img from '../constants/Img'
-import TrackPlayer from 'react-native-track-player'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -34,7 +33,6 @@ const Home = () => {
   })
 
   const validateUserAndPush = () => {
-    console.log('??')
     if (isNavigate.current) {
       if (userData?.me) {
         isNavigate.current = false
@@ -77,7 +75,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-    TrackPlayer.setupPlayer()
     navigation.addListener('blur', canNavigateHandler)
     return () => {
       navigation.removeListener('blur', canNavigateHandler)
@@ -139,6 +136,15 @@ AI가 페이스메이킹을 해줄 거예요.`}
           <Text>초기화</Text>
         </Pressable>
       </View>
+      <Image
+        source={Img.INTERSECT}
+        style={{
+          position: 'absolute',
+
+          bottom: -Dimensions.get('window').height * 0.4,
+          zIndex: -1,
+        }}
+      />
     </SafeAreaView>
   )
 }

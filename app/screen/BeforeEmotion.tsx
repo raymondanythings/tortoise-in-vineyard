@@ -15,14 +15,12 @@ const BeforeEmotion = () => {
   const navigation = useNavigation()
   const [emotion, setEmotion] = useRecoilState(emotionState)
   const [runState, setRunState] = useRecoilState(runAtom)
-  // const [startRun] = useStartRunMutation()
   const [startRun] = useStartRunMutation({
     onCompleted(data) {
       if (data.startRun) {
         const {
           startRun: { id, type },
         } = data
-        console.log(data)
         setRunState((prev) => ({
           ...prev,
           id,

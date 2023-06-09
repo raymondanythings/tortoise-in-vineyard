@@ -6,14 +6,13 @@ import globalStyle from '../common/globalStyle'
 import Confetti from '../components/Lotties/Confetti'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import Icon from '../constants/Icon'
-import bigEmotion from '../constants/bigEmotion'
+import bigEmotion, { Emotion } from '../constants/bigEmotion'
 
 const DELAY_NAVIGATION = 2200
 
-const Complete = ({ route }) => {
+const Complete = ({ route }: { route: { params: { emotion: Emotion } } }) => {
   const navigation = useNavigation()
   const { emotion } = route.params || {}
-  console.log(emotion, '<<')
 
   const animation = useRef(new Animated.Value(0)).current
 
@@ -35,7 +34,7 @@ const Complete = ({ route }) => {
   // 다음 페이지가 현재 없어서 home으로 가게 해둠
   useEffect(() => {
     setTimeout(() => {
-      navigation.dispatch(StackActions.push('grapes'))
+      navigation.dispatch(StackActions.replace('grapes'))
     }, DELAY_NAVIGATION)
   }, [])
 
@@ -68,15 +67,17 @@ const Complete = ({ route }) => {
               }}
               source={Icon.GRAPEFORCONFETTI}
             />
-            <Image
-              source={bigEmotion[emotion.value]}
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                resizeMode: 'contain',
-              }}
-            />
+            {emotion.value ? (
+              <Image
+                source={bigEmotion[emotion.value]}
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'contain',
+                }}
+              />
+            ) : null}
           </View>
         </Animated.View>
       </View>
