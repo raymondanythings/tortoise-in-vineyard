@@ -6,7 +6,6 @@ import globalStyle from '../common/globalStyle'
 import Img from '../constants/Img'
 import Text from '../components/Text'
 import Button from '../components/Button'
-import { StackActions, useNavigation } from '@react-navigation/native'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
