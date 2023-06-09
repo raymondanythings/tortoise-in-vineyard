@@ -28,6 +28,9 @@ const Home = () => {
     onCompleted({ me }) {
       validateUserAndPush()
     },
+    onError(error) {
+      console.log('login error : ', error)
+    },
   })
 
   const validateUserAndPush = () => {
@@ -96,7 +99,6 @@ AI가 페이스메이킹을 해줄 거예요.`}
       >
         <Image source={Img.LOGO_MOVING} />
       </View>
-      {/* <Image source={Img.GRAPE} /> */}
       <View style={[globalStyle.fullWidth, { flex: 2.5 }]}>
         {token ? (
           <Button
@@ -128,37 +130,14 @@ AI가 페이스메이킹을 해줄 거예요.`}
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard]}>카카오로 시작하기</Text>
           </Button>
         )}
-
-        {/* <Pressable style={{ paddingVertical: 8 }}>
-          <Text
-            style={[
-              globalStyle.fontMedium,
-              globalStyle.Pretendard,
-              {
-                textDecorationLine: 'underline',
-                fontWeight: '300',
-                color: '#A0A0A0',
-              },
-            ]}
-          >
-            서비스 약관 읽어보기
-          </Text>
-        </Pressable> */}
-        {/* <Pressable
+        <Pressable
           onPress={async () => {
-            await TrackPlayer.reset()
-            await TrackPlayer.add([
-              {
-                url: 'https://download.samplelib.com/mp3/sample-3s.mp3',
-              },
-            ])
-            await TrackPlayer.play()
-            // AsyncStorage.clear()
-            // setToken('')
+            AsyncStorage.clear()
+            setToken('')
           }}
         >
           <Text>초기화</Text>
-        </Pressable> */}
+        </Pressable>
       </View>
     </SafeAreaView>
   )

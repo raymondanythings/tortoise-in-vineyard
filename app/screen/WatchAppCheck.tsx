@@ -1,5 +1,5 @@
 import { StackActions, useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Image, Dimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
@@ -17,6 +17,18 @@ const WatchAppCheck = () => {
   const navigation = useNavigation()
   const setRunState = useSetRecoilState(runAtom)
   const { isConnected, isReachability } = useWatch()
+  useEffect(() => {
+    if (isReachability) {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'minheartratecheck',
+          },
+        ],
+      })
+    }
+  }, [isReachability])
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>
@@ -28,30 +40,6 @@ const WatchAppCheck = () => {
         {/* <Image source={Img.WATCH_APP} style={{ width: Dimensions.get('window').width }} /> */}
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
-        <Button
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            columnGap: 8,
-          }}
-          disabled={!isConnected || !isReachability}
-          onPress={() => {
-            if (user?.minHeartRate) {
-              setRunState((prev) => ({
-                ...prev,
-                type: RunType.HeartRate,
-              }))
-              navigation.dispatch(StackActions.push('beforeemotion'))
-            } else {
-              navigation.dispatch(StackActions.push('minheartratecheck'))
-            }
-          }}
-        >
-          <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            애플워치
-          </Text>
-        </Button>
         <Button
           style={{
             flexDirection: 'row',

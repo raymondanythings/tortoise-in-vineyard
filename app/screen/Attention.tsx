@@ -9,9 +9,13 @@ import Img from '../constants/Img'
 import useGetUser from '../hook/useGetUser'
 import useWatch from '../hook/useWatch'
 import { StackActions, useNavigation } from '@react-navigation/native'
+import { useGetHeartRateRageQuery } from '../../graphql/generated'
+import useGetHeartRateRange from '../hook/useGetHeartRateRange'
 const Attention = () => {
   const { isReachability } = useWatch()
   const navigation = useNavigation()
+  const heartRateRange = useGetHeartRateRange()
+
   const startRunning = () => {
     if (isReachability) {
       sendMessage({ action: 'startRunning' }, (payload) => {})
@@ -51,17 +55,25 @@ const Attention = () => {
               justifyContent: 'center',
               // backgroundColor: 'yellow',
               // width: '100%',
+              maxHeight: 90,
             }}
           >
             <View style={{ position: 'absolute' }}>
               <Image source={Img.SENDBOX_BLACK} style={{ height: 90 }} />
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: 260,
+              }}
+            >
               <Text
                 style={[
                   globalStyle.gaeguEmotion,
                   globalStyle.Pretendard,
-                  { color: '#A1AEB7', marginRight: 30, textAlign: 'right', flex: 1 },
+                  { color: '#A1AEB7', textAlign: 'center', flex: 1 },
                 ]}
               >
                 평균 심박수
@@ -70,19 +82,23 @@ const Attention = () => {
                 {user?.minHeartRate} BPM
               </Text>
             </View>
-            <View style={{ flexDirection: 'row', marginTop: 4 }}>
-              <Text
-                style={[
-                  globalStyle.gaeguEmotion,
-                  globalStyle.Pretendard,
-                  { color: '#8C46FF', marginRight: 30, textAlign: 'right', flex: 1 },
-                ]}
-              >
-                목표 심박수
-              </Text>
-              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard, { flex: 1 }]}>
-                {targetHeartRate} BPM
-              </Text>
+            <View style={{ flexDirection: 'row', marginTop: 4, width: 260 }}>
+              {heartRateRange ? (
+                <>
+                  <Text
+                    style={[
+                      globalStyle.gaeguEmotion,
+                      globalStyle.Pretendard,
+                      { color: '#8C46FF', textAlign: 'center', flex: 1 },
+                    ]}
+                  >
+                    목표 심박수
+                  </Text>
+                  <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard, { flex: 1 }]}>
+                    {heartRateRange} BPM
+                  </Text>
+                </>
+              ) : null}
             </View>
           </View>
         )}

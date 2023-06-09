@@ -6,6 +6,7 @@ export default {
   GRAPEFORCONFETTI: require('../assets/grape_confetti.png'),
   LOGO: require('../assets/logo.gif'),
   BOX: require('../assets/boxBlack.png'),
+  BOX_SMALL: require('../assets/boxBlack_small.png'),
   CHEVRON: require('../assets/chevron.png'),
   EMOTION: {
     ANGRY: require('../assets/emotion/ANGRY.png'),

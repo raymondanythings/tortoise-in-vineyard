@@ -8,6 +8,11 @@ import { authState } from '../store/auth'
 const Check = ({ navigation }: { navigation: any }) => {
   const setAuth = useSetRecoilState(authState)
   const checkUser = useCallback(async () => {
+    const initialCheck = await AsyncStorage.getItem('initialCheck')
+    if (!initialCheck) {
+      await AsyncStorage.setItem('initialCheck', 'initialCheck')
+      return navigation.navigate('mainScreen', { screen: 'letter' })
+    }
     const token = await AsyncStorage.getItem(AUTH_HEADER)
     if (token) {
       setAuth(token)

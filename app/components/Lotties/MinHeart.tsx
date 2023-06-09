@@ -1,84 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import { Image, View } from 'react-native'
 import Img from '../../constants/Img'
 import AnimatedLottieView from 'lottie-react-native'
 import heartcheck from '../../assets/lotties/min_heartrate.json'
-import useWatch from '../../hook/useWatch'
-import { sendMessage } from 'react-native-watch-connectivity'
-import { useRecoilValue } from 'recoil'
-import { watchAtom } from '../../store/watchAtom'
-import { useUpdateMinHeartRateMutation } from '../../../graphql/generated'
-import useGetUser from '../../hook/useGetUser'
-import { StackActions, useNavigation } from '@react-navigation/native'
+
 import Text from '../Text'
-import globalStyle, { Font } from '../../common/globalStyle'
-const STD_THRESHOLD = 5
-const MinHeart = () => {
-  const [heartRateData, setHeartRateData] = useState<number[]>([])
-  const { updateQuery } = useGetUser('cache-only')
-  const navigation = useNavigation()
-  const { isReachability } = useWatch()
-  const [updateMinHeart] = useUpdateMinHeartRateMutation({
-    onCompleted({ updateMinHeartRate: { minHeartRate } }) {
-      updateQuery((prev) => ({
-        ...prev,
-        me: {
-          ...prev.me,
-          minHeartRate,
-        },
-      }))
-      sendMessage({ action: 'stopWorkout' }, (payload) => {
-        navigation.dispatch(StackActions.replace('measurement'))
-      })
-    },
-  })
-  const watchState = useRecoilValue(watchAtom)
+import globalStyle from '../../common/globalStyle'
 
-  const isHeartRateConverged = useCallback(() => {
-    const mean = heartRateData.reduce((acc, cur) => acc + cur, 0) / heartRateData.length
-    const variance =
-      heartRateData.reduce((acc, cur) => acc + Math.pow(cur - mean, 2), 0) / heartRateData.length
-    const std = Math.sqrt(variance)
-    return std < STD_THRESHOLD
-  }, [heartRateData.length])
-
-  const determineStableHeartRate = () => {
-    if (heartRateData.length < 10) return
-
-    if (isHeartRateConverged()) {
-      // 수렴헀다면, 최근 10초간의 평균 심박수를 구해서 저장
-      // 마지막으로 수신한 심박수를 그대로 반환해도 무관
-      const lastTenSecondsHeartRate = heartRateData.slice(-10)
-
-      const stableHeartRate =
-        lastTenSecondsHeartRate.reduce((acc, cur) => acc + cur, 0) / lastTenSecondsHeartRate.length
-      onStable(stableHeartRate)
-    }
-  }
-
-  const onStable = (stableHeartRate: number) => {
-    updateMinHeart({
-      variables: { minHeartRate: stableHeartRate },
-    })
-  }
-
-  const getHeart = () => {
-    try {
-      sendMessage({ action: 'startWorkout' }, (payload) => console.log(payload?.isSuccess, '<<<'))
-    } catch (err) {
-      console.log(err, 'err')
-    }
-  }
-  useEffect(() => {
-    if (isReachability) {
-      getHeart()
-    }
-  }, [isReachability])
-
-  useEffect(() => {
-    setHeartRateData((prev) => [...prev, watchState.heartRate])
-    determineStableHeartRate()
-  }, [watchState])
+const MinHeart = ({ heartRate }: { heartRate: number }) => {
   return (
     <View
       style={{

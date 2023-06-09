@@ -12,7 +12,7 @@ import { useSetRecoilState } from 'recoil'
 import { runAtom } from '../store/run'
 import { RunType } from '../../graphql/generated'
 
-const WatchCheck = () => {
+const WatchCheck = ({ route }) => {
   const { user } = useGetUser('cache-only')
   const navigation = useNavigation()
   const setRunState = useSetRecoilState(runAtom)
@@ -39,9 +39,28 @@ const WatchCheck = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={!isConnected || !isReachability}
+          disabled={!isConnected}
           onPress={() => {
-            navigation.dispatch(StackActions.push('watchappcheck'))
+            if (!route?.params?.retry && user?.minHeartRate) {
+              setRunState((prev) => ({
+                ...prev,
+                type: RunType.HeartRate,
+              }))
+              navigation.dispatch(StackActions.push('beforeemotion'))
+            } else {
+              if (isReachability) {
+                navigation.reset({
+                  index: 0,
+                  routes: [
+                    {
+                      name: 'minheartratecheck',
+                    },
+                  ],
+                })
+              } else {
+                navigation.dispatch(StackActions.push('watchappcheck'))
+              }
+            }
           }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
@@ -55,7 +74,7 @@ const WatchCheck = () => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          disabled={isConnected && isReachability}
+          disabled={isConnected}
           onPress={() => {
             setRunState((prev) => ({
               ...prev,

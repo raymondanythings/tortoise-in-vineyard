@@ -8,9 +8,11 @@ import Button from '../components/Button'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import useGetUser from '../hook/useGetUser'
 import Icon from '../constants/Icon'
+import useGetHeartRateRange from '../hook/useGetHeartRateRange'
 
 const Measurement = () => {
   const { user } = useGetUser('cache-only')
+  const heartRateRange = useGetHeartRateRange()
   const navigation = useNavigation()
 
   return (
@@ -65,7 +67,11 @@ const Measurement = () => {
             >
               목표 심박수
             </Text>
-            <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>111 BPM</Text>
+            {heartRateRange ? (
+              <Text style={[globalStyle.gaeguEmotion, globalStyle.Pretendard]}>
+                {heartRateRange} BPM
+              </Text>
+            ) : null}
           </View>
         </View>
       </View>
@@ -76,7 +82,6 @@ const Measurement = () => {
             alignItems: 'center',
             justifyContent: 'center',
             columnGap: 8,
-            backgroundColor: '#A0A0A0',
           }}
           onPress={() => navigation.dispatch(StackActions.push('beforeemotion'))}
         >
@@ -90,8 +95,21 @@ const Measurement = () => {
             alignItems: 'center',
             justifyContent: 'center',
             columnGap: 8,
+            backgroundColor: '#A0A0A0',
           }}
-          onPress={() => navigation.dispatch(StackActions.pop())}
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'watchcheck',
+                  params: {
+                    retry: true,
+                  },
+                },
+              ],
+            })
+          }
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             다시 측정할게요

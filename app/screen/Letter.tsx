@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Animated, Dimensions, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Img from '../constants/Img'
 import Text from '../components/Text'
 import Button from '../components/Button'
+import { StackActions, useNavigation } from '@react-navigation/native'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
 const Letter = () => {
-  const [animation, setAnimation] = useState(new Animated.Value(1))
+  const animation = useRef(new Animated.Value(1)).current
   const [isFolded, setIsFolded] = useState(true)
-
+  const navigation = useNavigation()
   const fadeTransition = () => {
     Animated.timing(animation, {
       toValue: isFolded ? 1 : 0,
@@ -22,7 +23,11 @@ const Letter = () => {
   }
 
   const onImagePress = () => {
-    setIsFolded(!isFolded)
+    if (isFolded) {
+      setIsFolded(false)
+    } else {
+      navigation.dispatch(StackActions.replace('home'))
+    }
   }
 
   useEffect(() => {

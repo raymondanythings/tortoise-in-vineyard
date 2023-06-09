@@ -120,6 +120,8 @@ export type MutationUpdateMinHeartRateArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  /** [Protected] 적정 심박수 조회 API */
+  getHeartRateRange: Array<Scalars['Float']['output']>;
   grape: Grape;
   grapes: Array<Grape>;
   /** [Protected] 내 정보 조회 API */
@@ -243,6 +245,11 @@ export type UpdateBirthMutationVariables = Exact<{
 
 
 export type UpdateBirthMutation = { __typename?: 'Mutation', updateBirthYear: { __typename?: 'User', birthYear?: number | null } };
+
+export type GetHeartRateRageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHeartRateRageQuery = { __typename?: 'Query', getHeartRateRange: Array<number> };
 
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -475,6 +482,38 @@ export function useUpdateBirthMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateBirthMutationHookResult = ReturnType<typeof useUpdateBirthMutation>;
 export type UpdateBirthMutationResult = Apollo.MutationResult<UpdateBirthMutation>;
 export type UpdateBirthMutationOptions = Apollo.BaseMutationOptions<UpdateBirthMutation, UpdateBirthMutationVariables>;
+export const GetHeartRateRageDocument = gql`
+    query getHeartRateRage {
+  getHeartRateRange
+}
+    `;
+
+/**
+ * __useGetHeartRateRageQuery__
+ *
+ * To run a query within a React component, call `useGetHeartRateRageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetHeartRateRageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetHeartRateRageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetHeartRateRageQuery(baseOptions?: Apollo.QueryHookOptions<GetHeartRateRageQuery, GetHeartRateRageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetHeartRateRageQuery, GetHeartRateRageQueryVariables>(GetHeartRateRageDocument, options);
+      }
+export function useGetHeartRateRageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetHeartRateRageQuery, GetHeartRateRageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetHeartRateRageQuery, GetHeartRateRageQueryVariables>(GetHeartRateRageDocument, options);
+        }
+export type GetHeartRateRageQueryHookResult = ReturnType<typeof useGetHeartRateRageQuery>;
+export type GetHeartRateRageLazyQueryHookResult = ReturnType<typeof useGetHeartRateRageLazyQuery>;
+export type GetHeartRateRageQueryResult = Apollo.QueryResult<GetHeartRateRageQuery, GetHeartRateRageQueryVariables>;
 export const GetMeDocument = gql`
     query getMe {
   me {
