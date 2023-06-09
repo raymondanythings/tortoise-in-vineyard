@@ -16,5 +16,7 @@ export default {
   GRAPEBOX: require('../assets/grapeBox.png'),
   PAUSETURTLE: require('../assets/pauseTurtle.png'),
   ATTENTIONTURTLE: require('../assets/attentionTurtle.png'),
+  SLEEPTURTLE: require('../assets/sleepTurtle.png'),
+  BEFORERUNTURTLE: require('../assets/beforeRunTurtle.png'),
   GRAPEFULL: require('../assets/grapeFull.png'),
 }

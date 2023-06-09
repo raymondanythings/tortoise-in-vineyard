@@ -34,6 +34,13 @@ const Letter = () => {
     fadeTransition()
   }, [isFolded])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsFolded(false)
+    }, 2000)
+
+    return () => clearTimeout(timeout)
+  }, [])
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FEF9AE' }]}>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>

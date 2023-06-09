@@ -17,7 +17,7 @@ const Check = ({ navigation }: { navigation: any }) => {
     if (token) {
       setAuth(token)
     }
-    navigation.navigate('mainScreen', { screen: 'grapes' })
+    navigation.navigate('mainScreen', { screen: 'home' })
   }, [])
 
   useEffect(() => {

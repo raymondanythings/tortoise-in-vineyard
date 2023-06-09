@@ -16,26 +16,7 @@ import GrapeTree from '../components/GrapeTree'
 const GrapeTreeHome = () => {
   const navigation = useNavigation()
   const { user } = useGetUser('network-only')
-  const runState = useRecoilValue(runAtom)
   const grapeCircleCount = useMemo(() => user?.totalRun ?? 0 % 6, [user?.totalRun])
-
-  const [getGrape, { data }] = useGetGrapeLazyQuery({
-    fetchPolicy: 'network-only',
-  })
-  useRunQuery({
-    variables: {
-      id: runState.id,
-    },
-    onCompleted(data) {
-      if (data?.run?.grapeId) {
-        getGrape({
-          variables: {
-            id: data.run.grapeId,
-          },
-        })
-      }
-    },
-  })
 
   const totalRun = useMemo(() => user?.totalRun || 0, [user?.totalRun])
 
@@ -50,15 +31,27 @@ const GrapeTreeHome = () => {
       <View style={globalStyle.center}>
         <GrapeTree totalRun={totalRun} />
         <Image source={Img.INTERSECT} style={styles.intersect} />
-        <Image source={Img.GRAPEBOX} style={styles.grapeBox} />
+        {user?.canRunToday ? (
+          <Image source={Img.BEFORERUNTURTLE} style={styles.turtle} />
+        ) : (
+          <Image source={Img.SLEEPTURTLE} style={styles.turtle} />
+        )}
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
-          style={styles.button}
-          onPress={() => navigation.dispatch(StackActions.push('home'))}
+          style={{
+            ...styles.button,
+            backgroundColor: user?.canRunToday ? '#222222' : '#A1AEB7',
+          }}
+          onPress={() => {
+            if (user?.canRunToday) {
+              navigation.dispatch(StackActions.push('watchcheck'))
+            }
+          }}
+          disabled={!user?.canRunToday}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            내일 만나요!
+            {user?.canRunToday ? '달리기 시작' : '내일 만나요!'}
           </Text>
         </Button>
         <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
@@ -85,12 +78,12 @@ const styles = StyleSheet.create({
     bottom: -Dimensions.get('window').height * 0.45,
     left: -Dimensions.get('window').width * 0.7,
   },
-  grapeBox: {
+  turtle: {
     position: 'absolute',
     width: Dimensions.get('window').width * 0.26,
     height: Dimensions.get('window').height * 0.4,
     bottom: -Dimensions.get('window').height * 0.1,
-    left: Dimensions.get('window').width * 0.2,
+    right: Dimensions.get('window').width * 0.1,
     resizeMode: 'contain',
   },
   button: {
@@ -98,6 +91,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     columnGap: 8,
-    backgroundColor: '#A1AEB7',
   },
 })

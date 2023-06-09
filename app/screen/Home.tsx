@@ -37,7 +37,7 @@ const Home = () => {
       if (userData?.me) {
         isNavigate.current = false
         return navigation.dispatch(
-          StackActions.push(userData?.me.birthYear ? 'watchcheck' : 'birthday'),
+          StackActions.push(userData?.me.birthYear ? 'grapetreehome' : 'birthday'),
         )
       } else {
         getMe()

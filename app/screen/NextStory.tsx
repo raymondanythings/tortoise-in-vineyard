@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Animated, Dimensions, Pressable, View } from 'react-native'
+import { Image, Dimensions, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import globalStyle from '../common/globalStyle'
@@ -19,14 +19,14 @@ const NextStory = () => {
       <View style={[{ justifyContent: 'center' }, { flex: 20 }]}>
         <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Animated.Image
+            <Image
               source={Img.NEXTSTORY}
               style={{
-                width: screenWidth * 0.8,
-                height: screenHeight * 0.8,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.9,
                 resizeMode: 'contain',
                 position: 'absolute',
-                top: '-30%',
+                top: '-40%',
               }}
             />
           </View>
