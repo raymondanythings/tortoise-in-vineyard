@@ -12,4 +12,6 @@ export default {
   UNFOLD: require('../assets/unfold.png'),
   NEXTSTORY: require('../assets/nextStory.png'),
   INTERSECT: require('../assets/Intersect.png'),
+  TREE: require('../assets/tree.png'),
+  GRAPEBOX: require('../assets/grapeBox.png'),
 }

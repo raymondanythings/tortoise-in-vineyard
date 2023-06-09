@@ -17,6 +17,7 @@ import WatchAppCheck from './app/screen/WatchAppCheck'
 import Grapes from './app/screen/Grapes'
 import Letter from './app/screen/Letter'
 import NextStory from './app/screen/NextStory'
+import GrapeTree from './app/screen/GrapeTree'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -66,6 +67,7 @@ const MainScreen = () => {
       <MainStack.Screen name='grapes' component={Grapes} />
       <MainStack.Screen name='letter' component={Letter} />
       <MainStack.Screen name='nextstory' component={NextStory} />
+      <MainStack.Screen name='grapetree' component={GrapeTree} />
     </MainStack.Navigator>
   )
 }
