@@ -10,4 +10,5 @@ export default {
   SENDBOX_BLACK: require('../assets/sendbox_black.png'),
   FOLD: require('../assets/fold.png'),
   UNFOLD: require('../assets/unfold.png'),
+  NEXTSTORY: require('../assets/nextStory.png'),
 }
