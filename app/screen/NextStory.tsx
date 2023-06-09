@@ -14,7 +14,7 @@ const NextStory = () => {
   const navigation = useNavigation()
 
   return (
-    <SafeAreaView style={globalStyle.safeAreaContainer}>
+    <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FFF0F7' }]}>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}></View>
       <View style={[{ justifyContent: 'center' }, { flex: 20 }]}>
         <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -25,7 +25,6 @@ const NextStory = () => {
                 width: screenWidth * 0.8,
                 height: screenHeight * 0.8,
                 resizeMode: 'contain',
-                // backgroundColor: 'blue',
                 position: 'absolute',
                 top: '-30%',
               }}
