@@ -1,6 +1,6 @@
 import React from 'react'
 import globalStyle from '../common/globalStyle'
-import { View, Image } from 'react-native'
+import { View, Image, Dimensions } from 'react-native'
 import Text from '../components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Success from '../components/Lotties/Success'
@@ -10,6 +10,9 @@ import useGetUser from '../hook/useGetUser'
 import Icon from '../constants/Icon'
 import useGetHeartRateRange from '../hook/useGetHeartRateRange'
 
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
+
 const Measurement = () => {
   const { user } = useGetUser('cache-only')
   const heartRateRange = useGetHeartRateRange()
@@ -18,31 +21,9 @@ const Measurement = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header]}>
-        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>측정 완료!</Text>
-        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
-          {`실시간으로 심박수를 계산해서
-더 오래 달리도록 옆에서 도와줄게요!`}
-        </Text>
-      </View>
-      <View style={globalStyle.center}>
-        <View style={{ width: '60%', height: '60%', marginBottom: '10%' }}>
-          <Success />
-        </View>
-        <View
-          style={[
-            {
-              alignItems: 'center',
-              height: '30%',
-              position: 'relative',
-            },
-          ]}
-        >
-          <Image
-            source={Icon.BOX}
-            style={{ position: 'absolute', width: '100%', height: '100%', top: '-30%' }}
-            resizeMode='contain'
-          />
-          <View style={{ flexDirection: 'row', zIndex: 1 }}>
+        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>달리기 준비 완료!</Text>
+        <View style={{ marginTop: 100 }}>
+          <View style={{ flexDirection: 'row' }}>
             <Text
               style={[
                 globalStyle.gaeguEmotion,
@@ -56,13 +37,12 @@ const Measurement = () => {
               {user?.minHeartRate} BPM
             </Text>
           </View>
-          <View style={{ flexDirection: 'row', zIndex: 1 }}>
+          <View style={{ marginTop: 10, flexDirection: 'row' }}>
             <Text
               style={[
                 globalStyle.gaeguEmotion,
                 globalStyle.Pretendard,
-                globalStyle.grapeColorFont,
-                { marginRight: 20 },
+                { marginRight: 20, color: '#FF77B8' },
               ]}
             >
               목표 심박수
@@ -73,6 +53,24 @@ const Measurement = () => {
               </Text>
             ) : null}
           </View>
+        </View>
+      </View>
+      <View style={[globalStyle.center, { justifyContent: 'center', alignItems: 'center' }]}>
+        <View style={[{ position: 'relative' }]}>
+          <Image
+            source={Icon.BOX}
+            style={{
+              position: 'absolute',
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.4,
+              left: -screenWidth * 0.4,
+              top: -screenHeight * 0.28,
+            }}
+            resizeMode='contain'
+          />
+        </View>
+        <View style={{ width: '60%', height: '60%', marginBottom: '10%' }}>
+          <Success />
         </View>
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
