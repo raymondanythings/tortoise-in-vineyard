@@ -258,8 +258,12 @@ const Run = () => {
             longitude: location.longitude + 0.0000001,
           }}
         >
-          <View style={styles.radius}>
-            <FastImage source={Img.LOGO_MOVING} style={styles.marker} />
+          <View style={{ position: 'relative', top: 40 }}>
+            <FastImage
+              source={Img.LOGO_MOVING}
+              style={styles.marker}
+              resizeMode={FastImage.resizeMode.contain}
+            />
           </View>
         </MarkerAnimated>
         {/* 테두리 선 */}
@@ -460,17 +464,11 @@ export default Run
 
 const styles = StyleSheet.create({
   radius: {
-    height: 60,
-    width: 60,
-    borderRadius: 60 / 2,
-    backgroundColor: 'rgba(255, 226, 49, 1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   marker: {
-    height: 40,
-    width: 40,
-    // borderColor: 'white',
-    // overflow: 'hidden',
+    height: 70,
+    width: 100,
   },
 })
