@@ -1,0 +1,8 @@
+query run($id: String!) {
+  run(id: $id) {
+    id
+    emotionBefore
+    emotionAfter
+    runMeters
+  }
+}
