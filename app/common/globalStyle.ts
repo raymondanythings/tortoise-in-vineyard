@@ -40,6 +40,13 @@ export default StyleSheet.create({
     fontFamily: Font.Pretendard,
     lineHeight: 24,
   },
+  subheadingwhite: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: 'white',
+    fontFamily: Font.Pretendard,
+    lineHeight: 24,
+  },
   pretendardSub: {
     fontSize: 14,
     lineHeight: 24,

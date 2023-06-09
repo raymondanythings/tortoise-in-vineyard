@@ -18,6 +18,7 @@ import Grapes from './app/screen/Grapes'
 import Letter from './app/screen/Letter'
 import NextStory from './app/screen/NextStory'
 import GrapeTreeHome from './app/screen/GrapeTreeHome'
+import RecordGrape from './app/screen/RecordGrape'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -68,6 +69,7 @@ const MainScreen = () => {
       <MainStack.Screen name='letter' component={Letter} />
       <MainStack.Screen name='nextstory' component={NextStory} />
       <MainStack.Screen name='grapetreehome' component={GrapeTreeHome} />
+      <MainStack.Screen name='recordgrape' component={RecordGrape} />
     </MainStack.Navigator>
   )
 }
