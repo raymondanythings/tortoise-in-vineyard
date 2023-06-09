@@ -246,10 +246,24 @@ export type UpdateBirthMutationVariables = Exact<{
 
 export type UpdateBirthMutation = { __typename?: 'Mutation', updateBirthYear: { __typename?: 'User', birthYear?: number | null } };
 
+export type GrapesQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GrapesQuery = { __typename?: 'Query', grape: { __typename?: 'Grape', id: string, runs: Array<{ __typename?: 'Run', id: string, emotionAfter?: Emotion | null }> } };
+
 export type GetHeartRateRageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHeartRateRageQuery = { __typename?: 'Query', getHeartRateRange: Array<number> };
+
+export type RunQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type RunQuery = { __typename?: 'Query', run: { __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null } };
 
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -482,6 +496,45 @@ export function useUpdateBirthMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateBirthMutationHookResult = ReturnType<typeof useUpdateBirthMutation>;
 export type UpdateBirthMutationResult = Apollo.MutationResult<UpdateBirthMutation>;
 export type UpdateBirthMutationOptions = Apollo.BaseMutationOptions<UpdateBirthMutation, UpdateBirthMutationVariables>;
+export const GrapesDocument = gql`
+    query grapes($id: String!) {
+  grape(id: $id) {
+    id
+    runs {
+      id
+      emotionAfter
+    }
+  }
+}
+    `;
+
+/**
+ * __useGrapesQuery__
+ *
+ * To run a query within a React component, call `useGrapesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGrapesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGrapesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGrapesQuery(baseOptions: Apollo.QueryHookOptions<GrapesQuery, GrapesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GrapesQuery, GrapesQueryVariables>(GrapesDocument, options);
+      }
+export function useGrapesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GrapesQuery, GrapesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GrapesQuery, GrapesQueryVariables>(GrapesDocument, options);
+        }
+export type GrapesQueryHookResult = ReturnType<typeof useGrapesQuery>;
+export type GrapesLazyQueryHookResult = ReturnType<typeof useGrapesLazyQuery>;
+export type GrapesQueryResult = Apollo.QueryResult<GrapesQuery, GrapesQueryVariables>;
 export const GetHeartRateRageDocument = gql`
     query getHeartRateRage {
   getHeartRateRange
@@ -514,6 +567,44 @@ export function useGetHeartRateRageLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetHeartRateRageQueryHookResult = ReturnType<typeof useGetHeartRateRageQuery>;
 export type GetHeartRateRageLazyQueryHookResult = ReturnType<typeof useGetHeartRateRageLazyQuery>;
 export type GetHeartRateRageQueryResult = Apollo.QueryResult<GetHeartRateRageQuery, GetHeartRateRageQueryVariables>;
+export const RunDocument = gql`
+    query run($id: String!) {
+  run(id: $id) {
+    id
+    emotionBefore
+    emotionAfter
+    runMeters
+  }
+}
+    `;
+
+/**
+ * __useRunQuery__
+ *
+ * To run a query within a React component, call `useRunQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRunQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRunQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRunQuery(baseOptions: Apollo.QueryHookOptions<RunQuery, RunQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RunQuery, RunQueryVariables>(RunDocument, options);
+      }
+export function useRunLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RunQuery, RunQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RunQuery, RunQueryVariables>(RunDocument, options);
+        }
+export type RunQueryHookResult = ReturnType<typeof useRunQuery>;
+export type RunLazyQueryHookResult = ReturnType<typeof useRunLazyQuery>;
+export type RunQueryResult = Apollo.QueryResult<RunQuery, RunQueryVariables>;
 export const GetMeDocument = gql`
     query getMe {
   me {
