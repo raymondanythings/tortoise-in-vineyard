@@ -85,10 +85,20 @@ const Home = () => {
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
         <Logo />
-        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
-          {`남들과 비교하지 않고, 나만의 기준으로 운동해요.
-나만의 적정 심박수를 찾아서
-AI가 페이스메이킹을 해줄 거예요.`}
+        <Text
+          style={[
+            {
+              lineHeight: 30,
+              letterSpacing: -2,
+              textAlign: 'center',
+              fontSize: 24,
+              color: '#8C46FF',
+              fontWeight: 'bold',
+            },
+          ]}
+        >
+          {`거북이와 함께
+나만의 속도로 달려봐요!`}
         </Text>
       </View>
       <View
