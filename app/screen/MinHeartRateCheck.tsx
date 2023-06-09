@@ -8,7 +8,7 @@ import MinHeart from '../components/Lotties/MinHeart'
 
 const MinHeartRateCheck = () => {
   return (
-    <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FFF8FB' }]}>
+    <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FFF0F7' }]}>
       <View style={[globalStyle.header, {}]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center', lineHeight: 44 }]}>
           {`잠시만 움직이지 말고
