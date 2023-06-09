@@ -55,7 +55,7 @@ const Grapes = (route: any) => {
             justifyContent: 'center',
             columnGap: 8,
           }}
-          onPress={() => navigation.dispatch(StackActions.push('grapetree'))}
+          onPress={() => navigation.dispatch(StackActions.push('grapetreehome'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             포도밭 확인하기

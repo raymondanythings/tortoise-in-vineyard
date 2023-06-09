@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { View, Image, Dimensions } from 'react-native'
+import { View, Image, Dimensions, StyleSheet } from 'react-native'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
@@ -11,8 +11,9 @@ import { useRecoilValue } from 'recoil'
 import { runAtom } from '../store/run'
 import Img from '../constants/Img'
 import { useGetGrapeLazyQuery, useRunQuery } from '../../graphql/generated'
+import GrapeTree from '../components/GrapeTree'
 
-const GrapeTree = () => {
+const GrapeTreeHome = () => {
   const navigation = useNavigation()
   const { user } = useGetUser('network-only')
   const runState = useRecoilValue(runAtom)
@@ -47,46 +48,13 @@ const GrapeTree = () => {
         <GrapeCount count={grapeCircleCount} />
       </View>
       <View style={globalStyle.center}>
-        <Image
-          source={Img.TREE}
-          style={{
-            position: 'absolute',
-            width: Dimensions.get('window').width * 0.9,
-            height: Dimensions.get('window').height * 0.5,
-            top: -Dimensions.get('window').height * 0.04,
-            left: -Dimensions.get('window').width * 0.45,
-            zIndex: 1,
-          }}
-        />
-        <Image
-          source={Img.INTERSECT}
-          style={{
-            position: 'absolute',
-            bottom: -Dimensions.get('window').height * 0.45,
-            left: -Dimensions.get('window').width * 0.7,
-          }}
-        />
-        <Image
-          source={Img.GRAPEBOX}
-          style={{
-            position: 'absolute',
-            width: Dimensions.get('window').width * 0.26,
-            height: Dimensions.get('window').height * 0.4,
-            bottom: -Dimensions.get('window').height * 0.1,
-            left: Dimensions.get('window').width * 0.2,
-            resizeMode: 'contain',
-          }}
-        />
+        <GrapeTree totalRun={totalRun} />
+        <Image source={Img.INTERSECT} style={styles.intersect} />
+        <Image source={Img.GRAPEBOX} style={styles.grapeBox} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            columnGap: 8,
-            backgroundColor: '#A1AEB7',
-          }}
+          style={styles.button}
           onPress={() => navigation.dispatch(StackActions.push('home'))}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
@@ -101,4 +69,35 @@ const GrapeTree = () => {
   )
 }
 
-export default GrapeTree
+export default GrapeTreeHome
+
+const styles = StyleSheet.create({
+  tree: {
+    position: 'absolute',
+    width: Dimensions.get('window').width * 0.9,
+    height: Dimensions.get('window').height * 0.5,
+    top: -Dimensions.get('window').height * 0.04,
+    left: -Dimensions.get('window').width * 0.45,
+    zIndex: 1,
+  },
+  intersect: {
+    position: 'absolute',
+    bottom: -Dimensions.get('window').height * 0.45,
+    left: -Dimensions.get('window').width * 0.7,
+  },
+  grapeBox: {
+    position: 'absolute',
+    width: Dimensions.get('window').width * 0.26,
+    height: Dimensions.get('window').height * 0.4,
+    bottom: -Dimensions.get('window').height * 0.1,
+    left: Dimensions.get('window').width * 0.2,
+    resizeMode: 'contain',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    columnGap: 8,
+    backgroundColor: '#A1AEB7',
+  },
+})
