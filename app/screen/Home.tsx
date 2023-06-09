@@ -141,7 +141,7 @@ AI가 페이스메이킹을 해줄 거예요.`}
         style={{
           position: 'absolute',
 
-          bottom: -Dimensions.get('window').height * 0.4,
+          bottom: -Dimensions.get('window').height * 0.25,
           zIndex: -1,
         }}
       />
