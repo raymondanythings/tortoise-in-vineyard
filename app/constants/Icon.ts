@@ -10,6 +10,8 @@ export default {
   CHEVRON: require('../assets/chevron.png'),
   ARROW: require('../assets/arrow.png'),
   APPLE: require('../assets/apple.png'),
+  CLOSE: require('../assets/close.png'),
+  POLYGON: require('../assets/polygon.png'),
   EMOTION: {
     ANGRY: require('../assets/emotion/ANGRY.png'),
     EXCITED: require('../assets/emotion/EXCITED.png'),

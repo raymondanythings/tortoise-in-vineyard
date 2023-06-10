@@ -47,7 +47,7 @@ export default StyleSheet.create({
     lineHeight: 24,
   },
   pretendardSub: {
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
     fontFamily: Font.Pretendard,
   },
