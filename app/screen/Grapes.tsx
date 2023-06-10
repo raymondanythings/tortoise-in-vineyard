@@ -38,7 +38,7 @@ const Grapes = ({
 포도알을 총 ${totalRun}개 모았어요`}
         </Text>
       </View>
-      <View style={globalStyle.center}>
+      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
         {route?.params?.grape ? <GrapeBoard runs={route.params.grape.runs} /> : null}
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>

@@ -9,6 +9,7 @@ export default {
   BOX_SMALL: require('../assets/boxBlack_small.png'),
   CHEVRON: require('../assets/chevron.png'),
   ARROW: require('../assets/arrow.png'),
+  APPLE: require('../assets/apple.png'),
   EMOTION: {
     ANGRY: require('../assets/emotion/ANGRY.png'),
     EXCITED: require('../assets/emotion/EXCITED.png'),

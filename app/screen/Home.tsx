@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
@@ -17,7 +17,8 @@ import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
 import Img from '../constants/Img'
-import { screenHeight, screenWidth } from '../constants/screen'
+import { screenWidth } from '../constants/screen'
+import appleAuth from '@invertase/react-native-apple-authentication'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -58,6 +59,9 @@ const Home = () => {
     },
   })
   const kakaoLogin = useCallback(async () => {
+    // loginMutaion({
+    //   variables: { email: 'test122533@gmail.com', provider: AccountProvider.Kakao },
+    // })
     try {
       const token = await loginWithKakaoAccount()
       // const token = await login()
@@ -71,6 +75,34 @@ const Home = () => {
       console.error(err, '????')
     }
   }, [])
+
+  const appleLogin = async () => {
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      })
+      const credentialState = await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user,
+      )
+
+      if (credentialState === appleAuth.State.AUTHORIZED && appleAuthRequestResponse.email) {
+        loginMutaion({
+          variables: { email: appleAuthRequestResponse.email, provider: AccountProvider.Apple },
+        })
+      } else {
+        throw Error()
+      }
+    } catch (error: any) {
+      console.log(error, ' ????')
+      if (error.code === appleAuth.Error.CANCELED) {
+        // login canceled
+      } else {
+        // login error
+      }
+    }
+  }
+
   const canNavigateHandler = () => {
     isNavigate.current = true
   }
@@ -124,19 +156,40 @@ const Home = () => {
             </Text>
           </Button>
         ) : (
-          <Button
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#FEE500',
-              columnGap: 8,
-            }}
-            onPress={kakaoLogin}
-          >
-            <Image source={Icon.KAKAO} />
-            <Text style={[globalStyle.fontMedium, globalStyle.Pretendard]}>카카오로 시작하기</Text>
-          </Button>
+          <View style={{ width: '100%', rowGap: 8 }}>
+            <Button
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                columnGap: 8,
+                backgroundColor: '#FEE500',
+              }}
+              onPress={kakaoLogin}
+            >
+              <View style={{ width: 35, alignItems: 'center' }}>
+                <Image source={Icon.KAKAO} />
+              </View>
+              <Text style={[globalStyle.fontMedium, globalStyle.Pretendard]}>카카오로 로그인</Text>
+            </Button>
+            <Button
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                columnGap: 8,
+                backgroundColor: '#FFFFFF',
+                borderWidth: 1,
+                borderColor: '#000000',
+              }}
+              onPress={appleLogin}
+            >
+              <View style={{ width: 35, alignItems: 'center' }}>
+                <Image source={Icon.APPLE} />
+              </View>
+              <Text style={[globalStyle.fontMedium, globalStyle.Pretendard]}>Apple로 로그인</Text>
+            </Button>
+          </View>
         )}
         {/* <Pressable
           onPress={async () => {

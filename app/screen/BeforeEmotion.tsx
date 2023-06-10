@@ -68,31 +68,31 @@ const BeforeEmotion = () => {
     >
       <View style={[globalStyle.header]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
-          오늘의 감정은 어떤가요?
-        </Text>
-        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
-          달리기 전, 느낀 감정에 가까운 단어를 선택해주세요
+          {`달리기 전,
+오늘의 감정은 어떤가요?`}
         </Text>
       </View>
-      <View style={[globalStyle.center, { flexDirection: 'row' }]}>
+      <View style={[globalStyle.center, { flexDirection: 'row', alignItems: 'center' }]}>
         <EmotionButtons onIconPress={(selected) => setEmotion(selected)} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
-        <Button
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            columnGap: 8,
-            backgroundColor: emotion.value ? '#222222' : '#A0A0A0',
-          }}
-          disabled={!emotion.value}
-          onPress={handleButtonClick}
-        >
-          <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            감정 기록 완료
-          </Text>
-        </Button>
+        {emotion.value ? (
+          <Button
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              columnGap: 8,
+              backgroundColor: emotion.value ? '#222222' : '#A0A0A0',
+            }}
+            disabled={!emotion.value}
+            onPress={handleButtonClick}
+          >
+            <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
+              감정 기록 완료
+            </Text>
+          </Button>
+        ) : null}
       </View>
     </SafeAreaView>
   )

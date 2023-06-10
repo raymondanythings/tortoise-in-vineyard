@@ -20,16 +20,12 @@ const WatchCheck = ({ route }) => {
   const { isConnected, isReachability } = useWatch()
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
-      <View style={[globalStyle.header, {}]}>
+      <View style={[globalStyle.header]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
           애플워치 착용하셨나요?
         </Text>
-        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
-          {`심박수 측정을 위해 기기를 착용해주세요.
-없다면, 거리로 측정해드릴게요!`}
-        </Text>
       </View>
-      <View style={globalStyle.center}>
+      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
         <Image source={Img.WATCH_PREV} style={{ width: screenWidth }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
@@ -65,7 +61,7 @@ const WatchCheck = ({ route }) => {
           }}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            착용 완료
+            착용했어요
           </Text>
         </Button>
         <Button

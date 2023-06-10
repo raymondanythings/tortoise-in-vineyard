@@ -34,19 +34,7 @@ const Attention = () => {
         </View>
       </View>
       <View style={[globalStyle.center, { justifyContent: 'center', alignItems: 'center' }]}>
-        <View
-          style={{
-            width: screenWidth * 0.7,
-            height: screenHeight * 0.22,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Image
-            source={Img.ATTENTIONTURTLE}
-            style={{ width: screenWidth * 0.7, height: screenHeight * 0.24 }}
-          />
-        </View>
+        <Image source={Img.ATTENTIONTURTLE} style={{ transform: [{ scale: 0.7 }] }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <View style={styles.startBtn}>

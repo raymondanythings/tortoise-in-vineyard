@@ -19,8 +19,6 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
   const sharedValue = useSharedValue(0)
   const layoutWidth = useSharedValue(0)
 
-  const [canFinish, setCanFinish] = useState(false)
-
   const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
   const [toggled, setToggled] = useState(false)
   const handleComplete = (isToggled: boolean) => {
@@ -86,6 +84,8 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
       ></Animated.View>
       <AnimatedLinearGradient
         colors={['#222222', '#8C46FF']}
+        start={{ x: 0, y: 0.5 }}
+        end={{ x: 1, y: 0.5 }}
         style={[styles.background, colorWave]}
       />
 
@@ -96,25 +96,6 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
       </PanGestureHandler>
 
       <Text style={[styles.swipeText]}>달리기를 완료할게요</Text>
-      {/* {canFinish ? null : (
-        <Pressable
-          onPress={() => {
-            setCanFinish(true)
-          }}
-          style={{
-            width: '100%',
-            position: 'absolute',
-            height: BUTTON_HEIGHT,
-            backgroundColor: '#222222',
-            justifyContent: 'center',
-            borderRadius: 10,
-            left: 0,
-            zIndex: 10,
-          }}
-        >
-          <Text style={[styles.swipeText]}>달리기 완료</Text>
-        </Pressable>
-      )} */}
     </Animated.View>
   )
 }

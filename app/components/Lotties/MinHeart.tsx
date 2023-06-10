@@ -6,6 +6,7 @@ import heartcheck from '../../assets/lotties/min_heartrate.json'
 
 import Text from '../Text'
 import globalStyle from '../../common/globalStyle'
+import { screenWidth } from '../../constants/screen'
 
 const MinHeart = ({ heartRate }: { heartRate: number }) => {
   return (
@@ -14,8 +15,8 @@ const MinHeart = ({ heartRate }: { heartRate: number }) => {
         position: 'relative',
       }}
     >
-      <Image source={Img.WATCH_HEART} />
-      <View
+      <Image source={Img.WATCH_HEART} style={{ width: screenWidth }} />
+      {/* <View
         style={{
           position: 'absolute',
           width: '100%',
@@ -35,13 +36,14 @@ const MinHeart = ({ heartRate }: { heartRate: number }) => {
         >
           심박수
         </Text>
-      </View>
+      </View> */}
       <AnimatedLottieView
         style={{
-          width: '100%',
-          height: '100%',
+          width: '75%',
+          height: '75%',
           position: 'absolute',
-          top: '0%',
+          left: '9%',
+          top: '9%',
         }}
         source={heartcheck}
         autoPlay

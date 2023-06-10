@@ -6,7 +6,9 @@ const useHearkRateTraking = (intervalTime = 1000) => {
   const watchState = useRecoilValue(watchAtom)
   const [heartRateData, setHeartRateData] = useState<number[]>([])
   const updateHeartRate = () => {
-    setHeartRateData((prev) => [...prev, watchState.heartRate])
+    if (watchState.heartRate) {
+      setHeartRateData((prev) => [...prev, watchState.heartRate])
+    }
   }
   useEffect(() => {
     const id = setInterval(() => {

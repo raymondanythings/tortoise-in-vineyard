@@ -20,7 +20,7 @@ const Measurement = () => {
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>달리기 준비 완료!</Text>
-        <View style={{ marginTop: 100 }}>
+        <View style={{ marginTop: 50 }}>
           <View style={{ flexDirection: 'row' }}>
             <Text
               style={[
@@ -62,7 +62,7 @@ const Measurement = () => {
               width: screenWidth * 0.8,
               height: screenHeight * 0.4,
               left: -screenWidth * 0.4,
-              top: -screenHeight * 0.28,
+              top: -screenHeight * 0.315,
             }}
             resizeMode='contain'
           />
@@ -71,7 +71,7 @@ const Measurement = () => {
           <Success />
         </View>
       </View>
-      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
+      <View style={[globalStyle.fullWidth, globalStyle.footer, { flex: 4 }]}>
         <Button
           style={{
             flexDirection: 'row',

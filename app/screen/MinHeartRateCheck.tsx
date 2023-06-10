@@ -91,7 +91,7 @@ const MinHeartRateCheck = () => {
 심박수 측정은 1회만 진행해요`}
         </Text>
       </View>
-      <View style={globalStyle.center}>
+      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
         <MinHeart heartRate={heartRate || 0} />
       </View>
       <View

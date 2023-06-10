@@ -66,10 +66,11 @@ export default StyleSheet.create({
   },
   header: {
     position: 'relative',
-    flex: hasNotch() ? 3 : 2,
+    // flex: hasNotch() ? 3 : 2,
     marginTop: 40,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   center: {
     flex: hasNotch() ? 13 : 8,

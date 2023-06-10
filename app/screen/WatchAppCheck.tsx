@@ -11,6 +11,7 @@ import useGetUser from '../hook/useGetUser'
 import { useSetRecoilState } from 'recoil'
 import { runAtom } from '../store/run'
 import { RunType } from '../../graphql/generated'
+import { screenWidth } from '../constants/screen'
 
 const WatchAppCheck = () => {
   const { user } = useGetUser('cache-only')
@@ -36,8 +37,8 @@ const WatchAppCheck = () => {
           애플워치에서 어플을 켜주세요
         </Text>
       </View>
-      <View style={globalStyle.center}>
-        {/* <Image source={Img.WATCH_APP} style={{ width: Dimensions.get('window').width }} /> */}
+      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
+        <Image source={Img.WATCH_APP} style={{ width: screenWidth }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
