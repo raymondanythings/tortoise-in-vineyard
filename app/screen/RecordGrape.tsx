@@ -61,7 +61,7 @@ ${(index || 0) + 1}번째 포도송이예요!`}
           포도알을 누르면, 그날의 기록을 볼 수 있어요
         </Text>
       </View>
-      <View style={globalStyle.center}>
+      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
         {data?.grape?.runs ? (
           <GrapeBoard runs={data?.grape?.runs} onPressRun={handleRunPress} />
         ) : null}
