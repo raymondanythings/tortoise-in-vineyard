@@ -34,16 +34,18 @@ const MinHeartRateCheck = () => {
   })
 
   const isHeartRateConverged = useCallback(() => {
-    const mean = heartRateData.reduce((acc, cur) => acc + cur, 0) / heartRateData.length
+    const heartRateFilterdList = heartRateData.filter((n) => n > 0)
+    const mean =
+      heartRateFilterdList.reduce((acc, cur) => acc + cur, 0) / heartRateFilterdList.length
     const variance =
-      heartRateData.reduce((acc, cur) => acc + Math.pow(cur - mean, 2), 0) / heartRateData.length
+      heartRateFilterdList.reduce((acc, cur) => acc + Math.pow(cur - mean, 2), 0) /
+      heartRateFilterdList.length
     const std = Math.sqrt(variance)
     return std < STD_THRESHOLD
   }, [heartRateData.length])
 
   const determineStableHeartRate = () => {
     if (heartRateData.length < 10) return
-
     if (isHeartRateConverged()) {
       // 수렴헀다면, 최근 10초간의 평균 심박수를 구해서 저장
       // 마지막으로 수신한 심박수를 그대로 반환해도 무관
@@ -57,7 +59,7 @@ const MinHeartRateCheck = () => {
 
   const onStable = (stableHeartRate: number) => {
     updateMinHeart({
-      variables: { minHeartRate: stableHeartRate },
+      variables: { minHeartRate: Math.round(stableHeartRate) },
     })
   }
 

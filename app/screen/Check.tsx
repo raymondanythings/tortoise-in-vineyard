@@ -5,7 +5,7 @@ import { AUTH_HEADER } from '../constants/constants'
 import { useSetRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import TrackPlayer from 'react-native-track-player'
-import { useNavigation } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 const Check = () => {
   const setAuth = useSetRecoilState(authState)
   const navigation = useNavigation()
@@ -18,11 +18,12 @@ const Check = () => {
         routes: [
           {
             name: 'mainScreen',
-            path: 'letter',
+            params: {
+              screen: 'letter',
+            },
           },
         ],
       })
-      // return navigation.reset('mainScreen', { screen: 'letter' })
     }
     const token = await AsyncStorage.getItem(AUTH_HEADER)
     if (token) {
@@ -33,7 +34,9 @@ const Check = () => {
       routes: [
         {
           name: 'mainScreen',
-          path: 'home',
+          params: {
+            screen: 'home',
+          },
         },
       ],
     })
