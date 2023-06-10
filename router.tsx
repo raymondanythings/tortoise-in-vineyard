@@ -23,6 +23,7 @@ import { Image, Pressable, View } from 'react-native'
 import Text from './app/components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from './app/constants/Icon'
+import { hasNotch } from 'react-native-device-info'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -51,7 +52,7 @@ const MainScreen = () => {
           return props.back ? (
             <Pressable
               onPress={navigation.goBack}
-              style={{ position: 'absolute', left: 30, top: 60 }}
+              style={{ position: 'absolute', left: 30, top: hasNotch() ? 60 : 30 }}
             >
               <Image source={Icon.ARROW} />
             </Pressable>

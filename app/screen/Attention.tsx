@@ -25,16 +25,28 @@ const Attention = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header]}>
-        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center', marginTop: 80 }]}>
-          {`나만의 속도로
+        <View style={[{ position: 'relative', justifyContent: 'center', alignItems: 'center' }]}>
+          <Image source={Icon.BOX} style={styles.boxStyle} resizeMode='contain' />
+          <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
+            {`나만의 속도로
 달리기 가보자고!`}
-        </Text>
+          </Text>
+        </View>
       </View>
       <View style={[globalStyle.center, { justifyContent: 'center', alignItems: 'center' }]}>
-        <View style={[{ position: 'relative' }]}>
-          <Image source={Icon.BOX} style={styles.boxStyle} resizeMode='contain' />
+        <View
+          style={{
+            width: screenWidth * 0.7,
+            height: screenHeight * 0.22,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Image
+            source={Img.ATTENTIONTURTLE}
+            style={{ width: screenWidth * 0.7, height: screenHeight * 0.24 }}
+          />
         </View>
-        <Image source={Img.ATTENTIONTURTLE} style={styles.attention} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <View style={styles.startBtn}>
@@ -57,13 +69,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: screenWidth * 0.8,
     height: screenHeight * 0.4,
-    left: -screenWidth * 0.4,
-    top: -screenHeight * 0.35,
-  },
-  attention: {
-    width: screenWidth * 0.7,
-    height: screenHeight * 0.22,
-    marginBottom: screenHeight * 0.1,
+    // left: -screenWidth * 0.4,
+    // top: -screenHeight * 0.35,
   },
   startBtn: {
     width: screenWidth * 0.44,

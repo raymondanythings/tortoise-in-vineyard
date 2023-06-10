@@ -10,6 +10,8 @@ import useGetUser from '../hook/useGetUser'
 import Img from '../constants/Img'
 import GrapeTree from '../components/GrapeTree'
 import { screenWidth, screenHeight } from '../constants/screen'
+import colors from '../constants/colors'
+import { hasNotch } from 'react-native-device-info'
 
 const GrapeTreeHome = () => {
   const navigation = useNavigation()
@@ -19,26 +21,37 @@ const GrapeTreeHome = () => {
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>
       <View style={[globalStyle.header]}>
-        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
-          {`포도알을 총 ${totalRun}개 모았어요!`}
-        </Text>
-        <GrapeCount count={grapeCircleCount} />
-      </View>
-      <View style={globalStyle.center}>
-        {user?.grapesOnTree ? (
-          <GrapeTree
-            onPress={(grape, index) =>
-              navigation.dispatch(StackActions.push('recordgrape', { grape, index }))
+        <View style={{ alignItems: 'center' }}>
+          <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
+            {`포도알을 총 ${totalRun}개 모았어요!`}
+          </Text>
+          <Text
+            style={
+              (globalStyle.pretendardSub,
+              { color: colors.TEXT_MAIN_1, marginVertical: hasNotch() ? 10 : 4 })
             }
-            grapes={user?.grapesOnTree}
-          />
-        ) : null}
-        <Image source={Img.INTERSECT} style={styles.intersect} />
-        {user?.canRunToday ? (
-          <Image source={Img.BEFORERUNTURTLE} style={styles.turtle} />
-        ) : (
-          <Image source={Img.SLEEPTURTLE} style={styles.turtle} />
-        )}
+          >
+            모아둔 포도송이를 클릭해보세요
+          </Text>
+          <GrapeCount count={grapeCircleCount} />
+        </View>
+      </View>
+      <View style={[globalStyle.center, { flex: 12 }]}>
+        <View>
+          {user?.grapesOnTree ? (
+            <GrapeTree
+              onPress={(grape, index) =>
+                navigation.dispatch(StackActions.push('recordgrape', { grape, index }))
+              }
+              grapes={user.grapesOnTree}
+            />
+          ) : null}
+          {user?.canRunToday ? (
+            <Image source={Img.BEFORERUNTURTLE} style={styles.turtle} />
+          ) : (
+            <Image source={Img.SLEEPTURTLE} style={styles.turtle} />
+          )}
+        </View>
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
@@ -61,6 +74,9 @@ const GrapeTreeHome = () => {
           포도알은 하루 한 번만 획득할 수 있어요
         </Text>
       </View>
+      <View style={styles.intersect}>
+        <Image style={{ width: screenWidth, height: screenHeight * 0.4 }} source={Img.INTERSECT} />
+      </View>
     </SafeAreaView>
   )
 }
@@ -68,26 +84,23 @@ const GrapeTreeHome = () => {
 export default GrapeTreeHome
 
 const styles = StyleSheet.create({
-  tree: {
-    position: 'absolute',
-    width: screenWidth * 0.9,
-    height: screenHeight * 0.5,
-    top: -screenHeight * 0.04,
-    left: -screenWidth * 0.45,
-    zIndex: 1,
-  },
   intersect: {
     position: 'absolute',
-    bottom: -screenHeight * 0.45,
-    left: -screenWidth * 0.7,
+    height: screenHeight * 0.4,
+    width: screenWidth,
+    zIndex: -1,
+    bottom: 0,
   },
   turtle: {
     position: 'absolute',
-    width: screenWidth * 0.26,
-    height: screenHeight * 0.4,
-    bottom: -screenHeight * 0.1,
-    right: screenWidth * 0.1,
+    bottom: 0,
+    left: '20%',
     resizeMode: 'contain',
+    transform: [
+      {
+        scale: 0.8,
+      },
+    ],
   },
   button: {
     flexDirection: 'row',

@@ -15,7 +15,7 @@ const GrapeCount: FunctionComponent<GrapeCountProps> = ({ count }) => {
     <View
       style={{
         flexDirection: 'row',
-        marginTop: 12,
+        marginTop: 4,
         columnGap: 10,
         position: 'relative',
         alignItems: 'center',

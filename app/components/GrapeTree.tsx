@@ -1,148 +1,70 @@
 import React, { FC, useMemo } from 'react'
-import { Image, ImageProps, StyleSheet, StyleProp, Pressable } from 'react-native'
+import { Image, ImageProps, StyleSheet, StyleProp, Pressable, View } from 'react-native'
 import Img from '../constants/Img'
 import { screenWidth, screenHeight } from '../constants/screen'
 import { Grape } from '../../graphql/generated'
+import Icon from '../constants/Icon'
 export type GrapeById = Pick<Grape, '__typename' | 'id' | 'isFull' | 'createdAt'>
 const grapeStyles: ImageProps['style'][] = [
   {
-    width: screenWidth * 0.17,
-    height: screenHeight * 0.1,
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.43,
-    left: -screenWidth * 0.108,
+    top: '6%',
+    left: '38%',
   },
   {
-    width: screenWidth * 0.17,
-    height: screenHeight * 0.1,
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.401,
-    right: -screenWidth * 0.234,
-    transform: [
-      {
-        rotateZ: '10deg',
-      },
-      {
-        scale: 0.85,
-      },
-    ],
+    top: '12%',
+    left: '57%',
   },
   {
-    width: screenWidth * 0.17,
-    height: screenHeight * 0.1,
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.36,
-    right: screenWidth * 0.07,
-    transform: [{ rotate: '-30deg' }],
+    top: '18.5%',
+    left: '19.5%',
   },
   {
-    width: screenWidth * 0.17,
-    height: screenHeight * 0.1,
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.33,
-    right: -screenWidth * 0.12,
-    transform: [
-      {
-        scale: 0.85,
-      },
-      {
-        rotate: '-20deg',
-      },
-    ],
+    top: '26%',
+    left: '44%',
   },
   {
-    width: screenWidth * 0.14,
-    height: screenHeight * 0.08,
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.335,
-    right: -screenWidth * 0.29,
-    transform: [
-      {
-        rotate: '30deg',
-      },
-    ],
+    top: '26%',
+    left: '62%',
   },
   {
-    width: screenWidth * 0.14,
-    height: screenHeight * 0.08,
+    top: '34%',
+    left: '8%',
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.3,
-    right: screenWidth * 0.22,
-    transform: [
-      {
-        rotate: '-18deg',
-      },
-      {
-        scale: 1.05,
-      },
-    ],
   },
   {
-    width: screenWidth * 0.14,
-    height: screenHeight * 0.08,
+    top: '38.8%',
+    left: '30.2%',
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.27,
-    right: screenWidth * 0.001,
-    transform: [
-      {
-        rotate: '-28deg',
-      },
-      {
-        scale: 1.05,
-      },
-    ],
   },
   {
-    width: screenWidth * 0.14,
-    height: screenHeight * 0.08,
+    top: '42%',
+    left: '74%',
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.26,
-    right: -screenWidth * 0.37,
-    transform: [
-      {
-        rotate: '15deg',
-      },
-      {
-        scale: 1.05,
-      },
-    ],
   },
   {
-    width: screenWidth * 0.18,
-    height: screenHeight * 0.1,
+    top: '45%',
+    left: '52%',
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.23,
-    right: -screenWidth * 0.2,
-    transform: [
-      {
-        rotate: '0deg',
-      },
-    ],
   },
   {
-    width: screenWidth * 0.18,
-    height: screenHeight * 0.1,
+    top: '50%',
+    left: '16%',
     zIndex: 1,
     position: 'absolute',
-    bottom: screenHeight * 0.2,
-    right: screenWidth * 0.094,
-    transform: [
-      {
-        rotate: '-40deg',
-      },
-      {
-        scale: 0.9,
-      },
-    ],
   },
   // ... add more styles if needed
 ]
@@ -156,24 +78,18 @@ const GrapeTree: FC<GrapeTreeImageProps> = ({ grapes, onPress }) => {
   const grapesData = useMemo(() => grapes.slice(0, 10), [grapes])
 
   return (
-    <>
-      <Image source={Img.TREE} style={styles.tree} />
+    <View style={{ position: 'relative' }}>
+      <Image source={Img.TREE} />
       {grapesData.map((grape, index) => (
         <Pressable
           key={grape.id}
           style={[grapeStyles[index % grapeStyles.length]]}
           onPress={() => onPress && onPress(grape, index)}
         >
-          <Image
-            source={Img.GRAPEFULL}
-            style={{
-              width: grapeStyles[index % grapeStyles.length]!.width,
-              height: grapeStyles[index % grapeStyles.length]!.height,
-            }}
-          />
+          <Image source={Icon.GRAPES[index]} />
         </Pressable>
       ))}
-    </>
+    </View>
   )
 }
 
@@ -183,8 +99,8 @@ const styles = StyleSheet.create({
   tree: {
     position: 'absolute',
     width: screenWidth * 0.9,
-    height: screenHeight * 0.5,
-    top: -screenHeight * 0.04,
+    // height: screenHeight * 0.5,
+    top: -screenHeight * 0.02,
     left: -screenWidth * 0.45,
     zIndex: 1,
   },

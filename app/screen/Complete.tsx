@@ -7,13 +7,40 @@ import Confetti from '../components/Lotties/Confetti'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import Icon from '../constants/Icon'
 import bigEmotion, { Emotion } from '../constants/bigEmotion'
+import useGetUser from '../hook/useGetUser'
+import { useRecoilValue } from 'recoil'
+import { useGetGrapeLazyQuery, useRunQuery } from '../../graphql/generated'
+import { runAtom } from '../store/run'
 
 const DELAY_NAVIGATION = 2200
 
 const Complete = ({ route }: { route: { params: { emotion: Emotion } } }) => {
   const navigation = useNavigation()
+  const { user } = useGetUser('network-only')
   const { emotion } = route.params || {}
-
+  const runState = useRecoilValue(runAtom)
+  const [getGrape] = useGetGrapeLazyQuery({
+    fetchPolicy: 'network-only',
+    onCompleted(data) {
+      return setTimeout(() => {
+        navigation.dispatch(StackActions.replace('grapes', { grape: data.grape }))
+      }, DELAY_NAVIGATION)
+    },
+  })
+  useRunQuery({
+    variables: {
+      id: runState.id,
+    },
+    onCompleted(data) {
+      if (data?.run?.grapeId) {
+        getGrape({
+          variables: {
+            id: data.run.grapeId,
+          },
+        })
+      }
+    },
+  })
   const animation = useRef(new Animated.Value(0)).current
 
   useEffect(() => {
@@ -29,14 +56,6 @@ const Complete = ({ route }: { route: { params: { emotion: Emotion } } }) => {
     inputRange: [0, 0.5, 1],
     outputRange: [0, -150, 0],
   })
-
-  // 3초 뒤에 다른 페이지로 이동
-  // 다음 페이지가 현재 없어서 home으로 가게 해둠
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.dispatch(StackActions.replace('grapes'))
-    }, DELAY_NAVIGATION)
-  }, [])
 
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>

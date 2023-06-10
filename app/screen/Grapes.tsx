@@ -10,29 +10,23 @@ import GrapeBoard from '../components/GrapeBoard'
 import useGetUser from '../hook/useGetUser'
 import { useRecoilValue } from 'recoil'
 import { runAtom } from '../store/run'
-import { useGetGrapeLazyQuery, useRunQuery } from '../../graphql/generated'
+import { RunFragment, useGetGrapeLazyQuery, useRunQuery } from '../../graphql/generated'
 
-const Grapes = (route: any) => {
-  const navigation = useNavigation()
-  const { user } = useGetUser('network-only')
-  const runState = useRecoilValue(runAtom)
-  const [getGrape, { data }] = useGetGrapeLazyQuery({
-    fetchPolicy: 'network-only',
-  })
-  useRunQuery({
-    variables: {
-      id: runState.id,
-    },
-    onCompleted(data) {
-      if (data?.run?.grapeId) {
-        getGrape({
-          variables: {
-            id: data.run.grapeId,
-          },
-        })
+const Grapes = ({
+  route,
+}: {
+  route: {
+    params: {
+      grape: {
+        id: string
+        createdAt: string
+        runs: RunFragment[]
       }
-    },
-  })
+    }
+  }
+}) => {
+  const navigation = useNavigation()
+  const { user } = useGetUser('cache-only')
 
   const totalRun = useMemo(() => user?.totalRun || 0, [user?.totalRun])
 
@@ -45,7 +39,7 @@ const Grapes = (route: any) => {
         </Text>
       </View>
       <View style={globalStyle.center}>
-        {data?.grape?.runs ? <GrapeBoard runs={data?.grape?.runs} /> : null}
+        {route?.params?.grape ? <GrapeBoard runs={route.params.grape.runs} /> : null}
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button

@@ -17,7 +17,7 @@ import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
 import Img from '../constants/Img'
-import { screenHeight } from '../constants/screen'
+import { screenHeight, screenWidth } from '../constants/screen'
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -151,8 +151,8 @@ const Home = () => {
         source={Img.INTERSECT}
         style={{
           position: 'absolute',
-
-          bottom: -screenHeight * 0.25,
+          width: screenWidth,
+          bottom: 0,
           zIndex: -1,
         }}
       />

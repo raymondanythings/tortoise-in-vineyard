@@ -9,8 +9,6 @@ import Animated, {
   useSharedValue,
   runOnJS,
   withTiming,
-  Extrapolate,
-  interpolateColor,
 } from 'react-native-reanimated'
 import { Font } from '../common/globalStyle'
 import Icon from '../constants/Icon'
@@ -97,8 +95,8 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
         </Animated.View>
       </PanGestureHandler>
 
-      <Text style={[styles.swipeText]}>밀어서 종료하기</Text>
-      {canFinish ? null : (
+      <Text style={[styles.swipeText]}>달리기를 완료할게요</Text>
+      {/* {canFinish ? null : (
         <Pressable
           onPress={() => {
             setCanFinish(true)
@@ -116,7 +114,7 @@ const SwipeButton = ({ onToggle }: { onToggle?: (toggle: boolean) => void }) => 
         >
           <Text style={[styles.swipeText]}>달리기 완료</Text>
         </Pressable>
-      )}
+      )} */}
     </Animated.View>
   )
 }

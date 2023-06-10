@@ -20,4 +20,18 @@ export default {
     PROUD: require('../assets/emotion/PROUD.png'),
     UNSTABLE: require('../assets/emotion/UNSTABLE.png'),
   },
+  GRAPES: [
+    require(`../assets/grapes/1.png`),
+    require(`../assets/grapes/2.png`),
+    require(`../assets/grapes/3.png`),
+    require(`../assets/grapes/4.png`),
+    require(`../assets/grapes/5.png`),
+    require(`../assets/grapes/6.png`),
+    require(`../assets/grapes/7.png`),
+    require(`../assets/grapes/8.png`),
+    require(`../assets/grapes/9.png`),
+    require(`../assets/grapes/10.png`),
+  ],
 }
+
+// console.log(...Array.from({ length: 10 }, (_, i) => i))

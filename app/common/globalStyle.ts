@@ -23,7 +23,6 @@ export default StyleSheet.create({
   },
   gaeguTitle: {
     fontSize: 28,
-    lineHeight: 44,
     fontWeight: 'bold',
   },
   gaeguSub: {
@@ -67,15 +66,16 @@ export default StyleSheet.create({
   },
   header: {
     position: 'relative',
-    flex: hasNotch() ? 5 : 3,
+    flex: hasNotch() ? 3 : 2,
     marginTop: 40,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   center: {
-    flex: hasNotch() ? 13 : 11,
+    flex: hasNotch() ? 13 : 8,
   },
   footer: {
-    flex: hasNotch() ? 3.5 : 4,
+    flex: hasNotch() ? 3 : 3,
     rowGap: 8,
   },
   fontMedium: {
