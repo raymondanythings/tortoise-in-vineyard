@@ -60,11 +60,11 @@ const GrapeTreeHome = () => {
             backgroundColor: user?.canRunToday ? '#222222' : '#A1AEB7',
           }}
           onPress={() => {
+            navigation.dispatch(StackActions.push('watchcheck'))
             if (user?.canRunToday) {
-              navigation.dispatch(StackActions.push('watchcheck'))
             }
           }}
-          disabled={!user?.canRunToday}
+          // disabled={!user?.canRunToday}
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             {user?.canRunToday ? '달리기 시작' : '내일 만나요!'}
