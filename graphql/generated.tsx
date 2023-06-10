@@ -210,7 +210,7 @@ export type UserDataFragment = { __typename?: 'User', id: string, email: string,
 
 export type GrapeFragment = { __typename?: 'Grape', id: string, createdAt: any };
 
-export type RunFragment = { __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string };
+export type RunFragment = { __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string, createdAt: any };
 
 export type GetEncourageMutationVariables = Exact<{
   input: GetEncourageInput;
@@ -260,7 +260,7 @@ export type GetGrapeQueryVariables = Exact<{
 }>;
 
 
-export type GetGrapeQuery = { __typename?: 'Query', grape: { __typename?: 'Grape', id: string, createdAt: any, runs: Array<{ __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string }> } };
+export type GetGrapeQuery = { __typename?: 'Query', grape: { __typename?: 'Grape', id: string, createdAt: any, runs: Array<{ __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string, createdAt: any }> } };
 
 export type GetGrapesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -277,7 +277,7 @@ export type RunQueryVariables = Exact<{
 }>;
 
 
-export type RunQuery = { __typename?: 'Query', run: { __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string } };
+export type RunQuery = { __typename?: 'Query', run: { __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string, createdAt: any } };
 
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -317,6 +317,7 @@ export const RunFragmentDoc = gql`
   emotionAfter
   runMeters
   grapeId
+  createdAt
 }
     `;
 export const GetEncourageDocument = gql`

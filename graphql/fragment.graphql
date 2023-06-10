@@ -20,4 +20,5 @@ fragment run on Run {
   emotionAfter
   runMeters
   grapeId
+  createdAt
 }

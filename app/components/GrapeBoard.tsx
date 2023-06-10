@@ -1,11 +1,17 @@
 import React, { useMemo, Fragment, useRef, useState } from 'react'
-import { Image, ImageStyle, LayoutRectangle, View } from 'react-native'
+import { Image, ImageStyle, LayoutRectangle, View, Pressable } from 'react-native'
 import Img from '../constants/Img'
 import Icon from '../constants/Icon'
 import { RunFragment } from '../../graphql/generated'
 import bigEmotion from '../constants/bigEmotion'
 import { hasNotch } from 'react-native-device-info'
-const GrapeBoard = ({ runs }: { runs: RunFragment[] }) => {
+
+interface GrapeBoardProps {
+  runs: RunFragment[]
+  onPressRun: (run: RunFragment) => void
+}
+
+const GrapeBoard: React.FC<GrapeBoardProps> = ({ runs, onPressRun }) => {
   const [grapeLayout, setGrapeLayout] = useState<LayoutRectangle | null>(null)
   const isNotch = hasNotch()
   const imageStyles = useMemo(() => {
@@ -72,15 +78,30 @@ const GrapeBoard = ({ runs }: { runs: RunFragment[] }) => {
         }}
       />
       {runs.map((run, i) => (
-        <Fragment key={i}>
-          <Image style={imageStyles[i % imageStyles.length]} source={Icon.GRAPEFORCONFETTI} />
-          {run.emotionAfter ? (
+        <View key={i} style={imageStyles[i % imageStyles.length]}>
+          <Pressable
+            style={{ position: 'absolute', width: '100%', height: '100%' }}
+            onPress={() => {
+              onPressRun(run)
+            }}
+          >
             <Image
-              style={imageStyles[i % imageStyles.length]}
-              source={bigEmotion[run.emotionAfter]}
+              style={{ width: '100%', height: '100%', resizeMode: 'contain' }}
+              source={Icon.GRAPEFORCONFETTI}
             />
-          ) : null}
-        </Fragment>
+            {run.emotionAfter ? (
+              <Image
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                }}
+                source={bigEmotion[run.emotionAfter]}
+              />
+            ) : null}
+          </Pressable>
+        </View>
       ))}
     </View>
   )
