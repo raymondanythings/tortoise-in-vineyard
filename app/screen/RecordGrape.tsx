@@ -11,22 +11,7 @@ import { useGetGrapeLazyQuery, useGetGrapeQuery } from '../../graphql/generated'
 import { RunFragment } from '../../graphql/generated'
 import { Emotion, emotions } from '../constants/bigEmotion'
 import Icon from '../constants/Icon'
-
-const formatDate = (isoDateString: Date) => {
-  const date = new Date(isoDateString)
-  const year = date.getFullYear().toString().slice(2)
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  const day = date.getDate().toString().padStart(2, '0')
-
-  return `${year}. ${month}. ${day}`
-}
-
-const formatDistance = (distanceInMeters: number): string => {
-  if (distanceInMeters >= 1000) {
-    return `${(distanceInMeters / 1000).toFixed(2)}KM`
-  }
-  return `${distanceInMeters}M`
-}
+import { formatDate, formatDistance, findEmotionDetails } from '../../utils/modalUtils'
 
 const RecordGrape = ({ route }: { route: { params: { grape: GrapeById; index: number } } }) => {
   const { params: { grape, index } = {} } = route
@@ -40,10 +25,6 @@ const RecordGrape = ({ route }: { route: { params: { grape: GrapeById; index: nu
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedRun, setSelectedRun] = useState<RunFragment | null>(null)
 
-  // 모달에 넣을 감정 찾기
-  const findEmotionDetails = (emotionValue: string): Emotion => {
-    return emotions.find((emotion) => emotion.value === emotionValue) || emotions[0]
-  }
   const emotionBeforeDetails = findEmotionDetails(selectedRun?.emotionBefore || '')
   const emotionAfterDetails = findEmotionDetails(selectedRun?.emotionAfter || '')
 
