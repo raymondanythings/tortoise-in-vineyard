@@ -19,6 +19,10 @@ import Letter from './app/screen/Letter'
 import NextStory from './app/screen/NextStory'
 import GrapeTreeHome from './app/screen/GrapeTreeHome'
 import RecordGrape from './app/screen/RecordGrape'
+import { Image, Pressable, View } from 'react-native'
+import Text from './app/components/Text'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import Icon from './app/constants/Icon'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
@@ -42,9 +46,18 @@ const MainScreen = () => {
   return (
     <MainStack.Navigator
       initialRouteName='Home'
-      screenOptions={{
-        headerShown: false,
-      }}
+      screenOptions={({ navigation, route }) => ({
+        header(props) {
+          return props.back ? (
+            <Pressable
+              onPress={navigation.goBack}
+              style={{ position: 'absolute', left: 30, top: 60 }}
+            >
+              <Image source={Icon.ARROW} />
+            </Pressable>
+          ) : null
+        },
+      })}
     >
       <MainStack.Screen
         options={{

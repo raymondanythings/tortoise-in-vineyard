@@ -64,7 +64,7 @@ interface IGeolocation {
   longitude: number
 }
 
-const GRADIENT_LIMIT = 12
+const GRADIENT_LIMIT = 40
 
 const Run = () => {
   const watchState = useRecoilValue(watchAtom)
@@ -271,34 +271,64 @@ const Run = () => {
             )}
           </View>
         </MarkerAnimated>
+        {locations[0]?.latitude ? (
+          <MarkerAnimated
+            coordinate={{
+              latitude: locations[0].latitude - 0.0003,
+              longitude: locations[0].longitude + 0.0000001,
+            }}
+            style={{ zIndex: -1 }}
+          >
+            <View style={{ padding: 20 }}>
+              <View
+                style={{
+                  borderRadius: 9999,
+                  backgroundColor: selectedEmotion.color,
+                  borderWidth: 8,
+                  borderColor: '#fff',
+                  width: 45,
+                  height: 45,
+                  shadowColor: selectedEmotion.color,
+                  shadowOpacity: 0.9,
+                  shadowRadius: 10,
+                  shadowOffset: {
+                    height: 0,
+                    width: 0,
+                  },
+                }}
+              ></View>
+              <Text style={{ textAlign: 'center', fontFamily: Font.RF, fontSize: 22 }}>START</Text>
+            </View>
+          </MarkerAnimated>
+        ) : null}
         {/* 테두리 선 */}
         <Polyline
           coordinates={locations}
           strokeColors={
             locations.length >= 2
               ? locations.length <= GRADIENT_LIMIT
-                ? [...generateColor(selectedEmotion.color, '#6B2FF4', locations.length)]
+                ? [...generateColor('#5424FE', selectedEmotion.borderColor, locations.length)]
                 : [
+                    ...generateColor('#5424FE', selectedEmotion.borderColor, GRADIENT_LIMIT),
                     ...Array.from({ length: locations.length - GRADIENT_LIMIT }).map(
-                      (_) => '#6B2FF4',
+                      (_) => '#5424FE',
                     ),
-                    ...generateColor(selectedEmotion.color, '#6B2FF4', GRADIENT_LIMIT),
                   ]
               : []
           }
-          strokeWidth={26}
+          strokeWidth={24}
         />
         <Polyline
           coordinates={locations}
           strokeColors={
             locations.length >= 2
               ? locations.length <= GRADIENT_LIMIT
-                ? [...generateColor(selectedEmotion.color, '#914CF7', locations.length)]
+                ? [...generateColor('#8C46FF', selectedEmotion.color, locations.length)]
                 : [
+                    ...generateColor('#8C46FF', selectedEmotion.color, GRADIENT_LIMIT),
                     ...Array.from({ length: locations.length - GRADIENT_LIMIT }).map(
-                      (_) => '#914CF7',
+                      (_) => '#8C46FF',
                     ),
-                    ...generateColor(selectedEmotion.color, '#914CF7', GRADIENT_LIMIT),
                   ]
               : []
           }
@@ -365,7 +395,6 @@ const Run = () => {
           ) : (
             <View style={{ flex: 1 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                {/* 심박수 */}
                 <Text style={{ fontFamily: Font.Pretendard, fontSize: 46, fontWeight: '700' }}>
                   {Math.round(watchState.heartRate || 0)}
                 </Text>
@@ -455,7 +484,15 @@ const Run = () => {
           onToggle={() => {
             setTimeout(() => {
               sendMessage({ action: 'resume' as watchOsActionsType })
-              navigation.dispatch(StackActions.push('afteremotion'))
+
+              navigation.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: 'afteremotion',
+                  },
+                ],
+              })
             }, 1500)
           }}
         />

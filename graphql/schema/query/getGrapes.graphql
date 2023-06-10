@@ -6,3 +6,9 @@ query getGrape($id: String!) {
     }
   }
 }
+
+query getGrapes {
+  grapes {
+    id
+  }
+}

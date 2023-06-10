@@ -13,11 +13,9 @@ import { screenWidth, screenHeight } from '../constants/screen'
 
 const GrapeTreeHome = () => {
   const navigation = useNavigation()
-  const { user } = useGetUser('network-only')
+  const { user } = useGetUser('cache-only')
   const grapeCircleCount = useMemo(() => user?.totalRun ?? 0 % 6, [user?.totalRun])
-
   const totalRun = useMemo(() => user?.totalRun || 0, [user?.totalRun])
-
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>
       <View style={[globalStyle.header]}>
@@ -27,7 +25,14 @@ const GrapeTreeHome = () => {
         <GrapeCount count={grapeCircleCount} />
       </View>
       <View style={globalStyle.center}>
-        <GrapeTree totalRun={totalRun} />
+        {user?.grapesOnTree ? (
+          <GrapeTree
+            onPress={(grape, index) =>
+              navigation.dispatch(StackActions.push('recordgrape', { grape, index }))
+            }
+            grapes={user?.grapesOnTree}
+          />
+        ) : null}
         <Image source={Img.INTERSECT} style={styles.intersect} />
         {user?.canRunToday ? (
           <Image source={Img.BEFORERUNTURTLE} style={styles.turtle} />

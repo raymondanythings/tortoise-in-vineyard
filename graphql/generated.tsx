@@ -67,6 +67,7 @@ export type Grape = {
   __typename?: 'Grape';
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
+  isFull: Scalars['Boolean']['output'];
   runs: Array<Run>;
   updatedAt: Scalars['DateTime']['output'];
   user: User;
@@ -193,9 +194,13 @@ export type User = {
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   grapes: Array<Grape>;
+  /** 나무에 열려있는 포도송이 (가득 찬 포도송이만 반환) */
+  grapesOnTree: Array<Grape>;
   hasDevice: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   minHeartRate?: Maybe<Scalars['Float']['output']>;
+  /** 포도박스 개수 */
+  numBox: Scalars['Float']['output'];
   /** 총 달린 횟수 (총 포도알 개수) */
   totalRun: Scalars['Float']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -257,6 +262,11 @@ export type GetGrapeQueryVariables = Exact<{
 
 export type GetGrapeQuery = { __typename?: 'Query', grape: { __typename?: 'Grape', id: string, createdAt: any, runs: Array<{ __typename?: 'Run', id: string, emotionBefore: Emotion, emotionAfter?: Emotion | null, runMeters?: number | null, grapeId: string }> } };
 
+export type GetGrapesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetGrapesQuery = { __typename?: 'Query', grapes: Array<{ __typename?: 'Grape', id: string }> };
+
 export type GetHeartRateRageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -272,7 +282,7 @@ export type RunQuery = { __typename?: 'Query', run: { __typename?: 'Run', id: st
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean } };
+export type GetMeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, email: string, hasDevice: boolean, birthYear?: number | null, minHeartRate?: number | null, createdAt: any, updatedAt: any, totalRun: number, canRunToday: boolean, grapesOnTree: Array<{ __typename?: 'Grape', id: string, isFull: boolean, createdAt: any }> } };
 
 export type RunPaceMakerSubscriptionVariables = Exact<{
   runId: Scalars['String']['input'];
@@ -554,6 +564,40 @@ export function useGetGrapeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetGrapeQueryHookResult = ReturnType<typeof useGetGrapeQuery>;
 export type GetGrapeLazyQueryHookResult = ReturnType<typeof useGetGrapeLazyQuery>;
 export type GetGrapeQueryResult = Apollo.QueryResult<GetGrapeQuery, GetGrapeQueryVariables>;
+export const GetGrapesDocument = gql`
+    query getGrapes {
+  grapes {
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetGrapesQuery__
+ *
+ * To run a query within a React component, call `useGetGrapesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGrapesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGrapesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetGrapesQuery(baseOptions?: Apollo.QueryHookOptions<GetGrapesQuery, GetGrapesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetGrapesQuery, GetGrapesQueryVariables>(GetGrapesDocument, options);
+      }
+export function useGetGrapesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGrapesQuery, GetGrapesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetGrapesQuery, GetGrapesQueryVariables>(GetGrapesDocument, options);
+        }
+export type GetGrapesQueryHookResult = ReturnType<typeof useGetGrapesQuery>;
+export type GetGrapesLazyQueryHookResult = ReturnType<typeof useGetGrapesLazyQuery>;
+export type GetGrapesQueryResult = Apollo.QueryResult<GetGrapesQuery, GetGrapesQueryVariables>;
 export const GetHeartRateRageDocument = gql`
     query getHeartRateRage {
   getHeartRateRange
@@ -625,6 +669,11 @@ export const GetMeDocument = gql`
     query getMe {
   me {
     ...userData
+    grapesOnTree {
+      id
+      isFull
+      createdAt
+    }
   }
 }
     ${UserDataFragmentDoc}`;

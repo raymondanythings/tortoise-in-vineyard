@@ -138,14 +138,14 @@ const Home = () => {
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard]}>카카오로 시작하기</Text>
           </Button>
         )}
-        <Pressable
+        {/* <Pressable
           onPress={async () => {
             AsyncStorage.clear()
             setToken('')
           }}
         >
           <Text>초기화</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
       <Image
         source={Img.INTERSECT}
