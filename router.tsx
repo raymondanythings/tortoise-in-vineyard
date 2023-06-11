@@ -24,9 +24,26 @@ import Text from './app/components/Text'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from './app/constants/Icon'
 import { hasNotch } from 'react-native-device-info'
+import { StackActions, useNavigation } from '@react-navigation/native'
+import WebView from 'react-native-webview'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
+
+const Modal = ({ route }: { route: { params: { uri: string } } }) => {
+  console.log(route, '<<route')
+  return (
+    <View style={{ flex: 1 }}>
+      <WebView
+        source={{
+          uri:
+            route.params?.uri ||
+            'https://private-ketchup-05c.notion.site/6947dff37f674221a1c70738494f699b',
+        }}
+      />
+    </View>
+  )
+}
 
 const Router = () => {
   return (
@@ -60,32 +77,41 @@ const MainScreen = () => {
         },
       })}
     >
-      <MainStack.Screen
-        options={
-          {
-            // gestureEnabled: false,
-            // animationEnabled: false,
+      <MainStack.Group>
+        <MainStack.Screen
+          options={
+            {
+              // gestureEnabled: false,
+              // animationEnabled: false,
+            }
           }
-        }
-        name='home'
-        component={Home}
-      />
-      <MainStack.Screen name='birthday' component={Birthday} />
-      <MainStack.Screen name='onboard' component={OnBoard} />
-      <MainStack.Screen name='watchcheck' component={WatchCheck} />
-      <MainStack.Screen name='minheartratecheck' component={MinHeartRateCheck} />
-      <MainStack.Screen name='measurement' component={Measurement} />
-      <MainStack.Screen name='beforeemotion' component={BeforeEmotion} />
-      <MainStack.Screen name='attention' component={Attention} />
-      <MainStack.Screen name='run' component={SubscriptionWrapper} />
-      <MainStack.Screen name='afteremotion' component={AfterEmotion} />
-      <MainStack.Screen name='complete' component={Complete} />
-      <MainStack.Screen name='watchappcheck' component={WatchAppCheck} />
-      <MainStack.Screen name='grapes' component={Grapes} />
-      <MainStack.Screen name='letter' component={Letter} />
-      <MainStack.Screen name='nextstory' component={NextStory} />
-      <MainStack.Screen name='grapetreehome' component={GrapeTreeHome} />
-      <MainStack.Screen name='recordgrape' component={RecordGrape} />
+          name='home'
+          component={Home}
+        />
+        <MainStack.Screen name='birthday' component={Birthday} />
+        <MainStack.Screen name='onboard' component={OnBoard} />
+        <MainStack.Screen name='watchcheck' component={WatchCheck} />
+        <MainStack.Screen name='minheartratecheck' component={MinHeartRateCheck} />
+        <MainStack.Screen name='measurement' component={Measurement} />
+        <MainStack.Screen name='beforeemotion' component={BeforeEmotion} />
+        <MainStack.Screen name='attention' component={Attention} />
+        <MainStack.Screen name='run' component={SubscriptionWrapper} />
+        <MainStack.Screen name='afteremotion' component={AfterEmotion} />
+        <MainStack.Screen name='complete' component={Complete} />
+        <MainStack.Screen name='watchappcheck' component={WatchAppCheck} />
+        <MainStack.Screen name='grapes' component={Grapes} />
+        <MainStack.Screen name='letter' component={Letter} />
+        <MainStack.Screen name='nextstory' component={NextStory} />
+        <MainStack.Screen name='grapetreehome' component={GrapeTreeHome} />
+        <MainStack.Screen name='recordgrape' component={RecordGrape} />
+      </MainStack.Group>
+      <MainStack.Group>
+        <MainStack.Screen
+          name='modal'
+          component={Modal}
+          options={{ presentation: 'modal', headerShown: false }}
+        />
+      </MainStack.Group>
     </MainStack.Navigator>
   )
 }
