@@ -19,4 +19,5 @@ export default {
   SLEEPTURTLE: require('../assets/sleepTurtle.png'),
   BEFORERUNTURTLE: require('../assets/beforeRunTurtle.png'),
   GRAPEFULL: require('../assets/grapeFull.png'),
+  CLOUD: require('../assets/cloud.png'),
 }

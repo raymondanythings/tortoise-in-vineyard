@@ -6,7 +6,7 @@ import Icon from '../constants/Icon'
 const Logo = () => {
   return (
     <View style={{ flex: 1, height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-      <FastImage style={{ width: 300, height: 168, marginBottom: 20 }} source={Icon.LOGO} />
+      <FastImage style={{ width: 230, height: 129 }} source={Icon.LOGO} />
     </View>
   )
 }

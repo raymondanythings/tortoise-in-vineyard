@@ -17,7 +17,7 @@ import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import Logo from '../components/Logo'
 import Img from '../constants/Img'
-import { screenWidth } from '../constants/screen'
+import { screenHeight, screenWidth } from '../constants/screen'
 import appleAuth from '@invertase/react-native-apple-authentication'
 
 const Home = () => {
@@ -117,6 +117,14 @@ const Home = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
+        <Image
+          source={Img.CLOUD}
+          style={{
+            position: 'absolute',
+            bottom: 90,
+            zIndex: -1,
+          }}
+        />
         <Logo />
         <Text
           style={[
@@ -137,9 +145,9 @@ const Home = () => {
       <View
         style={[{ marginVertical: 20, justifyContent: 'center', marginLeft: '10%' }, { flex: 6 }]}
       >
-        <Image source={Img.LOGO_MOVING} />
+        <Image source={Img.LOGO_MOVING} style={{ width: 250, height: 173, top: -40 }} />
       </View>
-      <View style={[globalStyle.fullWidth, { flex: 2.5 }]}>
+      <View style={[globalStyle.fullWidth, { flex: 2.7 }]}>
         {token ? (
           <Button
             style={{
@@ -205,6 +213,7 @@ const Home = () => {
         style={{
           position: 'absolute',
           width: screenWidth,
+          height: screenHeight * 0.39,
           bottom: 0,
           zIndex: -1,
         }}
