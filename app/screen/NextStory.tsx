@@ -13,24 +13,19 @@ const NextStory = () => {
 
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FFF0F7' }]}>
-      <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}></View>
-      <View style={[{ justifyContent: 'center' }, { flex: 20 }]}>
-        <Pressable style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Image
-              source={Img.NEXTSTORY}
-              style={{
-                width: screenWidth * 0.9,
-                height: screenHeight * 0.9,
-                resizeMode: 'contain',
-                position: 'absolute',
-                top: '-40%',
-              }}
-            />
-          </View>
+      <View style={[globalStyle.fullWidth, globalStyle.header]}></View>
+      <View style={[{ justifyContent: 'center' }, globalStyle.center]}>
+        <Pressable style={{ flex: 1, justifyContent: 'center' }}>
+          <Image
+            source={Img.NEXTSTORY}
+            style={{
+              width: screenWidth * 0.9,
+              resizeMode: 'contain',
+            }}
+          />
         </Pressable>
       </View>
-      <View style={[globalStyle.fullWidth, { flex: 5 }]}>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
           style={{
             flexDirection: 'row',
@@ -39,7 +34,16 @@ const NextStory = () => {
             backgroundColor: '#8C46FF',
             columnGap: 8,
           }}
-          onPress={() => navigation.dispatch(StackActions.push('home'))}
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'home',
+                },
+              ],
+            })
+          }
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
             이해했어요

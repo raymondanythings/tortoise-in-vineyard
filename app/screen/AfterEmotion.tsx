@@ -69,33 +69,35 @@ const AfterEmotion = () => {
         <EmotionButtons onIconPress={handleEmotionSelection} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
-        <Button
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            columnGap: 8,
-            backgroundColor: emotion ? '#222222' : '#A0A0A0',
-          }}
-          disabled={!emotion?.value}
-          onPress={() => {
-            if (emotion?.value) {
-              endRunMutation({
-                variables: {
-                  input: {
-                    runMeters: Math.round(runState.distance * 1000),
-                    emotionAfter: emotion.value,
-                    runId: runState.id,
+        {emotion?.value ? (
+          <Button
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              columnGap: 8,
+              backgroundColor: emotion ? '#222222' : '#A0A0A0',
+            }}
+            disabled={!emotion?.value}
+            onPress={() => {
+              if (emotion?.value) {
+                endRunMutation({
+                  variables: {
+                    input: {
+                      runMeters: Math.round(runState.distance * 1000),
+                      emotionAfter: emotion.value,
+                      runId: runState.id,
+                    },
                   },
-                },
-              })
-            }
-          }}
-        >
-          <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            감정 기록 완료
-          </Text>
-        </Button>
+                })
+              }
+            }}
+          >
+            <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
+              감정 기록 완료
+            </Text>
+          </Button>
+        ) : null}
       </View>
     </SafeAreaView>
   )

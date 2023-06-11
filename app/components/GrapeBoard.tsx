@@ -74,7 +74,10 @@ const GrapeBoard: React.FC<GrapeBoardProps> = ({ runs, onPressRun }) => {
       <Image
         source={Img.GRAPE}
         onLayout={(event) => {
-          setGrapeLayout(() => event.nativeEvent.layout)
+          const layout = event?.nativeEvent?.layout
+          if (layout) {
+            setGrapeLayout(() => event.nativeEvent.layout)
+          }
         }}
       />
       {runs.map((run, i) => (

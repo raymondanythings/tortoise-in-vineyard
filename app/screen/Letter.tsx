@@ -24,7 +24,7 @@ const Letter = () => {
     if (isFolded) {
       setIsFolded(false)
     } else {
-      navigation.dispatch(StackActions.replace('home'))
+      navigation.dispatch(StackActions.replace('nextstory'))
     }
   }
 
@@ -36,60 +36,62 @@ const Letter = () => {
     const timeout = setTimeout(() => {
       setIsFolded(false)
     }, 2000)
-
     return () => clearTimeout(timeout)
   }, [])
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FEF9AE' }]}>
-      <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
-        <Animated.Text
-          style={[
-            {
-              opacity: animation,
-              position: 'absolute',
-              bottom: '-90%',
-            },
-            globalStyle.letter,
-            globalStyle.grapeColorFont,
-          ]}
-        >
-          사부작 사부작
-        </Animated.Text>
-      </View>
-      <View style={[{ justifyContent: 'center' }, { flex: 20 }]}>
+      <View
+        style={[
+          {
+            flex: globalStyle.center.flex + globalStyle.header.flex,
+            marginTop: 40,
+            justifyContent: 'center',
+          },
+        ]}
+      >
         <Pressable
           onPress={onImagePress}
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          style={{ flex: 1, position: 'relative', alignItems: 'center', justifyContent: 'center' }}
         >
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ position: 'absolute', alignItems: 'center' }}>
+            <Animated.Text
+              style={[
+                {
+                  opacity: animation,
+                },
+                globalStyle.letter,
+                globalStyle.grapeColorFont,
+              ]}
+            >
+              사부작 사부작
+            </Animated.Text>
             <Animated.Image
               source={Img.FOLD}
               style={{
-                width: screenWidth * 0.9,
-                height: screenHeight * 0.3,
+                // width: screenWidth * 0.9,
+                height: screenWidth * 0.6,
                 resizeMode: 'contain',
                 opacity: animation,
-                position: 'absolute',
-              }}
-            />
-            <Animated.Image
-              source={Img.UNFOLD}
-              style={{
-                width: screenWidth * 1,
-                height: screenHeight * 0.7,
-                resizeMode: 'contain',
-                position: 'absolute',
-                top: '-30%',
-                opacity: animation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
-                }),
               }}
             />
           </View>
+          <Animated.Image
+            source={Img.UNFOLD}
+            style={{
+              width: screenWidth * 1,
+              resizeMode: 'contain',
+              // height: screenHeight * 0.7,
+              position: 'absolute',
+              // top: '-30%',
+              opacity: animation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              }),
+            }}
+          />
         </Pressable>
       </View>
-      <View style={[globalStyle.fullWidth, { flex: 5 }]}>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         {!isFolded && (
           <Button
             style={{

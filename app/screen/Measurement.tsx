@@ -62,7 +62,7 @@ const Measurement = () => {
               width: screenWidth * 0.8,
               height: screenHeight * 0.4,
               left: -screenWidth * 0.4,
-              top: -screenHeight * 0.315,
+              top: -screenHeight * 0.28,
             }}
             resizeMode='contain'
           />
@@ -71,7 +71,7 @@ const Measurement = () => {
           <Success />
         </View>
       </View>
-      <View style={[globalStyle.fullWidth, globalStyle.footer, { flex: 4 }]}>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
           style={{
             flexDirection: 'row',

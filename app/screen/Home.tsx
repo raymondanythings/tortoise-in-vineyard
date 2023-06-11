@@ -37,9 +37,12 @@ const Home = () => {
   const validateUserAndPush = () => {
     if (isNavigate.current) {
       if (userData?.me) {
+        const {
+          me: { totalRun, birthYear },
+        } = userData
         isNavigate.current = false
         return navigation.dispatch(
-          StackActions.push(userData?.me.birthYear ? 'grapetreehome' : 'birthday'),
+          StackActions.replace(totalRun ? 'grapetreehome' : !birthYear ? 'birthday' : 'watchcheck'),
         )
       } else {
         getMe()
@@ -59,21 +62,21 @@ const Home = () => {
     },
   })
   const kakaoLogin = useCallback(async () => {
-    // loginMutaion({
-    //   variables: { email: 'test122533@gmail.com', provider: AccountProvider.Kakao },
-    // })
-    try {
-      const token = await loginWithKakaoAccount()
-      // const token = await login()
-      if (token) {
-        const { email } = await getKakaoProfile()
-        loginMutaion({
-          variables: { email, provider: AccountProvider.Kakao },
-        })
-      }
-    } catch (err) {
-      console.error(err, '????')
-    }
+    loginMutaion({
+      variables: { email: 'tes79533@gmail.com', provider: AccountProvider.Kakao },
+    })
+    // try {
+    //   const token = await loginWithKakaoAccount()
+    //   // const token = await login()
+    //   if (token) {
+    //     const { email } = await getKakaoProfile()
+    //     loginMutaion({
+    //       variables: { email, provider: AccountProvider.Kakao },
+    //     })
+    //   }
+    // } catch (err) {
+    //   console.error(err, '????')
+    // }
   }, [])
 
   const appleLogin = async () => {
@@ -147,7 +150,7 @@ const Home = () => {
       >
         <Image source={Img.LOGO_MOVING} style={{ width: 250, height: 173, top: -40 }} />
       </View>
-      <View style={[globalStyle.fullWidth, { flex: 2.7 }]}>
+      <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         {token ? (
           <Button
             style={{
@@ -160,7 +163,7 @@ const Home = () => {
             onPress={validateUserAndPush}
           >
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-              시작하기
+              시작할게요
             </Text>
           </Button>
         ) : (
@@ -199,14 +202,14 @@ const Home = () => {
             </Button>
           </View>
         )}
-        {/* <Pressable
+        <Pressable
           onPress={async () => {
             AsyncStorage.clear()
             setToken('')
           }}
         >
           <Text>초기화</Text>
-        </Pressable> */}
+        </Pressable>
       </View>
       <Image
         source={Img.INTERSECT}

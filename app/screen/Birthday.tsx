@@ -25,14 +25,16 @@ const Birthday = () => {
           birthYear: data.updateBirthYear.birthYear,
         },
       }))
-      navigation.dispatch(StackActions.push('watchcheck'))
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'watchcheck',
+          },
+        ],
+      })
     },
   })
-  useEffect(() => {
-    if (user?.birthYear) {
-      navigation.dispatch(StackActions.push('onboard'))
-    }
-  }, [user?.birthYear])
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.header, {}]}>

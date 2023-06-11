@@ -61,10 +61,12 @@ const MainScreen = () => {
       })}
     >
       <MainStack.Screen
-        options={{
-          gestureEnabled: false,
-          // animationEnabled: false,
-        }}
+        options={
+          {
+            // gestureEnabled: false,
+            // animationEnabled: false,
+          }
+        }
         name='home'
         component={Home}
       />

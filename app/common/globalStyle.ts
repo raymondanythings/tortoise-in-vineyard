@@ -66,14 +66,14 @@ export default StyleSheet.create({
   },
   header: {
     position: 'relative',
-    // flex: hasNotch() ? 3 : 2,
+    flex: 2,
     marginTop: 40,
     alignItems: 'center',
     // justifyContent: 'center',
     justifyContent: 'flex-start',
   },
   center: {
-    flex: hasNotch() ? 13 : 8,
+    flex: hasNotch() ? 11 : 8,
   },
   footer: {
     flex: hasNotch() ? 3 : 3,
@@ -94,6 +94,5 @@ export default StyleSheet.create({
     lineHeight: 28,
     letterSpacing: 3,
     fontFamily: Font.GAEGU_B,
-    marginBottom: 33,
   },
 })

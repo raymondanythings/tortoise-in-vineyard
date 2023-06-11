@@ -36,7 +36,7 @@ const GrapeTreeHome = () => {
           <GrapeCount count={grapeCircleCount} />
         </View>
       </View>
-      <View style={[globalStyle.center, { flex: 12 }]}>
+      <View style={[globalStyle.center, { justifyContent: 'center', flex: 11 }]}>
         <View>
           {user?.grapesOnTree ? (
             <GrapeTree
@@ -86,7 +86,7 @@ export default GrapeTreeHome
 const styles = StyleSheet.create({
   intersect: {
     position: 'absolute',
-    height: screenHeight * 0.4,
+    height: screenHeight * 0.34,
     width: screenWidth,
     zIndex: -1,
     bottom: 0,
