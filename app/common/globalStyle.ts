@@ -22,7 +22,7 @@ export default StyleSheet.create({
     marginBottom: 4,
   },
   gaeguTitle: {
-    fontSize: 30,
+    fontSize: 28,
     lineHeight: 36,
     fontWeight: 'bold',
   },
