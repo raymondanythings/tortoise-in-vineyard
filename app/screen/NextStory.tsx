@@ -7,6 +7,7 @@ import Img from '../constants/Img'
 import Text from '../components/Text'
 import Button from '../components/Button'
 import { screenWidth, screenHeight } from '../constants/screen'
+import { hasNotch } from 'react-native-device-info'
 
 const NextStory = () => {
   const navigation = useNavigation()
@@ -18,10 +19,16 @@ const NextStory = () => {
         <Pressable style={{ flex: 1, justifyContent: 'center' }}>
           <Image
             source={Img.NEXTSTORY}
-            style={{
-              width: screenWidth * 0.9,
-              resizeMode: 'contain',
-            }}
+            style={[
+              hasNotch()
+                ? {
+                    height: screenWidth * 0.9,
+                    flex: 1,
+                    marginBottom: 20,
+                  }
+                : { height: screenWidth * 0.9 },
+              { resizeMode: 'contain' },
+            ]}
           />
         </Pressable>
       </View>

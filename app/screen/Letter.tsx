@@ -78,9 +78,9 @@ const Letter = () => {
           <Animated.Image
             source={Img.UNFOLD}
             style={{
-              width: screenWidth * 1,
+              // width: screenWidth * 1,
               resizeMode: 'contain',
-              // height: screenHeight * 0.7,
+              height: screenHeight * 0.6,
               position: 'absolute',
               // top: '-30%',
               opacity: animation.interpolate({

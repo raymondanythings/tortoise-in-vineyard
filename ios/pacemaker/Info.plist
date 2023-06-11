@@ -80,9 +80,18 @@
 		<string>RF.ttf</string>
 		<string>fonts/RF.ttf</string>
 		<string>fonts/Pretendard-Regular.ttf</string>
-		<string>fonts/JGaegujaengyi-Bold.otf</string>
+		<string>fonts/Pretendard-Black.ttf</string>
+		<string>fonts/Pretendard-Black.ttf</string>
+		<string>fonts/JGaegujaengyi-Bold.ttf</string>
+		<string>fonts/Pretendard-ExtraBold.ttf</string>
+		<string>fonts/Pretendard-ExtraLight.ttf</string>
+		<string>fonts/Pretendard-Light.ttf</string>
+		<string>fonts/Pretendard-Medium.ttf</string>
+		<string>fonts/Pretendard-SemiBold.ttf</string>
+		<string>fonts/Pretendard-Thin.ttf</string>
 		<string>fonts/JGaegujaengyi-Light.otf</string>
 		<string>fonts/JGaegujaengyi-Medium.otf</string>
+		<string>fonts/JGaegujaengyi-Bold.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

@@ -37,7 +37,7 @@ const GrapeTreeHome = () => {
         </View>
       </View>
       <View style={[globalStyle.center, { justifyContent: 'center' }]}>
-        <View>
+        <View style={{ transform: [{ scale: hasNotch() ? 1 : 0.8 }] }}>
           {user?.grapesOnTree ? (
             <GrapeTree
               onPress={(grape, index) =>

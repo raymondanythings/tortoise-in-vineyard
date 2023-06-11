@@ -16,14 +16,14 @@ export default StyleSheet.create({
   },
   heading: {
     fontSize: 44,
-    lineHeight: 55,
+    // lineHeight: 55,
     letterSpacing: 3,
     fontFamily: Font.GAEGU_B,
     marginBottom: 4,
   },
   gaeguTitle: {
     fontSize: 28,
-    lineHeight: 36,
+    // lineHeight: 36,
     fontWeight: 'bold',
   },
   gaeguSub: {
@@ -38,18 +38,18 @@ export default StyleSheet.create({
     fontWeight: '400',
     color: '#A1AEB7',
     fontFamily: Font.Pretendard,
-    lineHeight: 24,
+    // lineHeight: 24,
   },
   subheadingwhite: {
     fontSize: 16,
     fontWeight: '400',
     color: 'white',
     fontFamily: Font.Pretendard,
-    lineHeight: 24,
+    // lineHeight: 24,
   },
   pretendardSub: {
     fontSize: 16,
-    lineHeight: 24,
+    // lineHeight: 24,
     fontFamily: Font.Pretendard,
   },
   safeAreaContainer: {
@@ -74,10 +74,10 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
   },
   center: {
-    flex: hasNotch() ? 11 : 8,
+    flex: 11,
   },
   footer: {
-    flex: hasNotch() ? 3 : 3,
+    flex: hasNotch() ? 3 : 4,
     rowGap: 8,
   },
   fontMedium: {
@@ -92,7 +92,7 @@ export default StyleSheet.create({
   },
   letter: {
     fontSize: 22,
-    lineHeight: 28,
+    // lineHeight: 28,
     letterSpacing: 3,
     fontFamily: Font.GAEGU_B,
   },
