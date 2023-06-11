@@ -60,12 +60,12 @@ const AfterEmotion = () => {
       ]}
     >
       <View style={[globalStyle.header]}>
-        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>현재 감정은 어떤가요?</Text>
-        <Text style={[globalStyle.subheading, { textAlign: 'center' }]}>
-          달리기 후, 느낀 감정에 가까운 단어를 선택해주세요
+        <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
+          {`달리기 후,
+지금의 감정은 어떤가요?`}
         </Text>
       </View>
-      <View style={[globalStyle.center, { flexDirection: 'row' }]}>
+      <View style={[globalStyle.center, { flexDirection: 'row', alignItems: 'center' }]}>
         <EmotionButtons onIconPress={handleEmotionSelection} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
