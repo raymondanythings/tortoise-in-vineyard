@@ -63,7 +63,7 @@ const Home = () => {
   })
   const kakaoLogin = useCallback(async () => {
     // loginMutaion({
-    //   variables: { email: 'qweqwe@gmail.com', provider: AccountProvider.Kakao },
+    //   variables: { email: 'qpp123@wsdsd.cdcsc', provider: AccountProvider.Kakao },
     // })
     try {
       const token = await loginWithKakaoAccount()

@@ -3,7 +3,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle, { Font } from '../common/globalStyle'
 import { Image, View } from 'react-native'
 import Text from '../components/Text'
-import Img from '../constants/Img'
 import MinHeart from '../components/Lotties/MinHeart'
 import Icon from '../constants/Icon'
 import useHearkRateTraking from '../hook/useHearkRateTraking'
@@ -27,9 +26,8 @@ const MinHeartRateCheck = () => {
           minHeartRate,
         },
       }))
-      sendMessage({ action: 'stopWorkout' }, (payload) => {
-        navigation.dispatch(StackActions.replace('measurement'))
-      })
+      sendMessage({ action: 'stopWorkout' }, (payload) => {})
+      return navigation.dispatch(StackActions.replace('measurement'))
     },
   })
 

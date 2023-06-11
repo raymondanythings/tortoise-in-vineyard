@@ -38,11 +38,11 @@ const WatchCheck = ({ route }) => {
           }}
           disabled={!isConnected}
           onPress={() => {
+            setRunState((prev) => ({
+              ...prev,
+              type: RunType.HeartRate,
+            }))
             if (!route?.params?.retry && user?.minHeartRate) {
-              setRunState((prev) => ({
-                ...prev,
-                type: RunType.HeartRate,
-              }))
               navigation.dispatch(StackActions.push('beforeemotion'))
             } else {
               if (isReachability) {
