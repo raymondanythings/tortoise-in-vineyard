@@ -26,17 +26,17 @@ const GrapeTreeHome = () => {
             {`포도알을 총 ${totalRun}개 모았어요!`}
           </Text>
           <Text
-            style={
-              (globalStyle.pretendardSub,
-              { color: colors.TEXT_MAIN_1, marginVertical: hasNotch() ? 10 : 4 })
-            }
+            style={[
+              globalStyle.pretendardSub,
+              { color: colors.TEXT_MAIN_1, marginVertical: hasNotch() ? 10 : 4 },
+            ]}
           >
             모아둔 포도송이를 클릭해보세요
           </Text>
           <GrapeCount count={grapeCircleCount} />
         </View>
       </View>
-      <View style={[globalStyle.center, { justifyContent: 'center', flex: 11 }]}>
+      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
         <View>
           {user?.grapesOnTree ? (
             <GrapeTree

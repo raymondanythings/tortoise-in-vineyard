@@ -62,21 +62,21 @@ const Home = () => {
     },
   })
   const kakaoLogin = useCallback(async () => {
-    loginMutaion({
-      variables: { email: 'tes79533@gmail.com', provider: AccountProvider.Kakao },
-    })
-    // try {
-    //   const token = await loginWithKakaoAccount()
-    //   // const token = await login()
-    //   if (token) {
-    //     const { email } = await getKakaoProfile()
-    //     loginMutaion({
-    //       variables: { email, provider: AccountProvider.Kakao },
-    //     })
-    //   }
-    // } catch (err) {
-    //   console.error(err, '????')
-    // }
+    // loginMutaion({
+    //   variables: { email: '34479533@gmail.com', provider: AccountProvider.Kakao },
+    // })
+    try {
+      const token = await loginWithKakaoAccount()
+      // const token = await login()
+      if (token) {
+        const { email } = await getKakaoProfile()
+        loginMutaion({
+          variables: { email, provider: AccountProvider.Kakao },
+        })
+      }
+    } catch (err) {
+      console.error(err, '????')
+    }
   }, [])
 
   const appleLogin = async () => {

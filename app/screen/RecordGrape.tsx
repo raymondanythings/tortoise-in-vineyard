@@ -58,7 +58,7 @@ const RecordGrape = ({ route }: { route: { params: { grape: GrapeById; index: nu
           {`내가 모은 
 ${(index || 0) + 1}번째 포도송이예요!`}
         </Text>
-        <Text style={[globalStyle.subheadingwhite, { textAlign: 'center' }]}>
+        <Text style={[globalStyle.subheadingwhite, { textAlign: 'center', marginTop: 10 }]}>
           포도알을 누르면, 그날의 기록을 볼 수 있어요
         </Text>
       </View>
@@ -84,7 +84,7 @@ ${(index || 0) + 1}번째 포도송이예요!`}
       </View>
       {/* 모달창 부분 */}
       <Modal
-        animationType='slide'
+        animationType='fade'
         transparent={true}
         visible={modalVisible}
         onRequestClose={handleCloseModal}
@@ -143,7 +143,6 @@ ${(index || 0) + 1}번째 포도송이예요!`}
                     modalStyle.emotionButton,
                     {
                       backgroundColor: emotionAfterDetails.color,
-                      marginBottom: 11,
                     },
                   ]}
                 >

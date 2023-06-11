@@ -78,7 +78,7 @@ const Grapes = ({
       </View>
       {/* 모달창 부분 */}
       <Modal
-        animationType='slide'
+        animationType='fade'
         transparent={true}
         visible={modalVisible}
         onRequestClose={handleCloseModal}

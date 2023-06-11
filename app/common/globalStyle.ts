@@ -23,6 +23,7 @@ export default StyleSheet.create({
   },
   gaeguTitle: {
     fontSize: 28,
+    lineHeight: 36,
     fontWeight: 'bold',
   },
   gaeguSub: {
@@ -33,14 +34,14 @@ export default StyleSheet.create({
   },
 
   subheading: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '400',
     color: '#A1AEB7',
     fontFamily: Font.Pretendard,
     lineHeight: 24,
   },
   subheadingwhite: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '400',
     color: 'white',
     fontFamily: Font.Pretendard,
