@@ -1,10 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Home from './app/screen/Home'
 import OnBoard from './app/screen/OnBoard'
 import WatchCheck from './app/screen/WatchCheck'
 import BeforeEmotion from './app/screen/BeforeEmotion'
-import Run from './app/screen/Run'
 import AfterEmotion from './app/screen/AfterEmotion'
 import Check from './app/screen/Check'
 import Birthday from './app/screen/Birthday'
@@ -20,18 +19,14 @@ import NextStory from './app/screen/NextStory'
 import GrapeTreeHome from './app/screen/GrapeTreeHome'
 import RecordGrape from './app/screen/RecordGrape'
 import { Image, Pressable, View } from 'react-native'
-import Text from './app/components/Text'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from './app/constants/Icon'
 import { hasNotch } from 'react-native-device-info'
-import { StackActions, useNavigation } from '@react-navigation/native'
 import WebView from 'react-native-webview'
 
 const MainStack = createStackNavigator()
 const Stack = createStackNavigator()
 
 const Modal = ({ route }: { route: { params: { uri: string } } }) => {
-  console.log(route, '<<route')
   return (
     <View style={{ flex: 1 }}>
       <WebView
