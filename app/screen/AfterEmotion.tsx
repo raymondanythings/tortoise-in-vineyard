@@ -94,7 +94,7 @@ const AfterEmotion = () => {
             }}
           >
             <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-              감정 기록 완료
+              감정을 기록할게요
             </Text>
           </Button>
         ) : null}

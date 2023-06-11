@@ -94,7 +94,7 @@ const Birthday = () => {
           }
         >
           <Text style={[globalStyle.fontMedium, globalStyle.Pretendard, { color: '#fff' }]}>
-            착용 완료
+            입력했어요
           </Text>
         </Button>
       </View>
