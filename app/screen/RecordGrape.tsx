@@ -84,7 +84,7 @@ ${(index || 0) + 1}번째 포도송이예요!`}
       </View>
       {/* 모달창 부분 */}
       <Modal
-        animationType='slide'
+        animationType='fade'
         transparent={true}
         visible={modalVisible}
         onRequestClose={handleCloseModal}
