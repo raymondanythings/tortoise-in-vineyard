@@ -169,11 +169,17 @@ const Run = () => {
   }, [])
 
   useEffect(() => {
-    let id: NodeJS.Timer = 0
-    if (runState.type === RunType.Distance && tracking) {
-      id = setInterval(() => {
-        postEncourage()
-      }, 60000)
+    let id: NodeJS.Timer
+    if (tracking) {
+      if (runState.type === RunType.HeartRate) {
+        id = setInterval(() => {
+          changeCount.current++
+        }, 1000)
+      } else {
+        id = setInterval(() => {
+          postEncourage()
+        }, 60000)
+      }
     }
     navigation.addListener('blur', () => {
       clearWatch()
@@ -196,32 +202,37 @@ const Run = () => {
     })
   }
 
+  // useEffect(() => {
+  //   let id: NodeJS.Timer
+  //   if (tracking) {
+  //     if (runState.type === RunType.HeartRate) {
+  //       id = setInterval(() => {
+  //         changeCount.current++
+  //         // if (changeCount.current >= 60) {
+  //         //   clearInterval(id)
+  //         // }
+  //       }, 1000)
+  //     }
+  //     navigation.addListener('blur', () => {
+  //       clearInterval(id)
+  //     })
+  //   }
+  //   return () => {
+  //     clearInterval(id)
+  //   }
+  // }, [isReachability, tracking])
+
   useEffect(() => {
-    let id: NodeJS.Timer
-    if (tracking) {
-      if (runState.type === RunType.HeartRate) {
-        id = setInterval(() => {
-          changeCount.current++
-          if (changeCount.current >= 60) {
-            clearInterval(id)
-          }
-        }, 1000)
-      }
-    }
-    return () => {
-      clearInterval(id)
-    }
-  }, [isReachability, tracking])
-  useEffect(() => {
-    if (tracking) {
-      if (changeCount.current >= 60) {
+    if (tracking && isReachability) {
+      if (changeCount.current >= 25) {
         postEncourage()
         changeCount.current = 0
       }
     } else {
       changeCount.current = 0
     }
-  }, [changeCount.current, tracking])
+  }, [changeCount.current, tracking, isReachability])
+
   return (
     <View style={{ flex: 1 }}>
       <MapView
