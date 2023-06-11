@@ -19,6 +19,22 @@ import Logo from '../components/Logo'
 import Img from '../constants/Img'
 import { screenHeight, screenWidth } from '../constants/screen'
 import appleAuth from '@invertase/react-native-apple-authentication'
+import jwtDecode from 'jwt-decode'
+
+interface AppleJwt {
+  aud: string
+  auth_time: number
+  c_hash: string
+  email: string
+  email_verified: string
+  exp: number
+  iat: number
+  is_private_email: string
+  iss: string
+  nonce: string
+  nonce_supported: boolean
+  sub: string
+}
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -88,13 +104,15 @@ const Home = () => {
       const credentialState = await appleAuth.getCredentialStateForUser(
         appleAuthRequestResponse.user,
       )
-
-      if (credentialState === appleAuth.State.AUTHORIZED && appleAuthRequestResponse.email) {
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        let email = appleAuthRequestResponse.email
+        if (!email) {
+          const decode = jwtDecode(appleAuthRequestResponse.identityToken!) as AppleJwt
+          email = decode.email
+        }
         loginMutaion({
-          variables: { email: appleAuthRequestResponse.email, provider: AccountProvider.Apple },
+          variables: { email, provider: AccountProvider.Apple },
         })
-      } else {
-        throw Error()
       }
     } catch (error: any) {
       console.log(error, ' ????')
