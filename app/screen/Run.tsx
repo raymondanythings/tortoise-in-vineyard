@@ -178,7 +178,7 @@ const Run = () => {
       } else {
         id = setInterval(() => {
           postEncourage()
-        }, 60000)
+        }, 25000)
       }
     }
     navigation.addListener('blur', () => {
