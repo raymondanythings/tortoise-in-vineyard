@@ -1,122 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	</array>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>포도밭거북이</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakaoec4ffed9033db1dfcee94288488ba2cb</string>
-			</array>
-		</dict>
-	</array>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>KAKAO_APP_KEY</key>
-	<string>ec4ffed9033db1dfcee94288488ba2cb</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>kakaokompassauth</string>
-		<string>storykompassauth</string>
-		<string>kakaolink</string>
-	</array>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
+		<key>BGTaskSchedulerPermittedIdentifiers</key>
+		<array>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		</array>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>en</string>
+		<key>CFBundleDisplayName</key>
+		<string>포도밭거북이</string>
+		<key>CFBundleExecutable</key>
+		<string>$(EXECUTABLE_NAME)</string>
+		<key>CFBundleIdentifier</key>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleName</key>
+		<string>$(PRODUCT_NAME)</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleShortVersionString</key>
+		<string>$(MARKETING_VERSION)</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleURLTypes</key>
+		<array>
 			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>kakaoec4ffed9033db1dfcee94288488ba2cb</string>
+				</array>
 			</dict>
-			<key>sesacthon-server.lucas-gong.dev</key>
+		</array>
+		<key>CFBundleVersion</key>
+		<string>$(CURRENT_PROJECT_VERSION)</string>
+		<key>KAKAO_APP_KEY</key>
+		<string>ec4ffed9033db1dfcee94288488ba2cb</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>kakaokompassauth</string>
+			<string>storykompassauth</string>
+			<string>kakaolink</string>
+		</array>
+		<key>LSRequiresIPhoneOS</key>
+		<true />
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSExceptionDomains</key>
 			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
+				<key>localhost</key>
+				<dict>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true />
+				</dict>
+				<key>sesacthon-server.lucas-gong.dev</key>
+				<dict>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true />
+					<key>NSIncludesSubdomains</key>
+					<true />
+				</dict>
 			</dict>
 		</dict>
+		<key>NSHealthShareUsageDescription</key>
+		<string>심박수 정보를 수집해 적정한 운동 강도를 유지하고 있는지 실시간으로 판단하고 안내하기 위해 활용합니다.</string>
+		<key>NSHealthUpdateUsageDescription</key>
+		<string>심박수를 측정해 적정한 운동 강도를 유지할 수 있도록 목표 심박수를 자동 계산하기 위해 활용합니다.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>달리기 기록을 추적하고, 진행 상황을 저장하기 위해 활용합니다.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>달리기 기록을 추적하고, 진행 상황을 저장하기 위해 활용합니다.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>달리기 기록을 추적하고, 진행 상황을 저장하기 위해 활용합니다.</string>
+		<key>UIAppFonts</key>
+		<array>
+			<string>RF.ttf</string>
+			<string>fonts/RF.ttf</string>
+			<string>fonts/Pretendard-Regular.ttf</string>
+			<string>fonts/JGaegujaengyi-Bold.otf</string>
+			<string>fonts/JGaegujaengyi-Light.otf</string>
+			<string>fonts/JGaegujaengyi-Medium.otf</string>
+		</array>
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>audio</string>
+			<string>external-accessory</string>
+			<string>location</string>
+			<string>processing</string>
+		</array>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen.storyboard</string>
+		<key>UIRequiredDeviceCapabilities</key>
+		<array>
+			<string>armv7</string>
+		</array>
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+		</array>
+		<key>UISupportedInterfaceOrientations~ipad</key>
+		<array>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+			<string>UIInterfaceOrientationPortrait</string>
+		</array>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false />
 	</dict>
-	<key>NSHealthShareUsageDescription</key>
-	<string>건강 데이터를 쓸때 필요해요.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>건강 데이터를 받아오는데 필요해요.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Program requires GPS to track cars and job orders</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Program requires GPS to track cars and job orders</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>내주변 정확한 관광지 정보 제공을 위해 필요해요.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>RF.ttf</string>
-		<string>fonts/RF.ttf</string>
-		<string>fonts/Pretendard-Regular.ttf</string>
-		<string>fonts/Pretendard-Black.ttf</string>
-		<string>fonts/Pretendard-Black.ttf</string>
-		<string>fonts/JGaegujaengyi-Bold.ttf</string>
-		<string>fonts/Pretendard-ExtraBold.ttf</string>
-		<string>fonts/Pretendard-ExtraLight.ttf</string>
-		<string>fonts/Pretendard-Light.ttf</string>
-		<string>fonts/Pretendard-Medium.ttf</string>
-		<string>fonts/Pretendard-SemiBold.ttf</string>
-		<string>fonts/Pretendard-Thin.ttf</string>
-		<string>fonts/JGaegujaengyi-Light.otf</string>
-		<string>fonts/JGaegujaengyi-Medium.otf</string>
-		<string>fonts/JGaegujaengyi-Bold.otf</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-		<string>external-accessory</string>
-		<string>location</string>
-		<string>processing</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen.storyboard</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-</dict>
 </plist>
