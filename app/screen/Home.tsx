@@ -174,28 +174,6 @@ const Home = () => {
         <Image source={Img.LOGO_MOVING} style={{ width: 250, height: 173, top: -40 }} />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
-        <Pressable
-          style={{ position: 'absolute', top: '-20%' }}
-          onPress={() => {
-            navigation.dispatch(
-              StackActions.push('modal', {
-                uri: 'https://private-ketchup-05c.notion.site/6947dff37f674221a1c70738494f699b',
-              }),
-            )
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 14,
-              textDecorationLine: 'underline',
-              color: colors.TEXT_MAIN_1,
-
-              fontFamily: globalStyle.Pretendard.fontFamily,
-            }}
-          >
-            서비스 약관 읽어보기
-          </Text>
-        </Pressable>
         {token ? (
           <Button
             style={{
@@ -247,13 +225,34 @@ const Home = () => {
             </Button>
           </View>
         )}
-        <Pressable
+        {/* <Pressable
           onPress={async () => {
             AsyncStorage.clear()
             setToken('')
           }}
         >
           <Text>초기화</Text>
+        </Pressable> */}
+        <Pressable
+          onPress={() => {
+            navigation.dispatch(
+              StackActions.push('modal', {
+                uri: 'https://private-ketchup-05c.notion.site/6947dff37f674221a1c70738494f699b',
+              }),
+            )
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 14,
+              textDecorationLine: 'underline',
+              color: colors.TEXT_MAIN_1,
+
+              fontFamily: globalStyle.Pretendard.fontFamily,
+            }}
+          >
+            서비스 약관 읽어보기
+          </Text>
         </Pressable>
       </View>
       <Image
