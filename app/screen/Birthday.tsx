@@ -14,7 +14,7 @@ const START_YEAR = 1900
 const END_YEAR = new Date().getFullYear()
 const Birthday = () => {
   const navigation = useNavigation()
-  const [birthday, setBirthday] = useState(END_YEAR)
+  const [birthday, setBirthday] = useState(1994)
   const { updateQuery, user } = useGetUser('network-only')
   const [update] = useUpdateBirthMutation({
     onCompleted(data) {
