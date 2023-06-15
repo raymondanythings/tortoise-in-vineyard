@@ -8,6 +8,7 @@ import Text from '../components/Text'
 import Button from '../components/Button'
 import { screenWidth, screenHeight } from '../constants/screen'
 import SplashScreen from 'react-native-splash-screen'
+import { SPLASH_DURATION } from '../constants/constants'
 
 const Letter = () => {
   const animation = useRef(new Animated.Value(1)).current
@@ -36,8 +37,8 @@ const Letter = () => {
   useEffect(() => {
     new Promise((resolve) => {
       setTimeout(() => {
-        SplashScreen.hide()
-      }, 3000)
+        resolve(SplashScreen.hide())
+      }, SPLASH_DURATION)
     }).then(() => {
       return setTimeout(() => {
         setIsFolded(false)

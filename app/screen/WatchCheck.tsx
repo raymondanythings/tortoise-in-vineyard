@@ -11,7 +11,7 @@ import useGetUser from '../hook/useGetUser'
 import { useSetRecoilState } from 'recoil'
 import { runAtom } from '../store/run'
 import { RunType } from '../../graphql/generated'
-import { screenWidth, screenHeight } from '../constants/screen'
+import { screenWidth } from '../constants/screen'
 
 const WatchCheck = ({ route }) => {
   const { user } = useGetUser('cache-only')
@@ -19,14 +19,28 @@ const WatchCheck = ({ route }) => {
   const setRunState = useSetRecoilState(runAtom)
   const { isConnected, isReachability } = useWatch()
   return (
-    <SafeAreaView style={globalStyle.safeAreaContainer}>
+    <SafeAreaView style={[globalStyle.safeAreaContainer]}>
       <View style={[globalStyle.header]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
           애플워치 착용하셨나요?
         </Text>
       </View>
-      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
-        <Image source={Img.WATCH_PREV} style={{ width: screenWidth }} />
+      <View
+        style={[
+          globalStyle.center,
+          { justifyContent: 'center', alignItems: 'center', width: screenWidth },
+        ]}
+      >
+        <Image
+          source={Img.WATCH_PREV}
+          style={{
+            transform: [
+              {
+                scale: 1.05,
+              },
+            ],
+          }}
+        />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button

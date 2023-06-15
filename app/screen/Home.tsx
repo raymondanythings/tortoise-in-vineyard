@@ -11,7 +11,7 @@ import {
 } from '@react-native-seoul/kakao-login'
 import Icon from '../constants/Icon'
 import { AccountProvider, useGetMeLazyQuery, useLoginMutation } from '../../graphql/generated'
-import { AUTH_HEADER } from '../constants/constants'
+import { AUTH_HEADER, SPLASH_DURATION } from '../constants/constants'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { useRecoilState } from 'recoil'
 import { authState } from '../store/auth'
@@ -133,7 +133,7 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide()
-    }, 3000)
+    }, SPLASH_DURATION)
     navigation.addListener('blur', canNavigateHandler)
     return () => {
       navigation.removeListener('blur', canNavigateHandler)
@@ -247,14 +247,14 @@ const Home = () => {
             </Button>
           </View>
         )}
-        {/* <Pressable
+        <Pressable
           onPress={async () => {
             AsyncStorage.clear()
             setToken('')
           }}
         >
           <Text>초기화</Text>
-        </Pressable> */}
+        </Pressable>
       </View>
       <Image
         source={Img.INTERSECT}

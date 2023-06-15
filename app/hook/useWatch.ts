@@ -1,22 +1,17 @@
-import { useCallback, useEffect, useState } from 'react'
 import {
-  getIsPaired,
-  getIsWatchAppInstalled,
   useReachability,
+  useInstalled,
+  usePaired,
+  useApplicationContext,
 } from 'react-native-watch-connectivity'
 
 const useWatch = () => {
-  const [isConnected, setIsConnected] = useState(false)
+  const isPaired = usePaired()
+  const isInstalled = useInstalled()
   const isReachability = useReachability()
-  const checkConnect = useCallback(async () => {
-    const connect = await Promise.all([getIsPaired(), getIsWatchAppInstalled()])
-    setIsConnected((prev) => connect.every((item) => item))
-  }, [])
-  useEffect(() => {
-    checkConnect()
-  }, [])
+
   return {
-    isConnected,
+    isConnected: isInstalled && isPaired,
     isReachability,
   }
 }

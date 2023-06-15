@@ -37,8 +37,22 @@ const WatchAppCheck = () => {
           애플워치에서 어플을 켜주세요
         </Text>
       </View>
-      <View style={[globalStyle.center, { justifyContent: 'center' }]}>
-        <Image source={Img.WATCH_APP} style={{ width: screenWidth }} />
+      <View
+        style={[
+          globalStyle.center,
+          { justifyContent: 'center', alignItems: 'center', width: screenWidth },
+        ]}
+      >
+        <Image
+          source={Img.WATCH_APP}
+          style={{
+            transform: [
+              {
+                scale: 1.05,
+              },
+            ],
+          }}
+        />
       </View>
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <Button
