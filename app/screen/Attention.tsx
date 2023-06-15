@@ -73,12 +73,7 @@ const Attention = () => {
     }
   }
   return (
-    <SafeAreaView
-      style={{
-        ...globalStyle.safeAreaContainer,
-        backgroundColor: loading ? 'yellow' : globalStyle.safeAreaContainer.backgroundColor,
-      }}
-    >
+    <SafeAreaView style={[globalStyle.safeAreaContainer]}>
       <View style={[globalStyle.header]}>
         <View style={[{ position: 'relative', justifyContent: 'center', alignItems: 'center' }]}>
           <Image source={Icon.BOX} style={styles.boxStyle} resizeMode='contain' />
@@ -94,7 +89,6 @@ const Attention = () => {
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <View style={styles.startBtn}>
           <StartButton onPress={handleButtonClick} />
-          <Text style={{ position: 'absolute', color: '#fff', fontSize: 28 }}>START</Text>
         </View>
       </View>
     </SafeAreaView>
