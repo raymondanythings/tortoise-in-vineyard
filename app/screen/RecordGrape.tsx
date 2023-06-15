@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Modal, StyleSheet, Image, Pressable } from 'react-native'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import globalStyle from '../common/globalStyle'
+import globalStyle, { Font } from '../common/globalStyle'
 import Text from '../components/Text'
 import Button from '../components/Button'
 import GrapeBoard from '../components/GrapeBoard'
@@ -92,7 +92,15 @@ ${(index || 0) + 1}번째 포도송이예요!`}
         <View style={modalStyle.centeredView}>
           <View style={[modalStyle.modalView]}>
             <View style={modalStyle.modalHeader}>
-              <Text style={[globalStyle.Pretendard, modalStyle.modalTitle]}>감정 일기장</Text>
+              <Text
+                style={[
+                  globalStyle.Pretendard,
+                  modalStyle.modalTitle,
+                  { fontFamily: Font.Pretendard_Semibold },
+                ]}
+              >
+                감정 일기장
+              </Text>
               <Pressable style={{ position: 'absolute', right: 0 }} onPress={handleCloseModal}>
                 <Image source={Icon.CLOSE} style={{ width: 35, height: 35 }} resizeMode='contain' />
               </Pressable>

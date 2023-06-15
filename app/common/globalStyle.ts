@@ -3,6 +3,7 @@ import { hasNotch } from 'react-native-device-info'
 
 export const Font = {
   Pretendard: 'Pretendard-Regular',
+  Pretendard_Semibold: 'Pretendard-SemiBold',
   RF: 'RF',
   GAEGU_M: 'JGaegujaengyi-Medium',
   GAEGU_L: 'JGaegujaengyi-Light',
