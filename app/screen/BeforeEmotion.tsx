@@ -19,12 +19,11 @@ const BeforeEmotion = () => {
     onCompleted(data) {
       if (data.startRun) {
         const {
-          startRun: { id, type },
+          startRun: { id },
         } = data
         setRunState((prev) => ({
           ...prev,
           id,
-          type,
           isRunning: true,
         }))
         // 뮤테이션 성공시 run 화면으로 이동
