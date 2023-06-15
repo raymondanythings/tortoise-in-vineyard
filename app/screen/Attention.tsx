@@ -94,7 +94,6 @@ const Attention = () => {
       <View style={[globalStyle.fullWidth, globalStyle.footer]}>
         <View style={styles.startBtn}>
           <StartButton onPress={handleButtonClick} />
-          <Text style={{ position: 'absolute', color: '#fff', fontSize: 28 }}>START</Text>
         </View>
       </View>
     </SafeAreaView>
