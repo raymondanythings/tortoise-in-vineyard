@@ -161,6 +161,19 @@ const Home = () => {
 
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
+      <Pressable
+        onPress={async () => {
+          AsyncStorage.clear()
+          setToken('')
+        }}
+        style={{
+          width: 50,
+          height: 50,
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+        }}
+      ></Pressable>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
         <Animated.View
           style={{
@@ -294,14 +307,6 @@ const Home = () => {
           zIndex: -1,
         }}
       />
-      {/* <Pressable
-        onPress={async () => {
-          AsyncStorage.clear()
-          setToken('')
-        }}
-      >
-        <Text>초기화</Text>
-      </Pressable> */}
     </SafeAreaView>
   )
 }

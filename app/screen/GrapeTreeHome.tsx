@@ -22,7 +22,12 @@ const GrapeTreeHome = () => {
     <SafeAreaView style={[globalStyle.safeAreaContainer]}>
       <View style={[globalStyle.header]}>
         <View style={{ alignItems: 'center' }}>
-          <Text style={[globalStyle.gaeguTitle, { textAlign: 'center', flexGrow: 1 }]}>
+          <Text
+            style={[
+              globalStyle.gaeguTitle,
+              { textAlign: 'center', flexGrow: 1, width: screenWidth },
+            ]}
+          >
             {`포도알을 총 ${totalRun}개 모았어요!`}
           </Text>
           <Text
