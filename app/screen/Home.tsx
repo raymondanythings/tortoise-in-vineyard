@@ -21,6 +21,7 @@ import { screenHeight, screenWidth } from '../constants/screen'
 import appleAuth from '@invertase/react-native-apple-authentication'
 import jwtDecode from 'jwt-decode'
 import colors from '../constants/colors'
+import SplashScreen from 'react-native-splash-screen'
 
 interface AppleJwt {
   aud: string
@@ -130,6 +131,9 @@ const Home = () => {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide()
+    }, 3000)
     navigation.addListener('blur', canNavigateHandler)
     return () => {
       navigation.removeListener('blur', canNavigateHandler)

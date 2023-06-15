@@ -5,11 +5,12 @@ import { AUTH_HEADER } from '../constants/constants'
 import { useSetRecoilState } from 'recoil'
 import { authState } from '../store/auth'
 import TrackPlayer from 'react-native-track-player'
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 const Check = () => {
   const setAuth = useSetRecoilState(authState)
   const navigation = useNavigation()
   const checkUser = useCallback(async () => {
+    await TrackPlayer.setupPlayer()
     const initialCheck = await AsyncStorage.getItem('initialCheck')
     if (!initialCheck) {
       await AsyncStorage.setItem('initialCheck', 'initialCheck')
@@ -44,7 +45,6 @@ const Check = () => {
   }, [])
 
   useEffect(() => {
-    TrackPlayer.setupPlayer()
     checkUser()
   }, [])
   return <Text>Loading..</Text>

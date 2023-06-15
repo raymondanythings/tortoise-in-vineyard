@@ -93,13 +93,6 @@
 		<string>fonts/JGaegujaengyi-Medium.otf</string>
 		<string>fonts/JGaegujaengyi-Bold.otf</string>
 	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-		<string>external-accessory</string>
-		<string>location</string>
-		<string>processing</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen.storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>

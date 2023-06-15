@@ -7,6 +7,7 @@ import Img from '../constants/Img'
 import Text from '../components/Text'
 import Button from '../components/Button'
 import { screenWidth, screenHeight } from '../constants/screen'
+import SplashScreen from 'react-native-splash-screen'
 
 const Letter = () => {
   const animation = useRef(new Animated.Value(1)).current
@@ -33,10 +34,15 @@ const Letter = () => {
   }, [isFolded])
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsFolded(false)
-    }, 2000)
-    return () => clearTimeout(timeout)
+    new Promise((resolve) => {
+      setTimeout(() => {
+        SplashScreen.hide()
+      }, 3000)
+    }).then(() => {
+      return setTimeout(() => {
+        setIsFolded(false)
+      }, 5000)
+    })
   }, [])
   return (
     <SafeAreaView style={[globalStyle.safeAreaContainer, { backgroundColor: '#FEF9AE' }]}>

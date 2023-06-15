@@ -4,7 +4,7 @@
 #import "RCTAppleHealthKit.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <RNKakaoLogins.h>
-
+#import "RNSplashScreen.h" 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -19,6 +19,7 @@
   //                                           launchOptions:launchOptions];
   // /* Add Background initializer for HealthKit  */
   // [[RCTAppleHealthKit new] initializeBackgroundObservers:bridge];
+  [RNSplashScreen show];  // here
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
