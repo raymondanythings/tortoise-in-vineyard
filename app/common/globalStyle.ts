@@ -23,8 +23,8 @@ export default StyleSheet.create({
     marginBottom: 4,
   },
   gaeguTitle: {
-    fontSize: 28,
-    // lineHeight: 36,
+    fontSize: 29,
+    lineHeight: 40,
     fontWeight: 'bold',
   },
   gaeguSub: {
@@ -69,7 +69,7 @@ export default StyleSheet.create({
   header: {
     position: 'relative',
     flex: 2,
-    marginTop: 40,
+    marginTop: 30,
     alignItems: 'center',
     // justifyContent: 'center',
     justifyContent: 'flex-start',
@@ -82,7 +82,7 @@ export default StyleSheet.create({
     rowGap: 8,
   },
   fontMedium: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
   },
   Pretendard: {
