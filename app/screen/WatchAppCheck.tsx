@@ -32,7 +32,7 @@ const WatchAppCheck = () => {
   }, [isReachability])
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
-      <View style={[globalStyle.header, {}]}>
+      <View style={[globalStyle.header]}>
         <Text style={[globalStyle.gaeguTitle, { textAlign: 'center' }]}>
           애플워치에서 어플을 켜주세요
         </Text>

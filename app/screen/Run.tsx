@@ -396,10 +396,16 @@ const Run = () => {
                 alignItems: 'baseline',
               }}
             >
-              <Text style={{ fontFamily: Font.Pretendard, color: 'black', fontSize: 46 }}>
+              <Text
+                style={{
+                  color: 'black',
+                  fontSize: 46,
+                  fontFamily: Font.Pretendard_Semibold,
+                }}
+              >
                 {distance > 1 ? distance.toFixed(2) : (distance * 1000).toFixed()}
               </Text>
-              <Text style={{ fontFamily: Font.Pretendard, color: 'black', fontSize: 18 }}>
+              <Text style={{ fontFamily: Font.Pretendard, color: 'black', fontSize: 20 }}>
                 {distance > 1 ? ' KM' : ' m'}
               </Text>
             </View>

@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   swipeText: {
     alignSelf: 'center',
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: Font.Pretendard,
     zIndex: 2,
     color: '#fff',
