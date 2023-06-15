@@ -1,21 +1,7 @@
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { sendMessage } from 'react-native-watch-connectivity'
-import MapView, {
-  LatLng,
-  Marker,
-  MarkerAnimated,
-  PROVIDER_GOOGLE,
-  Polyline,
-} from 'react-native-maps'
+import MapView, { LatLng, MarkerAnimated, PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
 import { Platform } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import { Font } from '../common/globalStyle'
@@ -29,9 +15,8 @@ import useWatch from '../hook/useWatch'
 import Heart from '../components/Lotties/Heart'
 import PinkDots from '../components/Lotties/PinkDots'
 import Swiper from '../components/Swiper'
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { calculateDistance } from '../../utils/distance'
-import FastImage from 'react-native-fast-image'
 import Img from '../constants/Img'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { emotionState } from '../store/emotionState'
@@ -41,7 +26,7 @@ import { RunType, useGetEncourageMutation } from '../../graphql/generated'
 import { runAtom } from '../store/run'
 import PurpleDots from '../components/Lotties/PurpleDots'
 import PurplePin from '../components/Lotties/PurplePin'
-import { screenWidth, screenHeight } from '../constants/screen'
+import { screenWidth } from '../constants/screen'
 
 // 위치 권한 요청
 async function requestPermission() {
@@ -201,27 +186,6 @@ const Run = () => {
       },
     })
   }
-
-  // useEffect(() => {
-  //   let id: NodeJS.Timer
-  //   if (tracking) {
-  //     if (runState.type === RunType.HeartRate) {
-  //       id = setInterval(() => {
-  //         changeCount.current++
-  //         // if (changeCount.current >= 60) {
-  //         //   clearInterval(id)
-  //         // }
-  //       }, 1000)
-  //     }
-  //     navigation.addListener('blur', () => {
-  //       clearInterval(id)
-  //     })
-  //   }
-  //   return () => {
-  //     clearInterval(id)
-  //   }
-  // }, [isReachability, tracking])
-
   useEffect(() => {
     if (tracking && isReachability) {
       if (changeCount.current >= 25) {
@@ -272,11 +236,7 @@ const Run = () => {
         >
           <View style={{ position: 'relative', top: 40 }}>
             {tracking ? (
-              <FastImage
-                source={Img.LOGO_MOVING}
-                style={styles.marker}
-                resizeMode={FastImage.resizeMode.contain}
-              />
+              <Image source={Img.LOGO_MOVING} style={styles.marker} resizeMode='contain' />
             ) : (
               <Image source={Img.PAUSETURTLE} style={styles.marker} />
             )}

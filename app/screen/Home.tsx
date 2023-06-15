@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Image, Pressable, View, ScrollView } from 'react-native'
+import React, { useCallback, useEffect, useRef } from 'react'
+import { Image, Pressable, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
