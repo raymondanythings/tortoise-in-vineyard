@@ -295,13 +295,13 @@ const Home = () => {
         }}
       />
       {/* <Pressable
-          onPress={async () => {
-            AsyncStorage.clear()
-            setToken('')
-          }}
-        >
-          <Text>초기화</Text>
-        </Pressable> */}
+        onPress={async () => {
+          AsyncStorage.clear()
+          setToken('')
+        }}
+      >
+        <Text>초기화</Text>
+      </Pressable> */}
     </SafeAreaView>
   )
 }
