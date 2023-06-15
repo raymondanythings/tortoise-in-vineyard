@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Image, Pressable, View } from 'react-native'
+import { Image, Pressable, View, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import globalStyle from '../common/globalStyle'
 import Button from '../components/Button'
@@ -22,6 +22,7 @@ import appleAuth from '@invertase/react-native-apple-authentication'
 import jwtDecode from 'jwt-decode'
 import colors from '../constants/colors'
 import SplashScreen from 'react-native-splash-screen'
+import Animated, { Easing, useSharedValue, withTiming } from 'react-native-reanimated'
 
 interface AppleJwt {
   aud: string
@@ -37,6 +38,8 @@ interface AppleJwt {
   nonce_supported: boolean
   sub: string
 }
+
+const CLOUD_ANIMATION_DURATION = 10000
 
 const Home = () => {
   const [token, setToken] = useRecoilState(authState)
@@ -130,11 +133,27 @@ const Home = () => {
     isNavigate.current = true
   }
 
+  const translateX = useSharedValue(0)
+
+  const loopAnimation = () => {
+    if (translateX.value < 0) {
+      translateX.value = 0
+    }
+    translateX.value = withTiming(-(screenWidth * 2), {
+      duration: CLOUD_ANIMATION_DURATION,
+      easing: Easing.linear,
+    })
+    setTimeout(() => {
+      loopAnimation()
+    }, CLOUD_ANIMATION_DURATION)
+  }
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide()
     }, SPLASH_DURATION)
     navigation.addListener('blur', canNavigateHandler)
+
+    loopAnimation()
     return () => {
       navigation.removeListener('blur', canNavigateHandler)
     }
@@ -143,14 +162,31 @@ const Home = () => {
   return (
     <SafeAreaView style={globalStyle.safeAreaContainer}>
       <View style={[globalStyle.fullWidth, globalStyle.header, { flex: 6 }]}>
-        <Image
-          source={Img.CLOUD}
+        <Animated.View
           style={{
             position: 'absolute',
+            maxWidth: screenWidth + 40,
             bottom: 90,
             zIndex: -1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            transform: [
+              {
+                translateX,
+              },
+            ],
           }}
-        />
+        >
+          <View style={{ width: screenWidth }}>
+            <Image source={Img.CLOUD} resizeMode='stretch' />
+          </View>
+          <View style={{ width: screenWidth }}>
+            <Image source={Img.CLOUD} resizeMode='stretch' />
+          </View>
+          <View style={{ width: screenWidth }}>
+            <Image source={Img.CLOUD} resizeMode='stretch' />
+          </View>
+        </Animated.View>
         <Logo />
         <Text
           style={[
@@ -225,14 +261,7 @@ const Home = () => {
             </Button>
           </View>
         )}
-        {/* <Pressable
-          onPress={async () => {
-            AsyncStorage.clear()
-            setToken('')
-          }}
-        >
-          <Text>초기화</Text>
-        </Pressable> */}
+
         <Pressable
           onPress={() => {
             navigation.dispatch(
@@ -265,6 +294,14 @@ const Home = () => {
           zIndex: -1,
         }}
       />
+      {/* <Pressable
+          onPress={async () => {
+            AsyncStorage.clear()
+            setToken('')
+          }}
+        >
+          <Text>초기화</Text>
+        </Pressable> */}
     </SafeAreaView>
   )
 }

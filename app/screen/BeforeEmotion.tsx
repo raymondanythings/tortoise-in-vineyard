@@ -14,46 +14,17 @@ import { runAtom } from '../store/run'
 const BeforeEmotion = () => {
   const navigation = useNavigation()
   const [emotion, setEmotion] = useRecoilState(emotionState)
-  const [runState, setRunState] = useRecoilState(runAtom)
-  const [startRun] = useStartRunMutation({
-    onCompleted(data) {
-      if (data.startRun) {
-        const {
-          startRun: { id },
-        } = data
-        setRunState((prev) => ({
-          ...prev,
-          id,
-          isRunning: true,
-        }))
-        // 뮤테이션 성공시 run 화면으로 이동
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'attention',
-            },
-          ],
-        })
-      } else {
-        console.log('뮤테이션 실패!!!')
-      }
-    },
-    onError: (error) => {
-      console.log(error)
-    },
-  })
 
   // useStartRunMutation 훅을 사용해서 뮤테이션을 실행하는 핸들러....
   const handleButtonClick = () => {
     if (emotion.value !== '') {
-      startRun({
-        variables: {
-          input: {
-            type: runState.type,
-            emotionBefore: emotion.value,
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'attention',
           },
-        },
+        ],
       })
     }
   }
