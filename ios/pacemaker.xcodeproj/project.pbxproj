@@ -874,8 +874,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "포도밭거북이";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "심박수 정보를 수집해 적정한 운동 강도를 유지하고 있는지 실시간으로 판단하고 안내하기 위해 활용합니다.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "심박수를 측정해 적정한 운동 강도를 유지할 수 있도록 목표 심박수를 자동 계산하기 위해 활용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
@@ -1064,8 +1064,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "포도밭거북이";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "심박수 정보를 수집해 적정한 운동 강도를 유지하고 있는지 실시간으로 판단하고 안내하기 위해 활용합니다.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "심박수를 측정해 적정한 운동 강도를 유지할 수 있도록 목표 심박수를 자동 계산하기 위해 활용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
@@ -1114,8 +1114,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchApp-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "포도밭거북이";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "건강 데이터를 쓸때 필요해요.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "건강 데이터를 받아오는데 필요해요.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "심박수 정보를 수집해 적정한 운동 강도를 유지하고 있는지 실시간으로 판단하고 안내하기 위해 활용합니다.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "심박수를 측정해 적정한 운동 강도를 유지할 수 있도록 목표 심박수를 자동 계산하기 위해 활용합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.seriousfont.pacemaker;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;

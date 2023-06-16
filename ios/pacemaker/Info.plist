@@ -104,16 +104,6 @@
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false />
-		<key>NSHealthShareUsageDescription</key>
-		<string>건강 데이터를 쓸때 필요해요.</string>
-		<key>NSHealthUpdateUsageDescription</key>
-		<string>건강 데이터를 받아오는데 필요해요.</string>
-		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-		<string>Program requires GPS to track cars and job orders</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>Program requires GPS to track cars and job orders</string>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>내주변 정확한 관광지 정보 제공을 위해 필요해요.</string>
 		<key>UIAppFonts</key>
 		<array>
 			<string>RF.ttf</string>

@@ -68,10 +68,15 @@ const MinHeartRateCheck = () => {
       console.log(err, 'err')
     }
   }
-  useEffect(() => {
+
+  const startHeartRateCheck = () => {
     if (isReachability) {
       getHeart()
     }
+  }
+  useEffect(() => {
+    navigation.addListener('focus', startHeartRateCheck)
+    return () => navigation.removeListener('focus', startHeartRateCheck)
   }, [isReachability])
 
   useEffect(() => {
