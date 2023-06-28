@@ -36,7 +36,7 @@
 
 <br>
 
-- 최초 1회 사용자만 평균 심박수 측정, 연령 데이터를 입력합니다.
+- 최초 1회 사용자만 평균 심박수 측정, 연령 데이터를 입력합니다. (평균 심박수 측정은 자동으로 입력됩니다. 애플워치를 착용하고 app을 켜주세요.)
 
 <br>
 
@@ -91,7 +91,7 @@
 ## 핵심 기술
 
 ### Frontend
-기술 스택 : React-Native, TypeScript, Apollo Client, Recoil
+기술 스택 : React-Native, Swift, Objective-C TypeScript, Apollo Client, Recoil
 
 ### Backend
 기술 스택 : NestJS, GraphQL, Prisma, Supabase (PostgreSQL), Github actions, AWS(EKS, ECR)
