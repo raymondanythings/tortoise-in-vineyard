@@ -79,6 +79,8 @@
 		21539F274E6B414B9E88080C /* RF.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = RF.ttf; path = ../fonts/RF.ttf; sourceTree = "<group>"; };
 		28E7ADA52A28A8A00001B551 /* pacemaker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pacemaker-Bridging-Header.h"; sourceTree = "<group>"; };
 		28E7ADA62A28A8A00001B551 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		31ED6FD84452A297E8E66753 /* Pods-pacemaker-pacemakerTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker-pacemakerTests.staging.xcconfig"; path = "Target Support Files/Pods-pacemaker-pacemakerTests/Pods-pacemaker-pacemakerTests.staging.xcconfig"; sourceTree = "<group>"; };
+		686BE8DC2D3AAA60D565FF8B /* Pods-pacemaker.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pacemaker.staging.xcconfig"; path = "Target Support Files/Pods-pacemaker/Pods-pacemaker.staging.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pacemaker/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA565BD0861A385FD01BB781 /* libPods-pacemaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pacemaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D3EF5FC61E35C253E6EFE4 /* libPods-pacemaker-pacemakerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pacemaker-pacemakerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +226,8 @@
 				EDDDEC25A85FF29D567B646D /* Pods-pacemaker.release.xcconfig */,
 				E15D84FF05E7B0CB211AC48F /* Pods-pacemaker-pacemakerTests.debug.xcconfig */,
 				DD74402AEEEAD249FC3C6BC4 /* Pods-pacemaker-pacemakerTests.release.xcconfig */,
+				686BE8DC2D3AAA60D565FF8B /* Pods-pacemaker.staging.xcconfig */,
+				31ED6FD84452A297E8E66753 /* Pods-pacemaker-pacemakerTests.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -795,7 +799,7 @@
 		};
 		7F5BC8482A3B6684009FB297 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDDDEC25A85FF29D567B646D /* Pods-pacemaker.release.xcconfig */;
+			baseConfigurationReference = 686BE8DC2D3AAA60D565FF8B /* Pods-pacemaker.staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -827,7 +831,7 @@
 		};
 		7F5BC8492A3B6684009FB297 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD74402AEEEAD249FC3C6BC4 /* Pods-pacemaker-pacemakerTests.release.xcconfig */;
+			baseConfigurationReference = 31ED6FD84452A297E8E66753 /* Pods-pacemaker-pacemakerTests.staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
