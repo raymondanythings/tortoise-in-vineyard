@@ -91,7 +91,7 @@
 ## 핵심 기술
 
 ### Frontend
-기술 스택 : React-Native, Swift, Objective-C, TypeScript, Apollo Client, Recoil
+기술 스택 : React-Native, Swift, Objective-C, TypeScript, Recoil
 
 ### Backend
 기술 스택 : NestJS, GraphQL, Prisma, Supabase (PostgreSQL), Github actions, AWS(EKS, ECR)
